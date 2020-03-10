@@ -1,0 +1,194 @@
+// GPars – Groovy Parallel Systems
+//
+// Copyright © 2008–2018  The original author or authors
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+//  Author: Václav Pech
+//  Author: Russel Winder
+//  Author: Dierk König
+//  Author: Hans Dockter
+//  Author: Rene Groeschke
+//  Author: Hamlet D'Arcy - Updated OSGi configuration
+//  Author: Schalk W. Cronjé
+//
+//  uplifted to java 11, and library refresh
+//  Author: Will Woodman
+
+
+plugins {
+    id 'groovy'
+    id 'java'
+    id 'maven'
+    id 'maven-publish'
+    //id 'osgi'
+    id 'eclipse'
+    id 'idea'
+    //id "org.asciidoctor"
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.11
+
+group = 'org.gpars'
+archivesBaseName = 'gpars'
+
+ext {
+    theVendor = 'gpars.org'
+    theTitle = 'GPars: Groovy Parallel Systems'
+    titleForDocumentation = archivesBaseName + ' ' + version
+    copyrightString = 'Copyright &#169; 2008&#8211;2020  V&#225;Will Woodman (on behalf of) clav Pech.  All Rights Reserved.'
+    packageTitle = group
+    description = 'The Groovy and Java high-level concurrency library offering actors, dataflow, CSP, agents, parallel collections, fork/join and more'
+}
+
+repositories {
+    if (gpars_useMavenLocal) { mavenLocal() }
+    jcenter()
+    mavenCentral()
+}
+
+configurations {
+    deployerJars
+    docs
+    cover
+    groovyDoc // Hack due to problem with groovydoc process in Gradle.
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.13'
+
+    compile "org.codehaus.groovy:groovy:${gpars_groovyVersion}"
+    compile "org.codehaus.groovy:groovy-cli-commons:${gpars_groovyVersion}"
+    compile "org.multiverse:multiverse-core:${gpars_multiverseVersion}", { transitive = false }
+    compile "io.netty:netty-all:${gpars_nettyVersion}"
+    compile "org.codehaus.jcsp:jcsp:${gpars_jcspVersion}"
+    testCompile "org.spockframework:spock-core:${gpars_spockVersion}"
+    testCompile "com.google.code.gson:gson:${gpars_gsonVersion}"
+    testCompile "com.google.guava:guava:${gpars_guavaVersion}"
+    testCompile fileTree(dir: 'lib', include: '*.jar')
+    deployerJars "org.apache.maven.wagon:wagon-http-lightweight:${gpars_wagonhttplightweightVersion}"
+    //cover "net.sourceforge.cobertura:cobertura:${gpars_coberturaVersion}"
+    // cant find testRuntime "net.sourceforge.cobertura:cobertura:${gpars_coberturaVersion}"
+    // Have to get some specific dependencies into the GroovyDoc process.
+    groovyDoc "org.codehaus.groovy:groovy:${gpars_groovyVersion}"
+    groovyDoc "org.fusesource.jansi:jansi:${gpars_jansiVersion}"
+
+}
+
+task copyDSLDefinitions(type: Copy) {
+    into "$buildDir/classes/main"
+    from(sourceSets.main.allSource) { include('**/*.gdsl') }
+}
+
+/*jar {
+    manifest {
+        attributes (
+            //name = 'gpars',  //read-only
+            version = this.version,
+            //symbolicName = 'gpars.org'
+        )
+
+            instruction 'Bundle-Vendor', ext.theVendor
+            instruction 'Bundle-Description', group
+            instruction 'Bundle-DocURL', 'http://gpars.codehaus.org'
+            instruction 'Built-By', System.properties.'user.name'
+            instruction 'Extension-Name', archivesBaseName
+            instruction 'Specification-Title', ext.theTitle
+            instruction 'Specification-Version', version
+            instruction 'Specification-Vendor', ext.theVendor
+            instruction 'Implementation-Title', ext.theTitle
+            instruction 'Implementation-Version', version
+            instruction 'Implementation-Vendor', ext.theVendor
+            instruction 'provider', ext.theVendor
+            instruction 'Export-Package', "*;version=${version}"
+            instruction 'Import-Package', '*;resolution:=optional'
+            instruction '-removeheaders', 'Bnd-LastModified'
+
+    }
+    dependsOn copyDSLDefinitions
+}
+
+ */
+
+test {
+    forkEvery = 600
+    maxParallelForks = hasProperty('gpars_maxTestForks') ? gpars_maxTestForks : 1
+    exclude '**/integration/**/*.*'
+}
+
+task integrationTest(type: Test, dependsOn: 'test') {
+    include '**/integration/**/*.*'
+}
+
+javadoc {
+    options.overview('overview.html')
+    options.showAll()
+    options.encoding('UTF-8')
+    options.setUse(true)
+    options.author(true)
+    options.version(true)
+    options.windowTitle(titleForDocumentation)
+    options.docTitle(titleForDocumentation)
+    options.footer(copyrightString)
+    doFirst {
+        javadoc.title = titleForDocumentation
+        javadoc.options.docTitle = javadoc.title
+    }
+}
+
+if (JavaVersion.current().isJava11Compatible()) {
+    tasks.withType(Javadoc) {
+        // disable the crazy super-strict doclint tool in Java 8
+        //noinspection SpellCheckingInspection
+        options.addStringOption('Xdoclint:none', '-quiet')
+    }
+}
+
+groovydoc {
+    groovyClasspath = configurations.groovyDoc // Hack, we shouldn't have to do this.
+    dependsOn(classes)
+    includePrivate = true
+    use = true
+    windowTitle = packageTitle
+    docTitle = packageTitle
+    header = packageTitle
+    footer = copyrightString
+    include 'groovyx/gpars/**'
+    overviewText = project.resources.text.fromFile('overview.html')
+}
+
+/*
+//need to resolve plugin
+asciidoctor {
+    sources {
+        include 'index.adoc', 'quick_reference.adoc'
+    }
+    backends 'html5','pdf'
+    attributes  toc: 'left',
+            doctype: 'book',
+            icons: 'font',
+            sectlink: true,
+            sectanchors: true,
+            numbered: true,
+            linkattrs: true,
+            imagesdir: 'images',
+            'source-highlighter': 'coderay',
+            stylesheet: 'css/style.css',
+            'pdf-stylesdir': 'theme',
+            'pdf-fontsdir': 'fonts',
+            'pdf-style': 'gpars'
+}*/
+
