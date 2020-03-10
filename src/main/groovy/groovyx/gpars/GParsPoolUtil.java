@@ -22,7 +22,6 @@ import groovy.time.Duration;
 import groovyx.gpars.forkjoin.CallAsyncTask;
 import groovyx.gpars.forkjoin.GParsPoolUtilHelper;
 import groovyx.gpars.pa.PAWrapper;
-import groovyx.gpars.pa.GParsPoolUtilHelper;
 import groovyx.gpars.scheduler.FJPool;
 import groovyx.gpars.util.GeneralTimer;
 import org.codehaus.groovy.runtime.InvokerHelper;
