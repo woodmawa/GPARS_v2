@@ -42,11 +42,11 @@ version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.11
 
-group = 'org.gpars'
-archivesBaseName = 'gpars'
+group = 'org.groovyx.gpars'
+archivesBaseName = 'groovyx.gpars'
 
 ext {
-    theVendor = 'gpars.org'
+    theVendor = 'groovyx.gpars.org'
     theTitle = 'GPars: Groovy Parallel Systems'
     titleForDocumentation = archivesBaseName + ' ' + version
     copyrightString = 'Copyright &#169; 2008&#8211;2020  V&#225;Will Woodman (on behalf of) clav Pech.  All Rights Reserved.'
@@ -96,9 +96,9 @@ task copyDSLDefinitions(type: Copy) {
 /*jar {
     manifest {
         attributes (
-            //name = 'gpars',  //read-only
+            //name = 'groovyx.gpars',  //read-only
             version = this.version,
-            //symbolicName = 'gpars.org'
+            //symbolicName = 'groovyx.gpars.org'
         )
 
             instruction 'Bundle-Vendor', ext.theVendor
@@ -166,7 +166,7 @@ groovydoc {
     docTitle = packageTitle
     header = packageTitle
     footer = copyrightString
-    include 'groovyx/gpars/**'
+    include 'groovyx/groovyx.gpars/**'
     overviewText = project.resources.text.fromFile('overview.html')
 }
 
@@ -189,6 +189,6 @@ asciidoctor {
             stylesheet: 'css/style.css',
             'pdf-stylesdir': 'theme',
             'pdf-fontsdir': 'fonts',
-            'pdf-style': 'gpars'
+            'pdf-style': 'groovyx.gpars'
 }*/
 
