@@ -26,6 +26,7 @@ import org.multiverse.api.callables.TxnBooleanCallable;
  *
  * @author Vaclav Pech
  */
+@SuppressWarnings("rawtypes")
 final class GParsAtomicBooleanBlock implements TxnBooleanCallable {
     private final Closure code;
 

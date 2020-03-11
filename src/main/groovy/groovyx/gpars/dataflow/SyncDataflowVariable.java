@@ -36,6 +36,7 @@ import static java.util.Arrays.asList;
  *
  * @author Vaclav Pech
  */
+@SuppressWarnings({"rawtypes", "serial"})
 public final class SyncDataflowVariable<T> extends DataflowVariable<T> {
     private static final String ERROR_READING_A_SYNCHRONOUS_CHANNEL = "Error reading a synchronous channel.";
     private final ResizeableCountDownLatch parties;

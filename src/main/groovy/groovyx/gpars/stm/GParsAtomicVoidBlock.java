@@ -26,6 +26,7 @@ import org.multiverse.api.callables.TxnVoidCallable;
  *
  * @author Vaclav Pech
  */
+@SuppressWarnings("rawtypes")
 final class GParsAtomicVoidBlock implements TxnVoidCallable {
     private final Closure code;
 

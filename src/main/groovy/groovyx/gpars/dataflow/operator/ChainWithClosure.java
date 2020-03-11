@@ -26,6 +26,7 @@ import org.codehaus.groovy.runtime.NullObject;
  * @author Vaclav Pech
  */
 
+@SuppressWarnings({"rawtypes", "unchecked", "serial"})
 public final class ChainWithClosure<V> extends Closure {
     private final Closure code;
 

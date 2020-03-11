@@ -49,6 +49,7 @@ import java.util.concurrent.ConcurrentMap;
  * @author Vaclav Pech, Dierk Koenig, Alex Tkachman
  *         Date: Sep 3, 2009
  */
+@SuppressWarnings({"unchecked"})
 public final class Dataflows extends GroovyObjectSupport {
 
     private static final DataflowVariable<Object> DUMMY = new DataflowVariable<Object>();

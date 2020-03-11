@@ -26,6 +26,7 @@ import org.multiverse.api.callables.TxnDoubleCallable;
  *
  * @author Vaclav Pech
  */
+@SuppressWarnings("rawtypes")
 final class GParsAtomicDoubleBlock implements TxnDoubleCallable {
     private final Closure code;
 

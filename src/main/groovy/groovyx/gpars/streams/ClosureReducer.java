@@ -25,6 +25,7 @@ import groovy.lang.Closure;
  *
  *  @author Russel Winder
  */
+@SuppressWarnings({"unchecked"})
 public class ClosureReducer<T> implements BinaryOperator<T> {
 
   private final Closure<?> code;

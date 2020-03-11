@@ -54,7 +54,7 @@ public abstract class MessagingRunnable<T> extends Closure {
     }
 
     @Override
-    public final Object call(final Object[] args) {
+    public final Object call(final Object... args) {
         if (args.length != 1)
             throw new UnsupportedOperationException(MESSAGING_RUNNABLE_NEED_EXACTLY_ONE_ARGUMENT_TO_RUN);
         doRun((T) args[0]);

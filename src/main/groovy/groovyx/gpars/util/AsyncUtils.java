@@ -26,6 +26,7 @@ import groovyx.gpars.scheduler.Pool;
 
 import org.codehaus.groovy.runtime.InvokerInvocationException;
 
+@SuppressWarnings("rawtypes")
 public class AsyncUtils {
 
     /**

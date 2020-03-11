@@ -43,6 +43,7 @@ import java.util.concurrent.TimeUnit;
  *
  * @author Rafal Slawik
  */
+@SuppressWarnings({"unchecked","rawtypes", "serial"})
 public class RemoteDataflowQueue<T> extends WithSerialId implements DataflowChannel<T>, RemoteSerialized {
     private RemoteHost remoteHost;
 

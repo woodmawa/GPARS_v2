@@ -29,6 +29,7 @@ import groovyx.gpars.serial.SerialMsg;
  *
  * @author Rafal Slawik
  */
+@SuppressWarnings("serial")
 public class RemoteAgentSendClosureMessage<T> extends SerialMsg {
     private final AgentCore agent;
     private final DataflowVariable<T> oldValueVariable;

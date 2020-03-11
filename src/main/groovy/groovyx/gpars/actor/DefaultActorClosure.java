@@ -23,6 +23,7 @@ import groovy.lang.Closure;
  *
  * @author Vaclav Pech
  */
+@SuppressWarnings("rawtypes")
 public final class DefaultActorClosure extends Closure {
 
     private final DefaultActor myActor;

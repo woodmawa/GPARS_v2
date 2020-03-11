@@ -40,6 +40,7 @@ import java.util.Map;
  * @author Vaclav Pech
  *         Date: Sep 23, 2009
  */
+@SuppressWarnings({"rawtypes", "unchecked"})
 public final class DataflowPrioritySelector extends DataflowSelector {
 
     /**

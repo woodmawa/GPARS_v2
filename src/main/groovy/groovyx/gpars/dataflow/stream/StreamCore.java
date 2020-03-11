@@ -36,6 +36,7 @@ import java.util.concurrent.atomic.AtomicReference;
  * @param <T> Type for values to pass through the channels
  * @author Johannes Link, Vaclav Pech
  */
+@SuppressWarnings({"rawtypes", "unchecked"})
 public abstract class StreamCore<T> implements FList<T> {
 
     protected final DataflowVariable<T> first;
@@ -246,11 +247,11 @@ public abstract class StreamCore<T> implements FList<T> {
         StreamCore<Object> recurResult = result;
         while (true) {
             if (recurRest.isEmpty()) {
-                recurResult.leftShift((Object)StreamCore.eos()); // explicit casting to make tests pass (Java8 related)
+                recurResult.leftShift(StreamCore.eos()); // explicit casting to make tests pass (Java8 related)
                 return;
             }
             final Object mapped = mapClosure.call(new Object[]{recurRest.getFirst()});
-            recurResult = recurResult.leftShift((Object)eval(mapped)); // explicit casting to make tests pass (Java8 related)
+            recurResult = recurResult.leftShift(eval(mapped)); // explicit casting to make tests pass (Java8 related)
             recurRest = recurRest.getRest();
         }
     }

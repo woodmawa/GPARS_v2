@@ -69,7 +69,7 @@ public abstract class ParallelUtils {
            }
 
            @Override
-           public T call(final Object[] args) {
+           public T call(final Object... args) {
                return this.call(args[0]);
            }
        };
@@ -100,7 +100,7 @@ public abstract class ParallelUtils {
            }
 
            @Override
-           public T call(final Object[] args) {
+           public T call(final Object... args) {
                @SuppressWarnings({"unchecked"})
                final Map.Entry<Object, Object> entry = (Map.Entry<Object, Object>) args[0];
                final Integer index = (Integer) args[1];

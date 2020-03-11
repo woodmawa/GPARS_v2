@@ -18,6 +18,7 @@ package groovyx.gpars.dataflow.operator;
 
 import groovy.lang.Closure;
 
+@SuppressWarnings({"rawtypes", "serial"})
 public class DataflowProcessorAtomicBoundAllClosure extends Closure {
     public DataflowProcessorAtomicBoundAllClosure() {
         super(null);
@@ -34,7 +35,7 @@ public class DataflowProcessorAtomicBoundAllClosure extends Closure {
     }
 
     @Override
-    public Object call(final Object[] args) {
+    public Object call(final Object... args) {
         ((DataflowProcessor) getDelegate()).bindAllOutputsAtomically(args[0]);
         return null;
 

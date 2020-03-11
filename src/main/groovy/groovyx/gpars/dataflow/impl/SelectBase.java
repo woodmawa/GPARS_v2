@@ -30,7 +30,7 @@ import java.util.*;
  * @author Vaclav Pech
  *         Date: 29th Sep 2010
  */
-@SuppressWarnings({"rawtypes", "RawUseOfParameterizedType"})
+@SuppressWarnings({"unchecked", "rawtypes", "RawUseOfParameterizedType"})
 public final class SelectBase<T> {
 
     private final List<SelectableChannel<? extends T>> channels;

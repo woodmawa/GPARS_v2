@@ -26,6 +26,7 @@ import groovyx.gpars.serial.SerialMsg;
  *
  * @author Rafal Slawik
  */
+@SuppressWarnings({"serial"})
 public class RemoteActorReplyMsg extends SerialMsg {
     private final String name;
     private final Actor actor;

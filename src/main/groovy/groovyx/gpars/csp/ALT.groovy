@@ -40,10 +40,10 @@ class ALT extends Alternative {
  * as required by <code>Alternative</code>
  */
     ALT(ChannelInputList channelList) {
-        super((Guard[]) channelList.toArray())
+        super(channelList.toArray() as Guard[])
     }
 
     ALT(List guardList) {
-        super((Guard[]) guardList.toArray())
+        super(guardList.toArray() as Guard[])
     }
 }

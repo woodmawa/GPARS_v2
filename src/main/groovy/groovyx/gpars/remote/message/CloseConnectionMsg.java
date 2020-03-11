@@ -24,6 +24,7 @@ import groovyx.gpars.serial.SerialMsg;
  *
  * @author Rafal Slawik
  */
+@SuppressWarnings({"serial"})
 public class CloseConnectionMsg extends SerialMsg {
 
     @Override

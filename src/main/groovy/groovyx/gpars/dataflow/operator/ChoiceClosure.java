@@ -25,6 +25,7 @@ import groovy.lang.Closure;
  * @author Vaclav Pech
  */
 
+@SuppressWarnings({"rawtypes", "serial"})
 public final class ChoiceClosure extends Closure<Void> {
     private final Closure<Integer> code;
 

@@ -35,6 +35,7 @@ import java.util.concurrent.ConcurrentHashMap;
  *
  * @author Rafal Slawik
  */
+@SuppressWarnings({"rawtypes"})
 public final class RemoteDataflows extends LocalHost {
 
     /**

@@ -38,7 +38,7 @@ import java.util.Collection;
  *
  * @author Vaclav Pech
  */
-@SuppressWarnings({"CallToStringEquals"})
+@SuppressWarnings({"rawtypes", "CallToStringEquals"})
 public final class InternalActor extends AbstractLoopingActor {
     public static final String METHOD_NAME_PREFIX = "activeObject_";
     public static final String PREPROCESS_METHOD_NAME = "preProcessReturnValue";

@@ -40,6 +40,7 @@ import java.util.concurrent.TimeUnit;
  * @author Vaclav Pech
  *         Date: Nov 4th 2010
  */
+@SuppressWarnings("rawtypes")
 public class DefaultActor extends AbstractLoopingActor {
 
     private Closure nextContinuation;

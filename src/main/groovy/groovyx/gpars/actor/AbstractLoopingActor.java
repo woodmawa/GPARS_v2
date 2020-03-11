@@ -27,6 +27,7 @@ import groovyx.gpars.util.AsyncMessagingCore;
  * @author Vaclav Pech
  *         Date: Aug 23, 2010
  */
+@SuppressWarnings("rawtypes")
 public abstract class AbstractLoopingActor extends Actor {
 
     private static final long serialVersionUID = -7638132628355085829L;

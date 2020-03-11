@@ -24,6 +24,7 @@ import groovyx.gpars.serial.SerialContext;
 /**
  * @author Alex Tkachman
  */
+@SuppressWarnings({"rawtypes"})
 public class RemoteDataflowExpression<T> extends DataflowExpression<T> implements RemoteSerialized {
     private static final long serialVersionUID = -3166182949181062129L;
     private final RemoteHost remoteHost;

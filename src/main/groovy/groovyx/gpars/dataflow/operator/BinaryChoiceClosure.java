@@ -24,7 +24,7 @@ import groovy.lang.Closure;
  *
  * @author Vaclav Pech
  */
-
+@SuppressWarnings({"rawtypes", "serial"})
 public final class BinaryChoiceClosure extends Closure<Void> {
     private final Closure<Boolean> code;
 

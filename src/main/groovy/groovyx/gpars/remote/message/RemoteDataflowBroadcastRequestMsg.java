@@ -27,6 +27,7 @@ import java.util.UUID;
  *
  * @author Rafal Slawik
  */
+@SuppressWarnings({"rawtypes", "serial"})
 public class RemoteDataflowBroadcastRequestMsg extends SerialMsg {
     final String name;
 

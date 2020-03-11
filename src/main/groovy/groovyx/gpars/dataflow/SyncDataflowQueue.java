@@ -40,7 +40,7 @@ import static java.util.Arrays.asList;
  * @author Vaclav Pech
  *         Date: Jun 5, 2009
  */
-@SuppressWarnings({"ClassWithTooManyMethods"})
+@SuppressWarnings({"rawtypes", "ClassWithTooManyMethods", "serial"})
 public final class SyncDataflowQueue<T> extends DataflowQueue<T> {
 
     /**

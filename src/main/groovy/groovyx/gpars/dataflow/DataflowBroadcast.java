@@ -42,6 +42,7 @@ import groovyx.gpars.serial.RemoteSerialized;
  * @param <T> The type of messages to pass through the stream
  * @author Vaclav Pech
  */
+@SuppressWarnings({"unchecked", "serial"})
 public final class DataflowBroadcast<T> extends DataflowStreamWriteAdapter<T> {
 
     /**

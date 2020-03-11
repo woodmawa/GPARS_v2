@@ -28,6 +28,7 @@ import groovyx.gpars.serial.SerialMsg;
  *
  * @author Rafal Slawik
  */
+@SuppressWarnings({"unchecked", "serial"})
 public class RemoteAgentGetValMsg<T> extends SerialMsg {
     private final AgentCore agent;
     private final DataflowVariable<T> valueVariable;

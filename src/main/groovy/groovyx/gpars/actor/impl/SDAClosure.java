@@ -24,6 +24,7 @@ import groovyx.gpars.actor.StaticDispatchActor;
  *
  * @author Vaclav Pech
  */
+@SuppressWarnings({"rawtypes", "unchecked"})
 public abstract class SDAClosure {
 
     private SDAClosure() {

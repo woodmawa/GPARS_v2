@@ -22,7 +22,7 @@
 //  Author: Hamlet D'Arcy - Updated OSGi configuration
 //  Author: Schalk W. Cronjé
 //
-//  uplifted to java 11, and library refresh
+//  uplifted to java 11, groovy 3.0.2 and general library refresh
 //  Author: Will Woodman
 
 
@@ -34,11 +34,12 @@ plugins {
     //id 'osgi'
     id 'eclipse'
     id 'idea'
+    id("org.asciidoctor.convert") version "1.5.9.2"
     //id "org.asciidoctor"
 }
 
-group 'org.example'
-version '1.0-SNAPSHOT'
+group 'org.softwood'
+version '2.0-SNAPSHOT'
 
 sourceCompatibility = 1.11
 
@@ -67,6 +68,13 @@ configurations {
     groovyDoc // Hack due to problem with groovydoc process in Gradle.
 }
 
+//ensure latest SHNAPSOTS are used for publishing
+configurations.all {
+    resolutionStrategy {
+        cacheChangingModulesFor 0, 'seconds'
+    }
+}
+
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.13'
 
@@ -88,40 +96,42 @@ dependencies {
 
 }
 
+//tasks.withType(GroovyCompile).all {
+//    options.compilerArgs << "-Xlint:all" << "-Werror"
+//}
+//  To get the details of the "unchecked" issues.
+//compileGroovy.options.compilerArgs = ['-Xlint']
+
 task copyDSLDefinitions(type: Copy) {
     into "$buildDir/classes/main"
     from(sourceSets.main.allSource) { include('**/*.gdsl') }
 }
 
-/*jar {
+jar {
+    archivesBaseName = 'GPARS-all'//project.name + '-all'
     manifest {
         attributes (
-            //name = 'groovyx.gpars',  //read-only
-            version = this.version,
-            //symbolicName = 'groovyx.gpars.org'
+                archiveName : 'groovyx.gpars',
+                archiveVersion: this.version,
+                symbolicName:'groovyx.gpars.org',
+                /*
+                'Bundle-Vendor', ext.theVendor,
+                'Bundle-Description', group,
+                'Bundle-DocURL', 'http://gpars.codehaus.org',
+                'Built-By', System.properties.'user.name',
+                'Extension-Name', archivesBaseName,
+                'Specification-Title', ext.theTitle,
+                'Specification-Vendor', ext.theVendor,
+                'Implementation-Title', ext.theTitle,
+                'Implementation-Version', archiveVersion,
+                'Implementation-Vendor', ext.theVendor,
+                'Provider':ext.theVendor,
+                'Export-Package', "*;version=${archiveVersion}",
+                'Import-Package', '*;resolution:=optional'*/
         )
-
-            instruction 'Bundle-Vendor', ext.theVendor
-            instruction 'Bundle-Description', group
-            instruction 'Bundle-DocURL', 'http://gpars.codehaus.org'
-            instruction 'Built-By', System.properties.'user.name'
-            instruction 'Extension-Name', archivesBaseName
-            instruction 'Specification-Title', ext.theTitle
-            instruction 'Specification-Version', version
-            instruction 'Specification-Vendor', ext.theVendor
-            instruction 'Implementation-Title', ext.theTitle
-            instruction 'Implementation-Version', version
-            instruction 'Implementation-Vendor', ext.theVendor
-            instruction 'provider', ext.theVendor
-            instruction 'Export-Package', "*;version=${version}"
-            instruction 'Import-Package', '*;resolution:=optional'
-            instruction '-removeheaders', 'Bnd-LastModified'
-
     }
     dependsOn copyDSLDefinitions
 }
-
- */
 
 test {
     forkEvery = 600
@@ -132,6 +142,13 @@ test {
 task integrationTest(type: Test, dependsOn: 'test') {
     include '**/integration/**/*.*'
 }
+
+// codenarc configuration
+tasks.withType(CodeNarc).all { codeNarcTask ->
+    codeNarcTask.configFile = file('./config/codenarc/codenarc.groovy')
+    codeNarcTask.ignoreFailures = true
+}
+
 
 javadoc {
     options.overview('overview.html')
@@ -170,8 +187,8 @@ groovydoc {
     overviewText = project.resources.text.fromFile('overview.html')
 }
 
-/*
-//need to resolve plugin
+
+//have i resolved the plugin correctly ?
 asciidoctor {
     sources {
         include 'index.adoc', 'quick_reference.adoc'
@@ -190,5 +207,136 @@ asciidoctor {
             'pdf-stylesdir': 'theme',
             'pdf-fontsdir': 'fonts',
             'pdf-style': 'groovyx.gpars'
-}*/
+}
 
+task jarDoc(type: Jar, dependsOn: [javadoc, groovydoc]) {
+    archiveClassifier = 'javadoc'
+    from docsDir
+}
+
+task jarSrc(type: Jar, dependsOn: classes) {
+    archiveClassifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives(jarSrc)
+    archives(jarDoc)
+}
+
+task zipGuide(type: Zip, dependsOn: asciidoctor) {
+    archiveAppendix = 'guide'
+    from(buildDir.name + '/asciidoc')
+}
+
+task zipSamples(type: Zip) {
+    archiveAppendix = 'samples'
+    from sourceSets.test.allSource.matching {
+        include 'groovyx/gpars/samples/**'
+    }
+}
+
+task zipJavaDemo(type: Zip) {
+    archiveAppendix = 'mvn-java-demo'
+    from('java-demo'){
+        include 'src/**'
+        include 'pom.xml'
+    }
+}
+
+task zipDist(type: Zip) {
+    from jar.outputs.files
+    from(sourceSets.main.runtimeClasspath){
+        include('netty*', 'multiverse*')
+    }
+    from('licenses'){
+        include '*'
+        into 'licenses'
+    }
+    from('src/main/resources/META-INF/'){
+        include('LICENSE.txt', 'NOTICE.txt')
+    }
+    archiveAppendix = 'all'
+}
+
+publishing {
+    publications {
+        gParsPublish(MavenPublication) {
+            artifactId 'gpars'
+            from components.java
+
+            artifact jarDoc {
+                archiveClassifier = 'javadoc'
+            }
+            artifact jarSrc {
+                archiveClassifier = 'sources'
+            }
+            artifact zipGuide {
+                archiveClassifier = 'guide'
+            }
+            artifact zipSamples {
+                archiveClassifier = 'samples'
+            }
+            artifact zipJavaDemo {
+                archiveClassifier = 'mvn-java-demo'
+            }
+            artifact zipDist {
+                archiveClassifier = 'all'
+            }
+        }
+    }
+    //just publish locally for now
+    repositories {
+        if (gpars_useMavenLocal ) {
+            mavenLocal()
+        } else {
+            //put other repositories, jfrog, etc here
+        }
+    }
+}
+
+/*
+//todo need to sort this out
+task release(dependsOn: ['build', 'jarSrc', 'jarDoc', 'zipSamples', 'zipJavaDemo', 'zipDist', 'zipGuide']).doLast {
+    println 'We release now'
+}
+*/
+
+idea {
+    module {
+        excludeDirs += file('gradle/') // Gradle directory including the wrapper subdirectory.
+        excludeDirs += file('.settings/') // Eclipse settings directory.
+        excludeDirs += file('bin') // Eclipse compilation directory.
+        excludeDirs += file('out') // IDEA compilation directory.
+        excludeDirs += file('build') // Gradle compilation directory.
+        excludeDirs += file('docs') // Jon's book directory
+        excludeDirs += file('java-demo') // A separate module of a pure-java gpars usage
+    }
+    project {
+        jdkName '1.11'
+        languageLevel 'JDK_1_11'
+        ipr {
+            withXml { provider ->
+                def node = provider.asNode()
+                def vcsConfig = node.component.find { it.'@name' == 'VcsDirectoryMappings' }
+                vcsConfig.mapping[0].'@vcs' = 'Git'
+                //Copy the inspection profiles as well as the spell-checker's dictionaries from the default project file
+                def inspectionConfig = provider.asNode().component.find {
+                    it.'@name' == 'InspectionProjectProfileManager'
+                }
+                if (inspectionConfig) node.remove(inspectionConfig)
+                def dictionaryConfig = provider.asNode().component.find { it.'@name' == 'ProjectDictionaryState' }
+                if (dictionaryConfig) node.remove(dictionaryConfig)
+                new File('GPars_CI_only.ipr').withReader { reader ->
+                    def project = new XmlParser().parse(reader)
+                    def inspections = project.component.find { it.'@name' == 'InspectionProjectProfileManager' }
+                    node.append(inspections)
+                    def dictionaries = project.component.find { it.'@name' == 'ProjectDictionaryState' }
+                    node.append(dictionaries)
+                }
+                def gradleSettings = node.appendNode('component', [name: 'GradleSettings'])
+                gradleSettings.appendNode('option', [name: 'SDK_HOME', value: gradle.gradleHomeDir.absolutePath])
+            }
+        }
+    }
+}

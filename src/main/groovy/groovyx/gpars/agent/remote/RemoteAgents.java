@@ -32,6 +32,7 @@ import java.util.concurrent.Future;
  *
  * @author Rafal Slawik
  */
+@SuppressWarnings({"rawtypes"})
 public final class RemoteAgents extends LocalHost {
 
     /**

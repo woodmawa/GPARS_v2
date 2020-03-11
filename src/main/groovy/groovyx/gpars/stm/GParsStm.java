@@ -36,6 +36,7 @@ import static org.multiverse.api.GlobalStmInstance.getGlobalStmInstance;
  *
  * @author Vaclav Pech
  */
+@SuppressWarnings("rawtypes")
 public abstract class GParsStm {
     static final String THE_CODE_FOR_AN_ATOMIC_BLOCK_MUST_NOT_BE_NULL = "The code for an atomic block must not be null.";
     static final String AN_EXCEPTION_WAS_EXPECTED_TO_BE_THROWN_FROM_UNWRAP_STM_CONTROL_ERROR_FOR = "An exception was expected to be thrown from unwrapStmControlError for ";

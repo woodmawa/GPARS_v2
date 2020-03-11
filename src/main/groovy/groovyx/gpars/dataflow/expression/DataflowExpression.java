@@ -71,7 +71,7 @@ import static java.util.Arrays.asList;
  *
  * @author Alex Tkachman, Vaclav Pech
  */
-@SuppressWarnings({"UnqualifiedStaticUsage", "CallToSimpleGetterFromWithinClass", "ConstantDeclaredInAbstractClass", "unchecked"})
+@SuppressWarnings({"rawtypes", "UnqualifiedStaticUsage", "CallToSimpleGetterFromWithinClass", "ConstantDeclaredInAbstractClass", "unchecked"})
 public abstract class DataflowExpression<T> extends WithSerialId implements GroovyObject, DataflowReadChannel<T> {
 
     private static final String ATTACHMENT = "attachment";

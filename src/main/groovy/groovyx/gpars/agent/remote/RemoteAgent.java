@@ -27,6 +27,7 @@ import groovyx.gpars.serial.RemoteSerialized;
  *
  * @author Rafal Slawik
  */
+@SuppressWarnings({"serial"})
 public class RemoteAgent<T> extends AgentCore implements RemoteSerialized{
     private final RemoteHost remoteHost;
 

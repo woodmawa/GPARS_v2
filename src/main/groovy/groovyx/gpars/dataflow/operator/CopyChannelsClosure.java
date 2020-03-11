@@ -25,6 +25,7 @@ import groovy.lang.Closure;
  * @author Vaclav Pech
  */
 
+@SuppressWarnings({"rawtypes", "serial"})
 public final class CopyChannelsClosure<V> extends Closure {
 
     private static final Class[] PARAMETER_TYPES = {Object.class};

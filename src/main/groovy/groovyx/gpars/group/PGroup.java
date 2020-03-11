@@ -56,7 +56,7 @@ import static java.util.Arrays.asList;
  * @author Vaclav Pech, Alex Tkachman
  *         Date: May 8, 2009
  */
-@SuppressWarnings({"RawUseOfParameterizedType"})
+@SuppressWarnings({"RawUseOfParameterizedType", "rawtypes", "unchecked", "deprecation"})
 public abstract class PGroup {
 
     protected static final String A_SPLITTER_NEEDS_AN_INPUT_CHANNEL_AND_AT_LEAST_ONE_OUTPUT_CHANNEL_TO_BE_CREATED = "A splitter needs an input channel and at least one output channel to be created.";
@@ -131,7 +131,7 @@ public abstract class PGroup {
      * @param code The code to invoke for each received message
      * @return A new instance of ReactiveEventBasedThread
      */
-    public final Actor reactor(@DelegatesTo(Actor.class) final Closure code) {
+    public final  Actor reactor(@DelegatesTo(Actor.class) final Closure code) {
         final Actor actor = new ReactiveActor(code);
         actor.setParallelGroup(this);
         actor.start();

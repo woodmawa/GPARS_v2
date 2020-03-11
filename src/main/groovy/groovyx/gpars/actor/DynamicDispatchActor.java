@@ -36,7 +36,7 @@ import groovyx.gpars.actor.impl.DDAClosure;
  *         Date: Jun 26, 2009
  */
 
-@SuppressWarnings({"ThisEscapedInObjectConstruction"})
+@SuppressWarnings({"rawtypes", "ThisEscapedInObjectConstruction"})
 public class DynamicDispatchActor extends AbstractLoopingActor {
     private static final long serialVersionUID = 2709208258556647529L;
 

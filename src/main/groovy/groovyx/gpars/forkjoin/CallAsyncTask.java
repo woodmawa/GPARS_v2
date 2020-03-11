@@ -24,6 +24,7 @@ import java.util.concurrent.RecursiveTask;
  *
  * @author Vaclav Pech
  */
+@SuppressWarnings({"serial"})
 public final class CallAsyncTask<V> extends RecursiveTask<V> {
     private final Closure<V> code;
 

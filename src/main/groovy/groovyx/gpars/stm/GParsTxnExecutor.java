@@ -26,6 +26,7 @@ import org.multiverse.api.callables.TxnCallable;
  *
  * @author Vaclav Pech
  */
+@SuppressWarnings("rawtypes")
 final class GParsTxnExecutor<T> implements TxnCallable<T> {
     private final Closure code;
 

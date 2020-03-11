@@ -40,6 +40,7 @@ import groovyx.gpars.dataflow.stream.SyncDataflowStream;
  * @param <T> The type of messages to pass through the stream
  * @author Vaclav Pech
  */
+@SuppressWarnings({"serial"})
 public final class SyncDataflowBroadcast<T> extends DataflowStreamWriteAdapter<T> {
 
     /**

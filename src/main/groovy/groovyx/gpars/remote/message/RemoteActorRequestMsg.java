@@ -27,6 +27,7 @@ import java.util.UUID;
  *
  * @author Rafal Slawik
  */
+@SuppressWarnings({"serial"})
 public class RemoteActorRequestMsg extends SerialMsg {
     private final String actorName;
 

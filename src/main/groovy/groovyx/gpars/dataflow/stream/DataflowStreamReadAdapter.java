@@ -59,7 +59,7 @@ import static java.util.Arrays.asList;
  * @param <T> The type of messages to pass through the stream
  * @author Vaclav Pech
  */
-@SuppressWarnings({"unchecked"})
+@SuppressWarnings({"rawtypes", "unchecked"})
 public class DataflowStreamReadAdapter<T> implements DataflowReadChannel<T> {
 
     private StreamCore<T> head;
@@ -669,7 +669,7 @@ public class DataflowStreamReadAdapter<T> implements DataflowReadChannel<T> {
         StreamCore<T> currentHead = asyncHead;
         while (currentHead != null) {
             values.add(currentHead.getFirstDFV());
-            currentHead = (StreamCore<T>) currentHead.rest.get();
+            currentHead = currentHead.rest.get();
         }
         return values;
     }

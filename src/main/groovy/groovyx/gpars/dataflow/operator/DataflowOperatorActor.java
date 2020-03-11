@@ -38,7 +38,7 @@ import java.util.Map;
  *
  * @author Vaclav Pech
  */
-@SuppressWarnings({"RawUseOfParameterizedType", "unchecked"})
+@SuppressWarnings({"RawUseOfParameterizedType", "rawtypes", "unchecked", "serial"})
 class DataflowOperatorActor extends DataflowProcessorActor {
     private Map values = new HashMap(10);
 

@@ -27,6 +27,7 @@ import groovyx.gpars.serial.SerialMsg;
  *
  * @author Rafal Slawik
  */
+@SuppressWarnings({"serial"})
 public class RemoteAgentReplyMsg extends SerialMsg {
     private final String name;
     private final AgentCore agent;

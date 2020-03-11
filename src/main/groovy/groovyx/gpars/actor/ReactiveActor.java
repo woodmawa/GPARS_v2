@@ -31,6 +31,7 @@ import groovy.lang.Closure;
  * @author Vaclav Pech, Alex Tkachman
  *         Date: Jun 26, 2009
  */
+@SuppressWarnings("rawtypes")
 public class ReactiveActor extends AbstractLoopingActor {
     private static final long serialVersionUID = 2709208258556647528L;
 

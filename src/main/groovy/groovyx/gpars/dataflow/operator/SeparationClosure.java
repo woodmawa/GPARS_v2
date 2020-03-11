@@ -28,6 +28,7 @@ import java.util.List;
  * @author Vaclav Pech
  */
 
+@SuppressWarnings({"rawtypes", "serial"})
 public final class SeparationClosure extends Closure<Void> {
     private final Closure<List<Object>> code;
 

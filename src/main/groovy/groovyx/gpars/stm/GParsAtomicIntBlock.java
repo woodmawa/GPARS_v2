@@ -26,6 +26,7 @@ import org.multiverse.api.callables.TxnIntCallable;
  *
  * @author Vaclav Pech
  */
+@SuppressWarnings("rawtypes")
 final class GParsAtomicIntBlock implements TxnIntCallable {
     private final Closure code;
 

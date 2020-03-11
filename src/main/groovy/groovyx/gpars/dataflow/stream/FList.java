@@ -23,6 +23,7 @@ import groovy.lang.Closure;
  *
  * @param <T> The type of values to store in the list
  */
+@SuppressWarnings("rawtypes")
 public interface FList<T> extends Iterable<T> {
 
     T getFirst();

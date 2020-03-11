@@ -32,7 +32,7 @@ import java.util.List;
  *
  * @author Vaclav Pech
  */
-@SuppressWarnings({"RawUseOfParameterizedType"})
+@SuppressWarnings({"serial", "rawtypes", "RawUseOfParameterizedType"})
 class DataflowSelectorActor extends DataflowProcessorActor {
     protected final boolean passIndex;
 

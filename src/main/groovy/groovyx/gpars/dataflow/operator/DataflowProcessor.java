@@ -44,7 +44,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * @author Vaclav Pech
  *         Date: Sep 9, 2009
  */
-@SuppressWarnings({"RawUseOfParameterizedType", "AccessingNonPublicFieldOfAnotherObject", "unchecked", "AbstractClassWithoutAbstractMethods", "ConstantDeclaredInAbstractClass"})
+@SuppressWarnings({"rawtypes", "RawUseOfParameterizedType", "AccessingNonPublicFieldOfAnotherObject", "unchecked", "AbstractClassWithoutAbstractMethods", "ConstantDeclaredInAbstractClass"})
 public abstract class DataflowProcessor {
 
     public static final String INPUTS = "inputs";

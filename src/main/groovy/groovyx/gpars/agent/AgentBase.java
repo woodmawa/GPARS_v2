@@ -31,6 +31,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  *
  * @author Vaclav Pech
  */
+@SuppressWarnings({"rawtypes", "serial"})
 abstract class AgentBase<T> extends AgentCore {
     /**
      * Allows reads not to wait in the message queue.

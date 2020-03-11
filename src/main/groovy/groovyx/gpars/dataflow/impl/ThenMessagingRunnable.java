@@ -23,7 +23,7 @@ import groovyx.gpars.dataflow.DataflowVariable;
 /**
  * @author Vaclav Pech
  */
-
+@SuppressWarnings({"rawtypes", "unchecked", "serial"})
 public class ThenMessagingRunnable<T, V> extends MessagingRunnable<T> {
     private final DataflowVariable<V> result;
     private final Closure<V> closure;

@@ -26,6 +26,7 @@ import org.multiverse.api.callables.TxnLongCallable;
  *
  * @author Vaclav Pech
  */
+@SuppressWarnings("rawtypes")
 final class GParsAtomicLongBlock implements TxnLongCallable {
     private final Closure code;
 

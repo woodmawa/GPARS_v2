@@ -24,6 +24,7 @@ import groovyx.gpars.dataflow.DataflowVariable;
  *
  * @author Rafal Slawik
  */
+@SuppressWarnings({"rawtypes", "unchecked", "serial"})
 public class AgentClosureExecutionClosure extends Closure {
     private final DataflowVariable oldValueVariable;
     private final DataflowVariable newValueVariable;

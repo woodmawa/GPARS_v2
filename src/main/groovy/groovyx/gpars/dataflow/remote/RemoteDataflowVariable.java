@@ -28,6 +28,7 @@ import groovyx.gpars.serial.RemoteSerialized;
  *
  * @author Rafal Slawik
  */
+@SuppressWarnings("rawtypes")
 public final class RemoteDataflowVariable<T> extends DataflowVariable<T> implements RemoteSerialized {
     private static final long serialVersionUID = -420013188758006693L;
     private final RemoteHost remoteHost;

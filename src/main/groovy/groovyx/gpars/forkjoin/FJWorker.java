@@ -25,7 +25,7 @@ import java.util.Arrays;
  *
  * @author Vaclav Pech
  */
-@SuppressWarnings({"unchecked"})
+@SuppressWarnings({"rawtypes", "unchecked", "serial"})
 final class FJWorker<T> extends AbstractForkJoinWorker<T> {
     private final Closure code;
     private final T[] args;

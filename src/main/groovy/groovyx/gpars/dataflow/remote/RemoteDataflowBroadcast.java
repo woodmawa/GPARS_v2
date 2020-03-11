@@ -28,6 +28,7 @@ import groovyx.gpars.remote.RemoteHost;
  *
  * @author Rafal Slawik
  */
+@SuppressWarnings({"serial"})
 public class RemoteDataflowBroadcast<T> extends DataflowStreamWriteAdapter<T> {
     public RemoteDataflowBroadcast(RemoteHost remoteHost) {
         super(new DataflowStream<T>());

@@ -27,6 +27,7 @@ import java.util.UUID;
  *
  * @author Rafal Slawik
  */
+@SuppressWarnings("serial")
 public class RemoteDataflowQueueRequestMsg extends SerialMsg {
     final String name;
 

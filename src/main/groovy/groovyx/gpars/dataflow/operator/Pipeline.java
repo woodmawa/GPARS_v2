@@ -33,6 +33,7 @@ import java.util.Map;
  *
  * @author Vaclav Pech
  */
+@SuppressWarnings({"rawtypes", "unchecked"})
 public final class Pipeline {
     private final PGroup group;
     private DataflowReadChannel output;

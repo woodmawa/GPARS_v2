@@ -73,6 +73,7 @@ import java.util.stream.Collectors;
  *
  * @see GParsPool
  */
+@SuppressWarnings({"rawtypes", "unchecked"})
 public class GParsPoolUtil {
 
     /**
@@ -1196,7 +1197,7 @@ public class GParsPoolUtil {
     @SuppressWarnings("GroovyAssignabilityCheck")
     public static <T> T minParallel(final Collection<T> collection, final Closure cl) throws ExecutionException, InterruptedException {
         //return GParsPoolUtilHelper.createPAFromCollection(collection, retrievePool()).min((Comparator<T>) createComparator(cl));
-        return (T) retrievePool().submit(() ->
+        return  retrievePool().submit(() ->
                 collection.parallelStream()
                         .min((a,b) -> cl.getMaximumNumberOfParameters() >= 2 ? (Integer) cl.call(a,b) : ((Comparable) a).compareTo(b))
                         .orElse(null)
@@ -1270,7 +1271,7 @@ public class GParsPoolUtil {
     @SuppressWarnings("GroovyAssignabilityCheck")
     public static <T> T maxParallel(final Collection<T> collection, final Closure cl) throws ExecutionException, InterruptedException {
         //return GParsPoolUtilHelper.createPAFromCollection(collection, retrievePool()).max((Comparator<T>) createComparator(cl));
-        return (T) retrievePool().submit(() ->
+        return retrievePool().submit(() ->
                 collection.parallelStream()
                         .max((a,b) -> cl.getMaximumNumberOfParameters() >= 2 ? (Integer) cl.call(a,b) : ((Comparable) a).compareTo(b))
                         .orElse(null)

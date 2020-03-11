@@ -26,6 +26,7 @@ import groovyx.gpars.dataflow.SelectableChannel;
  * @author Vaclav Pech
  *         Date: 30th Sep 2010
  */
+@SuppressWarnings("rawtypes")
 public final class SelectCallback<T> extends Closure {
     private static final long serialVersionUID = 5953873495199115151L;
     private final int index;
@@ -50,7 +51,7 @@ public final class SelectCallback<T> extends Closure {
      */
     @SuppressWarnings({"unchecked"})
     @Override
-    public Object call(final Object[] args) {
+    public Object call(final Object... args) {
         try {
             ((SelectBase<T>) getOwner()).boundNotification(index, channel);
         } catch (InterruptedException ignore) {

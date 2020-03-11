@@ -53,6 +53,7 @@ import java.util.concurrent.TimeUnit;
  *
  * @author Vaclav Pech, Alex Tkachman
  */
+@SuppressWarnings("rawtypes")
 public abstract class Actor extends MessageStream {
 
     /**

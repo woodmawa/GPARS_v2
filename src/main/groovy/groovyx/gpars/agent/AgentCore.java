@@ -30,7 +30,7 @@ import java.util.List;
  * @author Vaclav Pech
  *         Date: 13.4.2010
  */
-@SuppressWarnings({"UnqualifiedStaticUsage"})
+@SuppressWarnings({"serial", "UnqualifiedStaticUsage"})
 public abstract class AgentCore extends WithSerialId {
 
     private final AsyncMessagingCore core;

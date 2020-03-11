@@ -25,7 +25,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author Vaclav Pech, Alex Tkachman, Dierk Koenig
  */
-@SuppressWarnings({"ThrowCaughtLocally", "UnqualifiedStaticUsage"})
+@SuppressWarnings({"ThrowCaughtLocally", "UnqualifiedStaticUsage", "rawtypes"})
 public abstract class BlockingActor extends SequentialProcessingActor {
 
     private static final String THE_ACTOR_HAS_NOT_BEEN_STARTED = "The actor hasn't been started.";

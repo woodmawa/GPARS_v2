@@ -31,6 +31,7 @@ import java.util.concurrent.Semaphore;
  * @author Vaclav Pech
  *         Date: Jan 8, 2009
  */
+@SuppressWarnings("rawtypes")
 public class EnhancedSemaphore extends Semaphore {
     private static final long serialVersionUID = 7582324169075000859L;
 

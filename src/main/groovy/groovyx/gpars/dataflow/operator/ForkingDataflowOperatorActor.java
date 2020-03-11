@@ -31,7 +31,7 @@ import java.util.concurrent.Semaphore;
  *
  * @author Vaclav Pech
  */
-@SuppressWarnings({"RawUseOfParameterizedType"})
+@SuppressWarnings({"rawtypes", "RawUseOfParameterizedType", "serial"})
 final class ForkingDataflowOperatorActor extends DataflowOperatorActor {
     private final Semaphore semaphore;
     private final Pool threadPool;

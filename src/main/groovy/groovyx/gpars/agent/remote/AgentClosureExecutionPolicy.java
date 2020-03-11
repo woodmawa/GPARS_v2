@@ -29,6 +29,7 @@ import groovyx.gpars.serial.SerialMsg;
  *
  * @author Rafal Slawik
  */
+@SuppressWarnings({"rawtypes", "unchecked"})
 public enum AgentClosureExecutionPolicy {
     LOCAL {
         @Override

@@ -27,6 +27,7 @@ import groovyx.gpars.serial.SerialMsg;
  *
  * @author Rafal Slawik
  */
+@SuppressWarnings("serial")
 public class RemoteDataflowQueueReplyMsg extends SerialMsg {
     final String name;
     final DataflowChannel<?> queue;

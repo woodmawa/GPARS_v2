@@ -27,6 +27,7 @@ import org.codehaus.groovy.runtime.NullObject;
  * @author Vaclav Pech
  */
 
+@SuppressWarnings({"rawtypes", "serial"})
 public final class FilterClosure<V> extends Closure {
     private final Closure<Boolean> wiseMan;
 

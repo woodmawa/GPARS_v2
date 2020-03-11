@@ -28,6 +28,7 @@ import groovyx.gpars.serial.SerialMsg;
  *
  * @author Rafal Slawik
  */
+@SuppressWarnings({"unchecked", "serial"})
 public class RemoteDataflowQueueValueRequestMsg<T> extends SerialMsg{
     private final DataflowVariable<T> value;
     private final DataflowChannel<?> queue;

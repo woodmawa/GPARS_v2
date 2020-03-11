@@ -24,7 +24,7 @@ import groovy.lang.Closure;
  *
  * @author Vaclav Pech
  */
-@SuppressWarnings({"unchecked"})
+@SuppressWarnings({"unchecked", "rawtypes"})
 public abstract class ReactorMessagingRunnable<T, V> extends Closure {
     private static final long serialVersionUID = 4796783310470426395L;
     private static final Class<?>[] PARAMETER_TYPES = {Object.class};
@@ -54,7 +54,7 @@ public abstract class ReactorMessagingRunnable<T, V> extends Closure {
     }
 
     @Override
-    public final Object call(final Object[] args) {
+    public final Object call(final Object... args) {
         if (args.length != 1)
             throw new UnsupportedOperationException(REACTOR_MESSAGING_RUNNABLE_NEED_EXACTLY_ONE_ARGUMENT_TO_RUN);
         return doRun((T) args[0]);

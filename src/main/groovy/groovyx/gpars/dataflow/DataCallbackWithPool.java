@@ -29,6 +29,7 @@ import groovyx.gpars.scheduler.Pool;
  * @author Vaclav Pech, Alex Tkachman
  *         Date: Sep 13, 2009
  */
+@SuppressWarnings("rawtypes")
 public final class DataCallbackWithPool extends MessageStream {
     private static final long serialVersionUID = 6512046150477794254L;
     private final Closure code;

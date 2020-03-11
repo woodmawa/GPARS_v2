@@ -31,6 +31,7 @@ import java.util.Arrays;
  *
  * @author Alex Tkachman, Vaclav Pech
  */
+@SuppressWarnings({"rawtypes", "unchecked"})
 public class RunnableBackedBlockingActor extends BlockingActor {
     private static final long serialVersionUID = 8992135845484038961L;
 

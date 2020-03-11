@@ -33,7 +33,7 @@ import java.util.List;
  * @param <T> The type of messages to pass through the stream
  * @author Vaclav Pech
  */
-@SuppressWarnings({"SynchronizedMethod"})
+@SuppressWarnings({"unchecked", "rawtypes", "serial", "SynchronizedMethod"})
 public class DataflowStreamWriteAdapter<T> extends WithSerialId implements DataflowWriteChannel<T> {
 
     private StreamCore<T> head;

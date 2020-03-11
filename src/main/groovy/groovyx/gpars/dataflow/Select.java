@@ -43,7 +43,7 @@ import java.util.concurrent.TimeUnit;
  * @author Vaclav Pech
  *         Date: 30th Sep 2010
  */
-@SuppressWarnings({"MethodNamesDifferingOnlyByCase"})
+@SuppressWarnings({"MethodNamesDifferingOnlyByCase", "unchecked"})
 public class Select<T> {
 
     private final SelectBase<T> selectBase;

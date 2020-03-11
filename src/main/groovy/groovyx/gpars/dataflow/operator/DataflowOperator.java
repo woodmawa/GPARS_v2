@@ -38,7 +38,7 @@ import java.util.Map;
  * @author Vaclav Pech
  *         Date: Sep 9, 2009
  */
-@SuppressWarnings({"RawUseOfParameterizedType", "unchecked"})
+@SuppressWarnings({"RawUseOfParameterizedType", "rawtypes", "unchecked"})
 public final class DataflowOperator extends DataflowProcessor {
 
     /**
@@ -49,7 +49,7 @@ public final class DataflowOperator extends DataflowProcessor {
      * @param channels A map specifying "inputs" and "outputs" - dataflow channels (instances of the DataflowQueue or DataflowVariable classes) to use for inputs and outputs
      * @param code     The operator's body to run each time all inputs have a value to read
      */
-    @SuppressWarnings({"ThisEscapedInObjectConstruction"})
+    @SuppressWarnings({"rawtypes", "ThisEscapedInObjectConstruction"})
     public DataflowOperator(final PGroup group, final Map channels, final Closure code) {
         super(channels, code);
         final int parameters = code.getMaximumNumberOfParameters();

@@ -39,6 +39,7 @@ import static java.util.Arrays.asList;
  * @param <T> The type of messages to pass through the stream
  * @author Vaclav Pech
  */
+@SuppressWarnings({"rawtypes"})
 final class SyncDataflowStreamReadAdapter<T> extends DataflowStreamReadAdapter<T> {
 
     private boolean closed = false;

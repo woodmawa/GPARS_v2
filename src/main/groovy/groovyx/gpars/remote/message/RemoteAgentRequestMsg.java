@@ -28,6 +28,8 @@ import java.util.UUID;
  *
  * @author Rafal Slawik
  */
+
+@SuppressWarnings({"rawtypes", "serial"})
 public class RemoteAgentRequestMsg extends SerialMsg {
     private final String name;
 

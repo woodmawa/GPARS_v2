@@ -30,6 +30,7 @@ import java.util.concurrent.TimeUnit;
  *
  * @author Vaclav Pech
  */
+@SuppressWarnings({"rawtypes", "unchecked"})
 public interface Promise<T> extends SelectableChannel<T> {
 
     /**

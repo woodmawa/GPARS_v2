@@ -24,6 +24,7 @@ import groovyx.gpars.GParsPoolUtil
 /**
  * Wraps a ParallelArray instance in map/reduce operation chains.
  */
+@SuppressWarnings (["rawtypes"])
 abstract class AbstractPAWrapper<T> {
 
     /**

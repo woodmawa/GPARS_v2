@@ -59,7 +59,7 @@ import groovyx.gpars.serial.WithSerialId;
  * @author Vaclav Pech
  *         Date: Jun 5, 2009
  */
-@SuppressWarnings({"ClassWithTooManyMethods", "unchecked"})
+@SuppressWarnings({"rawtypes", "ClassWithTooManyMethods", "unchecked", "serial"})
 public class DataflowQueue<T> extends WithSerialId implements DataflowChannel<T> {
 
     /**

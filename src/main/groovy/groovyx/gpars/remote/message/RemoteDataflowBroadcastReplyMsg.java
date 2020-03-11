@@ -27,6 +27,7 @@ import groovyx.gpars.serial.SerialMsg;
  *
  * @author Rafal Slawik
  */
+@SuppressWarnings({"rawtypes", "serial"})
 public class RemoteDataflowBroadcastReplyMsg extends SerialMsg {
     private final String name;
     private final DataflowStreamWriteAdapter stream;

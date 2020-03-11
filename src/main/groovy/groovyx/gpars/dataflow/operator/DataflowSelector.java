@@ -46,7 +46,7 @@ import java.util.Map;
  * @author Vaclav Pech
  *         Date: Sep 9, 2009
  */
-@SuppressWarnings({"RawUseOfParameterizedType", "unchecked"})
+@SuppressWarnings({"RawUseOfParameterizedType", "rawtypes", "unchecked"})
 public class DataflowSelector extends DataflowProcessor {
 
     protected final Select select;
@@ -76,7 +76,7 @@ public class DataflowSelector extends DataflowProcessor {
             this.actor = new DataflowSelectorActor(this, group, outputs, inputs, (Closure) code.clone());
         }
         select = new Select(group, inputs);
-        guards = Collections.synchronizedList(new ArrayList<Boolean>((int) inputs.size()));
+        guards = Collections.synchronizedList(new ArrayList<Boolean>(inputs.size()));
         //fill in the provided or default guard flags
         final List<Boolean> gs = (List<Boolean>) channels.get("guards");
         if (gs != null) {

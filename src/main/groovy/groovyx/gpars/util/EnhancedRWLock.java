@@ -31,6 +31,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  * @author Vaclav Pech
  *         Date: Feb 18, 2009
  */
+@SuppressWarnings("rawtypes")
 public class EnhancedRWLock extends ReentrantReadWriteLock {
     private static final long serialVersionUID = 4598708242656870566L;
 

@@ -36,7 +36,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * @author Vaclav Pech
  *         Date: April 4, 2013
  */
-@SuppressWarnings({"AccessingNonPublicFieldOfAnotherObject", "UnqualifiedStaticUsage"})
+@SuppressWarnings({"serial", "AccessingNonPublicFieldOfAnotherObject", "UnqualifiedStaticUsage"})
 public final class LazyDataflowVariable<T> extends DataflowVariable<T> {
     private final Closure<T> initializer;
     private final AtomicBoolean initializationStarted = new AtomicBoolean(false);
