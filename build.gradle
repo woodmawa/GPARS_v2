@@ -35,10 +35,8 @@ plugins {
     id 'eclipse'
     id 'idea'
     id("org.asciidoctor.convert") version "1.5.9.2"
-    //id "org.asciidoctor"
 }
 
-group 'org.softwood'
 version '2.0-SNAPSHOT'
 
 sourceCompatibility = 1.11
@@ -108,7 +106,7 @@ task copyDSLDefinitions(type: Copy) {
 }
 
 jar {
-    archivesBaseName = 'GPARS-all'//project.name + '-all'
+    archivesBaseName = 'gpars-all'//project.name + '-all'
     manifest {
         attributes (
                 archiveName : 'groovyx.gpars',
