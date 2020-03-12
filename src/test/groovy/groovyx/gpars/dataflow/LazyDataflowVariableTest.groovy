@@ -18,6 +18,8 @@ package groovyx.gpars.dataflow
 
 import java.util.concurrent.CyclicBarrier
 import java.util.concurrent.TimeUnit
+import groovy.test.GroovyTestCase
+
 
 public class LazyDataflowVariableTest extends GroovyTestCase {
 

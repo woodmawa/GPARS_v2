@@ -17,6 +17,8 @@
 package groovyx.gpars.dataflow.impl
 
 import java.util.concurrent.TimeUnit
+import groovy.test.GroovyTestCase
+
 
 public class ResizeableCountDownLatchTest extends GroovyTestCase {
 

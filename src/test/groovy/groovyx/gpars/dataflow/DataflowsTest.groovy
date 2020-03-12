@@ -20,6 +20,9 @@ import groovyx.gpars.actor.Actors
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.CyclicBarrier
 import java.util.concurrent.TimeUnit
+import groovy.test.GroovyTestCase
+import groovy.test.GroovyTestCase
+
 
 public class DataflowsTest extends GroovyTestCase {
 

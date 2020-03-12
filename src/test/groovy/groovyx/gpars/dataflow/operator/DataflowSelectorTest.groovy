@@ -23,6 +23,8 @@ import groovyx.gpars.group.PGroup
 
 import java.util.concurrent.CyclicBarrier
 import java.util.concurrent.TimeUnit
+import groovy.test.GroovyTestCase
+
 
 /**
  * @author Vaclav Pech

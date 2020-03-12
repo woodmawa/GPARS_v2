@@ -20,6 +20,8 @@ import groovyx.gpars.group.DefaultPGroup
 
 import java.util.concurrent.Callable
 import java.util.concurrent.TimeUnit
+import groovy.test.GroovyTestCase
+
 
 public class LazyTaskTest extends GroovyTestCase {
     def group

@@ -18,6 +18,8 @@ package groovyx.gpars.dataflow.operator
 
 import groovyx.gpars.dataflow.DataflowVariable
 import static groovyx.gpars.dataflow.Dataflow.task
+import groovy.test.GroovyTestCase
+
 
 /**
  * @author Vaclav Pech

@@ -20,6 +20,7 @@ import groovyx.gpars.actor.Actors
 import groovyx.gpars.dataflow.DataflowVariable
 import groovyx.gpars.dataflow.Promise
 import org.codehaus.groovy.control.MultipleCompilationErrorsException
+import groovy.test.GroovyTestCase
 
 @SuppressWarnings("SpellCheckingInspection")
 public class ActiveObjectASTTransformationTest extends GroovyTestCase {

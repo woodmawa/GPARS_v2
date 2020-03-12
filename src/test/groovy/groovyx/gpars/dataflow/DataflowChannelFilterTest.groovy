@@ -18,6 +18,8 @@ package groovyx.gpars.dataflow
 
 import groovyx.gpars.dataflow.operator.PoisonPill
 import static groovyx.gpars.dataflow.Dataflow.operator
+import groovy.test.GroovyTestCase
+
 
 class DataflowChannelFilterTest extends GroovyTestCase {
 

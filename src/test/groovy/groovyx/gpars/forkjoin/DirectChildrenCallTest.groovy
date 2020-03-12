@@ -18,6 +18,7 @@ package groovyx.gpars.forkjoin
 
 import static groovyx.gpars.GParsPool.runForkJoin
 import static groovyx.gpars.GParsPool.withPool
+import groovy.test.GroovyTestCase
 
 class DirectChildrenCallTest extends GroovyTestCase {
     public void testDirectFib() {

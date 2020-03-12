@@ -19,6 +19,8 @@ package groovyx.gpars.dataflow.operator
 import groovyx.gpars.dataflow.DataflowQueue
 import groovyx.gpars.group.DefaultPGroup
 import groovyx.gpars.group.PGroup
+import groovy.test.GroovyTestCase
+
 /**
  * @author Vaclav Pech
  * Date: Sep 9, 2009

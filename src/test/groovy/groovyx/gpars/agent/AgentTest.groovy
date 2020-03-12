@@ -27,6 +27,8 @@ import java.util.concurrent.RejectedExecutionException
 import java.util.concurrent.ThreadPoolExecutor
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicBoolean
+import groovy.test.GroovyTestCase
+
 
 /**
  * @author Vaclav Pech

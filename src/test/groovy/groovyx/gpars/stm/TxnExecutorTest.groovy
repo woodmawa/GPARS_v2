@@ -22,6 +22,8 @@ import org.multiverse.api.references.TxnInteger
 import java.util.concurrent.CountDownLatch
 import org.multiverse.api.PropagationLevel
 import static org.multiverse.api.StmUtils.newTxnInteger
+import groovy.test.GroovyTestCase
+
 
 /**
  * @author Vaclav Pech

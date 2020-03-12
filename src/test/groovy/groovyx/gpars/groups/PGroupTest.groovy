@@ -24,6 +24,7 @@ import groovyx.gpars.group.NonDaemonPGroup
 import groovyx.gpars.group.PGroup
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.atomic.AtomicBoolean
+import groovy.test.GroovyTestCase
 
 public class PGroupTest extends GroovyTestCase {
     public void testDefaultGroupDaemon() {

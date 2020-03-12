@@ -21,6 +21,8 @@ import groovyx.gpars.group.NonDaemonPGroup
 import java.util.concurrent.CyclicBarrier
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicBoolean
+import groovy.test.GroovyTestCase
+
 
 public class SyncDataflowQueueTest extends GroovyTestCase {
 

@@ -21,6 +21,8 @@ import groovyx.gpars.actor.Actors
 import groovyx.gpars.actor.BlockingActor
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.atomic.AtomicInteger
+import groovy.test.GroovyTestCase
+
 
 public class ThreadLifeCycleTest extends GroovyTestCase {
 

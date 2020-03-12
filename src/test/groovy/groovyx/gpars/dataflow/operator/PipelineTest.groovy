@@ -21,6 +21,8 @@ import groovyx.gpars.dataflow.DataflowQueue
 import groovyx.gpars.dataflow.DataflowReadChannel
 import groovyx.gpars.group.NonDaemonPGroup
 import groovyx.gpars.group.PGroup
+import groovy.test.GroovyTestCase
+
 
 /**
  * @author Vaclav Pech

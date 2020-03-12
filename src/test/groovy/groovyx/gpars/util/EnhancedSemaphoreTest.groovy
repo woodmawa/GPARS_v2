@@ -17,6 +17,8 @@
 package groovyx.gpars.util
 
 import java.util.concurrent.Semaphore
+import groovy.test.GroovyTestCase
+
 
 /**
  *

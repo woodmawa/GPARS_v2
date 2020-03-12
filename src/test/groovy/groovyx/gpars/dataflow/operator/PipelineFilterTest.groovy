@@ -20,6 +20,8 @@ import groovyx.gpars.dataflow.DataflowQueue
 import groovyx.gpars.group.NonDaemonPGroup
 import groovyx.gpars.group.PGroup
 import org.codehaus.groovy.runtime.NullObject
+import groovy.test.GroovyTestCase
+
 
 /**
  * @author Vaclav Pech

@@ -20,6 +20,8 @@ import groovyx.gpars.dataflow.DataflowQueue
 import groovyx.gpars.group.DefaultPGroup
 import groovyx.gpars.group.PGroup
 import java.util.concurrent.TimeUnit
+import groovy.test.GroovyTestCase
+
 
 /**
  * @author Vaclav Pech

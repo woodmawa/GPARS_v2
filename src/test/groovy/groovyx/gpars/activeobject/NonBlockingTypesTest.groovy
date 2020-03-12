@@ -17,6 +17,8 @@
 package groovyx.gpars.activeobject
 
 import org.codehaus.groovy.control.MultipleCompilationErrorsException
+import groovy.test.GroovyTestCase
+
 
 class NonBlockingTypesTest extends GroovyTestCase {
     public void testDefault() {

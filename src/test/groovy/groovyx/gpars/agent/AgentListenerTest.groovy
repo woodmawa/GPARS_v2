@@ -17,6 +17,7 @@
 package groovyx.gpars.agent
 
 import groovyx.gpars.dataflow.Dataflows
+import groovy.test.GroovyTestCase
 
 /**
  * @author Vaclav Pech

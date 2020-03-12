@@ -23,6 +23,8 @@ import groovyx.gpars.group.DefaultPGroup
 import groovyx.gpars.group.PGroup
 
 import java.util.concurrent.CopyOnWriteArrayList
+import groovy.test.GroovyTestCase
+
 
 /**
  * @author Vaclav Pech

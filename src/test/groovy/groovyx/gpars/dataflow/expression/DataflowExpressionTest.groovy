@@ -19,6 +19,8 @@ package groovyx.gpars.dataflow.expression
 import groovyx.gpars.GParsPool
 import groovyx.gpars.dataflow.Dataflow
 import groovyx.gpars.dataflow.DataflowVariable
+import groovy.test.GroovyTestCase
+
 
 /**
  * @author Alex Tkachman

@@ -16,6 +16,9 @@
 
 package groovyx.gpars.dataflow
 
+import groovy.test.GroovyTestCase
+
+
 public class DataflowReadChannelEventTest extends GroovyTestCase {
 
     public void testVariable() {

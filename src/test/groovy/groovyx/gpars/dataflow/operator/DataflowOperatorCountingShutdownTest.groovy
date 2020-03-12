@@ -23,6 +23,8 @@ import static groovyx.gpars.dataflow.Dataflow.operator
 import static groovyx.gpars.dataflow.Dataflow.prioritySelector
 import static groovyx.gpars.dataflow.Dataflow.selector
 import static groovyx.gpars.dataflow.Dataflow.splitter
+import groovy.test.GroovyTestCase
+
 
 /**
  * @author Vaclav Pech

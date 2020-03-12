@@ -19,6 +19,7 @@ package groovyx.gpars.forkjoin
 import java.util.concurrent.ExecutionException
 import static groovyx.gpars.GParsPool.runForkJoin
 import static groovyx.gpars.GParsPool.withPool
+import groovy.test.GroovyTestCase
 
 /**
  *

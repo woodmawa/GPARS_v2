@@ -20,6 +20,8 @@ import groovyx.gpars.dataflow.DataflowVariable
 import groovyx.gpars.group.DefaultPGroup
 import java.util.concurrent.atomic.AtomicInteger
 import static groovyx.gpars.agent.Agent.agent
+import groovy.test.GroovyTestCase
+
 
 public class AwaitTaskTerminationTest extends GroovyTestCase {
 

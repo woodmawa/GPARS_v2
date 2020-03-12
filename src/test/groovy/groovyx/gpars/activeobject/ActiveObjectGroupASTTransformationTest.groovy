@@ -19,6 +19,7 @@ package groovyx.gpars.activeobject
 import groovyx.gpars.actor.Actors
 import groovyx.gpars.dataflow.DataflowVariable
 import groovyx.gpars.group.DefaultPGroup
+import groovy.test.GroovyTestCase
 
 public class ActiveObjectGroupASTTransformationTest extends GroovyTestCase {
 

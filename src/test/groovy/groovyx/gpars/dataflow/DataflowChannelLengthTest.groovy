@@ -17,6 +17,8 @@
 package groovyx.gpars.dataflow
 
 import java.util.concurrent.CyclicBarrier
+import groovy.test.GroovyTestCase
+
 
 public class DataflowChannelLengthTest extends GroovyTestCase {
 

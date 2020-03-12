@@ -25,6 +25,8 @@ import java.util.concurrent.CyclicBarrier
 import java.util.concurrent.atomic.AtomicBoolean
 
 import static groovyx.gpars.dataflow.Dataflow.prioritySelector
+import groovy.test.GroovyTestCase
+
 
 /**
  * @author Vaclav Pech

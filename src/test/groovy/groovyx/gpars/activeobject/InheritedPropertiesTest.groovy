@@ -16,15 +16,18 @@
 
 package groovyx.gpars.activeobject
 
+
+
 import org.codehaus.groovy.control.MultipleCompilationErrorsException
+import groovy.test.GroovyTestCase
 
 public class InheritedPropertiesTest extends GroovyTestCase {
     public void testOverridingActorNameNotAllowed() {
         final GroovyShell shell = new GroovyShell()
         shouldFail(MultipleCompilationErrorsException) {
             shell.evaluate("""
-    import groovyx.gpars.activeobject.ActiveObject
-    import groovyx.gpars.activeobject.ActiveMethod
+import groovyx.gpars.activeobject.ActiveObject
+import groovyx.gpars.activeobject.ActiveMethod
 
     @ActiveObject
     class A {
@@ -46,8 +49,8 @@ public class InheritedPropertiesTest extends GroovyTestCase {
         final GroovyShell shell = new GroovyShell()
         shouldFail(MultipleCompilationErrorsException) {
             shell.evaluate("""
-    import groovyx.gpars.activeobject.ActiveObject
-    import groovyx.gpars.activeobject.ActiveMethod
+import groovyx.gpars.activeobject.ActiveObject
+import groovyx.gpars.activeobject.ActiveMethod
 
     @ActiveObject
     class A {

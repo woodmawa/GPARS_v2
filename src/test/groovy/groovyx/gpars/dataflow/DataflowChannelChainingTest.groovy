@@ -19,6 +19,8 @@ package groovyx.gpars.dataflow
 import groovyx.gpars.dataflow.operator.PoisonPill
 import groovyx.gpars.group.NonDaemonPGroup
 import groovyx.gpars.group.PGroup
+import groovy.test.GroovyTestCase
+
 
 /**
  * @author Vaclav Pech

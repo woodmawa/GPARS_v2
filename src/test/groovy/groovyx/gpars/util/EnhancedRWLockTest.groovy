@@ -19,6 +19,8 @@ package groovyx.gpars.util
 import java.util.concurrent.locks.ReentrantReadWriteLock
 import java.util.concurrent.TimeUnit
 import groovyx.gpars.dataflow.DataflowVariable
+import groovy.test.GroovyTestCase
+
 
 /**
  *

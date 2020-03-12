@@ -20,6 +20,8 @@ import groovyx.gpars.group.NonDaemonPGroup
 
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
+import groovy.test.GroovyTestCase
+
 
 import static groovyx.gpars.actor.Actors.blockingActor
 

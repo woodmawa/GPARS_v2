@@ -24,6 +24,8 @@ import groovyx.gpars.group.PGroup
 
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicBoolean
+import groovy.test.GroovyTestCase
+
 
 /**
  * @author Vaclav Pech

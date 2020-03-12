@@ -19,6 +19,8 @@ package groovyx.gpars.dataflow
 import groovyx.gpars.group.NonDaemonPGroup
 
 import java.security.AccessControlException
+import groovy.test.GroovyTestCase
+
 
 /**
  * @author Vaclav Pech
