@@ -18,7 +18,8 @@
 package groovyx.gpars.benchmark.caliper.akka;
 
 import com.google.caliper.Param;
-import com.google.caliper.api.VmParam;
+import com.google.caliper.api.VmOptions;
+//import com.google.caliper.api.VmParam;
 import com.google.caliper.runner.CaliperMain;
 import groovyx.gpars.actor.Actor;
 import groovyx.gpars.actor.DynamicDispatchActor;
@@ -27,26 +28,24 @@ import groovyx.gpars.group.DefaultPGroup;
 import java.util.Random;
 import java.util.concurrent.CountDownLatch;
 
-
+//@VmOptions ({"$server"})
 public class BenchmarkLatencyDynamicDispatchActorCaliper extends BenchmarkCaliper {
 
     @Param({"1", "2", "4"})
     int numberOfClients;
 
-    @VmParam
     String server;
-    @VmParam
     String xms;
-    @VmParam
     String xmx;
-    @VmParam
     String gc;
+
 
     BenchmarkLatencyDynamicDispatchActorCaliper() {
         super(200, DYNAMIC_RUN, DYNAMIC_POISON, LatencyDynamicClient.class, LatencyDynamicDestination.class, LatencyDynamicWayPoint.class);
     }
 
     public long latencyLatencyDynamicDispatchActor(final int dummy) {
+
         long time = 0;
         try {
             time = timeLatency(numberOfClients);

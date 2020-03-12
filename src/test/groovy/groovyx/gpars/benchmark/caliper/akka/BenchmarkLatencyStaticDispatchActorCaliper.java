@@ -19,7 +19,7 @@
 package groovyx.gpars.benchmark.caliper.akka;
 
 import com.google.caliper.Param;
-import com.google.caliper.api.VmParam;
+//import com.google.caliper.api.VmParam;
 import com.google.caliper.runner.CaliperMain;
 import groovyx.gpars.actor.Actor;
 import groovyx.gpars.actor.StaticDispatchActor;
@@ -32,13 +32,11 @@ import java.util.concurrent.CountDownLatch;
 public class BenchmarkLatencyStaticDispatchActorCaliper extends BenchmarkCaliper {
     @Param({"1", "2", "4"})
     int numberOfClients;
-    @VmParam
+
+
     String server;
-    @VmParam
     String xms;
-    @VmParam
     String xmx;
-    @VmParam
     String gc;
 
     BenchmarkLatencyStaticDispatchActorCaliper() {

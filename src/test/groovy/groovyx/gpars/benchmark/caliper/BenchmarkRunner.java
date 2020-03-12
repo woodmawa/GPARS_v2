@@ -52,9 +52,9 @@ public final class BenchmarkRunner {
             for (final Class benchmark : benchmarks) {
                 try {
                     if (benchmark.getName().matches(".*Throughput.*")) {
-                        CaliperMain.exitlessMain(concat(concat(throughputArg, args, String.class), benchmark.getName()), writer);
+                        CaliperMain.exitlessMain(concat(concat(throughputArg, args, String.class), benchmark.getName()), writer, writer);
                     } else
-                        CaliperMain.exitlessMain(concat(concat(latencyArg, args, String.class), benchmark.getName()), writer);
+                        CaliperMain.exitlessMain(concat(concat(latencyArg, args, String.class), benchmark.getName()), writer, writer);
                 } catch (InvalidCommandException e) {
                     e.display(writer);
 

@@ -18,14 +18,14 @@
  */
 
 package groovyx.gpars.benchmark.caliper.chart;
-
-import com.google.caliper.model.Instrument;
+/*
+import com.google.caliper.model.Instrument;  //no longer accessible
 import com.google.caliper.model.Measurement;
-import com.google.caliper.model.Result;
+import com.google.caliper.model.Result; //no longer accessible
 import com.google.caliper.model.Run;
 import com.google.caliper.model.Scenario;
-import com.google.caliper.model.VM;
-import com.google.caliper.runner.ResultProcessor;
+import com.google.caliper.model.VM;  //no longer accessible
+import com.google.caliper.runner.ResultProcessor;  //no longer accessible
 import com.google.common.base.Function;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.ImmutableList;
@@ -55,7 +55,17 @@ import java.util.Queue;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
+*/
 
+/**
+ * warning - Caliper has changed so much with latest revision that non of this
+ * compiles
+ *
+ * todo will need to redo
+ * @Author Will Woodman
+ */
+
+/*
 final class ChartBuilder implements ResultProcessor {
 
     private static final int maxParamWidth = 30;
@@ -131,6 +141,8 @@ final class ChartBuilder implements ResultProcessor {
             axes.add(axis);
         }
 
+ */
+
         /*
         * Figure out how much influence each axis has on the measured value.
         * We sum the measurements taken with each value of each axis. For
@@ -140,6 +152,8 @@ final class ChartBuilder implements ResultProcessor {
         * across each axis' collection of sums. Higher variance implies higher
         * influence on the measured result.
         */
+
+        /*
         double sumOfAllMeasurements = 0;
         for (final ProcessedResult result : processedResults.values()) {
             sumOfAllMeasurements += result.median;
@@ -168,12 +182,14 @@ final class ChartBuilder implements ResultProcessor {
 
         buildChart();
     }
+    */
 
+/**
     private void buildChart() {
-        /* X axis label is User Parameter,
-           A parameter is singleton if it has only one value
-           Assumption here is there is only one user parameter(numberOfClients)
-           and there are multiple scenarios */
+        // X axis label is User Parameter,
+        //   A parameter is singleton if it has only one value
+        //   Assumption here is there is only one user parameter(numberOfClients)
+        //   and there are multiple scenarios
         String xLabel = null;
 
         for (final Axis axis : sortedAxes) {
@@ -187,9 +203,12 @@ final class ChartBuilder implements ResultProcessor {
             System.out.println("Need more than 1 scenario to build chart");
             return;
         }
+        */
 
-        /* Y axis label is the unit of measurements
-           It is ns for latency, and messages per second for throughput */
+
+        // Y axis label is the unit of measurements
+        //It is ns for latency, and messages per second for throughput
+/**
         final ProcessedResult firstResult = processedResults.values().iterator().next();
         final String yLabel = firstResult.responseUnit;
 
@@ -204,17 +223,20 @@ final class ChartBuilder implements ResultProcessor {
                 }
             }
         }
+ */
 
-        /* Looking for the previous measurements of this benchmark
-           that has the same number of scenarios by
-           parsing Json files saved in caliper-results folder.
-           Do not change the name of the file nor the name of the benchmark method */
-        final File dir = new File("caliper-results");
-        final List<ArrayList<Long>> historyYValues = new ArrayList<ArrayList<Long>>();
-        final List<ArrayList<String>> historyXValues = new ArrayList<ArrayList<String>>();
-        final ArrayList<String> historyNames = new ArrayList<String>();
+        // Looking for the previous measurements of this benchmark
+        //   that has the same number of scenarios by
+        //   parsing Json files saved in caliper-results folder.
+        //   Do not change the name of the file nor the name of the benchmark method
+        //final File dir = new File("caliper-results");
+        //final List<ArrayList<Long>> historyYValues = new ArrayList<ArrayList<Long>>();
+        //final List<ArrayList<String>> historyXValues = new ArrayList<ArrayList<String>>();
+        //final ArrayList<String> historyNames = new ArrayList<String>();
 
-        /* Pick history files that are most recently created */
+        // Pick history files that are most recently created
+
+/*
         final Queue<File> fileQueue = new PriorityQueue<File>(10, new Comparator<File>() {
             @Override
             public int compare(final File o1, final File o2) {
@@ -232,6 +254,7 @@ final class ChartBuilder implements ResultProcessor {
             }
         });
 
+
         if (dir.isDirectory()) {
             for (final File file : dir.listFiles(new FilenameFilter() {
                 @Override
@@ -246,10 +269,12 @@ final class ChartBuilder implements ResultProcessor {
                 }
             }
         }
+*/
 
-        /* Picks three latest histories.
-           Overflows Google Chart if try to plot more than 3 histories.(Total of 4)
-         */
+        // Picks three latest histories
+        // Overflows Google Chart if try to plot more than 3 histories.(Total of 4)
+         //
+/*
         for (int i = 0; i < 3; i++) {
             if (fileQueue.isEmpty()) break;
             final File file = fileQueue.poll();
@@ -259,9 +284,10 @@ final class ChartBuilder implements ResultProcessor {
             final String[] tempList = file.getName().split("\\.");
             historyNames.add(tempList[tempList.length - 2]);
         }
-
-        /* Calculating the range of the cart and the range of each data set.
-         */
+*/
+        // Calculating the range of the cart and the range of each data set.
+         //
+/*
         final Collection<Long> maxList = new ArrayList<Long>();
         for (final Iterable<Long> medians : historyYValues) {
             long max = -1L;
@@ -279,7 +305,9 @@ final class ChartBuilder implements ResultProcessor {
         final HTMLBuilder htmlBuilder = new HTMLBuilder(run);
         htmlBuilder.buildBarGraphURL(xValues, yValues, historyXValues, historyYValues, historyNames, xLabel, yLabel, globalMax);
     }
+    */
 
+/*
     private static ProcessedResult combineResults(final ProcessedResult r1, final Result r2) {
         checkArgument(r1.modelResult.instrumentLocalName.equals(r2.instrumentLocalName));
         checkArgument(r1.modelResult.scenarioLocalName.equals(r2.scenarioLocalName));
@@ -289,10 +317,12 @@ final class ChartBuilder implements ResultProcessor {
                 .build();
         return new ProcessedResult(r2);
     }
-
+*/
     /**
      * A scenario variable and the set of values to which it has been assigned.
      */
+
+    /*
     private class Axis {
         final AxisName name;
         final ImmutableList<AxisValue> values;
@@ -328,21 +358,27 @@ final class ChartBuilder implements ResultProcessor {
             return numberOfValues() == 1;
         }
     }
+    */
+
 
     /**
      * Orders the different axes by their variance. This results
      * in an appropriate grouping of output values.
      */
+    /*
     private static class VarianceOrdering extends Ordering<Axis> {
         @Override
         public int compare(final Axis a, final Axis b) {
             return Double.compare(a.variance, b.variance);
         }
     }
+    */
+
 
     /**
      * Orders scenarios by the axes.
      */
+    /*
     private class ByAxisOrdering extends Ordering<ScenarioName> {
         @Override
         public int compare(final ScenarioName scenarioALocalName, final ScenarioName scenarioBLocalName) {
@@ -357,7 +393,9 @@ final class ChartBuilder implements ResultProcessor {
             return 0;
         }
     }
+    */
 
+/*
     @SuppressWarnings("NumericCastThatLosesPrecision")
     private static int floor(final double d) {
         return (int) Math.floor(d);
@@ -376,7 +414,9 @@ final class ChartBuilder implements ResultProcessor {
         }
     }
 
+*/
 
+/*
     private static class ProcessedResult {
         private final Result modelResult;
         private final double[] values;
@@ -521,5 +561,5 @@ final class ChartBuilder implements ResultProcessor {
                 }
             };
 }
-
+*/
 

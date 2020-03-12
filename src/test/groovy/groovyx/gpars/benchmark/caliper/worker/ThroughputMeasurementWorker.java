@@ -16,6 +16,15 @@
 
 package groovyx.gpars.benchmark.caliper.worker;
 
+/**
+ * warning - Caliper has changed so much with latest revision that non of this
+ * compiles
+ *
+ * todo will need to redo
+ * @Author Will Woodman
+ */
+
+/*
 import com.google.caliper.api.Benchmark;
 import com.google.caliper.model.Measurement;
 import com.google.caliper.util.LastNValues;
@@ -28,7 +37,9 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
+*/
 
+/*
 public class ThroughputMeasurementWorker implements Worker {
     @Override
     public Collection<Measurement> measure(Benchmark benchmark, String methodName, Map<String, String> optionMap, WorkerEventLog log) throws Exception {
@@ -144,3 +155,4 @@ public class ThroughputMeasurementWorker implements Worker {
     }
 }
 
+*/

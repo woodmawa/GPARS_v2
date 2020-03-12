@@ -19,7 +19,7 @@
 package groovyx.gpars.benchmark.caliper.akka;
 
 import com.google.caliper.Param;
-import com.google.caliper.api.VmParam;
+//import com.google.caliper.api.VmParam;
 import com.google.caliper.runner.CaliperMain;
 import groovyx.gpars.actor.DynamicDispatchActor;
 import groovyx.gpars.group.DefaultPGroup;
@@ -34,13 +34,10 @@ public class BenchmarkThroughputDynamicDispatchActorCaliper extends BenchmarkCal
             "40", "42", "44", "46", "48"}
     )
     int numberOfClients;
-    @VmParam
+
     String server;
-    @VmParam
     String xms;
-    @VmParam
     String xmx;
-    @VmParam
     String gc;
 
 

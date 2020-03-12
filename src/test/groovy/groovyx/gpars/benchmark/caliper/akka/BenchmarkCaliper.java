@@ -21,13 +21,15 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.concurrent.CountDownLatch;
 
-import com.google.caliper.api.Benchmark;
+import com.google.caliper.AfterExperiment;
+import com.google.caliper.BeforeExperiment;
+import com.google.caliper.Benchmark;
 
 import groovyx.gpars.actor.Actor;
 import groovyx.gpars.group.DefaultPGroup;
 import groovyx.gpars.scheduler.FJPool;
 
-public abstract class BenchmarkCaliper extends Benchmark {
+public abstract class BenchmarkCaliper  {
     public static final int STATIC_RUN = 1;
     public static final int STATIC_MESSAGE = 2;
     public static final int STATIC_POISON = 3;
@@ -80,6 +82,7 @@ public abstract class BenchmarkCaliper extends Benchmark {
         return repeat;
     }
 
+    @Benchmark
     public long timeThroughput(final int reps, final int numberOfClients) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException, InstantiationException, InterruptedException {
         group = new DefaultPGroup(new FJPool(maxClients));
         repeatsPerClient = repeat / numberOfClients;//MESSAGE quota for each pair of actors
@@ -136,6 +139,7 @@ public abstract class BenchmarkCaliper extends Benchmark {
         }
     }
 
+    @BeforeExperiment
     private void setupLatencyBenchmark(final int numberOfClients) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException, InstantiationException {
 
         totalDuration = 0L;
@@ -154,6 +158,7 @@ public abstract class BenchmarkCaliper extends Benchmark {
         }
     }
 
+    @AfterExperiment
     private void teardownLatencyBenchmark() throws InterruptedException {
         for (final Actor client : clients) {
             client.send(POISON);

@@ -19,7 +19,7 @@
 package groovyx.gpars.benchmark.caliper.akka;
 
 import com.google.caliper.Param;
-import com.google.caliper.api.VmParam;
+//import com.google.caliper.api.VmParam;
 import com.google.caliper.runner.CaliperMain;
 import groovyx.gpars.actor.StaticDispatchActor;
 import groovyx.gpars.group.DefaultPGroup;
@@ -36,14 +36,11 @@ public class BenchmarkThroughputComputationStaticActorCaliper extends BenchmarkC
     )
     int numberOfClients;
 
-    @VmParam
     String server;
-    @VmParam
     String xms;
-    @VmParam
     String xmx;
-    @VmParam
     String gc;
+
 
     BenchmarkThroughputComputationStaticActorCaliper() {
         super(500, STATIC_RUN, ComputationStaticClient.class, ComputationStaticDestination.class);

@@ -16,6 +16,15 @@
 
 package groovyx.gpars.benchmark.caliper.instrument;
 
+/**
+ * warning - Caliper has changed so much with latest revision that non of this
+ * compiles
+ *
+ * todo will need to redo
+ * @Author Will Woodman
+ */
+
+/*
 import com.google.caliper.api.Benchmark;
 import com.google.caliper.api.SkipThisScenarioException;
 import com.google.caliper.runner.BenchmarkClass;
@@ -36,6 +45,11 @@ import java.util.concurrent.TimeUnit;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Throwables.propagateIfInstanceOf;
+
+*/
+
+
+/*
 
 public class LatencyMeasurementInstrument extends Instrument {
     @Override
@@ -113,3 +127,6 @@ public class LatencyMeasurementInstrument extends Instrument {
         return "latency";
     }
 }
+
+*/
+
