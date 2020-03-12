@@ -22,7 +22,7 @@ import groovyx.gpars.csp.plugAndPlay.GConsoleStringToInteger
 import groovyx.gpars.csp.plugAndPlay.GFixedDelay
 import groovyx.gpars.csp.plugAndPlay.GObjectToConsoleString
 
-import jcsp.lang.Channel
+import org.jcsp.lang.Channel
 
 def RU2RN = Channel.createOne2One()
 def RN2Conv = Channel.createOne2One()

@@ -16,6 +16,14 @@
 
 package groovyx.gpars.benchmark.caliper.chart
 
+/**
+ * warning - Caliper has changed so much with latest revision that non of this
+ * compiles
+ *
+ * todo will need to redo
+ * @Author Will Woodman
+ */
+/**
 import com.google.caliper.model.Environment
 import com.google.caliper.model.Instrument
 import com.google.caliper.model.Measurement
@@ -194,3 +202,4 @@ class HTMLBuilder {
         writer.close()
     }
 }
+*/

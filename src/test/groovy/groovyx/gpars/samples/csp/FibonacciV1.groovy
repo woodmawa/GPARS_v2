@@ -22,10 +22,10 @@ import groovyx.gpars.csp.plugAndPlay.GPCopy
 import groovyx.gpars.csp.plugAndPlay.GStatePairs
 import groovyx.gpars.csp.plugAndPlay.GPrint
 
-import jcsp.lang.CSProcess
-import jcsp.lang.Channel
-import jcsp.lang.ChannelOutput
-import jcsp.lang.One2OneChannel
+import org.jcsp.lang.CSProcess
+import org.jcsp.lang.Channel
+import org.jcsp.lang.ChannelOutput
+import org.jcsp.lang.One2OneChannel
 
 class FibonacciV1Process implements CSProcess {
 
@@ -33,10 +33,10 @@ class FibonacciV1Process implements CSProcess {
 
     void run() {
 
-        One2OneChannel a = Channel.createOne2One()
-        One2OneChannel b = Channel.createOne2One()
-        One2OneChannel c = Channel.createOne2One()
-        One2OneChannel d = Channel.createOne2One()
+        One2OneChannel a = Channel.one2One()
+        One2OneChannel b = Channel.one2One()
+        One2OneChannel c = Channel.one2One()
+        One2OneChannel d = Channel.one2One()
 
         def testList = [
                 new GPrefix(prefixValue: 0, inChannel: d.in(), outChannel: a.out()),

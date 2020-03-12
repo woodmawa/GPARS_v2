@@ -20,10 +20,10 @@ import groovyx.gpars.csp.PAR
 import groovyx.gpars.csp.plugAndPlay.GPCopy
 import groovyx.gpars.csp.plugAndPlay.GSuccessor
 
-import jcsp.lang.CSProcess
-import jcsp.lang.Channel
-import jcsp.lang.ChannelInput
-import jcsp.lang.ChannelOutput
+import org.jcsp.lang.CSProcess
+import org.jcsp.lang.Channel
+import org.jcsp.lang.ChannelInput
+import org.jcsp.lang.ChannelOutput
 
 class ResetNumbers implements CSProcess {
 

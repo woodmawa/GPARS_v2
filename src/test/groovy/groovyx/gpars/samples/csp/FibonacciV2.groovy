@@ -22,10 +22,10 @@ import groovyx.gpars.csp.plugAndPlay.GPCopy
 import groovyx.gpars.csp.plugAndPlay.GPairs
 import groovyx.gpars.csp.plugAndPlay.GPrint
 
-import jcsp.lang.CSProcess
-import jcsp.lang.Channel
-import jcsp.lang.ChannelOutput
-import jcsp.lang.One2OneChannel
+import org.jcsp.lang.CSProcess
+import org.jcsp.lang.Channel
+import org.jcsp.lang.ChannelOutput
+import org.jcsp.lang.One2OneChannel
 
 class FibonacciV2Process implements CSProcess {
 

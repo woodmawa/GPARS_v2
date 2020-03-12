@@ -20,10 +20,10 @@ import groovyx.gpars.csp.PAR
 import groovyx.gpars.csp.plugAndPlay.GNumbers
 import groovyx.gpars.csp.plugAndPlay.GPrint
 
-import jcsp.lang.Channel
-import jcsp.lang.One2OneChannel
+import org.jcsp.lang.Channel
+import org.jcsp.lang.One2OneChannel
 
-One2OneChannel N2P = Channel.createOne2One()
+One2OneChannel N2P = Channel.one2One()
 
 def testList = [
         new GNumbers(outChannel: N2P.out()),

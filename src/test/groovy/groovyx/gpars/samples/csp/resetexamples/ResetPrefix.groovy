@@ -18,9 +18,9 @@ package groovyx.gpars.samples.csp.resetexamples
 
 import groovyx.gpars.csp.ALT
 
-import jcsp.lang.CSProcess
-import jcsp.lang.ChannelInput
-import jcsp.lang.ChannelOutput
+import org.jcsp.lang.CSProcess
+import org.jcsp.lang.ChannelInput
+import org.jcsp.lang.ChannelOutput
 
 class ResetPrefix implements CSProcess {
 

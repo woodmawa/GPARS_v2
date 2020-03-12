@@ -19,11 +19,11 @@ package groovyx.gpars.samples.csp
 import groovyx.gpars.csp.PAR
 import groovyx.gpars.csp.plugAndPlay.GIdentity
 
-import jcsp.lang.CSProcess
-import jcsp.lang.Channel
-import jcsp.lang.ChannelInput
-import jcsp.lang.ChannelOutput
-import jcsp.lang.One2OneChannel
+import org.jcsp.lang.CSProcess
+import org.jcsp.lang.Channel
+import org.jcsp.lang.ChannelInput
+import org.jcsp.lang.ChannelOutput
+import org.jcsp.lang.One2OneChannel
 
 class Threading implements CSProcess {
     final int numberOfCopiers = 1500

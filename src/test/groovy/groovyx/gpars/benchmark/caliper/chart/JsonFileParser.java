@@ -16,6 +16,7 @@
 
 package groovyx.gpars.benchmark.caliper.chart;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -52,9 +53,10 @@ public class JsonFileParser {
             }
         }
 
-        final JsonParser parser = new JsonParser();
+        final Gson gson = new Gson();
         try {
-            jsonObject = (JsonObject) parser.parse(result);
+
+            jsonObject = (JsonObject) gson.fromJson(result, JsonObject.class);
         } catch (ClassCastException ignore) {
             jsonObject = new JsonObject();
         }

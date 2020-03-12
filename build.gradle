@@ -75,8 +75,8 @@ configurations.all {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.13'
+    compile group: 'org.codehaus.groovy', name: 'groovy-all', version: "${gpars_groovyVersion}"
 
-    compile "org.codehaus.groovy:groovy:${gpars_groovyVersion}"
     compile "org.codehaus.groovy:groovy-cli-commons:${gpars_groovyVersion}"
     compile "org.multiverse:multiverse-core:${gpars_multiverseVersion}", { transitive = false }
     compile "io.netty:netty-all:${gpars_nettyVersion}"

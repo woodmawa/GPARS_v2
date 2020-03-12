@@ -18,15 +18,15 @@ package groovyx.gpars.samples.csp
 
 import groovyx.gpars.csp.PAR
 
-import jcsp.lang.CSProcess
-import jcsp.lang.Channel
-import jcsp.lang.ChannelInput
-import jcsp.lang.ChannelOutput
-import jcsp.lang.One2OneChannel
+import org.jcsp.lang.CSProcess
+import org.jcsp.lang.Channel
+import org.jcsp.lang.ChannelInput
+import org.jcsp.lang.ChannelOutput
+import org.jcsp.lang.One2OneChannel
 
 final int requestedPrimeNumberCount = 100000
 
-One2OneChannel initialChannel = Channel.createOne2One()
+One2OneChannel initialChannel = Channel.One2One()
 
 final def par = new PAR([
         new Generator(outChannel: initialChannel.out()),
@@ -36,7 +36,7 @@ Thread.start {
 }
 
 def filter(inChannel, int prime) {
-    def outChannel = Channel.createOne2One()
+    def outChannel = Channel.One2One()
     def par = new PAR([new Filter(inChannel: inChannel, outChannel: outChannel.out(), prime: prime)])
     Thread.start {
         par.run()
