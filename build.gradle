@@ -25,7 +25,6 @@
 //  uplifted to java 11, groovy 3.0.2 and general library refresh
 //  Author: Will Woodman
 
-
 plugins {
     id 'groovy'
     id 'java'
@@ -41,7 +40,7 @@ version '2.0-SNAPSHOT'
 
 sourceCompatibility = 1.11
 
-group = 'org.groovyx.gpars'
+group = 'org.groovyx'
 archivesBaseName = 'groovyx.gpars'
 
 ext {
@@ -112,7 +111,7 @@ jar {
         attributes (
                 archiveName : 'groovyx.gpars',
                 archiveVersion: this.version,
-                symbolicName:'groovyx.gpars.org',
+                symbolicName:'groovyx.gpars.org'
                 /*
                 'Bundle-Vendor', ext.theVendor,
                 'Bundle-Description', group,
@@ -261,7 +260,7 @@ task zipDist(type: Zip) {
 publishing {
     publications {
         gParsPublish(MavenPublication) {
-            artifactId 'gpars'
+            artifactId = 'gpars'
             from components.java
 
             artifact jarDoc {
@@ -326,13 +325,16 @@ idea {
                 if (inspectionConfig) node.remove(inspectionConfig)
                 def dictionaryConfig = provider.asNode().component.find { it.'@name' == 'ProjectDictionaryState' }
                 if (dictionaryConfig) node.remove(dictionaryConfig)
+/*
                 new File('GPars_CI_only.ipr').withReader { reader ->
-                    def project = new XmlParser().parse(reader)
+                    def project = new XmlParser().parse(reader)  //wont parse
                     def inspections = project.component.find { it.'@name' == 'InspectionProjectProfileManager' }
                     node.append(inspections)
                     def dictionaries = project.component.find { it.'@name' == 'ProjectDictionaryState' }
                     node.append(dictionaries)
                 }
+
+ */
                 def gradleSettings = node.appendNode('component', [name: 'GradleSettings'])
                 gradleSettings.appendNode('option', [name: 'SDK_HOME', value: gradle.gradleHomeDir.absolutePath])
             }
