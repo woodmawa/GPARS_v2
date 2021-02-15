@@ -49,7 +49,7 @@ public class DataflowProcessorEventExceptionTest extends GroovyTestCase {
     }
 
     public void testNoListeners() {
-        def op = group.operator(inputs: [a, b], outputs: [c]) {x, y ->
+        def op = group.operator(inputs: [a, b], outputs: [c]) { x, y ->
             if (x == 1) throw new IllegalArgumentException('test')
             bindOutput x + y
         }
@@ -72,7 +72,7 @@ public class DataflowProcessorEventExceptionTest extends GroovyTestCase {
                 return false
             }
         }
-        def op = group.operator(inputs: [a, b], outputs: [c], listeners: [listener1]) {x, y ->
+        def op = group.operator(inputs: [a, b], outputs: [c], listeners: [listener1]) { x, y ->
             if (x == 1) throw new IllegalArgumentException('test')
             bindOutput x + y
         }
@@ -101,7 +101,7 @@ public class DataflowProcessorEventExceptionTest extends GroovyTestCase {
                 return true
             }
         }
-        def op = group.operator(inputs: [a, b], outputs: [c], listeners: [listener1]) {x, y ->
+        def op = group.operator(inputs: [a, b], outputs: [c], listeners: [listener1]) { x, y ->
             if (x == 1) throw new IllegalArgumentException('test')
             bindOutput x + y
         }
@@ -127,7 +127,7 @@ public class DataflowProcessorEventExceptionTest extends GroovyTestCase {
                 return true
             }
         }
-        def op = group.operator(inputs: [a, b], outputs: [c], listeners: [listener1]) {x, y ->
+        def op = group.operator(inputs: [a, b], outputs: [c], listeners: [listener1]) { x, y ->
             if (x == 1) throw new IllegalArgumentException('test')
             bindOutput x + y
         }
@@ -158,7 +158,7 @@ public class DataflowProcessorEventExceptionTest extends GroovyTestCase {
                 return false
             }
         }
-        def op = group.operator(inputs: [a, b], outputs: [c], listeners: [listener1]) {x, y ->
+        def op = group.operator(inputs: [a, b], outputs: [c], listeners: [listener1]) { x, y ->
             bindOutput x + y
         }
 
@@ -187,7 +187,7 @@ public class DataflowProcessorEventExceptionTest extends GroovyTestCase {
                 return false
             }
         }
-        def op = group.operator(inputs: [a, b], outputs: [c], listeners: [listener1]) {x, y ->
+        def op = group.operator(inputs: [a, b], outputs: [c], listeners: [listener1]) { x, y ->
             bindOutput x + y
         }
 
@@ -214,7 +214,7 @@ public class DataflowProcessorEventExceptionTest extends GroovyTestCase {
         }
 
         int countEventsThatStartWith(String filter) {
-            retrieveEvents {it.startsWith(filter)}.size()
+            retrieveEvents { it.startsWith(filter) }.size()
         }
 
         @Override

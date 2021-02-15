@@ -36,7 +36,7 @@ def producer = group.task {
     channel << -1
 }
 
-def consumer = group.operator(inputs: [channel], outputs: []) {value ->
+def consumer = group.operator(inputs: [channel], outputs: []) { value ->
     sleep 500  //simulating a slow consumer
     if (value == -1) terminate()
     else println "Received $value"

@@ -142,6 +142,7 @@ public final class InternalActor extends AbstractLoopingActor {
     }
 
     /**
+     *
      */
     private DataflowVariable<Object> preProcessReturnValue(final DataflowReadChannel<Object> actualResult, final Object actorHolder, final String executedMethodName) {
         final DataflowVariable<Object> resultProxy = new DataflowVariable<>();

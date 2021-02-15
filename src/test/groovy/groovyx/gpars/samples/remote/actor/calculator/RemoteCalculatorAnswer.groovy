@@ -30,8 +30,8 @@ def answerActor = Actors.actor {
 
     remoteActors.publish delegate, "remote-calculator"
 
-    react { a->
-        react { b->
+    react { a ->
+        react { b ->
             reply a + b
         }
     }

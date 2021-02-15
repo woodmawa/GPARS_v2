@@ -32,27 +32,27 @@ import groovyx.gpars.agent.Agent
  */
 
 //Create an agent storing names, rejecting 'Joe'
-final Closure rejectJoeValidator = {oldValue, newValue -> if ('Joe' in newValue) throw new IllegalArgumentException('Joe is not allowed to enter our list.')}
+final Closure rejectJoeValidator = { oldValue, newValue -> if ('Joe' in newValue) throw new IllegalArgumentException('Joe is not allowed to enter our list.') }
 
 Agent agent = new Agent([])
 agent.addValidator rejectJoeValidator
 
-agent {it << 'Dave'}                    //Accepted
-agent {it << 'Joe'}                     //Erroneously accepted, since by-passes the validation mechanism
+agent { it << 'Dave' }                    //Accepted
+agent { it << 'Joe' }                     //Erroneously accepted, since by-passes the validation mechanism
 println agent.val
 
 //Solution 1 - never alter the supplied state object
 agent = new Agent([])
 agent.addValidator rejectJoeValidator
 
-agent {updateValue(['Dave', * it])}      //Accepted
-agent {updateValue(['Joe', * it])}       //Rejected
+agent { updateValue(['Dave', *it]) }      //Accepted
+agent { updateValue(['Joe', *it]) }       //Rejected
 println agent.val
 
 //Solution 2 - use custom copy strategy on the agent
-agent = new Agent([], {it.clone()})
+agent = new Agent([], { it.clone() })
 agent.addValidator rejectJoeValidator
 
-agent {updateValue it << 'Dave'}        //Accepted
-agent {updateValue it << 'Joe'}         //Rejected, since 'it' is now just a copy of the internal agent's state
+agent { updateValue it << 'Dave' }        //Accepted
+agent { updateValue it << 'Joe' }         //Rejected, since 'it' is now just a copy of the internal agent's state
 println agent.val

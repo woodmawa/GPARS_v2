@@ -42,7 +42,7 @@ final t2 = group.task {
 }
 
 group.task {
-    (1..20).each {queue << it}
+    (1..20).each { queue << it }
 }
 
 [t1, t2]*.join()

@@ -217,7 +217,7 @@ class GParsExecutorsPool {
      * @throws AsyncException If any of the collection's elements causes the closure to throw an exception. The original exceptions will be stored in the AsyncException's concurrentExceptions field.
      */
     public static List<Object> executeAsyncAndWait(List<Closure> closures) {
-        return executeAsyncAndWait(* closures)
+        return executeAsyncAndWait(*closures)
     }
 
     /**
@@ -245,7 +245,7 @@ class GParsExecutorsPool {
      * @return Futures for the result values or exceptions of all closures
      */
     public static List<Future<Object>> executeAsync(List<Closure> closures) {
-        return executeAsync(* closures)
+        return executeAsync(*closures)
     }
 
     /**
@@ -257,7 +257,7 @@ class GParsExecutorsPool {
      * @return The fastest result obtained
      */
     public static def speculate(List<Closure> alternatives) {
-        speculate(* alternatives)
+        speculate(*alternatives)
     }
 
     /**
@@ -274,7 +274,7 @@ class GParsExecutorsPool {
         final AtomicInteger failureCounter = new AtomicInteger(0)
         futures << GParsExecutorsPool.executeAsync(alternatives.collect {
             original ->
-                {->
+                { ->
                     //noinspection GroovyEmptyCatchBlock
                     try {
                         def localResult = original()

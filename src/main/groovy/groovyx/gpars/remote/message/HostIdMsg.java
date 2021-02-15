@@ -32,6 +32,7 @@ public class HostIdMsg extends SerialMsg {
 
     /**
      * Construct message representing current state of the transport provider
+     *
      * @param id Local host id
      */
     public HostIdMsg(final UUID id) {

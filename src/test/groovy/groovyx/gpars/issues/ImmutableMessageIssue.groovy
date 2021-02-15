@@ -16,7 +16,8 @@
 
 package groovyx.gpars.issues
 
-@groovy.transform.Immutable final class TestMessage {
+@groovy.transform.Immutable
+final class TestMessage {
     String value
 }
 

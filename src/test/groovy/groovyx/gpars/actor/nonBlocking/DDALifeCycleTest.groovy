@@ -50,7 +50,7 @@ public class DDALifeCycleTest extends GroovyTestCase {
         def unprocessedMessages = []
 
         final Actor actor = group.messageHandler {
-            when {message ->
+            when { message ->
                 barrier.await()
                 counter.incrementAndGet()
                 stop()
@@ -58,7 +58,7 @@ public class DDALifeCycleTest extends GroovyTestCase {
         }
 
         actor.metaClass {
-            afterStop = {List messages ->
+            afterStop = { List messages ->
                 unprocessedMessages = messages
             }
         }
@@ -81,7 +81,7 @@ public class DDALifeCycleTest extends GroovyTestCase {
         final AtomicInteger counter = new AtomicInteger(0)
 
         final Actor actor = group.messageHandler {
-            when {message ->
+            when { message ->
                 barrier.await()
                 counter.incrementAndGet()
             }
@@ -108,7 +108,7 @@ public class DDALifeCycleTest extends GroovyTestCase {
         def unprocessedMessages = []
 
         final Actor actor = group.messageHandler {
-            when {message ->
+            when { message ->
                 barrier.await()
                 counter.incrementAndGet()
                 barrier.await()
@@ -117,7 +117,7 @@ public class DDALifeCycleTest extends GroovyTestCase {
         }
 
         actor.metaClass {
-            afterStop = {List messages ->
+            afterStop = { List messages ->
                 unprocessedMessages = messages
             }
         }
@@ -131,7 +131,7 @@ public class DDALifeCycleTest extends GroovyTestCase {
         assert 1 == counter.intValue()
         actor.join()
         assertFalse actor.isActive()
-        assert [2, 3] == unprocessedMessages.collect {it.payLoad}
+        assert [2, 3] == unprocessedMessages.collect { it.payLoad }
     }
 
     public void testExternalTerminate() {
@@ -139,7 +139,7 @@ public class DDALifeCycleTest extends GroovyTestCase {
         final AtomicInteger counter = new AtomicInteger(0)
 
         final Actor actor = group.messageHandler {
-            when {message ->
+            when { message ->
                 barrier.await()
                 counter.incrementAndGet()
             }
@@ -164,7 +164,7 @@ public class DDALifeCycleTest extends GroovyTestCase {
 
         final def group = new NonDaemonPGroup(1)
         final Actor actor = group.messageHandler {
-            when {message ->
+            when { message ->
                 barrier.await()
                 Thread.sleep 90000
                 counter.set 10
@@ -190,13 +190,13 @@ public class DDALifeCycleTest extends GroovyTestCase {
         final AtomicInteger counter = new AtomicInteger(0)
 
         final Actor actor = group.messageHandler {
-            when {message ->
+            when { message ->
                 10
             }
         }
 
         actor.metaClass {
-            afterStop = {List messages ->
+            afterStop = { List messages ->
                 counter.incrementAndGet()
                 latch.countDown()
             }
@@ -217,13 +217,13 @@ public class DDALifeCycleTest extends GroovyTestCase {
         AtomicReference messagesReference = new AtomicReference(null)
 
         final Actor actor = group.messageHandler {
-            when {message ->
+            when { message ->
                 counter.incrementAndGet()
             }
         }
 
         actor.metaClass {
-            afterStop = {List messages ->
+            afterStop = { List messages ->
                 messagesReference.set(messages)
                 latch.countDown()
             }
@@ -246,13 +246,13 @@ public class DDALifeCycleTest extends GroovyTestCase {
         AtomicReference messagesReference = new AtomicReference(null)
 
         final Actor actor = group.messageHandler {
-            when {message ->
+            when { message ->
                 counter.incrementAndGet()
             }
         }
 
         actor.metaClass {
-            afterStop = {List messages ->
+            afterStop = { List messages ->
                 messagesReference.set(messages)
                 latch.countDown()
             }
@@ -276,7 +276,7 @@ public class DDALifeCycleTest extends GroovyTestCase {
         AtomicReference<List> messagesReference = new AtomicReference<List>(null)
 
         final Actor actor = group.messageHandler {
-            when {message ->
+            when { message ->
                 barrier.await()
                 Thread.sleep(30000)
                 counter.incrementAndGet()  //never reached
@@ -284,7 +284,7 @@ public class DDALifeCycleTest extends GroovyTestCase {
         }
 
         actor.metaClass {
-            afterStop = {List messages ->
+            afterStop = { List messages ->
                 messagesReference.set(messages)
                 latch.countDown()
             }
@@ -313,14 +313,14 @@ public class DDALifeCycleTest extends GroovyTestCase {
         AtomicReference<List> messagesReference = new AtomicReference<List>(null)
 
         final Actor actor = group.fairMessageHandler {
-            when {message ->
+            when { message ->
                 barrier.await()
                 Thread.sleep(30000)
             }
         }
 
         actor.metaClass {
-            afterStop = {List messages ->
+            afterStop = { List messages ->
                 messagesReference.set(messages)
                 afterStopBarrier.await()
             }
@@ -347,14 +347,14 @@ public class DDALifeCycleTest extends GroovyTestCase {
         AtomicReference<List> messagesReference = new AtomicReference<List>(null)
 
         final Actor actor = group.messageHandler {
-            when {message ->
+            when { message ->
                 barrier.await()
                 Thread.currentThread().interrupt()
             }
         }
 
         actor.metaClass {
-            afterStop = {List messages ->
+            afterStop = { List messages ->
                 messagesReference.set(messages)
                 afterStopBarrier.await()
             }
@@ -380,14 +380,14 @@ public class DDALifeCycleTest extends GroovyTestCase {
         AtomicReference<List> messagesReference = new AtomicReference<List>(null)
 
         final Actor actor = group.messageHandler {
-            when {message ->
+            when { message ->
                 barrier.await()
                 throw new RuntimeException('test')
             }
         }
 
         actor.metaClass {
-            afterStop = {List messages ->
+            afterStop = { List messages ->
                 messagesReference.set(messages)
                 afterStopBarrier.await()
             }
@@ -411,7 +411,7 @@ public class DDALifeCycleTest extends GroovyTestCase {
         final AtomicInteger counter = new AtomicInteger(0)
 
         final Actor actor = group.messageHandler {
-            when {message ->
+            when { message ->
                 barrier.await()
                 counter.incrementAndGet()
                 barrier.await()
@@ -435,7 +435,7 @@ public class DDALifeCycleTest extends GroovyTestCase {
         final AtomicInteger counter = new AtomicInteger(0)
 
         final Actor actor = group.fairMessageHandler {
-            when {message ->
+            when { message ->
                 barrier.await()
             }
         }

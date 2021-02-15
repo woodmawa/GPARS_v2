@@ -55,8 +55,10 @@ class SwingLifeGameWithDataflowOperators {
     /* Controls the game */
     final def initialGrid = []  //initial values entered by the user
     final List<List<DataflowBroadcast>> channelGrid = []  //the sequence of life values (0 or 1) for each cell
-    final List<List<DataflowReadChannel>> printingGrid = []  //the sequence of life values (0 or 1) for each cell to read by the print method
-    final List<List<DataflowOperator>> operatorGrid = []  //the grid of operators calculating values for their respective cells
+    final List<List<DataflowReadChannel>> printingGrid = []
+    //the sequence of life values (0 or 1) for each cell to read by the print method
+    final List<List<DataflowOperator>> operatorGrid = []
+    //the grid of operators calculating values for their respective cells
     final DataflowBroadcast heartbeats = new DataflowBroadcast()  //gives pace to the calculation
     private final gridWidth
     private final gridHeight
@@ -95,9 +97,9 @@ class SwingLifeGameWithDataflowOperators {
 
                 scene = builder.panel()
                 scene.layout = new GridLayout(gridHeight, gridWidth)
-                (0..<gridHeight).each {rowIndex ->
+                (0..<gridHeight).each { rowIndex ->
                     def cellRow = []
-                    (0..<gridWidth).each {columnIndex ->
+                    (0..<gridWidth).each { columnIndex ->
                         final JPanel cell = builder.panel()
                         scene.add(cell)
                         def b = builder.button(' ', enabled: false)
@@ -126,11 +128,11 @@ class SwingLifeGameWithDataflowOperators {
     }
 
     private def setupOperators() {
-        (0..<gridHeight).each {rowIndex ->
+        (0..<gridHeight).each { rowIndex ->
             def operatorRow = []
-            (0..<gridWidth).each {columnIndex ->
+            (0..<gridWidth).each { columnIndex ->
                 def inputChannels = [channelGrid[rowIndex][columnIndex].createReadChannel()]
-                [rowIndex - 1, rowIndex, rowIndex + 1].each {currentRowIndex ->
+                [rowIndex - 1, rowIndex, rowIndex + 1].each { currentRowIndex ->
                     if (currentRowIndex in 0..<gridHeight) {
                         if (columnIndex > 0) inputChannels.add(channelGrid[currentRowIndex][columnIndex - 1].createReadChannel())
                         if (currentRowIndex != rowIndex) inputChannels.add(channelGrid[currentRowIndex][columnIndex].createReadChannel())
@@ -148,7 +150,7 @@ class SwingLifeGameWithDataflowOperators {
 
     private def setupCells() {
         final Random random = new Random()
-        (0..<gridHeight).each {rowIndex ->
+        (0..<gridHeight).each { rowIndex ->
             def initialRow = []
             def valueRow = []
             List<DataflowBroadcast> channelRow = []
@@ -171,14 +173,15 @@ class SwingLifeGameWithDataflowOperators {
 
     void evolve(def generation) {
         //initialize the dataflow network by copying the values to the cells (channels)
-        (0..<gridHeight).each {rowIndex ->
-            (0..<gridWidth).each {columnIndex ->
+        (0..<gridHeight).each { rowIndex ->
+            (0..<gridWidth).each { columnIndex ->
                 channelGrid[rowIndex][columnIndex] << initialGrid[rowIndex][columnIndex]
             }
         }
 
         while (true) {
-            heartbeats << 'go!'  //This message is sent to all operators to trigger the calculation of the next generation
+            heartbeats << 'go!'
+            //This message is sent to all operators to trigger the calculation of the next generation
             builder.edt {
                 ++generation
                 iteration.text = generation
@@ -206,7 +209,7 @@ class SwingLifeClosure extends Closure {
     @Override
     Object call(Object[] args) {
         def result = args[0]
-        def mates = args[1..-2].findAll {it > 0}.size()
+        def mates = args[1..-2].findAll { it > 0 }.size()
         if (mates > 3) result = 0
         else if (mates == 3) result = 1
         else if (result == 1 && mates == 2)
@@ -230,7 +233,7 @@ final class SwingLifePrintClosure extends SwingLifeClosure {
     Object call(Object[] args) {
         final row = visualCellRow
         SwingUtilities.invokeLater {
-            args.eachWithIndex {value, index ->
+            args.eachWithIndex { value, index ->
                 row[index].background = value == 1 ? Color.BLUE : Color.WHITE
             }
         }

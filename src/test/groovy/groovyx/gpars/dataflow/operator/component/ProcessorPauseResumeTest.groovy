@@ -42,7 +42,7 @@ public class ProcessorPauseResumeTest extends GroovyTestCase {
 
     public void testPause() throws Exception {
         final listener = new ProcessorPauseResume()
-        def op = group.operator(inputs: [a, b], outputs: [c], listeners: [listener]) {x, y ->
+        def op = group.operator(inputs: [a, b], outputs: [c], listeners: [listener]) { x, y ->
             bindOutput x + y
         }
 

@@ -22,7 +22,7 @@ import groovy.test.GroovyTestCase
 
 class DirectChildrenCallTest extends GroovyTestCase {
     public void testDirectFib() {
-        Closure fib = {number ->
+        Closure fib = { number ->
             if (number <= 2) {
                 return 1
             }
@@ -38,7 +38,7 @@ class DirectChildrenCallTest extends GroovyTestCase {
 
     public void testCorrectThreading() {
         final def threads = [:].asSynchronized()
-        Closure fib = {number ->
+        Closure fib = { number ->
             if (number <= 2) {
                 return 1
             }

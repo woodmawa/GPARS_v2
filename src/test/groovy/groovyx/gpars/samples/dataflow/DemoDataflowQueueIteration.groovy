@@ -29,24 +29,24 @@ final CyclicBarrier barrier = new CyclicBarrier(2)
 
 final DataflowQueue stream = new DataflowQueue()
 Dataflow.task {
-    (0..10).each {stream << it}
+    (0..10).each { stream << it }
     barrier.await()
 }
 
 barrier.await()
 println 'Current snapshot:'
-stream.each {print "$it " }
+stream.each { print "$it " }
 println ''
 
 stream << 11
 stream << 12
 
 println 'Another snapshot:'
-stream.each {print "$it " }
+stream.each { print "$it " }
 println ''
 
 println 'Reading from the stream'
-(1..stream.length()).each {print "${stream.val} "}
+(1..stream.length()).each { print "${stream.val} " }
 println ''
 println "The stream is now empty. Length =  ${stream.length()}"
 

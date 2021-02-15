@@ -27,10 +27,13 @@ import groovy.transform.PackageScope
  */
 
 //Messages
-@PackageScope final class FileToSort {
+@PackageScope
+final class FileToSort {
     String fileName
 }
-@PackageScope final class SortResult {
+
+@PackageScope
+final class SortResult {
     String fileName;
     List<String> words
 }
@@ -39,18 +42,18 @@ import groovy.transform.PackageScope
 final class WordSortActor extends DefaultActor {
 
     private List<String> sortedWords(String fileName) {
-        parseFile(fileName).sort {it.toLowerCase()}
+        parseFile(fileName).sort { it.toLowerCase() }
     }
 
     private List<String> parseFile(String fileName) {
         List<String> words = []
-        new File(fileName).splitEachLine(' ') {words.addAll(it)}
+        new File(fileName).splitEachLine(' ') { words.addAll(it) }
         return words
     }
 
     void act() {
         loop {
-            react {message ->
+            react { message ->
                 switch (message) {
                     case FileToSort:
                         println "Sorting file=${message.fileName} on thread ${Thread.currentThread().name}"
@@ -77,7 +80,7 @@ final class SortMaster extends DefaultActor {
     }
 
     private List createWorkers() {
-        return (1..numActors).collect {new WordSortActor().start()}
+        return (1..numActors).collect { new WordSortActor().start() }
     }
 
     private int sendTasksToWorkers() {

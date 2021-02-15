@@ -33,7 +33,7 @@ class GameMaster extends DefaultActor {
 
     void act() {
         loop {
-            react {int num ->
+            react { int num ->
                 if (num > secretNum)
                     reply 'too large'
                 else if (num < secretNum)

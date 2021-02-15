@@ -48,11 +48,12 @@ def alternative4 = {
 
 final def result = new DataflowQueue()
 
-[alternative1, alternative2, alternative3, alternative4].each {code ->
+[alternative1, alternative2, alternative3, alternative4].each { code ->
     task {
         try {
             result << code()
-        } catch (ignore) { }
+        } catch (ignore) {
+        }
     }
 }
 

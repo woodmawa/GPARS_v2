@@ -131,7 +131,7 @@ public class DataflowQueueTest extends GroovyTestCase {
 
         final DataflowQueue stream = new DataflowQueue()
         final Actor thread = Actors.blockingActor {
-            (0..10).each {stream << it}
+            (0..10).each { stream << it }
             barrier.await()
             receive {
                 stream << 11
@@ -141,7 +141,7 @@ public class DataflowQueueTest extends GroovyTestCase {
 
         barrier.await()
         assert 11 == stream.length()
-        stream.eachWithIndex {element, index -> assert index == element }
+        stream.eachWithIndex { element, index -> assert index == element }
         assert 11 == stream.length()
 
         thread << 'Proceed'
@@ -157,16 +157,18 @@ public class DataflowQueueTest extends GroovyTestCase {
 
         final DataflowQueue stream = new DataflowQueue()
         Actors.blockingActor {
-            (0..10).each {stream << null}
+            (0..10).each { stream << null }
             barrier.await()
         }
 
         barrier.await()
         assert 11 == stream.length()
-        stream.each {assertNull it }
+        stream.each { assertNull it }
         assert 11 == stream.length()
 
-        for (i in (0..10)) { assertNull stream.val }
+        for (i in (0..10)) {
+            assertNull stream.val
+        }
     }
 
     public void testToString() {
@@ -195,8 +197,8 @@ public class DataflowQueueTest extends GroovyTestCase {
     public void testWhenBound() {
         final DataflowQueue stream = new DataflowQueue()
         final Dataflows df = new Dataflows()
-        stream >> {df.x1 = it}
-        stream >> {df.x2 = it}
+        stream >> { df.x1 = it }
+        stream >> { df.x2 = it }
         def actor = Actors.actor {
             react {
                 df.x3 = it
@@ -216,8 +218,8 @@ public class DataflowQueueTest extends GroovyTestCase {
         final DataflowQueue dfs1 = new DataflowQueue()
         final DataflowQueue dfs2 = new DataflowQueue()
         final DataflowQueue dfs3 = new DataflowQueue()
-        stream.wheneverBound {dfs1 << it}
-        stream.wheneverBound {dfs2 << it}
+        stream.wheneverBound { dfs1 << it }
+        stream.wheneverBound { dfs2 << it }
         def actor = Actors.actor {
             react {
                 dfs3 << it
@@ -251,7 +253,7 @@ public class DataflowQueueTest extends GroovyTestCase {
             stream << 10
         }
         def handler = Actors.actor {
-            react {result.value = it}
+            react { result.value = it }
         }
         stream.getValAsync(handler)
         assert result.value == 10

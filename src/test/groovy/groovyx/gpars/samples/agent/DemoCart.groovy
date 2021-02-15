@@ -28,11 +28,11 @@ class ShoppingCart {
     private def cartState = new Agent<Map<String, Integer>>([:])
 
     public void addItem(String product, int quantity) {
-        cartState << {it[product] = quantity}
+        cartState << { it[product] = quantity }
     }
 
     public void removeItem(String product) {
-        cartState << {it.remove(product)}
+        cartState << { it.remove(product) }
     }
 
     public Object listContent() {

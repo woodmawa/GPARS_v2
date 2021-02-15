@@ -33,9 +33,9 @@ Dataflow.usingGroup(group) {
     task {
         'http://gpars.codehaus.org'.toURL().text
     }
-    .then { page -> page.toUpperCase() }
-    .then { page -> page.contains('GROOVY') }.then { println Dataflow.retrieveCurrentDFPGroup(); it }
-    .then(anotherGroup, { mentionsGroovy -> println "Groovy found: $mentionsGroovy" }, { error -> println "Error: $error" }).join()
+            .then { page -> page.toUpperCase() }
+            .then { page -> page.contains('GROOVY') }.then { println Dataflow.retrieveCurrentDFPGroup(); it }
+            .then(anotherGroup, { mentionsGroovy -> println "Groovy found: $mentionsGroovy" }, { error -> println "Error: $error" }).join()
 }
 
 group.shutdown()

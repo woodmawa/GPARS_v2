@@ -27,7 +27,7 @@ DefaultActor me
 me = Actors.actor {
     def message = 1
 
-    message.metaClass.onDeliveryError = {->
+    message.metaClass.onDeliveryError = { ->
         //send message back to the caller
         me << "Could not deliver $delegate"
     }

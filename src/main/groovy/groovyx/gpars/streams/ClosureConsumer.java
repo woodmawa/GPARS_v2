@@ -21,22 +21,22 @@ import java.util.function.Consumer;
 import groovy.lang.Closure;
 
 /**
- *  A wrapper around a Groovy Closure to create a Java BinaryOperator suitable for use in a Streams reduction.
+ * A wrapper around a Groovy Closure to create a Java BinaryOperator suitable for use in a Streams reduction.
  *
- *  @author Russel Winder
+ * @author Russel Winder
  */
 public class ClosureConsumer<T> implements Consumer<T> {
 
-  private final Closure<?> code;
+    private final Closure<?> code;
 
-  public ClosureConsumer(final Closure<?> code) {
-    this.code = code;
-  }
+    public ClosureConsumer(final Closure<?> code) {
+        this.code = code;
+    }
 
-  @Override
-  public void accept(final T a) {
-    final Object[] args = {a};
-    code.call(args);
-  }
+    @Override
+    public void accept(final T a) {
+        final Object[] args = {a};
+        code.call(args);
+    }
 
 }

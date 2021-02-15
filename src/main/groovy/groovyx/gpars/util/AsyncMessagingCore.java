@@ -24,7 +24,7 @@ import java.util.concurrent.atomic.AtomicIntegerFieldUpdater;
 
 /**
  * @author Vaclav Pech
- *         Date: Aug 23, 2010
+ * Date: Aug 23, 2010
  */
 public abstract class AsyncMessagingCore implements Runnable {
 

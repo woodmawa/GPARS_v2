@@ -38,8 +38,8 @@ public class TimeCategoryActorsTest extends GroovyTestCase {
         Actors.blockingActor {
 
             delegate.metaClass {
-                onTimeout = {-> timeoutFlag.set(true); terminate() }
-                afterStop = {messages -> latch.countDown() }
+                onTimeout = { -> timeoutFlag.set(true); terminate() }
+                afterStop = { messages -> latch.countDown() }
             }
 
             use(TimeCategory) {
@@ -60,12 +60,16 @@ public class TimeCategoryActorsTest extends GroovyTestCase {
         def actor = Actors.blockingActor {
             try {
                 receive(1.second) {}
-            } catch (MissingPropertyException ignore) {exceptions++ }
+            } catch (MissingPropertyException ignore) {
+                exceptions++
+            }
             while (true) {
                 try {
                     try {
                         receive(1.minute) {}
-                    } catch (MissingPropertyException ignore) {exceptions++ }
+                    } catch (MissingPropertyException ignore) {
+                        exceptions++
+                    }
                     terminate()
                 } finally {
                     latch.countDown()

@@ -35,7 +35,7 @@ def pingActor = Actors.actor {
             println "PING"
             remotePongActor << "PING"
             react {
-                 println it
+                println it
             }
         }
     }

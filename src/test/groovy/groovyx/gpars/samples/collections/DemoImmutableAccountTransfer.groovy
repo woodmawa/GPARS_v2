@@ -35,14 +35,15 @@ import static groovyx.gpars.GParsPool.withPool
  * based on the balance that a concurrent transfer has effected. 
  * @author Dierk König
  */
-@Immutable final class ImmutableAccount {
+@Immutable
+final class ImmutableAccount {
     int balance = 0
 
     ImmutableAccount credit(int add) {
         new ImmutableAccount(balance + add)
     }
 
-    /** @return list of new "this" and new target account   */
+    /** @return list of new "this" and new target account    */
     List<ImmutableAccount> transferTo(ImmutableAccount target, int amount) {
         [credit(-amount), target.credit(amount)]
     }

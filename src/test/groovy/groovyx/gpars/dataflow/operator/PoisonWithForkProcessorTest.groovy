@@ -43,7 +43,7 @@ class PoisonWithForkProcessorTest extends GroovyTestCase {
     }
 
     public void testPoisonWithSequentialWriteIntoChannels() {
-        def op = group.operator(inputs: [a, b], outputs: [c], maxForks: 4) {x, y ->
+        def op = group.operator(inputs: [a, b], outputs: [c], maxForks: 4) { x, y ->
             bindOutput x + y
         }
         100.times {
@@ -62,7 +62,7 @@ class PoisonWithForkProcessorTest extends GroovyTestCase {
     }
 
     public void testPoisonWithParallelWriteIntoChannels() {
-        def op = group.operator(inputs: [a, b], outputs: [c], maxForks: 4) {x, y ->
+        def op = group.operator(inputs: [a, b], outputs: [c], maxForks: 4) { x, y ->
             bindOutput x + y
         }
         final barrier = new CyclicBarrier(2)

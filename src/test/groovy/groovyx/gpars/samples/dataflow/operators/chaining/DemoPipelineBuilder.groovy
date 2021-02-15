@@ -29,9 +29,9 @@ final DataflowQueue queue = new DataflowQueue()
 final DataflowQueue result = new DataflowQueue()
 final Pipeline pipeline = new Pipeline(queue)
 
-final negate = {-it}
+final negate = { -it }
 
-pipeline | {it * 2} | {it + 1} | negate | result
+pipeline | { it * 2 } | { it + 1 } | negate | result
 assert pipeline.complete
 
 queue << 1

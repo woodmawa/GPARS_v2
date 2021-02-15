@@ -29,8 +29,8 @@ import javax.swing.SwingUtilities
  */
 
 def defaultSites = [
-        'http://www.dzone.com': 'Java Groovy',
-        'http://www.infoq.com': 'Java Scala',
+        'http://www.dzone.com' : 'Java Groovy',
+        'http://www.infoq.com' : 'Java Scala',
         'http://www.groovy.org': 'Java Groovy'
 ]
 
@@ -39,7 +39,7 @@ def contentCacheArea
 def wordFinderArea
 
 JTextArea.metaClass {
-    report = {text ->
+    report = { text ->
         def currentArea = delegate
         SwingUtilities.invokeLater {
             currentArea.text += text
@@ -57,7 +57,7 @@ def sites = new DataflowQueue()
 /**
  * Downloads received urls passing downloaded content to the output
  */
-Dataflow.operator(inputs: [downloadRequests], outputs: [urlRequests]) {request ->
+Dataflow.operator(inputs: [downloadRequests], outputs: [urlRequests]) { request ->
 
     contentDownloaderArea.report "Downloading ${request.site}"
 //    def content = request.site.toURL().text
@@ -76,7 +76,7 @@ pendingDownloads = [:]
  * Caches sites' contents. Accepts requests for url content, outputs the content. Outputs requests for download
  * if the site is not in cache yet.
  */
-Dataflow.operator(inputs: [urlRequests], outputs: [downloadRequests, sites]) {request ->
+Dataflow.operator(inputs: [urlRequests], outputs: [downloadRequests, sites]) { request ->
 
     if (request.content) {
         contentCacheArea.report "Caching ${request.site}"
@@ -115,12 +115,12 @@ Dataflow.operator(inputs: [urlRequests], outputs: [downloadRequests, sites]) {re
 /**
  * Accepts sites' content searching for the word Groovy in them, printing results to the UI.
  */
-Dataflow.operator(inputs: [sites], outputs: []) {request ->
+Dataflow.operator(inputs: [sites], outputs: []) { request ->
     def result = request.content.toUpperCase().contains('GROOVY')
     wordFinderArea.report "${result ? '' : 'No '}Groovy in ${request.site}."
 }
 
-def createOperatorPanel = {actorName ->
+def createOperatorPanel = { actorName ->
     def area = null
     panel {
         vbox() {

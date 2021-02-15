@@ -48,7 +48,7 @@ public class DataflowOperatorGentlyStopTest extends GroovyTestCase {
         final DataflowQueue c = new DataflowQueue()
         final DataflowQueue d = new DataflowQueue()
 
-        def op = group.operator(inputs: [a, b, c], outputs: [d]) {x, y, z ->
+        def op = group.operator(inputs: [a, b, c], outputs: [d]) { x, y, z ->
             bindOutput 0, x + y + z
         }
 
@@ -73,7 +73,7 @@ public class DataflowOperatorGentlyStopTest extends GroovyTestCase {
         final DataflowQueue c = new DataflowQueue()
         final DataflowQueue d = new DataflowQueue()
 
-        def op = group.operator(inputs: [a, b, c], outputs: [d]) {x, y, z ->
+        def op = group.operator(inputs: [a, b, c], outputs: [d]) { x, y, z ->
             bindOutput 0, x + y + z
         }
 
@@ -92,7 +92,7 @@ public class DataflowOperatorGentlyStopTest extends GroovyTestCase {
         final DataflowQueue c = new DataflowQueue()
         final DataflowQueue d = new DataflowQueue()
 
-        def op = group.selector(inputs: [a, b, c], outputs: [d]) {x ->
+        def op = group.selector(inputs: [a, b, c], outputs: [d]) { x ->
             bindOutput 0, x
         }
 

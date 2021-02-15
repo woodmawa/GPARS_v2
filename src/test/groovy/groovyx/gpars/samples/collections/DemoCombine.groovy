@@ -53,11 +53,11 @@ def cars = [new Car('F550', 2342.223), new Car('F550', 234.234), new Car('Da', 2
 
 withPool {
     def result =
-        cars.parallel.map {
-            [it, it.price]
-        }.combine(0) { sum, value ->
-            sum + value
-        }
+            cars.parallel.map {
+                [it, it.price]
+            }.combine(0) { sum, value ->
+                sum + value
+            }
 
     println result
 }

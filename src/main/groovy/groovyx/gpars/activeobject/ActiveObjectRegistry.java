@@ -37,7 +37,8 @@ public final class ActiveObjectRegistry {
 
     private final Map<String, PGroup> registry = new ConcurrentHashMap<String, PGroup>();
 
-    private ActiveObjectRegistry() { }
+    private ActiveObjectRegistry() {
+    }
 
     public PGroup findGroupById(final String groupId) {
         return registry.get(groupId);

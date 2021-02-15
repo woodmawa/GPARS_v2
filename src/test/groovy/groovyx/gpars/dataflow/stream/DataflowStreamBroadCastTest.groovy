@@ -29,7 +29,7 @@ public class DataflowStreamBroadCastTest extends GroovyTestCase {
         final DataflowReadChannel stream = writeStream.createReadChannel()
 
         final CyclicBarrier barrier = new CyclicBarrier(10)
-        10.times {value ->
+        10.times { value ->
             Dataflow.task {
                 barrier.await()
                 writeStream << value
@@ -44,7 +44,7 @@ public class DataflowStreamBroadCastTest extends GroovyTestCase {
         final DataflowReadChannel stream2 = writeStream.createReadChannel()
 
         final CyclicBarrier barrier = new CyclicBarrier(10)
-        10.times {value ->
+        10.times { value ->
             Dataflow.task {
                 barrier.await()
                 writeStream << value
@@ -71,6 +71,6 @@ public class DataflowStreamBroadCastTest extends GroovyTestCase {
         def result = (1..10).collect {
             stream.val
         }.sort()
-        assert result == (0..9).collect {it}
+        assert result == (0..9).collect { it }
     }
 }

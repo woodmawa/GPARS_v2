@@ -68,17 +68,17 @@ public class SyncDataflowVariableTest extends GroovyTestCase {
 
     public void testGet() {
         final SyncDataflowVariable variable = new SyncDataflowVariable(1)
-        Thread.start {variable << 10}
+        Thread.start { variable << 10 }
         assert 10 == variable.get()
     }
 
     public void testMultiGet() {
         final SyncDataflowVariable variable = new SyncDataflowVariable(3)
         final dataflows = new Dataflows()
-        Thread.start {variable << 10}
-        Thread.start {dataflows.a = variable.get()}
-        Thread.start {dataflows.b = variable.get()}
-        Thread.start {dataflows.c = variable.get(10, java.util.concurrent.TimeUnit.SECONDS)}
+        Thread.start { variable << 10 }
+        Thread.start { dataflows.a = variable.get() }
+        Thread.start { dataflows.b = variable.get() }
+        Thread.start { dataflows.c = variable.get(10, java.util.concurrent.TimeUnit.SECONDS) }
         assert 10 == dataflows.a
         assert 10 == dataflows.b
         assert 10 == dataflows.c
@@ -89,13 +89,13 @@ public class SyncDataflowVariableTest extends GroovyTestCase {
         shouldFail(TimeoutException) {
             variable.get(1, TimeUnit.SECONDS)
         }
-        Thread.start {variable << 10}
+        Thread.start { variable << 10 }
         assert 10 == variable.get(10, java.util.concurrent.TimeUnit.SECONDS)
     }
 
     public void testTimeoutGetWithMultipleParties() {
         final SyncDataflowVariable variable = new SyncDataflowVariable(2)
-        Thread.start {variable << 10}
+        Thread.start { variable << 10 }
 
         assert null == variable.getVal(1, TimeUnit.MILLISECONDS)
         assert null == variable.getVal(1, TimeUnit.MILLISECONDS)
@@ -126,10 +126,10 @@ public class SyncDataflowVariableTest extends GroovyTestCase {
 
         def result2 = new DataflowVariable()
         Thread.start {
-            variable.whenBound({result2 << it})
+            variable.whenBound({ result2 << it })
         }
 
-        Thread.start {variable << 10}
+        Thread.start { variable << 10 }
 
         assert 10 == result1.val
         assert 10 == result2.val

@@ -126,7 +126,7 @@ public class ReactorTest extends GroovyTestCase {
 
         Actors.blockingActor {
             reactor << 1
-            results << (1..3).collect {receive(1000, TimeUnit.MILLISECONDS)}
+            results << (1..3).collect { receive(1000, TimeUnit.MILLISECONDS) }
             reactor.stop()
         }
         assert results.val == [10, 20, 30]
@@ -150,11 +150,11 @@ public class ReactorTest extends GroovyTestCase {
 
         final Dataflows results = new Dataflows()
 
-        reactor.sendAndContinue(1) {results.d1 = it}
-        reactor.sendAndContinue(2) {results.d2 = it}
-        reactor.sendAndContinue(3) {results.d3 = it}
+        reactor.sendAndContinue(1) { results.d1 = it }
+        reactor.sendAndContinue(2) { results.d2 = it }
+        reactor.sendAndContinue(3) { results.d3 = it }
         Actors.actor {
-            reactor.sendAndContinue(4) {results.d4 = it}
+            reactor.sendAndContinue(4) { results.d4 = it }
         }
         assert results.d1 == 2
         assert results.d2 == 4

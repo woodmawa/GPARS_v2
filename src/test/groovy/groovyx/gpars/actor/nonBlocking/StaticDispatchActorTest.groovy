@@ -106,17 +106,17 @@ public class StaticDispatchActorTest extends GroovyTestCase {
     }
 
     public void testSendAndContinue() {
-        def sda = Actors.staticMessageHandler {message ->
+        def sda = Actors.staticMessageHandler { message ->
             reply 2 * message
         }
 
         final Dataflows results = new Dataflows()
 
-        sda.sendAndContinue(1) {results.d1 = it}
-        sda.sendAndContinue(2) {results.d2 = it}
-        sda.sendAndContinue(3) {results.d3 = it}
+        sda.sendAndContinue(1) { results.d1 = it }
+        sda.sendAndContinue(2) { results.d2 = it }
+        sda.sendAndContinue(3) { results.d3 = it }
         Actors.actor {
-            sda.sendAndContinue(4) {results.d4 = it}
+            sda.sendAndContinue(4) { results.d4 = it }
         }
         assert results.d1 == 2
         assert results.d2 == 4

@@ -44,7 +44,7 @@ class SampleB {}
 SampleB.metaClass {
     mixin SampleA
 
-    foo = {->
+    foo = { ->
         println 'New foo ' + receive('')
     }
 }

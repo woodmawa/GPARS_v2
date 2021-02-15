@@ -28,9 +28,9 @@ import groovyx.gpars.dataflow.DataflowReadChannel
 
 final DataflowBroadcast broadcast = new DataflowBroadcast()
 final DataflowReadChannel subscription1 = broadcast.createReadChannel()
-subscription1.chainWith {it * 2}.chainWith {it + 1} chainWith {println 'Subscription1: ' + it}
+subscription1.chainWith { it * 2 }.chainWith { it + 1 } chainWith { println 'Subscription1: ' + it }
 final DataflowReadChannel subscription2 = broadcast.createReadChannel()
-subscription2.chainWith {it * 3}.chainWith {it + 1} chainWith {println 'Subscription2: ' + it}
+subscription2.chainWith { it * 3 }.chainWith { it + 1 } chainWith { println 'Subscription2: ' + it }
 
 broadcast << 1
 broadcast << 2

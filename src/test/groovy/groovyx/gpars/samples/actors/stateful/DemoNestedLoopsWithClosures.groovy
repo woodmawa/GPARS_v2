@@ -26,15 +26,15 @@ import static groovyx.gpars.actor.Actors.actor
 
 Closure innerLoop
 
-Closure outerLoop = {->
-    react {a ->
+Closure outerLoop = { ->
+    react { a ->
         println 'Outer: ' + a
         innerLoop()
     }
 }
 
-innerLoop = {->
-    react {b ->
+innerLoop = { ->
+    react { b ->
         println 'Inner ' + b
         if (b == 0) outerLoop()
         else innerLoop()

@@ -21,7 +21,7 @@ package groovyx.gpars.dataflow;
  * It holds the index of the input channel, which was read, and the obtained value.
  *
  * @author Vaclav Pech
- *         Date: 30th Sep 2010
+ * Date: 30th Sep 2010
  */
 public final class SelectResult<T> {
     private final int index;

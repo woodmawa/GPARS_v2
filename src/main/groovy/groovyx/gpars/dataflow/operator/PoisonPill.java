@@ -19,12 +19,12 @@ package groovyx.gpars.dataflow.operator;
 /**
  * Represents the poison for dataflow operators.
  * After receiving the poison a dataflow operator will send the poisson to all its output channels and terminate.
- *
+ * <p>
  * Non=immediate poison will allow selectors to keep processing all remaining inputs until these get also poisoned.
  * There§s no difference in behavior between immediate and non=immediate poison pills when obtained bz an operator.
  *
  * @author Vaclav Pech
- *         Date: Oct 6, 2010
+ * Date: Oct 6, 2010
  */
 public class PoisonPill implements ControlMessage {
     private static final PoisonPill ourInstance = new PoisonPill();
@@ -33,6 +33,7 @@ public class PoisonPill implements ControlMessage {
 
     /**
      * Retrieves a non-immediate poison pill instance
+     *
      * @return The shared singleton non-immediate poison pill instance
      */
     public static PoisonPill getInstance() {
@@ -41,6 +42,7 @@ public class PoisonPill implements ControlMessage {
 
     /**
      * Retrieves an immediate poison pill instance
+     *
      * @return The shared singleton immediate poison pill instance
      */
     public static PoisonPill getImmediateInstance() {

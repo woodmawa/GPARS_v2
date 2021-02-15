@@ -3,7 +3,7 @@ package groovyx.gpars.benchmark.embarrassinglyParallel
 import groovyx.gpars.GParsExecutorsPool
 import groovyx.gpars.GParsPool
 
-final numbers = (0L..100000L).collect() {it}
+final numbers = (0L..100000L).collect() { it }
 def sum = 1
 2.times {
     sum = measureFJPool(numbers, sum)
@@ -31,12 +31,12 @@ println "Executors pool: " + (t4 - t3)
 
 private long measureFJPool(numbers, sum) {
     GParsPool.withPool {
-        (numbers.everyParallel {it >= 0}) ? sum : 0
+        (numbers.everyParallel { it >= 0 }) ? sum : 0
     }
 }
 
 private long measurePool(numbers, sum) {
     GParsExecutorsPool.withPool {
-        (numbers.everyParallel {it >= 0}) ? sum : 0
+        (numbers.everyParallel { it >= 0 }) ? sum : 0
     }
 }

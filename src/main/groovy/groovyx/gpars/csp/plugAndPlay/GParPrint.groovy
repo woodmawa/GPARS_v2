@@ -32,7 +32,7 @@ class GParPrint implements CSProcess {
     void run() {
         def inSize = inChannels.size()
         def readerList = []
-        (0..<inSize).each {i ->
+        (0..<inSize).each { i ->
             readerList[i] = new ProcessRead(inChannels[i])
         }
 
@@ -40,8 +40,7 @@ class GParPrint implements CSProcess {
 
         if (headings == null) {
             println "No headings provided"
-        }
-        else {
+        } else {
             headings.each { print "\t${it}" }
             println()
         }
@@ -51,7 +50,7 @@ class GParPrint implements CSProcess {
             parRead.run()
             //     print "\t"
 //      readerList.each { pr -> print "${pr.value}\t" }
-            readerList.each {pr -> print "\t" + pr.value.toString() }
+            readerList.each { pr -> print "\t" + pr.value.toString() }
             println()
             if (delay > 0) {
                 timer.sleep(delay)

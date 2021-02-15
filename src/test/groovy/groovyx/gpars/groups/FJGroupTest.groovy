@@ -73,7 +73,7 @@ public class FJGroupTest extends GroovyTestCase {
         final Actor actor2 = group2.actor {
             react {
                 actor1 << it + 10
-                react {message ->
+                react { message ->
                     result = message
                     latch.countDown()
                 }

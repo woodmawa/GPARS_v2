@@ -25,11 +25,11 @@ import groovyx.gpars.dataflow.DataflowVariable
 final DataflowVariable variable = new DataflowVariable()
 final DataflowVariable result = new DataflowVariable()
 
-final doubler = {it * 2}
-final adder = {it + 1}
+final doubler = { it * 2 }
+final adder = { it + 1 }
 
-variable >> doubler >> adder >> {result << it}
+variable >> doubler >> adder >> { result << it }
 
-Thread.start {variable << 4}
+Thread.start { variable << 4 }
 
 assert 9 == result.val

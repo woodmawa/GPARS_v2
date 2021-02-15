@@ -33,8 +33,10 @@ class NettyClientServerTest extends Specification {
         def connectedLatch = new CountDownLatch(2)
 
         LocalHost localHost = null
-        NettyServer server = new NettyServer(localHost, getHostAddress(), PORT, { serverConnected = true; connectedLatch.countDown() } as ConnectListener)
-        NettyClient client = new NettyClient(localHost, getHostAddress(), PORT, { clientConnected = true; connectedLatch.countDown() } as ConnectListener)
+        NettyServer server = new NettyServer(localHost, getHostAddress(), PORT, { serverConnected = true;
+            connectedLatch.countDown() } as ConnectListener)
+        NettyClient client = new NettyClient(localHost, getHostAddress(), PORT, { clientConnected = true;
+            connectedLatch.countDown() } as ConnectListener)
 
         when:
         server.start()

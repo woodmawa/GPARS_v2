@@ -45,8 +45,8 @@ public class DataflowProcessorStateObjectTest extends GroovyTestCase {
         final DataflowQueue b = new DataflowQueue()
         final DataflowQueue c = new DataflowQueue()
 
-        def op = group.operator(inputs: [a, b], outputs: [c], stateObject: [counter: 0]) {x, y ->
-            stateObject.counter += x+y
+        def op = group.operator(inputs: [a, b], outputs: [c], stateObject: [counter: 0]) { x, y ->
+            stateObject.counter += x + y
             bindOutput stateObject.counter
         }
 
@@ -65,7 +65,7 @@ public class DataflowProcessorStateObjectTest extends GroovyTestCase {
         final DataflowQueue b = new DataflowQueue()
         final DataflowQueue c = new DataflowQueue()
 
-        def op = group.selector(inputs: [a, b], outputs: [c], stateObject: [0]) {x->
+        def op = group.selector(inputs: [a, b], outputs: [c], stateObject: [0]) { x ->
             stateObject[0] += x
             bindOutput stateObject
         }
@@ -87,7 +87,7 @@ public class DataflowProcessorStateObjectTest extends GroovyTestCase {
         final DataflowQueue b = new DataflowQueue()
         final DataflowQueue c = new DataflowQueue()
 
-        def op = group.selector(inputs: [a, b], outputs: [c], stateObject: null) {x->
+        def op = group.selector(inputs: [a, b], outputs: [c], stateObject: null) { x ->
             bindOutput stateObject
         }
 
@@ -102,7 +102,7 @@ public class DataflowProcessorStateObjectTest extends GroovyTestCase {
         final DataflowQueue b = new DataflowQueue()
         final DataflowQueue c = new DataflowQueue()
 
-        def op = group.selector(inputs: [a, b], outputs: [c]) {x->
+        def op = group.selector(inputs: [a, b], outputs: [c]) { x ->
             bindOutput stateObject
         }
 

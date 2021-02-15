@@ -37,6 +37,7 @@ abstract class PipelineDynamicDispatchActor extends DynamicDispatchActor {
     }
 
 }
+
 final class DownloadPipelineDynamicDispatchActor extends groovyx.gpars.benchmark.akka.PipelineDynamicDispatchActor {
     String handleMessage(String message) {
         message.replaceFirst('Requested ', 'Downloaded ')

@@ -86,7 +86,9 @@ final class DemoWorker extends DefaultActor {
         Thread.sleep random.nextInt(3000)
     }
 }
+
 final class WorkToDo {}
+
 final class NeedMoreWork {}
 
 final Actor balancer = new LoadBalancer().start()

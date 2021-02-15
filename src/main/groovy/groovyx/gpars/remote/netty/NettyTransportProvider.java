@@ -27,6 +27,7 @@ public class NettyTransportProvider {
 
     /**
      * Factory method for creating server instances.
+     *
      * @param host
      * @param port
      * @param localHost the serialization context for connection
@@ -38,10 +39,11 @@ public class NettyTransportProvider {
 
     /**
      * Factory method for creating client instances.
-     * @param host the address of host to connect
-     * @param port the destination port
+     *
+     * @param host      the address of host to connect
+     * @param port      the destination port
      * @param localHost the serialization context for connection
-     * @param listener the action performed on connect
+     * @param listener  the action performed on connect
      * @return new instance of {@link NettyClient}
      */
     public static NettyClient createClient(String host, int port, LocalHost localHost, ConnectListener listener) {

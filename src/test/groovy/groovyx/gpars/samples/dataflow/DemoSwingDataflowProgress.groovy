@@ -42,7 +42,7 @@ builder.build {
     def frame = builder.frame(title: 'Demo', defaultCloseOperation: EXIT_ON_CLOSE, visible: true, location: [80, 80]) {
         panel(border: createEmptyBorder(10, 10, 10, 10)) {
             gridLayout rows: values.size(), columns: 2, hgap: 10, vgap: 10
-            values.eachWithIndex {value, index ->
+            values.eachWithIndex { value, index ->
                 bars[index] = progressBar(string: value, minimum: 0, maximum: value, stringPainted: true)
                 labels[index] = label()
             }
@@ -53,10 +53,10 @@ builder.build {
 
 Dataflow.task {
     def result = ''
-    values.eachWithIndex {value, index ->
+    values.eachWithIndex { value, index ->
         builder.edt { labels[index].text = 'Waiting' }
         def part = retrieved[index]
-        builder.edt { labels[index].text = 'Appending ' + part}
+        builder.edt { labels[index].text = 'Appending ' + part }
         sleep 1000
         result <<= part
         builder.edt { labels[index].text = result }
@@ -64,7 +64,7 @@ Dataflow.task {
 }
 
 GParsPool.withPool() {
-    values.eachWithIndexParallel {value, index ->
+    values.eachWithIndexParallel { value, index ->
         for (progress in 1..value) {
             sleep 1000
             builder.edt { bars[index].value = progress }

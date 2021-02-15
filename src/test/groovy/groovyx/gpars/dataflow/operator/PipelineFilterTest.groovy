@@ -42,25 +42,25 @@ public class PipelineFilterTest extends GroovyTestCase {
         final DataflowQueue queue1 = new DataflowQueue()
         final DataflowQueue queue2 = new DataflowQueue()
 
-        final odd = {num -> num % 2 != 0}
+        final odd = { num -> num % 2 != 0 }
 
         new Pipeline(group, queue1).chainWith odd into queue2
-        (1..5).each {queue1 << it}
-        assert [true, false, true, false, true] == (1..5).collect {queue2.val}
+        (1..5).each { queue1 << it }
+        assert [true, false, true, false, true] == (1..5).collect { queue2.val }
     }
 
     public void testPipelineNullObjectBlocking() {
         final DataflowQueue queue1 = new DataflowQueue()
         final DataflowQueue queue2 = new DataflowQueue()
 
-        final odd = {num ->
+        final odd = { num ->
             if (num == 5) return null  //null values are normally passed on
             if (num % 2 != 0) return num
             else return NullObject.nullObject  //this value gets blocked
         }
 
         new Pipeline(group, queue1).chainWith odd into queue2
-        (1..5).each {queue1 << it}
+        (1..5).each { queue1 << it }
         assert 1 == queue2.val
         assert 3 == queue2.val
         assert null == queue2.val
@@ -70,7 +70,7 @@ public class PipelineFilterTest extends GroovyTestCase {
         final DataflowQueue queue1 = new DataflowQueue()
         final DataflowQueue queue2 = new DataflowQueue()
 
-        final odd = {num -> }
+        final odd = { num -> }
 
         new Pipeline(group, queue1).chainWith odd into queue2
         queue1 << 1
@@ -83,10 +83,10 @@ public class PipelineFilterTest extends GroovyTestCase {
         final DataflowQueue queue1 = new DataflowQueue()
         final DataflowQueue queue2 = new DataflowQueue()
 
-        final odd = {num -> num % 2 != 0 }
+        final odd = { num -> num % 2 != 0 }
 
         new Pipeline(group, queue1).filter odd into queue2
-        (1..5).each {queue1 << it}
+        (1..5).each { queue1 << it }
         assert 1 == queue2.val
         assert 3 == queue2.val
         assert 5 == queue2.val

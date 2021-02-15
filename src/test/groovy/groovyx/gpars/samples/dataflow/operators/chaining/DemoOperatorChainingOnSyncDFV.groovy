@@ -26,7 +26,7 @@ import groovyx.gpars.dataflow.SyncDataflowVariable
  */
 
 final SyncDataflowVariable variable = new SyncDataflowVariable()
-final result = variable.chainWith {it * 2}.chainWith {it + 1} chainWith {it * 100}
+final result = variable.chainWith { it * 2 }.chainWith { it + 1 } chainWith { it * 100 }
 
 Thread.start {
     println result.val

@@ -24,19 +24,19 @@ import groovyx.gpars.agent.Agent
 
 final Agent counter = new Agent()
 
-counter.addListener {oldValue, newValue -> println "Changing value from $oldValue to $newValue"}
-counter.addListener {agent, oldValue, newValue -> println "Agent $agent changing value from $oldValue to $newValue"}
+counter.addListener { oldValue, newValue -> println "Changing value from $oldValue to $newValue" }
+counter.addListener { agent, oldValue, newValue -> println "Agent $agent changing value from $oldValue to $newValue" }
 
-counter.addValidator {oldValue, newValue -> if (oldValue > newValue) throw new IllegalArgumentException('Things can only go up in Groovy')}
-counter.addValidator {agent, oldValue, newValue -> if (oldValue == newValue) throw new IllegalArgumentException('Things never stay the same for $agent')}
+counter.addValidator { oldValue, newValue -> if (oldValue > newValue) throw new IllegalArgumentException('Things can only go up in Groovy') }
+counter.addValidator { agent, oldValue, newValue -> if (oldValue == newValue) throw new IllegalArgumentException('Things never stay the same for $agent') }
 
 counter 10
 counter 11
-counter {updateValue 12}
+counter { updateValue 12 }
 counter 10  //Will be rejected
-counter {updateValue it - 1}  //Will be rejected
-counter {updateValue it}  //Will be rejected
-counter {updateValue 11}  //Will be rejected
+counter { updateValue it - 1 }  //Will be rejected
+counter { updateValue it }  //Will be rejected
+counter { updateValue 11 }  //Will be rejected
 counter 12  //Will be rejected
 counter 20
 counter.await()

@@ -29,11 +29,11 @@ import static groovyx.gpars.GParsPool.withPool
  */
 
 withPool {
-    Closure sPlus = {Integer a, Integer b ->
+    Closure sPlus = { Integer a, Integer b ->
         a + b
     }
 
-    Closure sMultiply = {Integer a, Integer b ->
+    Closure sMultiply = { Integer a, Integer b ->
         sleep 2000
         a * b
     }
@@ -49,6 +49,6 @@ withPool {
     println "Asynchronous result: " + result.get()
 
     //Now let's use a callback to print the result once available
-    aMultiply(aPlus(10, 30), 100) >> {println "Result in a callback $it"}
+    aMultiply(aPlus(10, 30), 100) >> { println "Result in a callback $it" }
     println "The calculation has started"
 }

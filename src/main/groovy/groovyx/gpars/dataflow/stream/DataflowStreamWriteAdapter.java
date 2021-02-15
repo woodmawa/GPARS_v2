@@ -61,7 +61,7 @@ public class DataflowStreamWriteAdapter<T> extends WithSerialId implements Dataf
             @Override
             public MessageStream send(Object message) {
                 if (!(message instanceof Throwable))
-                    notifyRemote((T)message);
+                    notifyRemote((T) message);
                 return this;
             }
         });
@@ -99,7 +99,7 @@ public class DataflowStreamWriteAdapter<T> extends WithSerialId implements Dataf
             // TODO schedule this job?
             final Object sub = serialHandle.getSubscribers();
             if (sub instanceof RemoteHost) {
-                RemoteHost remoteHost = (RemoteHost)sub;
+                RemoteHost remoteHost = (RemoteHost) sub;
                 remoteHost.write(new BindDataflowStream(this, value));
             }
             if (sub instanceof List) {

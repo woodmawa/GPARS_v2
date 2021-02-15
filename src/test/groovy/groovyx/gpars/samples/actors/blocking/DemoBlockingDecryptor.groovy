@@ -28,7 +28,7 @@ import static groovyx.gpars.actor.Actors.blockingActor
 
 def decryptor = blockingActor {
     while (true) {
-        receive {message ->
+        receive { message ->
             if (message instanceof String) reply message.reverse()
             else stop()
         }

@@ -21,10 +21,10 @@ package groovyx.gpars.pa;// GPars - Groovy Parallel Systems
 
 
 /**
-  * A PA mapper built around a closure
-  *
-  * @author Vaclav Pech
-  */
+ * A PA mapper built around a closure
+ *
+ * @author Vaclav Pech
+ */
 // public final class ClosureMapper<V> implements Ops.Op<Object, V> {
 // private final Closure<V> code;
 

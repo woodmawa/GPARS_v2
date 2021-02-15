@@ -51,7 +51,7 @@ public class DataflowProcessorEventTest extends GroovyTestCase {
     public void testCustomEvent() {
         final listener1 = new TestListener()
         final listener2 = new TestListener()
-        def op = group.operator(inputs: [a, b], outputs: [c], listeners: [listener1, listener2]) {x, y ->
+        def op = group.operator(inputs: [a, b], outputs: [c], listeners: [listener1, listener2]) { x, y ->
             final xa = fireCustomEvent(x)
             bindOutput xa + y
         }
@@ -62,17 +62,17 @@ public class DataflowProcessorEventTest extends GroovyTestCase {
         assert 60 == c.val
         assert 1 == listener1.countEventsThatStartWith('customEvent')
         assert 1 == listener2.countEventsThatStartWith('customEvent')
-        assert "customEvent:10" == listener1.retrieveEvents {it.startsWith 'customEvent'}[0]
-        assert "customEvent:20" == listener2.retrieveEvents {it.startsWith 'customEvent'}[0]
+        assert "customEvent:10" == listener1.retrieveEvents { it.startsWith 'customEvent' }[0]
+        assert "customEvent:20" == listener2.retrieveEvents { it.startsWith 'customEvent' }[0]
         a << 1
         b << 2
         assert 6 == c.val
         assert 2 == listener1.countEventsThatStartWith('customEvent')
         assert 2 == listener2.countEventsThatStartWith('customEvent')
-        assert "customEvent:10" == listener1.retrieveEvents {it.startsWith 'customEvent'}[0]
-        assert "customEvent:1" == listener1.retrieveEvents {it.startsWith 'customEvent'}[1]
-        assert "customEvent:20" == listener2.retrieveEvents {it.startsWith 'customEvent'}[0]
-        assert "customEvent:2" == listener2.retrieveEvents {it.startsWith 'customEvent'}[1]
+        assert "customEvent:10" == listener1.retrieveEvents { it.startsWith 'customEvent' }[0]
+        assert "customEvent:1" == listener1.retrieveEvents { it.startsWith 'customEvent' }[1]
+        assert "customEvent:20" == listener2.retrieveEvents { it.startsWith 'customEvent' }[0]
+        assert "customEvent:2" == listener2.retrieveEvents { it.startsWith 'customEvent' }[1]
 
         op.terminate()
     }
@@ -81,7 +81,7 @@ public class DataflowProcessorEventTest extends GroovyTestCase {
         final listener1 = new TestListener()
         final listener2 = new TestListener()
 
-        def op = group.operator(inputs: [a, b], outputs: [c], listeners: [listener1, listener2]) {x, y ->
+        def op = group.operator(inputs: [a, b], outputs: [c], listeners: [listener1, listener2]) { x, y ->
             bindOutput x + y
         }
 
@@ -121,7 +121,7 @@ public class DataflowProcessorEventTest extends GroovyTestCase {
         final listener1 = new TestListener()
         final listener2 = new TestListener()
 
-        def op = group.operator(inputs: [a, b], outputs: [c], listeners: [listener1, listener2]) {x, y ->
+        def op = group.operator(inputs: [a, b], outputs: [c], listeners: [listener1, listener2]) { x, y ->
             bindOutput x + y
         }
 
@@ -137,19 +137,19 @@ public class DataflowProcessorEventTest extends GroovyTestCase {
         assert 1 >= listener1.countEventsThatStartWith('afterRun')
         assert 1 >= listener2.countEventsThatStartWith('afterRun')
 
-        final arrived1 = listener1.retrieveEvents {it.startsWith 'messageArrived'}
+        final arrived1 = listener1.retrieveEvents { it.startsWith 'messageArrived' }
         assert 'messageArrived 10' == arrived1.first()
         assert 'messageArrived 20' == arrived1.last()
-        assert 'messageSentOut 30' == listener1.retrieveEvents {it.startsWith 'messageSentOut'}.first()
+        assert 'messageSentOut 30' == listener1.retrieveEvents { it.startsWith 'messageSentOut' }.first()
 
         a << 1
         b << 2
         assert 3 == c.val
-        final arrived2 = listener2.retrieveEvents {it.startsWith 'messageArrived'}
+        final arrived2 = listener2.retrieveEvents { it.startsWith 'messageArrived' }
         assert 'messageArrived 1' == arrived2[2]
         assert 'messageArrived 2' == arrived2.last()
-        assert 'messageSentOut 30' == listener1.retrieveEvents {it.startsWith 'messageSentOut'}.first()
-        assert 'messageSentOut 3' == listener1.retrieveEvents {it.startsWith 'messageSentOut'}.last()
+        assert 'messageSentOut 30' == listener1.retrieveEvents { it.startsWith 'messageSentOut' }.first()
+        assert 'messageSentOut 3' == listener1.retrieveEvents { it.startsWith 'messageSentOut' }.last()
 
         op.terminate()
     }
@@ -158,7 +158,7 @@ public class DataflowProcessorEventTest extends GroovyTestCase {
         final listener1 = new TestListener()
         final listener2 = new TestListener()
 
-        def op = group.selector(inputs: [a, b], outputs: [c], listeners: [listener1, listener2]) {x ->
+        def op = group.selector(inputs: [a, b], outputs: [c], listeners: [listener1, listener2]) { x ->
             bindOutput x
         }
 
@@ -175,11 +175,11 @@ public class DataflowProcessorEventTest extends GroovyTestCase {
         assert 2 >= listener1.countEventsThatStartWith('afterRun')
         assert 2 >= listener2.countEventsThatStartWith('afterRun')
 
-        final arrived1 = listener1.retrieveEvents {it.startsWith 'messageArrived'}
+        final arrived1 = listener1.retrieveEvents { it.startsWith 'messageArrived' }
         assert 'messageArrived 10' == arrived1.first()
         assert 'messageArrived 20' == arrived1.last()
-        assert 'messageSentOut 10' == listener1.retrieveEvents {it.startsWith 'messageSentOut'}.first()
-        assert 'messageSentOut 20' == listener1.retrieveEvents {it.startsWith 'messageSentOut'}.last()
+        assert 'messageSentOut 10' == listener1.retrieveEvents { it.startsWith 'messageSentOut' }.first()
+        assert 'messageSentOut 20' == listener1.retrieveEvents { it.startsWith 'messageSentOut' }.last()
 
         op.terminate()
     }
@@ -188,7 +188,7 @@ public class DataflowProcessorEventTest extends GroovyTestCase {
         final listener1 = new TestListener()
         final listener2 = new TestListener()
 
-        def op = group.operator(inputs: [a, b], outputs: [c], listeners: [listener1, listener2]) {x, y ->
+        def op = group.operator(inputs: [a, b], outputs: [c], listeners: [listener1, listener2]) { x, y ->
             bindOutput x + y
         }
 
@@ -212,7 +212,7 @@ public class DataflowProcessorEventTest extends GroovyTestCase {
         final listener1 = new TestListener()
         final listener2 = new TestListener()
 
-        def op = group.operator(inputs: [a, b], outputs: [c], listeners: [listener1, listener2]) {x, y ->
+        def op = group.operator(inputs: [a, b], outputs: [c], listeners: [listener1, listener2]) { x, y ->
             bindOutput x + y
         }
 
@@ -240,7 +240,7 @@ public class DataflowProcessorEventTest extends GroovyTestCase {
         }
 
         int countEventsThatStartWith(String filter) {
-            retrieveEvents {it.startsWith(filter)}.size()
+            retrieveEvents { it.startsWith(filter) }.size()
         }
 
         @Override

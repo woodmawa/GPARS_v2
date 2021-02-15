@@ -21,7 +21,7 @@ package groovyx.gpars.actor.impl;
  * Implementing singleton pattern, ActorException holds the unique reference.
  *
  * @author Alex Tkachman
- *         Date: Feb 17, 2009
+ * Date: Feb 17, 2009
  */
 public final class ActorStopException extends ActorException {
     private static final long serialVersionUID = 6718779462386378739L;

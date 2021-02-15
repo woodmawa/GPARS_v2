@@ -21,4 +21,4 @@ import groovyx.gpars.dataflow.operator.ControlMessage
 /**
  * @author Vaclav Pech
  */
-class TestControlMessage implements ControlMessage { }
+class TestControlMessage implements ControlMessage {}

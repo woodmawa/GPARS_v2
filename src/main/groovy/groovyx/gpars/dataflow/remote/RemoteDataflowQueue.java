@@ -39,11 +39,11 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Proxy object for remote instance of Queue.
- * @param <T> the type of the queue
  *
+ * @param <T> the type of the queue
  * @author Rafal Slawik
  */
-@SuppressWarnings({"unchecked","rawtypes", "serial"})
+@SuppressWarnings({"unchecked", "rawtypes", "serial"})
 public class RemoteDataflowQueue<T> extends WithSerialId implements DataflowChannel<T>, RemoteSerialized {
     private RemoteHost remoteHost;
 
@@ -520,6 +520,7 @@ public class RemoteDataflowQueue<T> extends WithSerialId implements DataflowChan
 
     /**
      * Sends passed in value to queue on remote host.
+     *
      * @param value The value to enqueue
      * @return this
      */
@@ -564,6 +565,7 @@ public class RemoteDataflowQueue<T> extends WithSerialId implements DataflowChan
 
     /**
      * Creates a new variable and sends request to queue on remote host asking for value
+     *
      * @return The newly created DataflowVariable instance
      */
     private DataflowVariable<T> createRequestVariable() {
@@ -574,6 +576,7 @@ public class RemoteDataflowQueue<T> extends WithSerialId implements DataflowChan
 
     /**
      * Sends value to queue on remote host
+     *
      * @param value
      */
     private void enqueueValue(T value) {

@@ -72,7 +72,8 @@ class ForkAndJoinPromiseTest extends Specification {
         when:
         Promise result = task {
             a << 1
-        }.thenForkAndJoin({ b << 2; 2 }, { c << 3; 3 }, { throw new RuntimeException('test') }).then({ d << it; it }, { "error caught" })
+        }.thenForkAndJoin({ b << 2; 2 }, { c << 3; 3 }, { throw new RuntimeException('test') }).then({ d << it;
+            it }, { "error caught" })
         result.join()
 
         then:

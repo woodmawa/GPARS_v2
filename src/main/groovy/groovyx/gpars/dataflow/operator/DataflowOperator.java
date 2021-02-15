@@ -36,7 +36,7 @@ import java.util.Map;
  * </p>
  *
  * @author Vaclav Pech
- *         Date: Sep 9, 2009
+ * Date: Sep 9, 2009
  */
 @SuppressWarnings({"RawUseOfParameterizedType", "rawtypes", "unchecked"})
 public final class DataflowOperator extends DataflowProcessor {

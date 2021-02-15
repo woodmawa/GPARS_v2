@@ -46,7 +46,7 @@ def execute(int actorCount) {
             }
         }
     }
-    (0..<actorCount).each {long index ->
+    (0..<actorCount).each { long index ->
         final long start = 1l + index * sliceSize
         final long end = (index + 1l) * sliceSize
         computors.add(

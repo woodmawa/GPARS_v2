@@ -168,7 +168,7 @@ public final class ResizeableCountDownLatch {
      * @param timeout the maximum time to wait
      * @param unit    the time unit of the {@code timeout} argument
      * @return {@code true} if the count reached zero and {@code false}
-     *         if the waiting time elapsed before the count reached zero
+     * if the waiting time elapsed before the count reached zero
      * @throws InterruptedException if the current thread is interrupted
      *                              while waiting
      */

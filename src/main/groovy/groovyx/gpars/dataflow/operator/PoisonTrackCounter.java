@@ -30,6 +30,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 final class PoisonTrackCounter {
     private final DataflowVariable<Boolean> termination = new DataflowVariable<Boolean>();
     private final AtomicInteger counter;
+
     PoisonTrackCounter(final int count) {
         if (count < 0)
             throw new IllegalArgumentException("A counting poison pill can only start with a positive number");

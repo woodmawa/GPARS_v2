@@ -32,5 +32,6 @@ public interface SelectableChannel<T> {
      * @return The value bound to the DFV at the head of the stream or null
      * @throws InterruptedException If the current thread is interrupted
      */
-    @SuppressWarnings({"ClassReferencesSubclass"}) DataflowExpression<T> poll() throws InterruptedException;
+    @SuppressWarnings({"ClassReferencesSubclass"})
+    DataflowExpression<T> poll() throws InterruptedException;
 }

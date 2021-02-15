@@ -46,8 +46,7 @@ public abstract class ReplyingMessageStream extends Actor {
      * have not been sent by an actor. For such cases use replyIfExists().
      *
      * @param message reply message
-     * @throws ActorReplyException
-     *          If some of the replies failed to be sent.
+     * @throws ActorReplyException If some of the replies failed to be sent.
      */
     protected final void reply(final Object message) {
         if (sender == null) throw new ActorReplyException(CANNOT_SEND_REPLIES_NO_SENDER_HAS_BEEN_REGISTERED);

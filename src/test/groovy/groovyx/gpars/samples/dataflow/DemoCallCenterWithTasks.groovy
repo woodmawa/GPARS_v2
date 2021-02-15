@@ -41,7 +41,7 @@ final class CallCenter {
 
     def open() {
         println "Call center opening"
-        agents.times {agentIndex ->
+        agents.times { agentIndex ->
             group.task {
                 println "Agent $agentIndex logging in"
                 clockIn << true
@@ -64,7 +64,7 @@ final class CallCenter {
             }
         }
 
-        agents.times {clockIn.val}
+        agents.times { clockIn.val }
 
         println "Call center open"
     }

@@ -30,7 +30,7 @@ import java.util.concurrent.TimeUnit;
  * A common interface for all dataflow variables, streams or queues
  *
  * @author Vaclav Pech
- *         Date: 21st Sep 2010
+ * Date: 21st Sep 2010
  */
 public interface DataflowReadChannel<T> extends SelectableChannel<T> {
 

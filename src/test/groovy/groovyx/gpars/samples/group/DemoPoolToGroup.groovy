@@ -29,27 +29,27 @@ import java.util.concurrent.ForkJoinPool
  * combining multiple GPars concepts, e.g. dataflow tasks with parallel collections.
  */
 
-GParsPool.withPool {ForkJoinPool pool ->
-    [1, 2, 3, 4, 5].eachParallel {println it}
+GParsPool.withPool { ForkJoinPool pool ->
+    [1, 2, 3, 4, 5].eachParallel { println it }
 
     final PGroup group = PGroupBuilder.createFromPool(pool)
     group.task {
         println 'Printing this asynchronously'
     }.join()
 
-    group.threadPool.execute {println 'Printing this asynchronously as well'}
-    group.threadPool.forkJoinPool.execute {println 'Printing this asynchronously, too'}
+    group.threadPool.execute { println 'Printing this asynchronously as well' }
+    group.threadPool.forkJoinPool.execute { println 'Printing this asynchronously, too' }
 }
 
 
-GParsExecutorsPool.withPool {ExecutorService pool ->
-    [1, 2, 3, 4, 5].eachParallel {println it}
+GParsExecutorsPool.withPool { ExecutorService pool ->
+    [1, 2, 3, 4, 5].eachParallel { println it }
 
     final PGroup group = PGroupBuilder.createFromPool(pool)
     group.task {
         println 'Printing this asynchronously'
     }.join()
 
-    group.threadPool.execute {println 'Printing this asynchronously as well'}
-    group.threadPool.executorService.execute {println 'Printing this asynchronously, too'}
+    group.threadPool.execute { println 'Printing this asynchronously as well' }
+    group.threadPool.executorService.execute { println 'Printing this asynchronously, too' }
 }

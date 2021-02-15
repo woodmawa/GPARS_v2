@@ -68,7 +68,7 @@ abstract public class MergeSortTest extends GroovyTestCase {
 
     Closure createMessageHandler(def parentActor) {
         return {
-            receive {List<Integer> message ->
+            receive { List<Integer> message ->
                 assert message != null
                 switch (message.size()) {
                     case 0..1:

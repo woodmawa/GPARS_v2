@@ -38,8 +38,7 @@ final class ForwardingDelegate extends GroovyObjectSupport {
     public Object invokeMethod(final String name, final Object args) {
         try {
             return InvokerHelper.invokeMethod(first, name, args);
-        }
-        catch (MissingMethodException ignore) {
+        } catch (MissingMethodException ignore) {
             return InvokerHelper.invokeMethod(second, name, args);
         }
     }
@@ -48,8 +47,7 @@ final class ForwardingDelegate extends GroovyObjectSupport {
     public Object getProperty(final String property) {
         try {
             return InvokerHelper.getProperty(first, property);
-        }
-        catch (MissingPropertyException ignore) {
+        } catch (MissingPropertyException ignore) {
             return InvokerHelper.getProperty(second, property);
         }
     }
@@ -58,8 +56,7 @@ final class ForwardingDelegate extends GroovyObjectSupport {
     public void setProperty(final String property, final Object newValue) {
         try {
             InvokerHelper.setProperty(first, property, newValue);
-        }
-        catch (MissingPropertyException ignore) {
+        } catch (MissingPropertyException ignore) {
             InvokerHelper.setProperty(second, property, newValue);
         }
     }

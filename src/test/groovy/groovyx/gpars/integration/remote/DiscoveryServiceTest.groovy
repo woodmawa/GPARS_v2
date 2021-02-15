@@ -56,7 +56,8 @@ class DiscoveryServiceTest extends Specification {
                 println "ask"
                 address = client.ask actorUrl get 10, TimeUnit.MILLISECONDS
                 received = true
-            } catch (TimeoutException e) {}
+            } catch (TimeoutException e) {
+            }
         }
         address
     }

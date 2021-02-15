@@ -33,33 +33,34 @@ class MyPooledActor extends DefaultActor {
     }
 
     private void handleA() {
-        react {a ->
+        react { a ->
             replyIfExists "Done"
             handleB(a)
         }
     }
 
     private void handleB(int a) {
-        react {b ->
+        react { b ->
             println a + b
             LifeCycleHelper.latch.countDown()
         }
     }
 }
+
 testActor(new MyPooledActor().start())
 
 
 Actor actor2 = actor {
     delegate.metaClass {
-        handleA = {->
-            react {a ->
+        handleA = { ->
+            react { a ->
                 replyIfExists "Done"
                 handleB(a)
             }
         }
 
-        handleB = {a ->
-            react {b ->
+        handleB = { a ->
+            react { b ->
                 println a + b
                 LifeCycleHelper.latch.countDown()
             }
@@ -72,15 +73,15 @@ Actor actor2 = actor {
 testActor(actor2)
 
 
-Closure handleB = {a ->
-    react {b ->
+Closure handleB = { a ->
+    react { b ->
         println a + b
         LifeCycleHelper.latch.countDown()
     }
 }
 
-Closure handleA = {->
-    react {a ->
+Closure handleA = { ->
+    react { a ->
         replyIfExists "Done"
         handleB(a)
     }

@@ -78,6 +78,7 @@ public class AbstractActorTest extends GroovyTestCase {
             protected void act() {
                 Thread.sleep(100)
             }
+
             public void afterStart() {
                 flag.set(true)
                 latch.countDown()
@@ -98,7 +99,7 @@ public class AbstractActorTest extends GroovyTestCase {
         final AtomicReference result = new AtomicReference()
 
         Actor actor = Actors.blockingActor {
-            delegate.metaClass.onTimeout = {-> timeoutFlag.set(true)}
+            delegate.metaClass.onTimeout = { -> timeoutFlag.set(true) }
 
             receive(1, TimeUnit.SECONDS) {
                 receiveFlag.set(true)
@@ -161,7 +162,7 @@ public class AbstractActorTest extends GroovyTestCase {
         }
         final Promise<Object> promise = a.sendAndPromise(10)
         assert !promise.isBound()
-        promise >> {result << it}
+        promise >> { result << it }
         barrier.await(90, TimeUnit.SECONDS)
         assert promise.get() == 20
         assert promise.isBound()
@@ -179,7 +180,8 @@ class InterruptionTestActor extends BlockingActor {
 
     final AtomicReference undeliveredMessages = new AtomicReference()
 
-    @Override protected void act() {
+    @Override
+    protected void act() {
         startLatch.countDown()
         receive()
         proceedFlag.set(true)  //should never reach this line
@@ -203,7 +205,8 @@ class AfterStopTestActor extends BlockingActor {
 
     final AtomicReference undeliveredMessages = new AtomicReference()
 
-    @Override protected void act() {
+    @Override
+    protected void act() {
         String message1 = receive()
         deliveredMessages.add(message1)
         startLatch.countDown()

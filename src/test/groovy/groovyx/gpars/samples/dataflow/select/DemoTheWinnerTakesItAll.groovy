@@ -19,6 +19,7 @@ package groovyx.gpars.samples.dataflow.select
 import groovyx.gpars.dataflow.Promise
 import groovyx.gpars.dataflow.Select
 import groovyx.gpars.group.DefaultPGroup
+
 /**
  * Demonstrates the use of dataflow tasks and selects to pick the fastest result of concurrently run calculations.
  */

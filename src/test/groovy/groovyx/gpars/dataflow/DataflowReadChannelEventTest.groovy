@@ -27,26 +27,26 @@ public class DataflowReadChannelEventTest extends GroovyTestCase {
         dfv.eventManager.addDataflowChannelListener(new DataflowChannelListener<Integer>() {
             @Override
             void onMessage(final Integer message) {
-                counter+=1
+                counter += 1
             }
         })
         dfv.eventManager.addDataflowChannelListener(new DataflowChannelListener<Integer>() {
             @Override
             void onMessage(final Integer message) {
-                counter+=10
+                counter += 10
             }
         })
-        assert counter==0
+        assert counter == 0
         dfv << 100
-        assert counter==11
+        assert counter == 11
 
         dfv.eventManager.addDataflowChannelListener(new DataflowChannelListener<Integer>() {
             @Override
             void onMessage(final Integer message) {
-                counter+=100
+                counter += 100
             }
         })
-        assert counter==11
+        assert counter == 11
     }
 
     public void testQueue() {
@@ -55,29 +55,29 @@ public class DataflowReadChannelEventTest extends GroovyTestCase {
         queue.eventManager.addDataflowChannelListener(new DataflowChannelListener<Integer>() {
             @Override
             void onMessage(final Integer message) {
-                counter+=1
+                counter += 1
             }
         })
         queue.eventManager.addDataflowChannelListener(new DataflowChannelListener<Integer>() {
             @Override
             void onMessage(final Integer message) {
-                counter+=10
+                counter += 10
             }
         })
-        assert counter==0
+        assert counter == 0
         queue << 100
-        assert counter==11
+        assert counter == 11
         queue << 100
-        assert counter==22
+        assert counter == 22
 
         queue.eventManager.addDataflowChannelListener(new DataflowChannelListener<Integer>() {
             @Override
             void onMessage(final Integer message) {
-                counter+=100
+                counter += 100
             }
         })
         queue << 100
-        assert counter==133
+        assert counter == 133
     }
 
     public void testBroadcast() {
@@ -89,36 +89,36 @@ public class DataflowReadChannelEventTest extends GroovyTestCase {
         subscription1.eventManager.addDataflowChannelListener(new DataflowChannelListener<Integer>() {
             @Override
             void onMessage(final Integer message) {
-                counter+=1
+                counter += 1
             }
         })
         subscription2.eventManager.addDataflowChannelListener(new DataflowChannelListener<Integer>() {
             @Override
             void onMessage(final Integer message) {
-                counter+=100
+                counter += 100
             }
         })
         subscription1.eventManager.addDataflowChannelListener(new DataflowChannelListener<Integer>() {
             @Override
             void onMessage(final Integer message) {
-                counter+=10
+                counter += 10
             }
         })
-        assert counter==0
+        assert counter == 0
         broadcast << 100
-        assert counter==111
+        assert counter == 111
         broadcast << 100
-        assert counter==222
+        assert counter == 222
 
         final subscription3 = broadcast.createReadChannel()
         subscription3.eventManager.addDataflowChannelListener(new DataflowChannelListener<Integer>() {
             @Override
             void onMessage(final Integer message) {
-                counter+=1000
+                counter += 1000
             }
         })
-        assert counter==222
+        assert counter == 222
         broadcast << 100
-        assert counter==1333
+        assert counter == 1333
     }
 }

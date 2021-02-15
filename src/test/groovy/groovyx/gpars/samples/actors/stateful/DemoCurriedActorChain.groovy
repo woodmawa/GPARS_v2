@@ -25,7 +25,7 @@ import groovyx.gpars.actor.Actors
 def intermediaries = []
 
 for (i in 1..30) {
-    intermediaries << Actors.actor({index ->
+    intermediaries << Actors.actor({ index ->
         react {
             println('Received: ' + index + ":" + it)
             if (index != 29) intermediaries[index + 1].send('message')

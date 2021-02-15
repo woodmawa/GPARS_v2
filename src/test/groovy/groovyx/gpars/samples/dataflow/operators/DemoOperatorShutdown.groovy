@@ -34,11 +34,11 @@ final DataflowQueue out = new DataflowQueue()
 
 final def group = new NonDaemonPGroup()
 
-def op1 = group.operator(inputs: [a, b, c], outputs: [d, e]) {x, y, z -> }
+def op1 = group.operator(inputs: [a, b, c], outputs: [d, e]) { x, y, z -> }
 
-def op2 = group.selector(inputs: [d], outputs: [f, out]) { }
+def op2 = group.selector(inputs: [d], outputs: [f, out]) {}
 
-def op3 = group.prioritySelector(inputs: [e, f], outputs: [b]) {value, index -> }
+def op3 = group.prioritySelector(inputs: [e, f], outputs: [b]) { value, index -> }
 
 [op1, op2, op3]*.terminate()
 op1.join()

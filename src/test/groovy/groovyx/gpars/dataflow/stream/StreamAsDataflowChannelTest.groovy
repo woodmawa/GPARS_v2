@@ -41,7 +41,7 @@ class StreamAsDataflowChannelTest extends GroovyTestCase {
         final DataflowStream original = new DataflowStream()
         def stream = new DataflowStreamReadAdapter(original)
         def result = new DataflowVariable()
-        stream >> {result << it}
+        stream >> { result << it }
         task {
             original << 1
         }
@@ -52,7 +52,7 @@ class StreamAsDataflowChannelTest extends GroovyTestCase {
         def original = new DataflowStream()
         def stream = new DataflowStreamReadAdapter(original)
         def result = new DataflowVariable()
-        stream.whenBound() {result << it}
+        stream.whenBound() { result << it }
         new DefaultPGroup().task {
             original << 1
         }

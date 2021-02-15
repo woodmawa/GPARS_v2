@@ -31,7 +31,7 @@ def scheduler = Executors.newFixedThreadPool(20)
 scheduler.execute { df.result = many.collect { df[it] }.sum() }
 
 // each in a newly started executor:
-many.each {num ->
+many.each { num ->
     scheduler.execute {
         df[num] = 1
     }

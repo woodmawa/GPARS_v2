@@ -37,8 +37,7 @@ public interface JCSPCopy {
      * <p>Company: Napier University</p>
      *
      * @author Jon Kerridge, Ken Barclay, John Savage
-     * @version 1.0
-     *
+     * @version 1.0*
      */
     public abstract copy()
 }

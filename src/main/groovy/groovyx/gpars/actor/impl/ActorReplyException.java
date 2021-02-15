@@ -23,7 +23,7 @@ import java.util.List;
  * Indicates problems sending replies to actors. Holds a list of exceptions that occurred during reply dispatch.
  *
  * @author Vaclav Pech
- *         Date: Jun 11, 2009
+ * Date: Jun 11, 2009
  */
 public final class ActorReplyException extends RuntimeException {
     private static final long serialVersionUID = -3877063222143535104L;
@@ -44,12 +44,14 @@ public final class ActorReplyException extends RuntimeException {
         return issues;
     }
 
-    @Override public String toString() {
+    @Override
+    public String toString() {
         return super.toString() + issues;
     }
 
     @SuppressWarnings({"CallToPrintStackTrace"})
-    @Override public void printStackTrace() {
+    @Override
+    public void printStackTrace() {
         super.printStackTrace();
         for (final Exception e : issues) e.printStackTrace();
     }

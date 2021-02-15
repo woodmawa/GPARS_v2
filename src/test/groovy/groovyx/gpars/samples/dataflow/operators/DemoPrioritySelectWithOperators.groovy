@@ -60,11 +60,11 @@ task {
 def selected = new DataflowQueue()
 def selector = prioritySelector(inputs: [critical, ordinary, whoCares], outputs: [selected])
 def results = new DataflowQueue()
-def op = operator(selected, results, {bindOutput it})
+def op = operator(selected, results, { bindOutput it })
 
 println 'Starting to monitor our IT department'
 sleep 3000
-10.times {println "Received: ${results.val}"}
+10.times { println "Received: ${results.val}" }
 
 selector.terminate()
 op.terminate()

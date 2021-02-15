@@ -29,7 +29,7 @@ import static groovyx.gpars.actor.Actors.actor
 
 final Actor actor = actor {
     def candidates = []
-    def printResult = {-> println "The best offer is ${candidates.max()}"}
+    def printResult = { -> println "The best offer is ${candidates.max()}" }
 
     loop(3, printResult) {
         react {

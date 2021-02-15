@@ -25,7 +25,7 @@ import static groovyx.gpars.actor.Actors.actor
 
 Closure createMessageHandler(def parentActor) {
     return {
-        react {List<Integer> message ->
+        react { List<Integer> message ->
             assert message != null
             switch (message.size()) {
                 case 0..1:
@@ -43,8 +43,8 @@ Closure createMessageHandler(def parentActor) {
                     child1.send(splitList[0])
                     child2.send(splitList[1])
 
-                    react {message1 ->
-                        react {message2 ->
+                    react { message1 ->
+                        react { message2 ->
                             parentActor.send merge(message1, message2)
                         }
                     }

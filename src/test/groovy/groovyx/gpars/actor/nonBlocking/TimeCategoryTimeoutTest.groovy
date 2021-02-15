@@ -40,8 +40,8 @@ public class TimeCategoryTimeoutTest extends GroovyTestCase {
 
         actor {
             delegate.metaClass {
-                onTimeout = {-> timeoutFlag.set(true); terminate() }
-                afterStop = {messages -> barrier.await() }
+                onTimeout = { -> timeoutFlag.set(true); terminate() }
+                afterStop = { messages -> barrier.await() }
             }
 
             loop {
@@ -66,12 +66,16 @@ public class TimeCategoryTimeoutTest extends GroovyTestCase {
         final def actor = actor {
             try {
                 react(1.second) {}
-            } catch (MissingPropertyException ignore) {exceptions++ }
+            } catch (MissingPropertyException ignore) {
+                exceptions++
+            }
             loop {
                 try {
                     try {
                         react(1.minute) {}
-                    } catch (MissingPropertyException ignore) {exceptions++ }
+                    } catch (MissingPropertyException ignore) {
+                        exceptions++
+                    }
                     terminate()
                 } finally {
                     latch.countDown()
@@ -108,7 +112,7 @@ public class TimeCategoryTimeoutTest extends GroovyTestCase {
         }
 
         actor.metaClass {
-            onTimeout = {-> timeoutFlag.set(true) }
+            onTimeout = { -> timeoutFlag.set(true) }
         }
 
         actor.send 'message'
@@ -140,7 +144,7 @@ public class TimeCategoryTimeoutTest extends GroovyTestCase {
         }
 
         actor.metaClass {
-            onTimeout = {-> timeoutFlag.set(true) }
+            onTimeout = { -> timeoutFlag.set(true) }
         }
 
         actor.send 'message'
@@ -168,7 +172,7 @@ public class TimeCategoryTimeoutTest extends GroovyTestCase {
         }
 
         actor.metaClass {
-            onTimeout = {-> barrier.await(); terminate() }
+            onTimeout = { -> barrier.await(); terminate() }
         }
 
         actor.send 'message'

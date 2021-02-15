@@ -36,18 +36,18 @@ for (def i in 1..1000)
     process i
 
 def doneFlag = new DataflowVariable()
-activeTasks.addListener {oldValue, newValue -> if (newValue == 0) doneFlag.bind(true)}
+activeTasks.addListener { oldValue, newValue -> if (newValue == 0) doneFlag.bind(true) }
 if (activeTasks.val > 0) doneFlag.join()
 pooledGroup.shutdown()
 println '*** Ended at ' + new Date()
 
 
 public void process(int i) {
-    activeTasks << {updateValue it + 1}
+    activeTasks << { updateValue it + 1 }
     pooledGroup.task {
         Thread.sleep(100) // to simulate some work
         println 'Task ' + i + ' finished at ' + new Date()
-        activeTasks << {updateValue it - 1}
+        activeTasks << { updateValue it - 1 }
     }
 }
 

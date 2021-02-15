@@ -31,7 +31,7 @@ public class DataflowTaskTest extends GroovyTestCase {
     public void testTaskRun() {
         final DataflowVariable a = new DataflowVariable()
 
-        task {-> a << true }
+        task { -> a << true }
 
         assertTrue a.val
     }
@@ -47,19 +47,19 @@ public class DataflowTaskTest extends GroovyTestCase {
     public void testDelegate() {
         final DataflowVariable a = new DataflowVariable()
 
-        task {a << delegate}
+        task { a << delegate }
 
         assert this == a.val
     }
 
     public void testJoin() {
-        assert 5 == task {5}.val
+        assert 5 == task { 5 }.val
 
         def a
         def b
 
-        def t1 = task {a = 10}
-        def t2 = task {b = 20}
+        def t1 = task { a = 10 }
+        def t2 = task { b = 20 }
         [t1, t2]*.join()
         assert a == 10
         assert b == 20

@@ -31,15 +31,18 @@ import static groovyx.gpars.GParsPool.withPool
  */
 
 class DownloadingSearch {
-    @AsyncFun Closure download = {String url ->
+    @AsyncFun
+    Closure download = { String url ->
         url.toURL().text
     }
 
-    @AsyncFun Closure scanFor = {String word, String text ->
+    @AsyncFun
+    Closure scanFor = { String word, String text ->
         text.findAll(word).size()
     }
 
-    @AsyncFun Closure lower = {s -> s.toLowerCase()}
+    @AsyncFun
+    Closure lower = { s -> s.toLowerCase() }
 
     void scan() {
         def result = scanFor('groovy', lower(download('http://www.infoq.com')))  //synchronous processing

@@ -93,7 +93,7 @@ final listener = new DataflowEventListener() {
     }
 }
 
-def op = group.operator(inputs: [a, b], outputs: [c], listeners: [listener]) {x, y ->
+def op = group.operator(inputs: [a, b], outputs: [c], listeners: [listener]) { x, y ->
     if (x < 0) throw new IllegalArgumentException('Do not want to handle negative values')
     bindOutput x + y
 }

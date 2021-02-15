@@ -43,7 +43,7 @@ class DataflowChannelChainingDSLTest extends GroovyTestCase {
     public void testIntoQueue() {
         final DataflowQueue queue1 = new DataflowQueue()
         final DataflowQueue queue2 = new DataflowQueue()
-        queue1.chainWith(group) {it * 2}.into(group, queue2)
+        queue1.chainWith(group) { it * 2 }.into(group, queue2)
 
 
         queue1 << 1
@@ -63,7 +63,7 @@ class DataflowChannelChainingDSLTest extends GroovyTestCase {
         final DataflowQueue queue1 = new DataflowQueue()
         final DataflowQueue queue2 = new DataflowQueue()
         final DataflowQueue queue3 = new DataflowQueue()
-        queue1.chainWith(group) {it * 2}.split(group, queue2, queue3)
+        queue1.chainWith(group) { it * 2 }.split(group, queue2, queue3)
 
 
         queue1 << 1
@@ -84,7 +84,7 @@ class DataflowChannelChainingDSLTest extends GroovyTestCase {
     public void testIntoBroadcast() {
         final DataflowBroadcast broadcast1 = new DataflowBroadcast()
         final DataflowBroadcast broadcast2 = new DataflowBroadcast()
-        broadcast1.createReadChannel().chainWith(group) {it * 2}.into(group, broadcast2)
+        broadcast1.createReadChannel().chainWith(group) { it * 2 }.into(group, broadcast2)
 
 
         final subscription = broadcast2.createReadChannel()
@@ -106,7 +106,7 @@ class DataflowChannelChainingDSLTest extends GroovyTestCase {
         final DataflowBroadcast broadcast1 = new DataflowBroadcast()
         final DataflowBroadcast broadcast2 = new DataflowBroadcast()
         final DataflowBroadcast broadcast3 = new DataflowBroadcast()
-        broadcast1.createReadChannel().chainWith(group) {it * 2}.split(group, broadcast2, broadcast3)
+        broadcast1.createReadChannel().chainWith(group) { it * 2 }.split(group, broadcast2, broadcast3)
 
         final DataflowReadChannel subscription2 = broadcast2.createReadChannel()
         final DataflowReadChannel subscription3 = broadcast3.createReadChannel()
@@ -129,7 +129,7 @@ class DataflowChannelChainingDSLTest extends GroovyTestCase {
     public void testIntoDFV() {
         final DataflowVariable variable1 = new DataflowVariable()
         final DataflowVariable variable2 = new DataflowVariable()
-        variable1.chainWith(group) {it * 2}.into(group, variable2)
+        variable1.chainWith(group) { it * 2 }.into(group, variable2)
 
 
         variable1 << 1
@@ -141,7 +141,7 @@ class DataflowChannelChainingDSLTest extends GroovyTestCase {
         final DataflowVariable variable1 = new DataflowVariable()
         final DataflowVariable variable2 = new DataflowVariable()
         final DataflowVariable variable3 = new DataflowVariable()
-        variable1.chainWith(group) {it * 2}.split(group, variable2, variable3)
+        variable1.chainWith(group) { it * 2 }.split(group, variable2, variable3)
 
 
         variable1 << 1
@@ -166,7 +166,7 @@ class DataflowChannelChainingDSLTest extends GroovyTestCase {
         final DataflowQueue queue1 = new DataflowQueue()
         final DataflowQueue queue2 = new DataflowQueue()
         final DataflowQueue queue3 = new DataflowQueue()
-        queue1.chainWith(group) {it * 2}.tap(group, queue2).into queue3
+        queue1.chainWith(group) { it * 2 }.tap(group, queue2).into queue3
 
 
         queue1 << 1
@@ -188,7 +188,7 @@ class DataflowChannelChainingDSLTest extends GroovyTestCase {
         final DataflowQueue queue1 = new DataflowQueue()
         final DataflowQueue queue2 = new DataflowQueue()
         final DataflowQueue queue3 = new DataflowQueue()
-        queue1.merge(group, queue2) {a, b -> a + b}.into queue3
+        queue1.merge(group, queue2) { a, b -> a + b }.into queue3
 
         queue1 << 1
         queue1 << 2
@@ -204,16 +204,16 @@ class DataflowChannelChainingDSLTest extends GroovyTestCase {
         final DataflowQueue queue2 = new DataflowQueue()
         final DataflowQueue queue3 = new DataflowQueue()
         shouldFail(IllegalArgumentException) {
-            queue1.merge(group, queue2) {->}
+            queue1.merge(group, queue2) { -> }
         }
         shouldFail(IllegalArgumentException) {
-            queue1.merge(group, queue2) {it}
+            queue1.merge(group, queue2) { it }
         }
         shouldFail(IllegalArgumentException) {
-            queue1.merge(group, queue2) {a, b, c ->}
+            queue1.merge(group, queue2) { a, b, c -> }
         }
         shouldFail(IllegalArgumentException) {
-            queue1.merge(group, [queue2, queue3]) {a, b ->}
+            queue1.merge(group, [queue2, queue3]) { a, b -> }
         }
     }
 
@@ -221,7 +221,7 @@ class DataflowChannelChainingDSLTest extends GroovyTestCase {
         final SyncDataflowQueue queue1 = new SyncDataflowQueue()
         final SyncDataflowQueue queue2 = new SyncDataflowQueue()
         final DataflowQueue queue3 = new DataflowQueue()
-        final DataflowReadChannel pipeline = queue1.merge(group, queue2) {a, b -> a + b}
+        final DataflowReadChannel pipeline = queue1.merge(group, queue2) { a, b -> a + b }
         pipeline.into queue3
 
         Thread.start {
@@ -243,7 +243,7 @@ class DataflowChannelChainingDSLTest extends GroovyTestCase {
         final DataflowBroadcast broadcast1 = new DataflowBroadcast()
         final DataflowQueue queue2 = new DataflowQueue()
         final DataflowQueue queue3 = new DataflowQueue()
-        broadcast1.createReadChannel().merge(group, queue2) {a, b -> a + b}.into queue3
+        broadcast1.createReadChannel().merge(group, queue2) { a, b -> a + b }.into queue3
 
         broadcast1 << 1
         broadcast1 << 2
@@ -258,7 +258,7 @@ class DataflowChannelChainingDSLTest extends GroovyTestCase {
         final SyncDataflowBroadcast broadcast1 = new SyncDataflowBroadcast()
         final DataflowQueue queue2 = new DataflowQueue()
         final DataflowQueue queue3 = new DataflowQueue()
-        final DataflowReadChannel pipeline = broadcast1.createReadChannel().merge(group, queue2) {a, b -> a + b}
+        final DataflowReadChannel pipeline = broadcast1.createReadChannel().merge(group, queue2) { a, b -> a + b }
         pipeline.into queue3
 
         Thread.start {
@@ -277,7 +277,7 @@ class DataflowChannelChainingDSLTest extends GroovyTestCase {
         final DataflowVariable queue1 = new DataflowVariable()
         final DataflowVariable queue2 = new DataflowVariable()
         final DataflowVariable queue3 = new DataflowVariable()
-        queue1.merge(group, queue2) {a, b -> a + b}.into queue3
+        queue1.merge(group, queue2) { a, b -> a + b }.into queue3
 
         queue1 << 1
         queue2 << 3
@@ -289,7 +289,7 @@ class DataflowChannelChainingDSLTest extends GroovyTestCase {
         final SyncDataflowVariable queue1 = new SyncDataflowVariable()
         final SyncDataflowVariable queue2 = new SyncDataflowVariable()
         final SyncDataflowVariable queue3 = new SyncDataflowVariable()
-        final DataflowReadChannel pipeline = queue1.merge(group, queue2) {a, b -> a + b}
+        final DataflowReadChannel pipeline = queue1.merge(group, queue2) { a, b -> a + b }
         pipeline.into queue3
 
         queue1 << 1
@@ -303,10 +303,10 @@ class DataflowChannelChainingDSLTest extends GroovyTestCase {
         final DataflowQueue queue1 = new DataflowQueue()
         final DataflowQueue queue2 = new DataflowQueue()
 
-        final odd = {num -> num % 2 != 0 }
+        final odd = { num -> num % 2 != 0 }
 
         queue1.filter(group, odd) into queue2
-        (1..5).each {queue1 << it}
+        (1..5).each { queue1 << it }
         assert 1 == queue2.val
         assert 3 == queue2.val
         assert 5 == queue2.val

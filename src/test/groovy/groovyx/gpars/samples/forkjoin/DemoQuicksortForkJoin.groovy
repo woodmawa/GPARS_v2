@@ -27,13 +27,13 @@ import static groovyx.gpars.GParsPool.withPool
 
 def quicksort(numbers) {
     withPool {
-        groovyx.gpars.GParsPool.runForkJoin(0, numbers) {index, list ->
-            def groups = list.groupBy {it <=> list[list.size().intdiv(2)]}
+        groovyx.gpars.GParsPool.runForkJoin(0, numbers) { index, list ->
+            def groups = list.groupBy { it <=> list[list.size().intdiv(2)] }
             if ((list.size() < 2) || (groups.size() == 1)) {
                 return [index: index, list: list.clone()]
             }
-            (-1..1).each {forkOffChild(it, groups[it] ?: [])}
-            return [index: index, list: childrenResults.sort {it.index}.sum {it.list}]
+            (-1..1).each { forkOffChild(it, groups[it] ?: []) }
+            return [index: index, list: childrenResults.sort { it.index }.sum { it.list }]
         }.list
     }
 }

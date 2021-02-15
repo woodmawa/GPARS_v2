@@ -41,11 +41,11 @@ class ResetNumbers implements CSProcess {
                 outChannel: a.out(),
                 inChannel: c.in(),
                 resetChannel: resetChannel),
-                new GPCopy(inChannel: a.in(),
-                        outChannel0: outChannel,
-                        outChannel1: b.out()),
-                new GSuccessor(inChannel: b.in(),
-                        outChannel: c.out())
+                        new GPCopy(inChannel: a.in(),
+                                outChannel0: outChannel,
+                                outChannel1: b.out()),
+                        new GSuccessor(inChannel: b.in(),
+                                outChannel: c.out())
         ]
         new PAR(testList).run()
     }

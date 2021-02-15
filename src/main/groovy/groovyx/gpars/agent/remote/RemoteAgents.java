@@ -53,8 +53,9 @@ public final class RemoteAgents extends LocalHost {
     /**
      * Publishes {@link groovyx.gpars.agent.Agent} under given name.
      * It overrides previously published Agent if the same name is given.
+     *
      * @param agent the Agent to be published
-     * @param name the name under which Agent is published
+     * @param name  the name under which Agent is published
      */
     public void publish(Agent<?> agent, String name) {
         publishedAgents.put(name, agent);
@@ -62,6 +63,7 @@ public final class RemoteAgents extends LocalHost {
 
     /**
      * Retrieves {@link groovyx.gpars.agent.Agent} published under specified name on remote host.
+     *
      * @param host the address of remote host
      * @param port the port of remote host
      * @param name the name under which Agent was published

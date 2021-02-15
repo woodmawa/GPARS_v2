@@ -26,8 +26,8 @@ final DataflowVariable result = new DataflowVariable()
 final DataflowVariable variable = new DataflowVariable()
 final calculator = new ActiveDemoCalculator()
 
-variable.then calculator.&doubler then calculator.&adder then {result << it}
+variable.then calculator.&doubler then calculator.&adder then { result << it }
 
-Thread.start {variable << 4}
+Thread.start { variable << 4 }
 assert 9 == result.val
 

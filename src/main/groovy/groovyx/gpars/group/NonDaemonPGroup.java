@@ -28,7 +28,7 @@ import groovyx.gpars.scheduler.DefaultPool;
  * The DefaultPGroup class implements the Pool interface through @Delegate.
  *
  * @author Vaclav Pech
- *         Date: Jun 17, 2009
+ * Date: Jun 17, 2009
  */
 public final class NonDaemonPGroup extends PGroup {
 

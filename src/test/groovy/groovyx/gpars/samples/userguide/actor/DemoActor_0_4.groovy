@@ -24,12 +24,11 @@ import groovyx.gpars.actor.Actors
 
 final def decryptor = Actors.actor {
     loop {
-        react {String message ->
+        react { String message ->
             if ('stopService' == message) {
                 println 'Stopping decryptor'
                 stop()
-            }
-            else reply message.reverse()
+            } else reply message.reverse()
         }
     }
 }

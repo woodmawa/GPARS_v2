@@ -65,7 +65,7 @@ final def numbers = [1, 5, 2, 4, 3, 8, 6, 7, 3, 4, 5, 2, 2, 9, 8, 7, 6, 7, 8, 1,
 
 withPool(3) {  //feel free to experiment with the number of fork/join threads in the pool
     println """Sorted numbers: ${
-        runForkJoin(numbers) {nums ->
+        runForkJoin(numbers) { nums ->
             println "Thread ${Thread.currentThread().name[-1]}: Sorting $nums"
             switch (nums.size()) {
                 case 0..1:
@@ -75,8 +75,8 @@ withPool(3) {  //feel free to experiment with the number of fork/join threads in
                     else return nums[-1..0]                       //store own result
                 default:
                     def splitList = split(nums)
-                    [splitList[0], splitList[1]].each {forkOffChild it}  //fork a child task
-                    return merge(* childrenResults)      //use results of children tasks to calculate and store own result
+                    [splitList[0], splitList[1]].each { forkOffChild it }  //fork a child task
+                    return merge(*childrenResults)      //use results of children tasks to calculate and store own result
             }
         }
     }"""

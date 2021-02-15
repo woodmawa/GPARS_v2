@@ -29,7 +29,7 @@ import java.util.concurrent.Semaphore;
  * }*
  *
  * @author Vaclav Pech
- *         Date: Jan 8, 2009
+ * Date: Jan 8, 2009
  */
 @SuppressWarnings("rawtypes")
 public class EnhancedSemaphore extends Semaphore {

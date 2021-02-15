@@ -44,6 +44,7 @@ class MemoryPropagationTest extends GroovyTestCase {
     }
 
 }
+
 class MemoryPropagationTestActor extends DynamicDispatchActor {
     long counter1 = 0
     long counter2 = 0

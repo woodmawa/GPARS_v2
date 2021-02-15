@@ -41,15 +41,15 @@ final DataflowQueue out = new DataflowQueue()
 
 final def group = new NonDaemonPGroup()
 
-def op1 = group.operator(inputs: [a, b, c], outputs: [d, e]) {x, y, z -> }
+def op1 = group.operator(inputs: [a, b, c], outputs: [d, e]) { x, y, z -> }
 
-def op2 = group.selector(inputs: [d], outputs: [f, out]) { }
+def op2 = group.selector(inputs: [d], outputs: [f, out]) {}
 
-def op3 = group.prioritySelector(inputs: [e, f], outputs: [b]) {value, index -> }
+def op3 = group.prioritySelector(inputs: [e, f], outputs: [b]) { value, index -> }
 
 //Send the poisson indicating the number of operators than need to be terminated before we can continue
 final pill = new CountingPoisonPill(3)
-pill.termination.whenBound {println "Reporting asynchronously that the network has been stopped"}
+pill.termination.whenBound { println "Reporting asynchronously that the network has been stopped" }
 a << pill
 
 if (pill.termination.bound) println "Wow, that was quick. We are done already!"

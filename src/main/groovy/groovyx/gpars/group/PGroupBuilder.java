@@ -19,6 +19,7 @@ package groovyx.gpars.group;
 import groovyx.gpars.scheduler.DefaultPool;
 import groovyx.gpars.scheduler.FJPool;
 import groovyx.gpars.scheduler.Pool;
+
 import java.util.concurrent.ForkJoinPool;
 
 import java.util.concurrent.ThreadPoolExecutor;

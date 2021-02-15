@@ -37,7 +37,7 @@ class ChatServerActor extends DefaultActor {
                         break
                     case "unregister":
                         connectedClients.remove(message.sender)
-                        connectedClients.each { name, client -> client << new ChatMessage(action: "say", sender: "server", message: "${message.sender} has left")}
+                        connectedClients.each { name, client -> client << new ChatMessage(action: "say", sender: "server", message: "${message.sender} has left") }
                         break
                     case "show":
                         connectedClients[message.sender] << new ChatMessage(action: "show", sender: "server", message: connectedClients.keySet().toListString())

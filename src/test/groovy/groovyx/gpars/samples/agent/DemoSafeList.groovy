@@ -30,14 +30,14 @@ final Closure cl = {
  */
 final Agent<List> agent = new Agent<List>([1], cl)
 
-agent {it << 2}      //add 2 to the list
-agent {println it}   //print the state [1, 2]
+agent { it << 2 }      //add 2 to the list
+agent { println it }   //print the state [1, 2]
 
-println(agent.sendAndWait {it})         //The return value of the closure it sent back in reply
-println(agent.sendAndWait {it.size()})  //The size of the internal list is sent back
+println(agent.sendAndWait { it })         //The return value of the closure it sent back in reply
+println(agent.sendAndWait { it.size() })  //The size of the internal list is sent back
 println agent.val                       //The usual, lazy value retrieval
 println agent.instantVal                //The immediate internal state snapshot retrieval
-agent.valAsync {println it}             //The asynchronous variant
+agent.valAsync { println it }             //The asynchronous variant
 agent.await()                           //Waits until all messages currently in the queue get processed
 
 agent << [1, 2, 3, 4, 5]                //Send a new array to set as the new internal state

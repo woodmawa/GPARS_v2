@@ -43,7 +43,7 @@ final t2 = group.task {
 }
 
 group.task {
-    (1..20).each {broadcast << it}
+    (1..20).each { broadcast << it }
 }
 
 [t1, t2]*.join()

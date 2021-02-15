@@ -41,7 +41,7 @@ import java.util.concurrent.TimeUnit;
  * </p>
  *
  * @author Vaclav Pech
- *         Date: 30th Sep 2010
+ * Date: 30th Sep 2010
  */
 @SuppressWarnings({"MethodNamesDifferingOnlyByCase", "unchecked"})
 public class Select<T> {

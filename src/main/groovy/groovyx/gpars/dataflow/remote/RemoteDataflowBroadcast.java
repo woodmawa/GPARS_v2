@@ -24,8 +24,8 @@ import groovyx.gpars.remote.RemoteHost;
 
 /**
  * Proxy object for remote instance of Broadcast.
- * @param <T> the type of the broadcast
  *
+ * @param <T> the type of the broadcast
  * @author Rafal Slawik
  */
 @SuppressWarnings({"serial"})

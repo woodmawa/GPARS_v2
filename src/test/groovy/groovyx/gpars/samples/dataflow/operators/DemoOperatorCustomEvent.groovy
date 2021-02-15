@@ -43,7 +43,7 @@ final listener = new DataflowEventAdapter() {
     }
 }
 
-op = group.operator(inputs: [a, b], outputs: [c], listeners: [listener]) {x, y ->
+op = group.operator(inputs: [a, b], outputs: [c], listeners: [listener]) { x, y ->
     final sum = x + y
     if (sum > 100) bindOutput(fireCustomEvent(sum))  //Reporting that the sum is too high, binding the lowered value that comes back
     else bindOutput sum

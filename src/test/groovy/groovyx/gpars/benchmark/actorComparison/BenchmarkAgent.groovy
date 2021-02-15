@@ -39,7 +39,7 @@ final def concurrencyLevel = 8
     }
 
     Closure message
-    message = {it.relay(message)}
+    message = { it.relay(message) }
 
     for (int i = 0; i < 500; i++) {
         last.send(message)

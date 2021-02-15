@@ -36,7 +36,7 @@ import static groovyx.gpars.GParsPool.withPool
 //Combining an asynchronous summary with the inject (reduce) function
 
 withPool {
-    Promise<Integer> result = (0..100000).inject(0, {a, b -> a + b}.asyncFun())
+    Promise<Integer> result = (0..100000).inject(0, { a, b -> a + b }.asyncFun())
     println "Doing something else while the calculation is running"
 
     sleep 1000

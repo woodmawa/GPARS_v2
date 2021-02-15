@@ -26,8 +26,7 @@ import groovy.transform.TypeCheckingMode
  * respective streams without those being exposed to the operator.
  * While full access to the inner workings remains available, it is advised to use the methods
  * {@link KanbanTray#take} and {@link KanbanTray#bind}.
- * @see KanbanLink
- * @author Dierk Koenig
+ * @see KanbanLink* @author Dierk Koenig
  */
 @CompileStatic(value = TypeCheckingMode.PASS)
 class KanbanTray {

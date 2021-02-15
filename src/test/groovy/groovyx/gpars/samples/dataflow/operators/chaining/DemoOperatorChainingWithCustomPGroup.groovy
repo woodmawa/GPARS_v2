@@ -28,7 +28,7 @@ import groovyx.gpars.group.NonDaemonPGroup
 final NonDaemonPGroup group = new NonDaemonPGroup(2)
 
 final DataflowQueue queue = new DataflowQueue()
-queue.chainWith(group) {it * 2}.chainWith(group) {it + 1}.chainWith(group) {println it}
+queue.chainWith(group) { it * 2 }.chainWith(group) { it + 1 }.chainWith(group) { println it }
 
 queue << 1
 queue << 2

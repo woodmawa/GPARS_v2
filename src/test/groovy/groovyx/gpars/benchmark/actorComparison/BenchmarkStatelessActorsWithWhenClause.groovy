@@ -33,7 +33,7 @@ int i = 0
 while (i < 10000) {
     def soFarLast = last
     def channel = group.messageHandler {
-        when {def msg ->
+        when { def msg ->
             soFarLast?.send(msg)
             cdl.countDown()
         }

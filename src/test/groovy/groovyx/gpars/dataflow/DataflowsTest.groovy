@@ -172,9 +172,9 @@ public class DataflowsTest extends GroovyTestCase {
         final result1 = new DataflowVariable()
         final result2 = new DataflowVariable()
 
-        data.y {result1 << it }
+        data.y { result1 << it }
         data.y = 'value'
-        data.y {result2 << it }
+        data.y { result2 << it }
 
         assert result1.val instanceof String
         assert 'value' == result1.val
@@ -241,7 +241,7 @@ public class DataflowsTest extends GroovyTestCase {
         data.x = 0
         data.y = 1
         def log = []
-        data.each {entry ->
+        data.each { entry ->
             log << entry.key
             log << entry.value
         }

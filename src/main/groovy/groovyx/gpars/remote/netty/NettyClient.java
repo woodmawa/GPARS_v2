@@ -30,9 +30,9 @@ import java.util.List;
 
 /**
  * Represents client that connects to server
- * @see groovyx.gpars.remote.netty.NettyServer
  *
  * @author Rafal Slawik
+ * @see groovyx.gpars.remote.netty.NettyServer
  */
 public class NettyClient {
     private final EventLoopGroup workerGroup;
@@ -42,6 +42,7 @@ public class NettyClient {
 
     /**
      * Creates client that connect to server on specified host and port.
+     *
      * @param host the host where server listens on
      * @param port the port that server listens on
      */

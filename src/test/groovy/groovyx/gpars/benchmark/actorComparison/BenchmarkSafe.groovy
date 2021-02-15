@@ -32,7 +32,7 @@ final long t1 = System.currentTimeMillis()
 final Agent agent = new Agent<Long>(0L)
 300.times {
     1000.times {
-        pool.submit {agent << {updateValue(it + 1)}}
+        pool.submit { agent << { updateValue(it + 1) } }
     }
     agent.await()
 }

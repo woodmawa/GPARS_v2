@@ -70,7 +70,6 @@ import java.util.stream.Collectors;
  * @author Robert Fischer
  * @author Russel Winder
  * @author Szymon Stepniak
- *
  * @see GParsPool
  */
 @SuppressWarnings({"rawtypes", "unchecked"})
@@ -823,7 +822,7 @@ public class GParsPoolUtil {
         final Closure<Object> predicate = isClosure(filter) ?
                 (Closure<Object>) filter :
                 collectionContainsClosure(toCollection(filter));
-        
+
         return retrievePool().submit(() ->
                 collection.entrySet()
                         .parallelStream()
@@ -1197,9 +1196,9 @@ public class GParsPoolUtil {
     @SuppressWarnings("GroovyAssignabilityCheck")
     public static <T> T minParallel(final Collection<T> collection, final Closure cl) throws ExecutionException, InterruptedException {
         //return GParsPoolUtilHelper.createPAFromCollection(collection, retrievePool()).min((Comparator<T>) createComparator(cl));
-        return  retrievePool().submit(() ->
+        return retrievePool().submit(() ->
                 collection.parallelStream()
-                        .min((a,b) -> cl.getMaximumNumberOfParameters() >= 2 ? (Integer) cl.call(a,b) : ((Comparable) a).compareTo(b))
+                        .min((a, b) -> cl.getMaximumNumberOfParameters() >= 2 ? (Integer) cl.call(a, b) : ((Comparable) a).compareTo(b))
                         .orElse(null)
         ).get();
     }
@@ -1234,7 +1233,7 @@ public class GParsPoolUtil {
         //return GParsPoolUtilHelper.createPAFromCollection(collection, retrievePool()).min();
         return retrievePool().submit(() ->
                 collection.parallelStream()
-                        .min((a,b) -> ((Comparable) a).compareTo(b))
+                        .min((a, b) -> ((Comparable) a).compareTo(b))
                         .orElse(null)
         ).get();
     }
@@ -1250,7 +1249,7 @@ public class GParsPoolUtil {
         //return GParsPoolUtilHelper.createPA(collection, retrievePool()).min();;
         return retrievePool().submit(() ->
                 toCollection(collection).parallelStream()
-                        .min((a,b) -> ((Comparable) a).compareTo(b))
+                        .min((a, b) -> ((Comparable) a).compareTo(b))
                         .orElse(null)
         ).get();
     }
@@ -1273,7 +1272,7 @@ public class GParsPoolUtil {
         //return GParsPoolUtilHelper.createPAFromCollection(collection, retrievePool()).max((Comparator<T>) createComparator(cl));
         return retrievePool().submit(() ->
                 collection.parallelStream()
-                        .max((a,b) -> cl.getMaximumNumberOfParameters() >= 2 ? (Integer) cl.call(a,b) : ((Comparable) a).compareTo(b))
+                        .max((a, b) -> cl.getMaximumNumberOfParameters() >= 2 ? (Integer) cl.call(a, b) : ((Comparable) a).compareTo(b))
                         .orElse(null)
         ).get();
     }
@@ -1308,7 +1307,7 @@ public class GParsPoolUtil {
         //return GParsPoolUtilHelper.createPAFromCollection(collection, retrievePool()).max();
         return retrievePool().submit(() ->
                 collection.parallelStream()
-                        .max((a,b) -> ((Comparable) a).compareTo(b))
+                        .max((a, b) -> ((Comparable) a).compareTo(b))
                         .orElse(null)
         ).get();
     }
@@ -1430,7 +1429,7 @@ public class GParsPoolUtil {
         //return GParsPoolUtilHelper.createPAFromCollection(collection, retrievePool()).reduce(new ClosureReducer<T>(cl), null);
         return retrievePool().submit(() ->
                 collection.parallelStream()
-                        .reduce((a,b) -> (T) cl.call(a,b))
+                        .reduce((a, b) -> (T) cl.call(a, b))
                         .orElse(null)
         ).get();
     }
@@ -1457,15 +1456,15 @@ public class GParsPoolUtil {
      * It's important to protect any shared resources used by the supplied closure from race conditions caused by multi-threaded access.
      *
      * @param collection The collection to reduce over.
-     * @param seed A seed value to initialize the operation.
-     * @param cl A binary operation (assumed to be an accumulation) to apply during the reduction.
+     * @param seed       A seed value to initialize the operation.
+     * @param cl         A binary operation (assumed to be an accumulation) to apply during the reduction.
      * @return The value calculated by the reduction.
      */
     public static <T> T injectParallel(final Collection<T> collection, final T seed, final Closure cl) throws ExecutionException, InterruptedException {
         //return collection.parallelStream().reduce(seed, new ClosureReducer<T>(cl));
         T result = retrievePool().submit(() ->
                 collection.parallelStream()
-                        .reduce((a,b) -> (T) cl.call(a,b))
+                        .reduce((a, b) -> (T) cl.call(a, b))
                         .orElse(null)
         ).get();
 
@@ -1571,7 +1570,7 @@ public class GParsPoolUtil {
 
     private static <T> Collection<T> inspectGroovyMetaClassIfNeeded(final GroovyObjectSupport object) {
         Class<?> metaClass = (Class<?>) object.invokeMethod("getClass", null);
-        
+
         if (List.class.isAssignableFrom(metaClass)) {
             Object[] objects = (Object[]) object.invokeMethod("toArray", null);
             return (List<T>) Arrays.asList((objects));
@@ -1607,14 +1606,14 @@ public class GParsPoolUtil {
         };
     }
 
-    private static  <T> T callClosure(final Closure cl, final Object element) {
+    private static <T> T callClosure(final Closure cl, final Object element) {
         if (Map.Entry.class.isAssignableFrom(element.getClass()) && cl.getMaximumNumberOfParameters() >= 2) {
             return (T) cl.call(((Map.Entry) element).getKey(), (((Map.Entry) element).getValue()));
         }
         return (T) cl.call(element);
     }
 
-    private static  <T> T callIndexedClosure(final Closure cl, final Object element, int index) {
+    private static <T> T callIndexedClosure(final Closure cl, final Object element, int index) {
         if (Map.Entry.class.isAssignableFrom(element.getClass()) && cl.getMaximumNumberOfParameters() >= 3) {
             return (T) cl.call(((Map.Entry) element).getKey(), (((Map.Entry) element).getValue()), index);
         }

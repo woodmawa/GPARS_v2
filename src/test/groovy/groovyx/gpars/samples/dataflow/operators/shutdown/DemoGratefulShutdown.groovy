@@ -41,29 +41,29 @@ final f = new DataflowQueue<Object>()
 final result = new DataflowQueue<Object>()
 
 final monitor = new GracefulShutdownMonitor(100);
-def op1 = group.operator(inputs: [a, b], outputs: [c], listeners: [new GracefulShutdownListener(monitor)]) {x, y ->
+def op1 = group.operator(inputs: [a, b], outputs: [c], listeners: [new GracefulShutdownListener(monitor)]) { x, y ->
     sleep 5
     bindOutput x + y
 }
-def op2 = group.operator(inputs: [c], outputs: [d, e], listeners: [new GracefulShutdownListener(monitor)]) {x ->
+def op2 = group.operator(inputs: [c], outputs: [d, e], listeners: [new GracefulShutdownListener(monitor)]) { x ->
     sleep 10
-    bindAllOutputs 2*x
+    bindAllOutputs 2 * x
 }
-def op3 = group.operator(inputs: [d], outputs: [f], listeners: [new GracefulShutdownListener(monitor)]) {x ->
+def op3 = group.operator(inputs: [d], outputs: [f], listeners: [new GracefulShutdownListener(monitor)]) { x ->
     sleep 5
     bindOutput x + 40
 }
-def op4 = group.operator(inputs: [e.createReadChannel(), f], outputs: [result], listeners: [new GracefulShutdownListener(monitor)]) {x, y ->
+def op4 = group.operator(inputs: [e.createReadChannel(), f], outputs: [result], listeners: [new GracefulShutdownListener(monitor)]) { x, y ->
     sleep 5
     bindOutput x + y
 }
 
-100.times{a << 10}
-100.times{b << 20}
+100.times { a << 10 }
+100.times { b << 20 }
 
 final shutdownPromise = monitor.shutdownNetwork()
 
-100.times{assert 160 == result.val}
+100.times { assert 160 == result.val }
 
 shutdownPromise.get()
 [op1, op2, op3, op4]*.join()

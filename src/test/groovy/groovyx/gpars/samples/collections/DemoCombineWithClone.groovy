@@ -25,7 +25,8 @@ import static groovyx.gpars.GParsPool.withPool
  * @author Mario Garcia, Vaclav Pech
  */
 
-@TupleConstructor @ToString
+@TupleConstructor
+@ToString
 class PricedCar implements Cloneable {
     String model
     String color
@@ -57,33 +58,33 @@ class PricedCar implements Cloneable {
 }
 
 def cars = [new PricedCar('F550', 'blue', 2342.223),
-        new PricedCar('F550', 'red', 234.234),
-        new PricedCar('Da', 'white', 2222.2),
-        new PricedCar('Da', 'white', 1111.1)]
+            new PricedCar('F550', 'red', 234.234),
+            new PricedCar('Da', 'white', 2222.2),
+            new PricedCar('Da', 'white', 1111.1)]
 
 withPool {
     //Combine by model
     def result =
-        cars.parallel.map {
-            [it.model, it]
-        }.combine(new PricedCar('', 'N/A', 0.0)) {sum, value ->
-            sum.model = value.model
-            sum.price += value.price
-            sum
-        }.values()
+            cars.parallel.map {
+                [it.model, it]
+            }.combine(new PricedCar('', 'N/A', 0.0)) { sum, value ->
+                sum.model = value.model
+                sum.price += value.price
+                sum
+            }.values()
 
     println result
 
     //Combine by model and color (the PricedCar's equals and hashCode))
     result =
-        cars.parallel.map {
-            [it, it]
-        }.combine(new PricedCar('', 'N/A', 0.0)) {sum, value ->
-            sum.model = value.model
-            sum.color = value.color
-            sum.price += value.price
-            sum
-        }.values()
+            cars.parallel.map {
+                [it, it]
+            }.combine(new PricedCar('', 'N/A', 0.0)) { sum, value ->
+                sum.model = value.model
+                sum.color = value.color
+                sum.price += value.price
+                sum
+            }.values()
 
     println result
 }

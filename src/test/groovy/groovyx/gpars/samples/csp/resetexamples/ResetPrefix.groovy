@@ -37,8 +37,7 @@ class ResetPrefix implements CSProcess {
                 def resetValue = resetChannel.read()
                 inChannel.read()     // read the inChannel and ignore it
                 outChannel.write(resetValue)
-            }
-            else {    //inChannel input only
+            } else {    //inChannel input only
                 def inputValue = inChannel.read()     // and send it on through the system
                 outChannel.write(inputValue)
             }

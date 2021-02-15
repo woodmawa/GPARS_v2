@@ -37,7 +37,7 @@ final def concurrencyLevel = 8
     perform("Early graceful shutdown", concurrencyLevel, monitor, new GracefulShutdownListener(monitor), true)
 }
 
-private void perform(String title, int concurrencyLevel, GracefulShutdownMonitor monitor, GracefulShutdownListener listener, boolean shutdownEarly=false) {
+private void perform(String title, int concurrencyLevel, GracefulShutdownMonitor monitor, GracefulShutdownListener listener, boolean shutdownEarly = false) {
     group = new DefaultPGroup(new FJPool(concurrencyLevel))
 
     final DataflowQueue queue1 = new DataflowQueue()
@@ -56,11 +56,10 @@ private void perform(String title, int concurrencyLevel, GracefulShutdownMonitor
     long sum = 0
     def op = createOperator(queue1, queue2, result, sum, listener)
 
-    if(listener==null) {
+    if (listener == null) {
         assert 2000021000000 == result.val
         op.terminate()
-    }
-    else {
+    } else {
         if (!shutdownEarly) assert 2000021000000 == result.val
         monitor.shutdownNetwork().get()
     }
@@ -71,7 +70,7 @@ private void perform(String title, int concurrencyLevel, GracefulShutdownMonitor
 }
 
 private DataflowProcessor createOperator(DataflowQueue queue1, DataflowQueue queue2, DataflowQueue result, long sum, GracefulShutdownListener listener) {
-    group.operator(inputs: [queue1, queue2], outputs: [result], listeners: listener ? [listener] : []) {x, y ->
+    group.operator(inputs: [queue1, queue2], outputs: [result], listeners: listener ? [listener] : []) { x, y ->
         if (x == -1) {
             bindOutput sum
         } else {

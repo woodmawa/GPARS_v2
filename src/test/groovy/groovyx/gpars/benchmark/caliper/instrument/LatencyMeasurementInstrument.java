@@ -19,8 +19,9 @@ package groovyx.gpars.benchmark.caliper.instrument;
 /**
  * warning - Caliper has changed so much with latest revision that non of this
  * compiles
- *
+ * <p>
  * todo will need to redo
+ *
  * @Author Will Woodman
  */
 

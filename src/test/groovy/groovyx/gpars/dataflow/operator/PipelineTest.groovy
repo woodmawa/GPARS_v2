@@ -68,7 +68,8 @@ public class PipelineTest extends GroovyTestCase {
             final Pipeline pipeline = new Pipeline(queue)
 
             assert !pipeline.complete
-            pipeline | { groups << delegate.actor.parallelGroup; it * 2 } | { groups << delegate.actor.parallelGroup; it + 1 } | result
+            pipeline | { groups << delegate.actor.parallelGroup; it * 2 } | { groups << delegate.actor.parallelGroup;
+                it + 1 } | result
             assert pipeline.complete
             shouldFail(IllegalStateException) {
                 pipeline | result

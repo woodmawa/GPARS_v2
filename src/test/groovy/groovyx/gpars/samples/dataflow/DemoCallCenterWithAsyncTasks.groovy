@@ -40,7 +40,7 @@ final class AsyncCallCenter {
 
     def open() {
         println "Call center opening"
-        agents.times {agentIndex ->
+        agents.times { agentIndex ->
             group.task {
                 println "Agent $agentIndex logging in"
                 clockIn << true
@@ -48,13 +48,13 @@ final class AsyncCallCenter {
             }
         }
 
-        agents.times {clockIn.val}
+        agents.times { clockIn.val }
 
         println "Call center open"
     }
 
     private static def createHandler(final queue, final clockOut, final int agentIndex) {
-        {message ->
+        { message ->
             switch (message) {
                 case -1:
                     println "Agent $agentIndex going home"

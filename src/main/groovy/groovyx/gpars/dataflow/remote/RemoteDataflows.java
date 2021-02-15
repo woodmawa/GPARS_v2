@@ -82,8 +82,9 @@ public final class RemoteDataflows extends LocalHost {
     /**
      * Publishes {@link DataflowVariable} under given name.
      * It overrides previously published variable if the same name is given.
+     *
      * @param variable the variable to be published
-     * @param name the name under which variable is published
+     * @param name     the name under which variable is published
      */
     public void publish(DataflowVariable<?> variable, String name) {
         publishedVariables.put(name, variable);
@@ -91,6 +92,7 @@ public final class RemoteDataflows extends LocalHost {
 
     /**
      * Retrieves {@link DataflowVariable} published under specified name on remote host.
+     *
      * @param host the address of remote host
      * @param port the the port of remote host
      * @param name the name under which variable was published
@@ -103,8 +105,9 @@ public final class RemoteDataflows extends LocalHost {
     /**
      * Publishes {@link DataflowBroadcast} under given name.
      * It overrides previously published broadcast if the same name is given.
+     *
      * @param broadcastStream the stream to be published
-     * @param name the name under which stream is published
+     * @param name            the name under which stream is published
      */
     public void publish(DataflowBroadcast broadcastStream, String name) {
         publishedBroadcasts.put(name, broadcastStream);
@@ -113,6 +116,7 @@ public final class RemoteDataflows extends LocalHost {
     /**
      * Retrieves {@link DataflowReadChannel} corresponding to
      * {@link DataflowBroadcast} published under given name on remote host.
+     *
      * @param host the address of remote host
      * @param port the port of remote host
      * @param name the name under which broadcast is published
@@ -134,8 +138,9 @@ public final class RemoteDataflows extends LocalHost {
     /**
      * Publishes {@link DataflowQueue} under given name.
      * It overrides previously published queue if the same name is given.
+     *
      * @param queue the queue to be published
-     * @param name the name under which queue is published
+     * @param name  the name under which queue is published
      */
     public void publish(DataflowQueue<?> queue, String name) {
         publishedQueues.put(name, queue);
@@ -143,6 +148,7 @@ public final class RemoteDataflows extends LocalHost {
 
     /**
      * Retrieves {@link DataflowQueue} published under specified name on remote host.
+     *
      * @param host the address of remote host
      * @param port the port of remote host
      * @param name the name under which queue was published
@@ -154,6 +160,7 @@ public final class RemoteDataflows extends LocalHost {
 
     /**
      * Factory method for creating RemoteDataflows
+     *
      * @return new instance of RemoteDataflows
      */
     public static RemoteDataflows create() {

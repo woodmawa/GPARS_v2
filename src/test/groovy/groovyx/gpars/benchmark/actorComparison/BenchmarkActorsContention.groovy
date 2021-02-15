@@ -101,6 +101,7 @@ final class RunnableAttackActor extends RunnableBackedBlockingActor {
         }
     }
 }
+
 final class StressHandler extends ReactiveActor {
 
     def StressHandler() {

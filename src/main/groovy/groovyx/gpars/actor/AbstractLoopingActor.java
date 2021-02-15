@@ -25,7 +25,7 @@ import groovyx.gpars.util.AsyncMessagingCore;
  * Wraps all actors that repeatedly loop through incoming messages and hold no implicit state between subsequent messages.
  *
  * @author Vaclav Pech
- *         Date: Aug 23, 2010
+ * Date: Aug 23, 2010
  */
 @SuppressWarnings("rawtypes")
 public abstract class AbstractLoopingActor extends Actor {

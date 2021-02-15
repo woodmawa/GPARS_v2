@@ -25,7 +25,7 @@ import java.io.Serializable;
  * This class is not intended to be use directly by users.
  *
  * @author Vaclav Pech, Alex Tkachman
- *         Date: Feb 27, 2009
+ * Date: Feb 27, 2009
  */
 public class ActorMessage implements Serializable {
     private static final long serialVersionUID = -2925547808451571430L;

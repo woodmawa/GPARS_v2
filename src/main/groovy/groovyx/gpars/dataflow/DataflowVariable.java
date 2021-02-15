@@ -37,7 +37,7 @@ import java.util.concurrent.TimeoutException;
  *
  * @param <T> Type of values to bind with the DataflowVariable
  * @author Vaclav Pech, Alex Tkachman
- *         Date: Jun 4, 2009
+ * Date: Jun 4, 2009
  */
 @SuppressWarnings({"unchecked", "AccessingNonPublicFieldOfAnotherObject", "UnqualifiedStaticUsage"})
 public class DataflowVariable<T> extends DataflowExpression<T> implements DataflowChannel<T>, Promise<T> {

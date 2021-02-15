@@ -47,7 +47,7 @@ public class GracefulShutdownTest extends GroovyTestCase {
     public void testSingleOperatorShutdown() throws Exception {
         final monitor = new GracefulShutdownMonitor();
         final listener = new GracefulShutdownListener(monitor)
-        def op = group.operator(inputs: [a, b], outputs: [c], listeners: [listener]) {x, y ->
+        def op = group.operator(inputs: [a, b], outputs: [c], listeners: [listener]) { x, y ->
             bindOutput x + y
         }
 
@@ -75,7 +75,7 @@ public class GracefulShutdownTest extends GroovyTestCase {
                 return arrived
             }
         }
-        def op = group.operator(inputs: [a, b], outputs: [c], listeners: [listener]) {x, y ->
+        def op = group.operator(inputs: [a, b], outputs: [c], listeners: [listener]) { x, y ->
             throw new IllegalStateException("Should never get here")
         }
         a << 10
@@ -101,7 +101,7 @@ public class GracefulShutdownTest extends GroovyTestCase {
             }
         }
 
-        def op = group.operator(inputs: [a, b], outputs: [c], listeners: [listener]) {x, y ->
+        def op = group.operator(inputs: [a, b], outputs: [c], listeners: [listener]) { x, y ->
             bindOutput x + y
         }
 
@@ -135,7 +135,7 @@ public class GracefulShutdownTest extends GroovyTestCase {
             }
         }
 
-        def op = group.operator(inputs: [a, b], outputs: [c], listeners: [listener]) {x, y ->
+        def op = group.operator(inputs: [a, b], outputs: [c], listeners: [listener]) { x, y ->
             bindOutput x + y
         }
 
@@ -177,7 +177,7 @@ public class GracefulShutdownTest extends GroovyTestCase {
             }
         }
 
-        def op = group.operator(inputs: [a, b], outputs: [c], listeners: [listener]) {x, y ->
+        def op = group.operator(inputs: [a, b], outputs: [c], listeners: [listener]) { x, y ->
             bindOutput x + y
         }
 
@@ -210,7 +210,7 @@ public class GracefulShutdownTest extends GroovyTestCase {
             }
         }
 
-        def op = group.operator(inputs: [a, b], outputs: [c], listeners: [listener]) {x, y ->
+        def op = group.operator(inputs: [a, b], outputs: [c], listeners: [listener]) { x, y ->
             bindOutput x + y
         }
 
@@ -235,17 +235,17 @@ public class GracefulShutdownTest extends GroovyTestCase {
     public void testSlowSingleOperatorShutdown() throws Exception {
         final monitor = new GracefulShutdownMonitor(100);
         final listener = new GracefulShutdownListener(monitor)
-        def op = group.operator(inputs: [a, b], outputs: [c], listeners: [listener]) {x, y ->
+        def op = group.operator(inputs: [a, b], outputs: [c], listeners: [listener]) { x, y ->
             sleep 50
             bindOutput x + y
         }
 
-        100.times{a << 10}
-        100.times{b << 20}
+        100.times { a << 10 }
+        100.times { b << 20 }
 
         final shutdownPromise = monitor.shutdownNetwork()
 
-        100.times{assert 30 == c.val}
+        100.times { assert 30 == c.val }
         shutdownPromise.get()
         op.join()
 
@@ -264,34 +264,35 @@ public class GracefulShutdownTest extends GroovyTestCase {
             final result = new DataflowQueue<Object>()
 
             final monitor = new GracefulShutdownMonitor(100);
-            def op1 = group.operator(inputs: [a, b], outputs: [c], listeners: [new GracefulShutdownListener(monitor)]) {x, y ->
+            def op1 = group.operator(inputs: [a, b], outputs: [c], listeners: [new GracefulShutdownListener(monitor)]) { x, y ->
                 sleep 5
                 bindOutput x + y
             }
-            def op2 = group.operator(inputs: [c], outputs: [d, e], listeners: [new GracefulShutdownListener(monitor)]) {x ->
+            def op2 = group.operator(inputs: [c], outputs: [d, e], listeners: [new GracefulShutdownListener(monitor)]) { x ->
                 sleep 10
-                bindAllOutputs 2*x
+                bindAllOutputs 2 * x
             }
-            def op3 = group.operator(inputs: [d], outputs: [f], listeners: [new GracefulShutdownListener(monitor)]) {x ->
+            def op3 = group.operator(inputs: [d], outputs: [f], listeners: [new GracefulShutdownListener(monitor)]) { x ->
                 sleep 5
                 bindOutput x + 40
             }
-            def op4 = group.operator(inputs: [e.createReadChannel(), f], outputs: [result], listeners: [new GracefulShutdownListener(monitor)]) {x, y ->
+            def op4 = group.operator(inputs: [e.createReadChannel(), f], outputs: [result], listeners: [new GracefulShutdownListener(monitor)]) { x, y ->
                 sleep 5
                 bindOutput x + y
             }
 
-            100.times{a << 10}
-            100.times{b << 20}
+            100.times { a << 10 }
+            100.times { b << 20 }
 
             final shutdownPromise = monitor.shutdownNetwork()
 
-            100.times{assert 160 == result.val}
+            100.times { assert 160 == result.val }
 
             shutdownPromise.get()
             [op1, op2, op3, op4]*.join()
         }
     }
+
     public void testGracefulOperatorShutdownWithForks() throws Exception {
         10.times {
             final DataflowQueue a = new DataflowQueue()
@@ -303,29 +304,29 @@ public class GracefulShutdownTest extends GroovyTestCase {
             final result = new DataflowQueue<Object>()
 
             final monitor = new GracefulShutdownMonitor(100);
-            def op1 = group.operator(inputs: [a, b], outputs: [c], maxForks: 3, listeners: [new GracefulShutdownListener(monitor)]) {x, y ->
+            def op1 = group.operator(inputs: [a, b], outputs: [c], maxForks: 3, listeners: [new GracefulShutdownListener(monitor)]) { x, y ->
                 sleep 5
                 bindOutput x + y
             }
-            def op2 = group.operator(inputs: [c], outputs: [d, e], maxForks: 3, listeners: [new GracefulShutdownListener(monitor)]) {x ->
+            def op2 = group.operator(inputs: [c], outputs: [d, e], maxForks: 3, listeners: [new GracefulShutdownListener(monitor)]) { x ->
                 sleep 10
-                bindAllOutputs 2*x
+                bindAllOutputs 2 * x
             }
-            def op3 = group.operator(inputs: [d], outputs: [f], maxForks: 4, listeners: [new GracefulShutdownListener(monitor)]) {x ->
+            def op3 = group.operator(inputs: [d], outputs: [f], maxForks: 4, listeners: [new GracefulShutdownListener(monitor)]) { x ->
                 sleep 5
                 bindOutput x + 40
             }
-            def op4 = group.operator(inputs: [e.createReadChannel(), f], outputs: [result], maxForks: 5, listeners: [new GracefulShutdownListener(monitor)]) {x, y ->
+            def op4 = group.operator(inputs: [e.createReadChannel(), f], outputs: [result], maxForks: 5, listeners: [new GracefulShutdownListener(monitor)]) { x, y ->
                 sleep 5
                 bindOutput x + y
             }
 
-            100.times{a << 10}
-            100.times{b << 20}
+            100.times { a << 10 }
+            100.times { b << 20 }
 
             final shutdownPromise = monitor.shutdownNetwork()
 
-            100.times{assert 160 == result.val}
+            100.times { assert 160 == result.val }
 
             shutdownPromise.get()
             [op1, op2, op3, op4]*.join()
@@ -343,29 +344,29 @@ public class GracefulShutdownTest extends GroovyTestCase {
             final result = new DataflowQueue<Object>()
 
             final monitor = new GracefulShutdownMonitor(100);
-            def op1 = group.operator(inputs: [a, b], outputs: [c], listeners: [new GracefulShutdownListener(monitor)]) {x, y ->
+            def op1 = group.operator(inputs: [a, b], outputs: [c], listeners: [new GracefulShutdownListener(monitor)]) { x, y ->
                 sleep 5
                 bindOutput x + y
             }
-            def op2 = group.operator(inputs: [c], outputs: [d, e], listeners: [new GracefulShutdownListener(monitor)]) {x ->
+            def op2 = group.operator(inputs: [c], outputs: [d, e], listeners: [new GracefulShutdownListener(monitor)]) { x ->
                 sleep 10
-                bindAllOutputs 2*x
+                bindAllOutputs 2 * x
             }
-            def op3 = group.operator(inputs: [d], outputs: [f], listeners: [new GracefulShutdownListener(monitor)]) {x ->
+            def op3 = group.operator(inputs: [d], outputs: [f], listeners: [new GracefulShutdownListener(monitor)]) { x ->
                 sleep 5
                 bindOutput x + 40
             }
-            def op4 = group.operator(inputs: [e.createReadChannel(), f], outputs: [result], listeners: [new GracefulShutdownListener(monitor)]) {x, y ->
+            def op4 = group.operator(inputs: [e.createReadChannel(), f], outputs: [result], listeners: [new GracefulShutdownListener(monitor)]) { x, y ->
                 sleep 5
                 bindOutput x + y
             }
 
-            100.times{a << 10}
-            100.times{b << 10}
+            100.times { a << 10 }
+            100.times { b << 10 }
 
             final shutdownPromise = monitor.shutdownNetwork()
 
-            100.times{assert 120 == result.val}
+            100.times { assert 120 == result.val }
 
             shutdownPromise.get()
             [op1, op2, op3, op4]*.join()

@@ -23,7 +23,7 @@ import java.util.List;
  * Whenever invoking a select, guards can be specified, reducing the set of all input channels of the Select to consider in the given request.
  *
  * @author Vaclav Pech
- *         Date: 30th Sep 2010
+ * Date: 30th Sep 2010
  */
 public abstract class GuardedSelectRequest<T> implements SelectRequest<T> {
     private final List<Boolean> mask;

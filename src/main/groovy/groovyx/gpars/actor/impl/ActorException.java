@@ -24,7 +24,7 @@ package groovyx.gpars.actor.impl;
  * to avoid need for exception object creation each time.
  *
  * @author Vaclav Pech, Alex Tkachman
- *         Date: Feb 17, 2009
+ * Date: Feb 17, 2009
  */
 public class ActorException extends RuntimeException {
     private static final long serialVersionUID = 1L;

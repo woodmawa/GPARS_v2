@@ -77,7 +77,7 @@ public class LifeCycleTest extends GroovyTestCase {
         }
 
         actor.metaClass {
-            afterStop = {List messages ->
+            afterStop = { List messages ->
                 messagesReference.set(messages)
                 barrier.await()
             }
@@ -151,7 +151,7 @@ public class LifeCycleTest extends GroovyTestCase {
         }
 
         actor.metaClass {
-            afterStop = {List messages ->
+            afterStop = { List messages ->
                 counter.incrementAndGet()
                 latch.countDown()
             }
@@ -182,7 +182,7 @@ public class LifeCycleTest extends GroovyTestCase {
         }
 
         actor.metaClass {
-            afterStop = {List messages ->
+            afterStop = { List messages ->
                 messagesReference.set(messages)
                 latch.countDown()
             }
@@ -216,7 +216,7 @@ public class LifeCycleTest extends GroovyTestCase {
         }
 
         actor.metaClass {
-            afterStop = {List messages ->
+            afterStop = { List messages ->
                 messagesReference.set(messages)
                 latch.countDown()
             }
@@ -240,9 +240,9 @@ public class LifeCycleTest extends GroovyTestCase {
 
     public void testStartedByFactory() {
         final def df = new Dataflows()
-        def a1 = group.actor {df.actor = true}
-        def a2 = group.reactor {df.reactor = true} << ''
-        def a3 = group.messageHandler {df.handler = true}
+        def a1 = group.actor { df.actor = true }
+        def a2 = group.reactor { df.reactor = true } << ''
+        def a3 = group.messageHandler { df.handler = true }
 
 
         assert df.actor
@@ -281,7 +281,7 @@ public class LifeCycleTest extends GroovyTestCase {
         }
 
         actor.metaClass {
-            afterStop = {List messages ->
+            afterStop = { List messages ->
                 messagesReference.set(messages)
                 afterStopBarrier.await()
             }
@@ -315,7 +315,7 @@ public class LifeCycleTest extends GroovyTestCase {
         }
 
         actor.metaClass {
-            afterStop = {List messages ->
+            afterStop = { List messages ->
                 messagesReference.set(messages)
                 afterStopBarrier.await()
             }

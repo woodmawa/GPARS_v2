@@ -55,14 +55,13 @@ class SuccessfulCustomer extends BarberCustomer {
 
 def group = new DefaultPGroup()
 def barbersShop
-def barber = group.reactor {message ->
+def barber = group.reactor { message ->
     if (message instanceof PendingCustomer) {
         println('Barber : Starting with Customer ' + message.customer.id)
         Thread.sleep((Math.random() * 600 + 100) as int)
         println('Barber : Finished with Customer ' + message.customer.id)
         new SuccessfulCustomer(message.customer)
-    }
-    else {
+    } else {
         throw new RuntimeException('barber got a message of unexpected type ' + message.class)
     }
 }
@@ -72,15 +71,14 @@ barbersShop = group.actor {
     def customersRejected = 0
     def customersProcessed = 0
     loop {
-        react {message ->
+        react { message ->
             switch (message) {
                 case Customer_RW:
                     if (seatsTaken < 4) {
                         println('Shop : Customer ' + message.id + ' takes a seat.')
                         barber.send(new PendingCustomer(message))
                         ++seatsTaken
-                    }
-                    else {
+                    } else {
                         println('Shop : Customer ' + message.id + ' turned away.')
                         ++customersRejected
                     }
@@ -100,7 +98,7 @@ barbersShop = group.actor {
         }
     }
 }
-(0..<20).each {number ->
+(0..<20).each { number ->
     Thread.sleep((Math.random() * 200 + 100) as int)
     barbersShop.send(new Customer_RW(number))
 }

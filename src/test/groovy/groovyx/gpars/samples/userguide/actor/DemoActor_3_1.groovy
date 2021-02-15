@@ -30,13 +30,13 @@ class MyDemoActor extends DefaultActor {
     }
 
     private void handleA() {
-        react {a ->
+        react { a ->
             handleB(a)
         }
     }
 
     private void handleB(int a) {
-        react {b ->
+        react { b ->
             println a + b
             reply a + b
         }

@@ -45,6 +45,7 @@ public class ImmutableMessageTest extends GroovyTestCase {
     }
 }
 
-@Immutable final class TestMessage {
+@Immutable
+final class TestMessage {
     String value
 }

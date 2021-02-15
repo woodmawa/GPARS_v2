@@ -33,14 +33,15 @@ import groovy.transform.Immutable
  * reliefs the account from knowing about concurrency.
  * @author Dierk König
  */
-@Immutable class ImmutableAccount2 {
+@Immutable
+class ImmutableAccount2 {
     int balance = 0
 
     ImmutableAccount2 credit(int add) {
         new ImmutableAccount2(balance + add)
     }
 
-    /** @return list of new "this" and new target account   */
+    /** @return list of new "this" and new target account    */
     List<ImmutableAccount2> transferTo(ImmutableAccount2 target, int amount) {
         [credit(-amount), target.credit(amount)]
     }
@@ -51,9 +52,9 @@ class ReferenceSafe {
 
     synchronized List getValues() { references }
     /** @param update a closure that gets called with the spread of saved refs
-     * and that's return value becomes the new reference list  */
+     * and that's return value becomes the new reference list   */
     synchronized void setValues(Closure update) {
-        references = update(* references).asImmutable()
+        references = update(*references).asImmutable()
     }
 }
 

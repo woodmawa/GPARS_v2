@@ -30,7 +30,7 @@ With this approach it is possible to provide state-free nodes
 that serve as e.g. generators or collectors.
 */
 
-def loopLink(KanbanFlow flow, ProcessingNode node, start){
+def loopLink(KanbanFlow flow, ProcessingNode node, start) {
     flow.cycleAllowed = true
     KanbanLink link = flow.link(node).to(node)
     link.downstream << new KanbanTray(link: link, product: start)
@@ -44,7 +44,7 @@ def counter = node { self, loop, down ->
 }
 def primes = node { up, down ->
     def x = up.take()
-    if ( (2 ..< x ).any { y -> x % y == 0 } ) { // y is a factor of x => x is not prime
+    if ((2..<x).any { y -> x % y == 0 }) { // y is a factor of x => x is not prime
         ~down
     } else {
         down x
@@ -55,7 +55,7 @@ def collector = node { self, loop, up ->
     latch.countDown()
     def col = self.take()
     println col                 // reveal the collected state for demo reasons
-    loop (col + up.take())
+    loop(col + up.take())
 }
 
 loopLink flow, counter, 0       // self-cycle, number generator

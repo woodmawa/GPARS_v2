@@ -32,9 +32,9 @@ import static groovyx.gpars.GParsPool.withPool
  as few as one thread is enough to keep the computation going.
  */
 
-withPool(1) {pool ->  //feel free to experiment with the number of fork/join threads in the pool
+withPool(1) { pool ->  //feel free to experiment with the number of fork/join threads in the pool
     println """Number of files: ${
-        runForkJoin(new File("./src")) {file ->
+        runForkJoin(new File("./src")) { file ->
             long count = 0
             file.eachFile {
                 if (it.isDirectory()) {

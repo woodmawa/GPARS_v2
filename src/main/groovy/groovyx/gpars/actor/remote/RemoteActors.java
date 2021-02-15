@@ -64,8 +64,9 @@ public final class RemoteActors extends LocalHost implements RemotingContextWith
     /**
      * Publishes {@link groovyx.gpars.actor.Actor} under given name.
      * It overrides previously published Actor if the same name is given.
+     *
      * @param actor the Actor to be published
-     * @param name the name under which Actor is published
+     * @param name  the name under which Actor is published
      */
     public void publish(Actor actor, String name) {
         if (!RemoteActorsUrlUtils.isValidActorName(name)) {
@@ -76,6 +77,7 @@ public final class RemoteActors extends LocalHost implements RemotingContextWith
 
     /**
      * Retrieves {@link groovyx.gpars.actor.Actor} published under specified name on remote host.
+     *
      * @param host the address of remote host
      * @param port the port of remote host
      * @param name the name under which Actor was published
@@ -87,6 +89,7 @@ public final class RemoteActors extends LocalHost implements RemotingContextWith
 
     /**
      * Retrieves {@link groovyx.gpars.actor.Actor} published under specified url
+     *
      * @param actorUrl the actor url
      * @return promise of {@link RemoteActor}
      */
@@ -119,6 +122,7 @@ public final class RemoteActors extends LocalHost implements RemotingContextWith
 
     /**
      * Checks if {@link groovyx.gpars.actor.Actor} under specified url was published within this context
+     *
      * @param actorUrl the actor url
      * @return true if url matches some actor within this context
      */
@@ -134,6 +138,7 @@ public final class RemoteActors extends LocalHost implements RemotingContextWith
 
     /**
      * Creates remoting context for Actors with specified name
+     *
      * @param contextName the name of the context
      * @return Context with specified name
      */

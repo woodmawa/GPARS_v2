@@ -93,7 +93,9 @@ final class DemoWorker extends DefaultActor {
         }
     }
 }
+
 final class WorkToDo {}
+
 final class NeedMoreWork {}
 
 final Actor balancer = new LoadBalancer().start()

@@ -24,12 +24,12 @@ import groovyx.gpars.serial.SerialMsg;
 
 /**
  * Message that carry item request to remote queue.
- * @param <T> the type of the queue
  *
+ * @param <T> the type of the queue
  * @author Rafal Slawik
  */
 @SuppressWarnings({"unchecked", "serial"})
-public class RemoteDataflowQueueValueRequestMsg<T> extends SerialMsg{
+public class RemoteDataflowQueueValueRequestMsg<T> extends SerialMsg {
     private final DataflowVariable<T> value;
     private final DataflowChannel<?> queue;
 
@@ -41,7 +41,7 @@ public class RemoteDataflowQueueValueRequestMsg<T> extends SerialMsg{
     @Override
     public void execute(RemoteConnection conn) {
         try {
-            value.bindUnique((T)queue.getVal());
+            value.bindUnique((T) queue.getVal());
         } catch (InterruptedException e) {
             value.bindError(e);
         }

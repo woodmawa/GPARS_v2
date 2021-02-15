@@ -39,7 +39,7 @@ public class DataflowOperatorCountingShutdownTest extends GroovyTestCase {
         final DataflowQueue d = new DataflowQueue()
         final DataflowQueue e = new DataflowQueue()
 
-        def op = operator(inputs: [a, b, c], outputs: [d, e]) {x, y, z ->
+        def op = operator(inputs: [a, b, c], outputs: [d, e]) { x, y, z ->
             bindOutput 0, x + y + z
             bindOutput 1, x * y * z
         }
@@ -81,7 +81,7 @@ public class DataflowOperatorCountingShutdownTest extends GroovyTestCase {
         final DataflowVariable a = new DataflowVariable()
         final DataflowVariable d = new DataflowVariable()
 
-        def op = operator(inputs: [a], outputs: [d]) {x ->
+        def op = operator(inputs: [a], outputs: [d]) { x ->
             bindOutput x
         }
 
@@ -101,11 +101,11 @@ public class DataflowOperatorCountingShutdownTest extends GroovyTestCase {
         final DataflowQueue f = new DataflowQueue()
         final DataflowQueue out = new DataflowQueue()
 
-        def op1 = operator(inputs: [a, b, c], outputs: [d, e]) {x, y, z -> }
+        def op1 = operator(inputs: [a, b, c], outputs: [d, e]) { x, y, z -> }
 
-        def op2 = operator(inputs: [d], outputs: [f, out]) { }
+        def op2 = operator(inputs: [d], outputs: [f, out]) {}
 
-        def op3 = operator(inputs: [e, f], outputs: [b, out]) {x, y -> }
+        def op3 = operator(inputs: [e, f], outputs: [b, out]) { x, y -> }
 
         final pill = new CountingPoisonPill(3)
         a << pill
@@ -126,11 +126,11 @@ public class DataflowOperatorCountingShutdownTest extends GroovyTestCase {
         final DataflowQueue f = new DataflowQueue()
         final DataflowQueue out = new DataflowQueue()
 
-        def op1 = selector(inputs: [a, b, c], outputs: [d, e]) {value, index -> }
+        def op1 = selector(inputs: [a, b, c], outputs: [d, e]) { value, index -> }
 
-        def op2 = selector(inputs: [d], outputs: [f, out]) { }
+        def op2 = selector(inputs: [d], outputs: [f, out]) {}
 
-        def op3 = prioritySelector(inputs: [e, f], outputs: [b]) {value, index -> }
+        def op3 = prioritySelector(inputs: [e, f], outputs: [b]) { value, index -> }
 
         final pill = new ImmediateCountingPoisonPill(3)
         a << pill
@@ -148,7 +148,7 @@ public class DataflowOperatorCountingShutdownTest extends GroovyTestCase {
         final DataflowQueue d = new DataflowQueue()
         final DataflowQueue e = new DataflowQueue()
 
-        def op = operator(inputs: [a, b, c], outputs: [d, e]) {x, y, z ->
+        def op = operator(inputs: [a, b, c], outputs: [d, e]) { x, y, z ->
             bindOutput 0, x + y + z
             bindOutput 1, x * y * z
         }
@@ -173,7 +173,7 @@ public class DataflowOperatorCountingShutdownTest extends GroovyTestCase {
         final DataflowQueue c = new DataflowQueue()
         final DataflowQueue d = new DataflowQueue()
 
-        def op = operator(inputs: [a, b, c], outputs: [d]) {x, y, z ->
+        def op = operator(inputs: [a, b, c], outputs: [d]) { x, y, z ->
             bindOutput 0, x + y + z
         }
 
@@ -196,7 +196,7 @@ public class DataflowOperatorCountingShutdownTest extends GroovyTestCase {
         final DataflowQueue c = new DataflowQueue()
         final DataflowQueue d = new DataflowQueue()
 
-        def op = selector(inputs: [a, b, c], outputs: [d]) {x ->
+        def op = selector(inputs: [a, b, c], outputs: [d]) { x ->
             bindOutput 0, x
         }
 
@@ -204,7 +204,7 @@ public class DataflowOperatorCountingShutdownTest extends GroovyTestCase {
         b << 20
         c << 30
 
-        assert (1..3).collect {d.val} as Set == [10, 20, 30] as Set
+        assert (1..3).collect { d.val } as Set == [10, 20, 30] as Set
         final pill = new ImmediateCountingPoisonPill(2)
         a << pill
         c << pill
@@ -219,7 +219,7 @@ public class DataflowOperatorCountingShutdownTest extends GroovyTestCase {
         final DataflowQueue c = new DataflowQueue()
         final DataflowQueue d = new DataflowQueue()
 
-        def op = selector(inputs: [a, b, c], outputs: [d]) {x ->
+        def op = selector(inputs: [a, b, c], outputs: [d]) { x ->
             bindOutput 0, x
         }
 
@@ -227,7 +227,7 @@ public class DataflowOperatorCountingShutdownTest extends GroovyTestCase {
         b << 20
         c << 30
 
-        assert (1..3).collect {d.val} as Set == [10, 20, 30] as Set
+        assert (1..3).collect { d.val } as Set == [10, 20, 30] as Set
         final pill = new CountingPoisonPill(1)
         a << pill
         c << pill

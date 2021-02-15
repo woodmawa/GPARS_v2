@@ -28,7 +28,7 @@ import java.util.List;
 
 /**
  * @author Vaclav Pech
- *         Date: 13.4.2010
+ * Date: 13.4.2010
  */
 @SuppressWarnings({"serial", "UnqualifiedStaticUsage"})
 public abstract class AgentCore extends WithSerialId {

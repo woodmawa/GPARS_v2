@@ -79,7 +79,7 @@ public class SyncDataflowQueueTest extends GroovyTestCase {
     public void testTimeoutGet() {
         final SyncDataflowQueue queue = new SyncDataflowQueue()
         assert queue.getVal(1, TimeUnit.SECONDS) == null
-        Thread.start {queue << 10}
+        Thread.start { queue << 10 }
         assert 10 == queue.getVal(10, java.util.concurrent.TimeUnit.SECONDS)
     }
 
@@ -100,11 +100,11 @@ public class SyncDataflowQueueTest extends GroovyTestCase {
 
         def result2 = new DataflowVariable()
         Thread.start {
-            queue.whenBound({result2 << it})
+            queue.whenBound({ result2 << it })
         }
 
-        Thread.start {queue << 10}
-        Thread.start {queue << 20}
+        Thread.start { queue << 10 }
+        Thread.start { queue << 20 }
 
         assert result1.val in [10, 20]
         assert result2.val in [10, 20]
@@ -116,11 +116,11 @@ public class SyncDataflowQueueTest extends GroovyTestCase {
         final SyncDataflowQueue stream = new SyncDataflowQueue()
         assert stream.poll() == null
         assert stream.poll() == null
-        Thread.start {stream << 1}
+        Thread.start { stream << 1 }
         sleep 1000
         assert stream.poll()?.val == 1
         assert stream.poll()?.val == null
-        Thread.start {stream << 2}
+        Thread.start { stream << 2 }
         sleep 1000
         assert stream.poll()?.val == 2
         assert stream.poll()?.val == null
@@ -170,7 +170,7 @@ public class SyncDataflowQueueTest extends GroovyTestCase {
         final SyncDataflowQueue stream = new SyncDataflowQueue()
         def group = new NonDaemonPGroup(2)
         final Actor thread = group.blockingActor {
-            (0..10).each {num -> Thread.start {stream << num}}
+            (0..10).each { num -> Thread.start { stream << num } }
             sleep 3000
             barrier.await()
             receive {
@@ -180,7 +180,7 @@ public class SyncDataflowQueueTest extends GroovyTestCase {
 
         barrier.await()
         assert 11 == stream.length()
-        stream.collect {it}.sort().eachWithIndex {element, index -> assert index == element }
+        stream.collect { it }.sort().eachWithIndex { element, index -> assert index == element }
         assert 11 == stream.length()
 
         thread << 'Proceed'
@@ -196,27 +196,29 @@ public class SyncDataflowQueueTest extends GroovyTestCase {
         final SyncDataflowQueue stream = new SyncDataflowQueue()
         def group = new NonDaemonPGroup(2)
         group.blockingActor {
-            (0..10).each {Thread.start {stream << null}}
+            (0..10).each { Thread.start { stream << null } }
             sleep 3000
             barrier.await()
         }
 
         barrier.await()
         assert 11 == stream.length()
-        stream.each {assertNull it }
+        stream.each { assertNull it }
         assert 11 == stream.length()
 
-        for (i in (0..10)) { assertNull stream.val }
+        for (i in (0..10)) {
+            assertNull stream.val
+        }
         group.shutdown()
     }
 
     public void testToString() {
         final SyncDataflowQueue<Integer> stream = new SyncDataflowQueue<Integer>()
         assert 'SyncDataflowQueue(queue=[])' == stream.toString()
-        Thread.start {stream << 10}
+        Thread.start { stream << 10 }
         sleep 1000
         assert 'SyncDataflowQueue(queue=[SyncDataflowVariable(value=10)])' == stream.toString()
-        Thread.start {stream << 20}
+        Thread.start { stream << 20 }
         sleep 1000
         assert 'SyncDataflowQueue(queue=[SyncDataflowVariable(value=10), SyncDataflowVariable(value=20)])' == stream.toString()
         stream.val
@@ -225,10 +227,10 @@ public class SyncDataflowQueueTest extends GroovyTestCase {
         assert 'SyncDataflowQueue(queue=[])' == stream.toString()
 
         final SyncDataflowVariable variable = new SyncDataflowVariable()
-        Thread.start {stream << variable}
+        Thread.start { stream << variable }
         sleep 1000
         assert 'SyncDataflowQueue(queue=[SyncDataflowVariable(value=null)])' == stream.toString()
-        Thread.start {variable << '30'}
+        Thread.start { variable << '30' }
         Thread.sleep 3000  //let the value propagate asynchronously into the variable stored in the stream
         assert 'SyncDataflowQueue(queue=[SyncDataflowVariable(value=30)])' == stream.toString()
         assert 'SyncDataflowQueue(queue=[SyncDataflowVariable(value=30)])' == stream.toString()
@@ -240,8 +242,8 @@ public class SyncDataflowQueueTest extends GroovyTestCase {
     public void testWhenBound() {
         final SyncDataflowQueue stream = new SyncDataflowQueue()
         final Dataflows df = new Dataflows()
-        stream >> {df.x1 = it}
-        stream >> {df.x2 = it}
+        stream >> { df.x1 = it }
+        stream >> { df.x2 = it }
 
         def group = new NonDaemonPGroup(2)
         def actor = group.actor {
@@ -264,8 +266,8 @@ public class SyncDataflowQueueTest extends GroovyTestCase {
         final SyncDataflowQueue dfs1 = new SyncDataflowQueue()
         final SyncDataflowQueue dfs2 = new SyncDataflowQueue()
         final SyncDataflowQueue dfs3 = new SyncDataflowQueue()
-        stream.wheneverBound {dfs1 << it}
-        stream.wheneverBound {dfs2 << it}
+        stream.wheneverBound { dfs1 << it }
+        stream.wheneverBound { dfs2 << it }
 
         def group = new NonDaemonPGroup(2)
         def actor = group.actor {
@@ -305,7 +307,7 @@ public class SyncDataflowQueueTest extends GroovyTestCase {
             stream << 10
         }
         def handler = group.actor {
-            react {result.value = it}
+            react { result.value = it }
         }
         stream.getValAsync(handler)
         assert result.value == 10
@@ -328,28 +330,28 @@ public class SyncDataflowQueueTest extends GroovyTestCase {
     public void testMissedTimeout() {
         final SyncDataflowQueue stream = new SyncDataflowQueue()
         assertNull stream.getVal(10, TimeUnit.MILLISECONDS)
-        Thread.start {stream << 10}
+        Thread.start { stream << 10 }
         assert 10 == stream.getVal(10, TimeUnit.SECONDS)
-        Thread.start {stream << 20}
+        Thread.start { stream << 20 }
         assert 20 == stream.getVal(10, TimeUnit.SECONDS)
-        Thread.start {stream << 30}
+        Thread.start { stream << 30 }
         assert 30 == stream.getVal(10, TimeUnit.SECONDS)
         assertNull stream.getVal(2, TimeUnit.SECONDS)
-        Thread.start {stream << 40}
+        Thread.start { stream << 40 }
         assert 40 == stream.getVal(10, TimeUnit.SECONDS)
     }
 
     public void testMissedTimeoutWithNull() {
         final SyncDataflowQueue stream = new SyncDataflowQueue()
         assertNull stream.getVal(10, TimeUnit.MILLISECONDS)
-        Thread.start {stream << null}
+        Thread.start { stream << null }
         assert null == stream.getVal(10, TimeUnit.MINUTES)
-        Thread.start {stream << null}
+        Thread.start { stream << null }
         assert null == stream.getVal(10, TimeUnit.SECONDS)
-        Thread.start {stream << 30}
+        Thread.start { stream << 30 }
         assert 30 == stream.getVal(10, TimeUnit.SECONDS)
         assertNull stream.getVal(2, TimeUnit.SECONDS)
-        Thread.start {stream << null}
+        Thread.start { stream << null }
         assert null == stream.getVal(10, TimeUnit.SECONDS)
     }
 }

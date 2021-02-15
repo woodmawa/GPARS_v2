@@ -29,13 +29,13 @@ final def doubler = Actors.reactor {
 }
 
 Actor actor = Actors.actor {
-    (1..10).each {doubler << it}
+    (1..10).each { doubler << it }
     int i = 0
     loop {
         i += 1
         if (i > 10) stop()
         else {
-            react {message ->
+            react { message ->
                 println "Double of $i = $message"
             }
         }

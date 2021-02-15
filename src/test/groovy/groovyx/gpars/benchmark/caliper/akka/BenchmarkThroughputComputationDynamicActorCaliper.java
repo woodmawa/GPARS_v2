@@ -42,7 +42,6 @@ public class BenchmarkThroughputComputationDynamicActorCaliper extends Benchmark
     String gc;
 
 
-
     BenchmarkThroughputComputationDynamicActorCaliper() {
         super(500, DYNAMIC_RUN, ComputationDynamicClient.class, ComputationDynamicDestination.class);
     }

@@ -28,9 +28,9 @@ import static groovyx.gpars.GParsPool.withPool
 def quicksort(list) {
     if (list.size() < 2) return list.clone()
     withPool {
-        def groups = list.groupByParallel {it <=> list[list.size().intdiv(2)]}
+        def groups = list.groupByParallel { it <=> list[list.size().intdiv(2)] }
         if (groups.size() == 1) return list.clone()
-        (-1..1).collect({quicksort(groups[it] as ArrayList ?: [])}).sumParallel()
+        (-1..1).collect({ quicksort(groups[it] as ArrayList ?: []) }).sumParallel()
     }
 }
 

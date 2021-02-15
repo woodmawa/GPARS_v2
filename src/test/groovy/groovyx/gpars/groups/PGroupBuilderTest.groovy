@@ -32,7 +32,7 @@ class PGroupBuilderTest extends GroovyTestCase {
         PGroup group = PGroupBuilder.createFromPool(pool)
         assert pool == group.threadPool
         assert group.threadPool instanceof Pool
-        group.threadPool.execute({->})
+        group.threadPool.execute({ -> })
         group.shutdown()
     }
 
@@ -41,7 +41,7 @@ class PGroupBuilderTest extends GroovyTestCase {
         PGroup group = PGroupBuilder.createFromPool(pool)
         assert pool == group.threadPool.forkJoinPool
         assert group.threadPool instanceof Pool
-        group.threadPool.execute({->})
+        group.threadPool.execute({ -> })
         group.shutdown()
     }
 
@@ -50,7 +50,7 @@ class PGroupBuilderTest extends GroovyTestCase {
         PGroup group = PGroupBuilder.createFromPool(pool)
         assert pool == group.threadPool.executorService
         assert group.threadPool instanceof Pool
-        group.threadPool.execute({->})
+        group.threadPool.execute({ -> })
         group.shutdown()
     }
 }

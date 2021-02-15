@@ -52,8 +52,7 @@ class ChatClientActor extends DefaultActor {
             react { line ->
                 if (line == "@show") {
                     server << new ChatMessage(action: "show", sender: name)
-                }
-                else {
+                } else {
                     server << new ChatMessage(action: "say", sender: name, message: line)
                 }
             }

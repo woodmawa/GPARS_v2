@@ -29,11 +29,11 @@ import groovyx.gpars.actor.impl.DDAClosure;
  * }*      void onMessage(Object message) {*          println 'Received object'
  * }*      void onMessage(NullObject nullMessage) {*          println 'Received null'
  * }*} </pre>
- *
+ * <p>
  * Method when {...} provides an alternative way to define message handlers
  *
  * @author Vaclav Pech, Alex Tkachman, Dierk Koenig
- *         Date: Jun 26, 2009
+ * Date: Jun 26, 2009
  */
 
 @SuppressWarnings({"rawtypes", "ThisEscapedInObjectConstruction"})

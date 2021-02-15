@@ -30,13 +30,13 @@ class RemoteActorsUrlUtilsTest extends Specification {
         isValidActorName(name) == valid
 
         where:
-        name   | valid
-        "name" | true
-        "a/a"  | false
-        "aaa"  | true
-        null   | false
-        ""     | true
-        "/////"| false
+        name    | valid
+        "name"  | true
+        "a/a"   | false
+        "aaa"   | true
+        null    | false
+        ""      | true
+        "/////" | false
     }
 
     @Unroll

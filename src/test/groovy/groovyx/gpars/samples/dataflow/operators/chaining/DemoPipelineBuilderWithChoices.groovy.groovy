@@ -34,13 +34,13 @@ final DataflowQueue converted = new DataflowQueue()
 final Pool pool = new DefaultPool(false, 2)
 
 final DataflowQueue logChannel = new DataflowQueue()
-logChannel | {println 'LOG: ' + it}
+logChannel | { println 'LOG: ' + it }
 
-final negate = {-it}
+final negate = { -it }
 
 final Pipeline pipeline = new Pipeline(pool, queue)
 
-pipeline.binaryChoice(nonNegative, negative) {it >= 0}
+pipeline.binaryChoice(nonNegative, negative) { it >= 0 }
 
 negative | negate | converted
 
