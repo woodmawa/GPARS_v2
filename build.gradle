@@ -78,15 +78,15 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.13'
     compile group: 'org.codehaus.groovy', name: 'groovy-all', version: "${gpars_groovyVersion}"
 
-    compile "org.codehaus.groovy:groovy-cli-commons:${gpars_groovyVersion}"
-    compile "org.multiverse:multiverse-core:${gpars_multiverseVersion}", { transitive = false }
-    compile "io.netty:netty-all:${gpars_nettyVersion}"
-    compile "org.codehaus.jcsp:jcsp:${gpars_jcspVersion}"
-    testCompile "org.spockframework:spock-core:${gpars_spockVersion}"
-    testCompile "com.google.code.gson:gson:${gpars_gsonVersion}"
-    testCompile "com.google.guava:guava:${gpars_guavaVersion}"
-    testCompile fileTree(dir: 'lib', include: '*.jar')
-    testCompile group: 'com.google.caliper', name: 'caliper', version: '1.0-beta-2'
+    implementation "org.codehaus.groovy:groovy-cli-commons:${gpars_groovyVersion}"
+    implementation "org.multiverse:multiverse-core:${gpars_multiverseVersion}", { transitive = false }
+    implementation "io.netty:netty-all:${gpars_nettyVersion}"
+    implementation "org.codehaus.jcsp:jcsp:${gpars_jcspVersion}"
+    //implementation "com.google.code.gson:gson:${gpars_gsonVersion}"
+    testImplementation "org.spockframework:spock-core:${gpars_spockVersion}"
+    testImplementation "com.google.guava:guava:${gpars_guavaVersion}"
+    testImplementation fileTree(dir: 'lib', include: '*.jar')
+    testImplementation group: 'com.google.caliper', name: 'caliper', version: '1.0-beta-2'
     deployerJars "org.apache.maven.wagon:wagon-http-lightweight:${gpars_wagonhttplightweightVersion}"
     //cover "net.sourceforge.cobertura:cobertura:${gpars_coberturaVersion}"
     // cant find testRuntime "net.sourceforge.cobertura:cobertura:${gpars_coberturaVersion}"
