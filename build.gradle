@@ -22,14 +22,13 @@
 //  Author: Hamlet D'Arcy - Updated OSGi configuration
 //  Author: Schalk W. Cronjé
 //
-//  uplifted to java 11, groovy 3.0.2 and general library refresh
+//  uplifted to java 17, groovy 3.0.8 and general library refresh, and gradle 7.2
 //  Author: Will Woodman
 
 
 plugins {
     id 'groovy'
     id 'java'
-    id 'maven'
     id 'maven-publish'
     //id 'osgi'
     id 'eclipse'
@@ -39,7 +38,7 @@ plugins {
 
 version '2.0-SNAPSHOT'
 
-sourceCompatibility = 1.11
+sourceCompatibility = 1.17
 
 group = 'org.groovyx.gpars'
 archivesBaseName = 'groovyx.gpars'
@@ -75,8 +74,8 @@ configurations.all {
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.13'
-    compile group: 'org.codehaus.groovy', name: 'groovy-all', version: "${gpars_groovyVersion}"
+    testImplementation group: 'junit', name: 'junit', version: '4.13'
+    implementation group: 'org.codehaus.groovy', name: 'groovy-all', version: "${gpars_groovyVersion}"
 
     implementation "org.codehaus.groovy:groovy-cli-commons:${gpars_groovyVersion}"
     implementation "org.multiverse:multiverse-core:${gpars_multiverseVersion}", { transitive = false }
@@ -313,8 +312,8 @@ idea {
         excludeDirs += file('java-demo') // A separate module of a pure-java gpars usage
     }
     project {
-        jdkName '1.11'
-        languageLevel 'JDK_11'
+        jdkName '1.17'
+        //languageLevel 'JDK_17'
         ipr {
             withXml { provider ->
                 def node = provider.asNode()
