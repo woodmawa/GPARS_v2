@@ -39,7 +39,7 @@ final def b = new DataflowVariable()
 
 group.with {
     task {
-        a >> {b << 20 + it}
+        a >> { b << 20 + it }
     }
 
     task {

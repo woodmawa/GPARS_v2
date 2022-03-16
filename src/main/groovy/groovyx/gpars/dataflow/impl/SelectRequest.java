@@ -22,7 +22,7 @@ package groovyx.gpars.dataflow.impl;
  * and a routine to invoke once a value is available.
  *
  * @author Vaclav Pech
- *         Date: 30th Sep 2010
+ * Date: 30th Sep 2010
  */
 public interface SelectRequest<T> {
 

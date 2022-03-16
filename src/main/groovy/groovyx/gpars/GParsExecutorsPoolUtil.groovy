@@ -41,8 +41,7 @@ import static groovyx.gpars.util.ParallelUtils.buildResultMap
  * This class forms the core of the DSL initialized by <i>GParsExecutorsPool</i>. The static methods of <i>GParsExecutorsPoolUtil</i>
  * get attached to their first arguments (the Groovy Category mechanism) and can be then invoked as if they were part of
  * the argument classes.
- * @see groovyx.gpars.GParsExecutorsPool
- *
+ * @see groovyx.gpars.GParsExecutorsPool*
  * @author Vaclav Pech
  * Date: Oct 23, 2008
  */
@@ -54,11 +53,11 @@ public class GParsExecutorsPoolUtil {
     private static final GeneralTimer timer = GParsConfig.retrieveDefaultTimer('GParsExecutorsTimeoutTimer', true)
 
     // Hack needed for maps.
-   private static java.util.Collection createCollection(Object object) {
-       def collection = []
-       for (element in object) collection << element
-       return collection
-   }
+    private static java.util.Collection createCollection(Object object) {
+        def collection = []
+        for (element in object) collection << element
+        return collection
+    }
 
     /**
      * schedules the supplied closure for processing in the underlying thread pool.
@@ -78,7 +77,7 @@ public class GParsExecutorsPoolUtil {
      * Calls a closure in a separate thread supplying the given arguments, returning a future for the potential return value.
      */
     public static Future callAsync(final Closure cl, final Object... args) {
-        callParallel {-> cl(* args) }
+        callParallel { -> cl(*args) }
     }
 
     /**
@@ -121,7 +120,7 @@ public class GParsExecutorsPoolUtil {
     public static Closure async(Closure cl) {
         return { Object... args ->
             if (args != null && args.size() == 0) callParallel(cl)
-            else callParallel({ -> cl(* args) })
+            else callParallel({ -> cl(*args) })
         }
     }
 
@@ -175,7 +174,7 @@ public class GParsExecutorsPoolUtil {
         final Semaphore semaphore = new Semaphore(0)
         Closure code = async({ Object... args ->
             try {
-                cl(* args)
+                cl(*args)
             } catch (Throwable e) {
                 exceptions.add(e)
             } finally {
@@ -369,7 +368,7 @@ public class GParsExecutorsPoolUtil {
      */
     public static def findAnyParallel(Object collection, Closure cl) {
         final AtomicReference result = new AtomicReference(null)
-        return processAnyResult(collection.collect { value -> {-> cl(value) ? value : null } })
+        return processAnyResult(collection.collect { value -> { -> cl(value) ? value : null } })
 //        collectParallel(collection, {if ((result.get() == null) && cl(it)) {result.set(it); return it} else return null})
 //        return result.get()
     }
@@ -421,7 +420,7 @@ public class GParsExecutorsPoolUtil {
      *     assert [1, 2, 3, 4, 5].anyParallel{Number number -&gt number > 2}*     assert ![1, 2, 3, 4, 5].anyParallel{Number number -&gt number > 6}*}* @throws AsyncException If any of the collection's elements causes the closure to throw an exception. The original exceptions will be stored in the AsyncException's concurrentExceptions field.
      */
     public static boolean anyParallel(Object collection, Closure cl) {
-        return processAnyResult(collection.collect { value -> {-> cl(value) } })
+        return processAnyResult(collection.collect { value -> { -> cl(value) } })
 //        final AtomicBoolean flag = new AtomicBoolean(false)
 //        eachParallel(collection, {if ((!flag.get()) && cl(it)) flag.set(true)})
 //        return flag.get()
@@ -486,7 +485,7 @@ public class GParsExecutorsPoolUtil {
         final AtomicInteger totalCounter = new AtomicInteger(alternatives.size())
         futures << GParsExecutorsPool.executeAsync(alternatives.collect {
             original ->
-                {->
+                { ->
                     try {
                         def localResult = original()
                         if (localResult) {
@@ -497,7 +496,8 @@ public class GParsExecutorsPoolUtil {
                     } catch (Throwable e) {
                         exceptions.add(e)
                     } finally {
-                        if (totalCounter.decrementAndGet() == 0 && !result.isBound()) result << null  //No more results may appear
+                        if (totalCounter.decrementAndGet() == 0 && !result.isBound()) result << null
+                        //No more results may appear
                     }
                 }
         })

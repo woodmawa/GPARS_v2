@@ -32,7 +32,7 @@ import static groovyx.gpars.dataflow.ProcessingNode.node
 
 List<List<Integer>> makeBoard() { (0..9).collect { [0] * 10 } }
 
-def display = node { boardOut, boardIn  ->
+def display = node { boardOut, boardIn ->
     def board = boardIn.take()
     boardOut << board                   // downstream can proceed concurrently
     board.each { println it.join(' ') }
@@ -41,7 +41,7 @@ def display = node { boardOut, boardIn  ->
 
 def nextBoard = node { boardIn, boardOut ->
     def board = boardIn.take()
-    def out   = makeBoard()
+    def out = makeBoard()
     for (row in 1..8) { // we could use eachParallel here but that is a different story
         for (col in 1..8) {
             out[row][col] = nextCellValue(board, row, col)
@@ -52,24 +52,24 @@ def nextBoard = node { boardIn, boardOut ->
 
 int nextCellValue(board, row, col) {
     def aliveNeighbors =
-        board[row - 1][col - 1] + board[row - 1][col] + board[row - 1][col + 1] +
-        board[row + 0][col - 1] +                       board[row + 0][col + 1] +
-        board[row + 1][col - 1] + board[row + 1][col] + board[row + 1][col + 1]
-    switch(aliveNeighbors){
-        case 0..1 : return 0
-        case 2    : return board[row][col]
-        case 3    : return 1
-        case 4..8 : return 0
+            board[row - 1][col - 1] + board[row - 1][col] + board[row - 1][col + 1] +
+                    board[row + 0][col - 1] + board[row + 0][col + 1] +
+                    board[row + 1][col - 1] + board[row + 1][col] + board[row + 1][col + 1]
+    switch (aliveNeighbors) {
+        case 0..1: return 0
+        case 2: return board[row][col]
+        case 3: return 1
+        case 4..8: return 0
     }
 }
 
 new KanbanFlow().with {
     cycleAllowed = true
-    def down = link display   to nextBoard
+    def down = link display to nextBoard
     def loop = link nextBoard to display
 
     def startBoard = makeBoard()
-    [[1,2],[2,3],[3,1],[3,2],[3,3]].each { startBoard[it[0]][it[1]] = 1 } // glider
+    [[1, 2], [2, 3], [3, 1], [3, 2], [3, 3]].each { startBoard[it[0]][it[1]] = 1 } // glider
     loop.downstream << new KanbanTray(link: loop, product: startBoard)
 
     start()

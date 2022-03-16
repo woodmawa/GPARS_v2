@@ -34,8 +34,8 @@ final def console = group.actor {
 }
 
 final def calculator = group.actor {
-    react {a ->
-        react {b ->
+    react { a ->
+        react { b ->
             console.send(a + b)
         }
     }

@@ -61,6 +61,7 @@ abstract class DataflowProcessorActor extends StaticDispatchActor<Object> {
 
     /**
      * Registers the provided handler to all input channels
+     *
      * @param handler The closure to invoke whenever a value gets bound to any of the input channels
      */
     final void registerChannelListenersToAllInputs(final DataflowChannelListener<Object> handler) {
@@ -68,6 +69,7 @@ abstract class DataflowProcessorActor extends StaticDispatchActor<Object> {
             ((DataflowReadChannel<Object>) input).getEventManager().addDataflowChannelListener(handler);
         }
     }
+
     final void onException(final Throwable e) {
         reportException(e);
         terminate();

@@ -26,7 +26,7 @@ import org.codehaus.groovy.runtime.NullObject
  */
 public abstract class DDAClosure {
 
-    private DDAClosure() { }
+    private DDAClosure() {}
 
     /**
      * Creates the closure for a given DDA
@@ -34,7 +34,7 @@ public abstract class DDAClosure {
      * @return The closure to use for dynamic dispatch to the given actor
      */
     public static Closure createDDAClosure(final DynamicDispatchActor dda) {
-        {msg ->
+        { msg ->
             return dda.onMessage(msg != null ? msg : NullObject.nullObject)  //Groovy truth won't let us use Elvis for numbers, strings and collections correctly)
         }
     }

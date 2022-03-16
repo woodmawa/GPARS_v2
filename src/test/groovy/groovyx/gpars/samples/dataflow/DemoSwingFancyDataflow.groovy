@@ -38,7 +38,7 @@ final SwingBuilder builder = new SwingBuilder()
 builder.build {
     final JFrame frame = builder.frame(title: 'Demo', defaultCloseOperation: JFrame.EXIT_ON_CLOSE, visible: true) {
         panel(layout: new GridLayout(values.size(), 2)) {
-            values.eachWithIndex {value, index ->
+            values.eachWithIndex { value, index ->
                 button('Undefined', opaque: true, id: 'x' + index)
                 button('Accumulated summary not known', opaque: true, id: 'y' + index)
             }
@@ -49,7 +49,7 @@ builder.build {
 
 Dataflow.task {
     int sum = 0
-    values.eachWithIndex {value, index ->
+    values.eachWithIndex { value, index ->
         builder.edt {
             builder."y$index".text = 'Waiting'
             builder."y$index".background = Color.red
@@ -68,8 +68,8 @@ Dataflow.task {
     }
 }
 
-values.eachWithIndex {value, index ->
-    df."$index" {newValue ->
+values.eachWithIndex { value, index ->
+    df."$index" { newValue ->
         builder.edt {
             builder."x$index".text = newValue
             builder."x$index".background = Color.green
@@ -80,7 +80,7 @@ values.eachWithIndex {value, index ->
 random = new Random()
 
 GParsPool.withPool(3) {
-    values.eachWithIndexParallel {value, index ->
+    values.eachWithIndexParallel { value, index ->
         builder.edt {
             builder."x$index".text = 'Calculating'
             builder."x$index".background = Color.blue
@@ -96,5 +96,5 @@ private def func(value) {
 }
 
 def factorial(value) {
-    (1..value).toList().inject(1) {partial, num -> partial * num}
+    (1..value).toList().inject(1) { partial, num -> partial * num }
 }

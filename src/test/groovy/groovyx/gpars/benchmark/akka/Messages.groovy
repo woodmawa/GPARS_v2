@@ -24,10 +24,13 @@ import groovy.transform.Immutable
 
 @Singleton
 class StartMessage {}
+
 @Singleton
 class StopMessage {}
+
 @Singleton
 class CancelMessage {}
+
 @Immutable
 final class TokenMessage {
     int id

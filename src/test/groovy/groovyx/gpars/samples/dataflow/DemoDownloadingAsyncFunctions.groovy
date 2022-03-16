@@ -29,15 +29,15 @@ import static groovyx.gpars.GParsPool.withPool
  */
 
 withPool {
-    Closure download = {String url ->
+    Closure download = { String url ->
         url.toURL().text
     }
 
-    Closure scanFor = {String word, String text ->
+    Closure scanFor = { String word, String text ->
         text.findAll(word).size()
     }
 
-    Closure lower = {s -> s.toLowerCase()}
+    Closure lower = { s -> s.toLowerCase() }
 
     println scanFor('groovy', lower(download('http://www.infoq.com')))  //synchronous processing
 
@@ -49,15 +49,15 @@ withPool {
 
 //now we'll instead make the functions asynchronous right-away
 withPool {
-    Closure download = {String url ->
+    Closure download = { String url ->
         url.toURL().text
     }.asyncFun()
 
-    Closure scanFor = {String word, String text ->
+    Closure scanFor = { String word, String text ->
         text.findAll(word).size()
     }.asyncFun()
 
-    Closure lower = {s -> s.toLowerCase()}.asyncFun()
+    Closure lower = { s -> s.toLowerCase() }.asyncFun()
 
     //asynchronous processing
     def result = scanFor('groovy', lower(download('http://www.infoq.com')))

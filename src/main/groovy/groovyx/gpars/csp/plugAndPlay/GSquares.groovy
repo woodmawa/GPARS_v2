@@ -33,10 +33,10 @@ class GSquares implements CSProcess {
         One2OneChannel I2P = Channel.one2one()
 
         def testList = [new GNumbers(outChannel: N2I.out()),
-                new GIntegrate(inChannel: N2I.in(),
-                        outChannel: I2P.out()),
-                new GPairs(inChannel: I2P.in(),
-                        outChannel: outChannel),
+                        new GIntegrate(inChannel: N2I.in(),
+                                outChannel: I2P.out()),
+                        new GPairs(inChannel: I2P.in(),
+                                outChannel: outChannel),
         ]
         new PAR(testList).run()
     }

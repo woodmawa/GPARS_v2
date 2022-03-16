@@ -50,7 +50,7 @@ public class LoopTest extends GroovyTestCase {
                 react {
                     counter.incrementAndGet()
                     barrier.await()
-                    react {message ->
+                    react { message ->
                         counter.incrementAndGet()
                         barrier.await()
 
@@ -86,7 +86,7 @@ public class LoopTest extends GroovyTestCase {
         }
 
         actor.metaClass {
-            afterStop = {List messages ->
+            afterStop = { List messages ->
                 afterStopBarrier.await()
             }
             onInterrupt = {}
@@ -117,7 +117,7 @@ public class LoopTest extends GroovyTestCase {
         }
 
         actor.metaClass {
-            afterStop = {List messages ->
+            afterStop = { List messages ->
                 messagesReference.set(messages)
                 afterBarrier.await()
             }

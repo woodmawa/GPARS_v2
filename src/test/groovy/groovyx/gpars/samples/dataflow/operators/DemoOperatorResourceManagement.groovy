@@ -54,7 +54,7 @@ final listener = new DataflowEventAdapter() {
     }
 }
 
-def op = group.operator(inputs: [a, b], outputs: [c], stateObject: state, listeners: [listener]) {x, y ->
+def op = group.operator(inputs: [a, b], outputs: [c], stateObject: state, listeners: [listener]) { x, y ->
     stateObject.log.print("Processing $x and $y;")
     bindOutput x + y
 }

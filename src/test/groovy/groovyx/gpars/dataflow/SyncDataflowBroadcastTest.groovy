@@ -108,7 +108,7 @@ class SyncDataflowBroadcastTest extends GroovyTestCase {
         assert !writerReached2.get()
 
         def readerResult = new DataflowVariable()
-        Thread.start {readerResult << subscription1.val}
+        Thread.start { readerResult << subscription1.val }
         assert subscription2.val == 3
         assert readerResult.val == 3
 
@@ -120,7 +120,7 @@ class SyncDataflowBroadcastTest extends GroovyTestCase {
     public void testMultipleWriters() {
         final SyncDataflowBroadcast broadcast = new SyncDataflowBroadcast()
         final DataflowReadChannel subscription = broadcast.createReadChannel()
-        (1..20).each {num -> Thread.start {broadcast << num}}
+        (1..20).each { num -> Thread.start { broadcast << num } }
         sleep 1000
 
         def results = [] as Set
@@ -151,7 +151,7 @@ class SyncDataflowBroadcastTest extends GroovyTestCase {
         sleep 1000
         assert !writerReached.get()
 
-        Thread.start {subscription2.val}
+        Thread.start { subscription2.val }
         assert subscription3.val == 1
         shouldFail(IllegalStateException) {
             subscription1.val
@@ -254,7 +254,6 @@ class SyncDataflowBroadcastTest extends GroovyTestCase {
         assert writerReached1.get()
 
 
-
         subscription2.whenBound {
             result2 << it
         }
@@ -355,7 +354,7 @@ class SyncDataflowBroadcastTest extends GroovyTestCase {
             broadcast.unsubscribeReadChannel(subscription1)
         }
         shouldFail(IllegalStateException) {
-            subscription2.wheneverBound { }
+            subscription2.wheneverBound {}
         }
 
 
@@ -386,7 +385,7 @@ class SyncDataflowBroadcastTest extends GroovyTestCase {
         final SyncDataflowBroadcast broadcast = new SyncDataflowBroadcast()
         DataflowReadChannel subscription1 = broadcast.createReadChannel()
         DataflowReadChannel subscription2 = broadcast.createReadChannel()
-        Thread.start {broadcast << 10}
+        Thread.start { broadcast << 10 }
 
         assert null == subscription1.getVal(1, TimeUnit.MILLISECONDS)
         assert null == subscription1.getVal(1, TimeUnit.MILLISECONDS)

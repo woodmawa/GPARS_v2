@@ -49,7 +49,7 @@ def controller = Actors.reactor {
     iterations.times {
         GParsPool.withPool(10) {
             reactors.eachParallel {
-                numOfMessages.times {msg ->
+                numOfMessages.times { msg ->
                     it.send(msg)
                 }
             }

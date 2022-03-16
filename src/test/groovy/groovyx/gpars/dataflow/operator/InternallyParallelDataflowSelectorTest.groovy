@@ -49,7 +49,7 @@ public class InternallyParallelDataflowSelectorTest extends GroovyTestCase {
         final DataflowQueue d = new DataflowQueue()
         final DataflowQueue e = new DataflowQueue()
 
-        def op = group.selector(inputs: [a, b, c], outputs: [d, e], maxForks: 2) {x ->
+        def op = group.selector(inputs: [a, b, c], outputs: [d, e], maxForks: 2) { x ->
             bindOutput 0, x
             bindOutput 1, 2 * x
         }
@@ -92,10 +92,10 @@ public class InternallyParallelDataflowSelectorTest extends GroovyTestCase {
         final DataflowQueue e = new DataflowQueue()
 
         shouldFail(IllegalArgumentException) {
-            group.selector(inputs: [a, b, c], outputs: [d, e], maxForks: 0) {x, y, z -> }
+            group.selector(inputs: [a, b, c], outputs: [d, e], maxForks: 0) { x, y, z -> }
         }
         shouldFail(IllegalArgumentException) {
-            group.selector(inputs: [a, b, c], outputs: [d, e], maxForks: -1) {x, y, z -> }
+            group.selector(inputs: [a, b, c], outputs: [d, e], maxForks: -1) { x, y, z -> }
         }
     }
 
@@ -103,9 +103,9 @@ public class InternallyParallelDataflowSelectorTest extends GroovyTestCase {
         final DataflowQueue a = new DataflowQueue()
         final DataflowQueue d = new DataflowQueue()
 
-        def selector1 = group.selector(inputs: [a], outputs: [], maxForks: 2) {v -> terminate()}
-        def selector2 = group.selector(inputs: [a], maxForks: 2) {v -> terminate()}
-        def selector3 = group.selector(inputs: [a], mistypedOutputs: [d], maxForks: 2) {v -> terminate()}
+        def selector1 = group.selector(inputs: [a], outputs: [], maxForks: 2) { v -> terminate() }
+        def selector2 = group.selector(inputs: [a], maxForks: 2) { v -> terminate() }
+        def selector3 = group.selector(inputs: [a], mistypedOutputs: [d], maxForks: 2) { v -> terminate() }
 
         a << 'value'
         a << 'value'
@@ -119,13 +119,13 @@ public class InternallyParallelDataflowSelectorTest extends GroovyTestCase {
         final DataflowQueue d = new DataflowQueue()
 
         shouldFail(IllegalArgumentException) {
-            group.selector(inputs1: [a], outputs: [d], maxForks: 2) {v -> }
+            group.selector(inputs1: [a], outputs: [d], maxForks: 2) { v -> }
         }
         shouldFail(IllegalArgumentException) {
-            group.selector(outputs: [d], maxForks: 2) {v -> }
+            group.selector(outputs: [d], maxForks: 2) { v -> }
         }
         shouldFail(IllegalArgumentException) {
-            group.selector([maxForks: 2]) {v -> }
+            group.selector([maxForks: 2]) { v -> }
         }
     }
 

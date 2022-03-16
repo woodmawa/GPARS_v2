@@ -33,7 +33,7 @@ public class JoinTest extends GroovyTestCase {
 
     public void testCooperatingActorJoin() {
         final def actor1 = Actors.actor { react {} }
-        final def actor2 = Actors.actor {actor1.join()}
+        final def actor2 = Actors.actor { actor1.join() }
         actor1 << 'Message'
         [actor1, actor2]*.join()
         assertFalse actor1.isActive()
@@ -41,7 +41,7 @@ public class JoinTest extends GroovyTestCase {
     }
 
     public void testStoppedActorJoin() {
-        final def actor = Actors.actor { }
+        final def actor = Actors.actor {}
         actor.join()
         assertFalse actor.isActive()
         actor.join()

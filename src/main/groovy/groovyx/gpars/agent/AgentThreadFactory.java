@@ -22,7 +22,7 @@ import java.util.concurrent.ThreadFactory;
  * Creates daemon threads for the default agent thread pools
  *
  * @author Vaclav Pech
- *         Date: 13.4.2010
+ * Date: 13.4.2010
  */
 final class AgentThreadFactory implements ThreadFactory {
     @Override

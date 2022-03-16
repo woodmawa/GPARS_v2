@@ -24,20 +24,20 @@ import groovyx.gpars.group.NonDaemonPGroup
 final def group = new NonDaemonPGroup(10)
 def jugMembers = group.agent(['Me'])  //add Me
 
-jugMembers.send {it.add 'James'}  //add James
+jugMembers.send { it.add 'James' }  //add James
 
 final Thread t1 = Thread.start {
-    jugMembers.send {it.add 'Joe'}  //add Joe
+    jugMembers.send { it.add 'Joe' }  //add Joe
 }
 
 final Thread t2 = Thread.start {
-    jugMembers << {it.add 'Dave'}  //add Dave
-    jugMembers << {it.add 'Alice'}  //add Alice
+    jugMembers << { it.add 'Dave' }  //add Dave
+    jugMembers << { it.add 'Alice' }  //add Alice
 }
 
 [t1, t2]*.join()
 println jugMembers.val
-jugMembers.valAsync {println "Current members: $it"}
+jugMembers.valAsync { println "Current members: $it" }
 
 jugMembers.await()
 

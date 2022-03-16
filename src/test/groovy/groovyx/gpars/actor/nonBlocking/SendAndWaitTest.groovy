@@ -184,7 +184,7 @@ public class SendAndWaitTest extends GroovyTestCase {
             }
 
             barrier.await()
-            react { }
+            react {}
         }
 
         barrier.await()

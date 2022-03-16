@@ -23,15 +23,15 @@ import groovyx.gpars.actor.Actors
  * @author Vaclav Pech
  */
 
-Closure handleB = {a ->
-    react {b ->
+Closure handleB = { a ->
+    react { b ->
         println a + b
         reply a + b
     }
 }
 
-Closure handleA = {->
-    react {a ->
+Closure handleA = { ->
+    react { a ->
         handleB(a)
     }
 }

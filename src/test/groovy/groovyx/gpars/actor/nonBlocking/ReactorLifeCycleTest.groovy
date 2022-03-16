@@ -56,7 +56,7 @@ public class ReactorLifeCycleTest extends GroovyTestCase {
         }
 
         actor.metaClass {
-            afterStop = {List messages ->
+            afterStop = { List messages ->
                 unprocessedMessages = messages
             }
         }
@@ -111,7 +111,7 @@ public class ReactorLifeCycleTest extends GroovyTestCase {
         }
 
         actor.metaClass {
-            afterStop = {List messages ->
+            afterStop = { List messages ->
                 unprocessedMessages = messages
             }
         }
@@ -125,7 +125,7 @@ public class ReactorLifeCycleTest extends GroovyTestCase {
         assert 1 == counter.intValue()
         actor.join()
         assertFalse actor.isActive()
-        assert [2, 3] == unprocessedMessages.collect {it.payLoad}
+        assert [2, 3] == unprocessedMessages.collect { it.payLoad }
     }
 
     public void testExternalTerminate() {
@@ -185,7 +185,7 @@ public class ReactorLifeCycleTest extends GroovyTestCase {
         }
 
         actor.metaClass {
-            afterStop = {List messages ->
+            afterStop = { List messages ->
                 counter.incrementAndGet()
                 latch.countDown()
             }
@@ -210,7 +210,7 @@ public class ReactorLifeCycleTest extends GroovyTestCase {
         }
 
         actor.metaClass {
-            afterStop = {List messages ->
+            afterStop = { List messages ->
                 messagesReference.set(messages)
                 latch.countDown()
             }
@@ -237,7 +237,7 @@ public class ReactorLifeCycleTest extends GroovyTestCase {
         }
 
         actor.metaClass {
-            afterStop = {List messages ->
+            afterStop = { List messages ->
                 messagesReference.set(messages)
                 latch.countDown()
             }
@@ -267,7 +267,7 @@ public class ReactorLifeCycleTest extends GroovyTestCase {
         }
 
         actor.metaClass {
-            afterStop = {List messages ->
+            afterStop = { List messages ->
                 messagesReference.set(messages)
                 latch.countDown()
             }
@@ -301,7 +301,7 @@ public class ReactorLifeCycleTest extends GroovyTestCase {
         }
 
         actor.metaClass {
-            afterStop = {List messages ->
+            afterStop = { List messages ->
                 messagesReference.set(messages)
                 afterStopBarrier.await()
             }
@@ -333,7 +333,7 @@ public class ReactorLifeCycleTest extends GroovyTestCase {
         }
 
         actor.metaClass {
-            afterStop = {List messages ->
+            afterStop = { List messages ->
                 messagesReference.set(messages)
                 afterStopBarrier.await()
             }
@@ -364,7 +364,7 @@ public class ReactorLifeCycleTest extends GroovyTestCase {
         }
 
         actor.metaClass {
-            afterStop = {List messages ->
+            afterStop = { List messages ->
                 messagesReference.set(messages)
                 afterStopBarrier.await()
             }

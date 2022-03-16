@@ -1,18 +1,18 @@
 /**
  * Copyright (C) 2009 Google Inc.
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * <p>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
+ * <p>
  * Modified by Hyuk Don Kwon
  * Modified to support graphing using Google Chart
  */
@@ -143,15 +143,15 @@ final class ChartBuilder implements ResultProcessor {
 
  */
 
-        /*
-        * Figure out how much influence each axis has on the measured value.
-        * We sum the measurements taken with each value of each axis. For
-        * axes that have influence on the measurement, the sums will differ
-        * by value. If the axis has little influence, the sums will be similar
-        * to one another and close to the overall average. We take the variance
-        * across each axis' collection of sums. Higher variance implies higher
-        * influence on the measured result.
-        */
+/*
+ * Figure out how much influence each axis has on the measured value.
+ * We sum the measurements taken with each value of each axis. For
+ * axes that have influence on the measurement, the sums will differ
+ * by value. If the axis has little influence, the sums will be similar
+ * to one another and close to the overall average. We take the variance
+ * across each axis' collection of sums. Higher variance implies higher
+ * influence on the measured result.
+ */
 
         /*
         double sumOfAllMeasurements = 0;
@@ -185,56 +185,56 @@ final class ChartBuilder implements ResultProcessor {
     */
 
 /**
-    private void buildChart() {
-        // X axis label is User Parameter,
-        //   A parameter is singleton if it has only one value
-        //   Assumption here is there is only one user parameter(numberOfClients)
-        //   and there are multiple scenarios
-        String xLabel = null;
+ private void buildChart() {
+ // X axis label is User Parameter,
+ //   A parameter is singleton if it has only one value
+ //   Assumption here is there is only one user parameter(numberOfClients)
+ //   and there are multiple scenarios
+ String xLabel = null;
 
-        for (final Axis axis : sortedAxes) {
-            if (!axis.isSingleton()) {
-                xLabel = axis.name.toString();
-                break;
-            }
-        }
+ for (final Axis axis : sortedAxes) {
+ if (!axis.isSingleton()) {
+ xLabel = axis.name.toString();
+ break;
+ }
+ }
 
-        if (xLabel == null) {
-            System.out.println("Need more than 1 scenario to build chart");
-            return;
-        }
-        */
-
-
-        // Y axis label is the unit of measurements
-        //It is ns for latency, and messages per second for throughput
-/**
-        final ProcessedResult firstResult = processedResults.values().iterator().next();
-        final String yLabel = firstResult.responseUnit;
-
-        final ArrayList<Long> yValues = new ArrayList<Long>();
-        final ArrayList<String> xValues = new ArrayList<String>();
-        for (final ScenarioName scenarioLocalName : sortedScenarioNames) {
-            final ProcessedResult result = processedResults.get(scenarioLocalName);
-            yValues.add((long) result.median);
-            for (final Axis axis : sortedAxes) {
-                if (!axis.isSingleton()) {
-                    xValues.add(axis.get(scenarioLocalName).toString());
-                }
-            }
-        }
+ if (xLabel == null) {
+ System.out.println("Need more than 1 scenario to build chart");
+ return;
+ }
  */
 
-        // Looking for the previous measurements of this benchmark
-        //   that has the same number of scenarios by
-        //   parsing Json files saved in caliper-results folder.
-        //   Do not change the name of the file nor the name of the benchmark method
-        //final File dir = new File("caliper-results");
-        //final List<ArrayList<Long>> historyYValues = new ArrayList<ArrayList<Long>>();
-        //final List<ArrayList<String>> historyXValues = new ArrayList<ArrayList<String>>();
-        //final ArrayList<String> historyNames = new ArrayList<String>();
 
-        // Pick history files that are most recently created
+// Y axis label is the unit of measurements
+//It is ns for latency, and messages per second for throughput
+/**
+ final ProcessedResult firstResult = processedResults.values().iterator().next();
+ final String yLabel = firstResult.responseUnit;
+
+ final ArrayList<Long> yValues = new ArrayList<Long>();
+ final ArrayList<String> xValues = new ArrayList<String>();
+ for (final ScenarioName scenarioLocalName : sortedScenarioNames) {
+ final ProcessedResult result = processedResults.get(scenarioLocalName);
+ yValues.add((long) result.median);
+ for (final Axis axis : sortedAxes) {
+ if (!axis.isSingleton()) {
+ xValues.add(axis.get(scenarioLocalName).toString());
+ }
+ }
+ }
+ */
+
+// Looking for the previous measurements of this benchmark
+//   that has the same number of scenarios by
+//   parsing Json files saved in caliper-results folder.
+//   Do not change the name of the file nor the name of the benchmark method
+//final File dir = new File("caliper-results");
+//final List<ArrayList<Long>> historyYValues = new ArrayList<ArrayList<Long>>();
+//final List<ArrayList<String>> historyXValues = new ArrayList<ArrayList<String>>();
+//final ArrayList<String> historyNames = new ArrayList<String>();
+
+// Pick history files that are most recently created
 
 /*
         final Queue<File> fileQueue = new PriorityQueue<File>(10, new Comparator<File>() {
@@ -271,9 +271,9 @@ final class ChartBuilder implements ResultProcessor {
         }
 */
 
-        // Picks three latest histories
-        // Overflows Google Chart if try to plot more than 3 histories.(Total of 4)
-         //
+// Picks three latest histories
+// Overflows Google Chart if try to plot more than 3 histories.(Total of 4)
+//
 /*
         for (int i = 0; i < 3; i++) {
             if (fileQueue.isEmpty()) break;
@@ -285,8 +285,8 @@ final class ChartBuilder implements ResultProcessor {
             historyNames.add(tempList[tempList.length - 2]);
         }
 */
-        // Calculating the range of the cart and the range of each data set.
-         //
+// Calculating the range of the cart and the range of each data set.
+//
 /*
         final Collection<Long> maxList = new ArrayList<Long>();
         for (final Iterable<Long> medians : historyYValues) {
@@ -318,9 +318,9 @@ final class ChartBuilder implements ResultProcessor {
         return new ProcessedResult(r2);
     }
 */
-    /**
-     * A scenario variable and the set of values to which it has been assigned.
-     */
+/**
+ * A scenario variable and the set of values to which it has been assigned.
+ */
 
     /*
     private class Axis {
@@ -361,10 +361,10 @@ final class ChartBuilder implements ResultProcessor {
     */
 
 
-    /**
-     * Orders the different axes by their variance. This results
-     * in an appropriate grouping of output values.
-     */
+/**
+ * Orders the different axes by their variance. This results
+ * in an appropriate grouping of output values.
+ */
     /*
     private static class VarianceOrdering extends Ordering<Axis> {
         @Override
@@ -375,9 +375,9 @@ final class ChartBuilder implements ResultProcessor {
     */
 
 
-    /**
-     * Orders scenarios by the axes.
-     */
+/**
+ * Orders scenarios by the axes.
+ */
     /*
     private class ByAxisOrdering extends Ordering<ScenarioName> {
         @Override

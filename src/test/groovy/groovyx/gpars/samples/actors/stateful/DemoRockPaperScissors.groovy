@@ -36,7 +36,8 @@ final /*static*/ BEATS = [
         [Move.SCISSORS, Move.PAPER]
 ].asImmutable()
 
-@Immutable final class Stroke {
+@Immutable
+final class Stroke {
     String player;
     Move move
 }
@@ -48,7 +49,7 @@ def randomMove() {
     return Move.values()[random.nextInt(Move.values().length)]
 }
 
-def announce = {Stroke first, Stroke second ->
+def announce = { Stroke first, Stroke second ->
     String winner = "tie"
     if ([first, second]*.move in BEATS) winner = first.player
     if ([second, first]*.move in BEATS) winner = second.player
@@ -75,8 +76,8 @@ def coordinator = pooled.actor {
         react {
             player1.send()
             player2.send()
-            react {Stroke first ->
-                react {Stroke second ->
+            react { Stroke first ->
+                react { Stroke second ->
                     println announce(first, second)
                     send()
                 }

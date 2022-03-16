@@ -23,8 +23,8 @@ import groovyx.gpars.GParsPool
  */
 
 def n = [15, 4, 3, 4, 10]
-GParsPool.withPool(3) {pool ->
-    def k = n.anyParallel {t ->
+GParsPool.withPool(3) { pool ->
+    def k = n.anyParallel { t ->
         println "$t started"
         sleep t * 1000
         println "$t ended"

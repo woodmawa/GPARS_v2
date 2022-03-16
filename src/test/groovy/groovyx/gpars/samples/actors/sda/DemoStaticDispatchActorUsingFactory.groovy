@@ -23,7 +23,7 @@ import static groovyx.gpars.actor.Actors.staticMessageHandler
  * which offers quick actor implementation leveraging compile-time binding of the message handler.
  */
 
-final actor = staticMessageHandler {String message ->
+final actor = staticMessageHandler { String message ->
     println 'Received string ' + message
 
     switch (message) {

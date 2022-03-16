@@ -22,7 +22,7 @@ import java.util.List;
  * This class wraps multiple exception, which occurred in concurrently run code inside one of the <i>GParsExecutorsPoolUtil</i> methods.
  *
  * @author Vaclav Pech
- *         Date: Nov 17, 2008
+ * Date: Nov 17, 2008
  */
 public final class AsyncException extends RuntimeException {
     private static final long serialVersionUID = 1573135643731810717L;

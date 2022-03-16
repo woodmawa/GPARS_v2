@@ -25,14 +25,14 @@ import groovyx.gpars.dataflow.DataflowVariable
 
 final DataflowVariable variable = new DataflowVariable()
 
-final doubler = {it * 2}
-final inc = {it + 1}
-final dec = {it - 1}
+final doubler = { it * 2 }
+final inc = { it + 1 }
+final dec = { it - 1 }
 
 final doubled = variable.then doubler
 doubled.then inc then this.&println
 doubled.then dec then this.&println
 
-Thread.start {variable << 4}
+Thread.start { variable << 4 }
 
 sleep 1000

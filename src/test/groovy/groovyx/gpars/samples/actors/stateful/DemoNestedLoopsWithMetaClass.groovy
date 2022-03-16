@@ -26,15 +26,15 @@ import static groovyx.gpars.actor.Actors.actor
 
 Actor actor = actor {
     delegate.metaClass {
-        outerLoop = {->
-            react {a ->
+        outerLoop = { ->
+            react { a ->
                 println 'Outer: ' + a
                 innerLoop()
             }
         }
 
-        innerLoop = {->
-            react {b ->
+        innerLoop = { ->
+            react { b ->
                 println 'Inner ' + b
                 if (b == 0) outerLoop()
                 else innerLoop()

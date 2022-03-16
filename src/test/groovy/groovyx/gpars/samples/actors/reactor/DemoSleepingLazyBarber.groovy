@@ -55,7 +55,7 @@ barber.scheduleAtFixedRate({
 //}, 0, 15, TimeUnit.MINUTES)
 }, 0, 15, TimeUnit.SECONDS)  //we're using SECONDS to save your time while watching the demo
 
-def barberShop = new DefaultPGroup().reactor {message ->
+def barberShop = new DefaultPGroup().reactor { message ->
     //noinspection GroovySwitchStatementWithNoDefault
     switch (message) {
         case EnterShop:

@@ -37,7 +37,7 @@ me = Actors.actor {
         }
     }
 
-    me.metaClass.onDeliveryError = {msg ->
+    me.metaClass.onDeliveryError = { msg ->
         //callback on actor inaccessibility
         println "Could not deliver message $msg"
     }

@@ -28,9 +28,9 @@ import static groovyx.gpars.dataflow.Dataflow.operator
  */
 
 //Mock-up definitions of build steps
-final createABuildStep = {name -> {param -> println "Starting $name"; sleep 3000; println "Finished $name"; true}}
-final createASlowArgBuildStep = {name -> {param -> println "Starting $name"; sleep 9000; println "Finished $name"; true}}
-final createAThreeArgBuildStep = {name -> {a, b, c -> println "Starting $name"; sleep 3000; println "Finished $name"; true}}
+final createABuildStep = { name -> { param -> println "Starting $name"; sleep 3000; println "Finished $name"; true } }
+final createASlowArgBuildStep = { name -> { param -> println "Starting $name"; sleep 9000; println "Finished $name"; true } }
+final createAThreeArgBuildStep = { name -> { a, b, c -> println "Starting $name"; sleep 3000; println "Finished $name"; true } }
 final checkout = createASlowArgBuildStep 'Checkout Sources'
 final compileSources = createABuildStep 'Compile Sources'
 final generateAPIDoc = createABuildStep 'Generate API Doc'
@@ -50,27 +50,27 @@ final done = new DataflowQueue()
 
 /* Here's the composition of individual build steps into a process */
 
-operator(inputs: [urls], outputs: [checkedOutProjects], maxForks: 3) {url ->
+operator(inputs: [urls], outputs: [checkedOutProjects], maxForks: 3) { url ->
     bindAllOutputs checkout(url)
 }
 
-operator([checkedOutProjects.createReadChannel()], [compiledProjects]) {projectRoot ->
+operator([checkedOutProjects.createReadChannel()], [compiledProjects]) { projectRoot ->
     bindOutput compileSources(projectRoot)
 }
 
-operator(checkedOutProjects.createReadChannel(), apiDocs) {projectRoot ->
+operator(checkedOutProjects.createReadChannel(), apiDocs) { projectRoot ->
     bindOutput generateAPIDoc(projectRoot)
 }
 
-operator(checkedOutProjects.createReadChannel(), userDocs) {projectRoot ->
+operator(checkedOutProjects.createReadChannel(), userDocs) { projectRoot ->
     bindOutput generateUserDocumentation(projectRoot)
 }
 
-operator([compiledProjects, apiDocs, userDocs], [packages]) {classes, api, guide ->
+operator([compiledProjects, apiDocs, userDocs], [packages]) { classes, api, guide ->
     bindOutput packageProject(classes, api, guide)
 }
 
-final deployer = operator(packages, done) {packagedProject ->
+final deployer = operator(packages, done) { packagedProject ->
     if (deploy(packagedProject) == 'success') bindOutput true
     else bindOutput false
 }

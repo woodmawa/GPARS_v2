@@ -53,7 +53,7 @@ public class DataflowChannelLengthTest extends GroovyTestCase {
         assert queue.length() == 1
         queue << 20
         assert queue.length() == 2
-        queue.whenBound {barrier.await()}
+        queue.whenBound { barrier.await() }
         barrier.await()
         assert queue.length() == 1
         queue.val
@@ -97,8 +97,8 @@ public class DataflowChannelLengthTest extends GroovyTestCase {
         assert subscription1.length() == 2
         assert subscription2.length() == 3
 
-        subscription1.whenBound {barrier.await()}
-        subscription2.whenBound {barrier.await()}
+        subscription1.whenBound { barrier.await() }
+        subscription2.whenBound { barrier.await() }
         barrier.await()
         assert subscription1.length() == 1
         assert subscription2.length() == 2
@@ -121,7 +121,7 @@ public class DataflowChannelLengthTest extends GroovyTestCase {
         channel << 1
         channel << 2
         channel << 3
-        subscription1.whenBound {barrier.await()}
+        subscription1.whenBound { barrier.await() }
         assert 2 == subscription1.val
         assert 3 == subscription1.val
         barrier.await()

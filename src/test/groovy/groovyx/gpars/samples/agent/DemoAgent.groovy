@@ -23,19 +23,19 @@ import groovyx.gpars.agent.Agent
  */
 def jugMembers = new Agent<List<String>>(['Me'])  //add Me
 
-jugMembers.send {it.add 'James'}  //add James
+jugMembers.send { it.add 'James' }  //add James
 
 final Thread t1 = Thread.start {
-    jugMembers << {it.add 'Joe'}  //add Joe (using the operator)
+    jugMembers << { it.add 'Joe' }  //add Joe (using the operator)
 }
 
 final Thread t2 = Thread.start {
-    jugMembers {it.add 'Dave'}  //add Dave (using the implicit call() method)
-    jugMembers {it.add 'Alice'}  //add Alice (using the implicit call() method)
+    jugMembers { it.add 'Dave' }  //add Dave (using the implicit call() method)
+    jugMembers { it.add 'Alice' }  //add Alice (using the implicit call() method)
 }
 
 [t1, t2]*.join()
 println jugMembers.val
-jugMembers.valAsync {println "Current members: $it"}
+jugMembers.valAsync { println "Current members: $it" }
 
 jugMembers.await()

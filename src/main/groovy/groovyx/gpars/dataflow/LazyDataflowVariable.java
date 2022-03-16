@@ -34,7 +34,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  *
  * @param <T> Type of values to bind with the DataflowVariable
  * @author Vaclav Pech
- *         Date: April 4, 2013
+ * Date: April 4, 2013
  */
 @SuppressWarnings({"serial", "AccessingNonPublicFieldOfAnotherObject", "UnqualifiedStaticUsage"})
 public final class LazyDataflowVariable<T> extends DataflowVariable<T> {

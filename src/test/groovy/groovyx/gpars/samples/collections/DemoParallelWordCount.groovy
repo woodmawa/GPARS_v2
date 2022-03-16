@@ -33,7 +33,8 @@ println combineCount2(words)
  */
 def groupByCount(arg) {
     withPool {
-        return arg.parallel.map {[it, 1]}.groupBy {it[0]}.getParallel().map {it.value = it.value.size(); it}.sort {-it.value}.collection
+        return arg.parallel.map { [it, 1] }.groupBy { it[0] }.getParallel().map { it.value = it.value.size();
+            it }.sort { -it.value }.collection
     }
 }
 
@@ -42,14 +43,14 @@ def groupByCount(arg) {
  */
 def mapReduceCount(arg) {
     withPool {
-        return arg.parallel.map {[(it): 1]}.reduce {a, b ->
-            b.each {k, v ->
+        return arg.parallel.map { [(it): 1] }.reduce { a, b ->
+            b.each { k, v ->
                 def value = a[k]
                 if (value == null) a[k] = v
                 else a[k] = value + v
             }
             a
-        }.getParallel().sort {-it.value}.collection
+        }.getParallel().sort { -it.value }.collection
     }
 }
 
@@ -58,7 +59,7 @@ def mapReduceCount(arg) {
  */
 def combineCount1(arg) {
     withPool {
-        arg.parallel.map {[it, 1]}.combine(0, {a, b -> a + b}).getParallel().sort {-it.value}.collection
+        arg.parallel.map { [it, 1] }.combine(0, { a, b -> a + b }).getParallel().sort { -it.value }.collection
     }
 }
 
@@ -67,7 +68,8 @@ def combineCount1(arg) {
  */
 def combineCount2(arg) {
     withPool {
-        arg.parallel.map {[it, 1]}.combine([], {list, value -> list << value}).getParallel().map {it.value = it.value.size(); it}.sort {-it.value}.collection
+        arg.parallel.map { [it, 1] }.combine([], { list, value -> list << value }).getParallel().map { it.value = it.value.size();
+            it }.sort { -it.value }.collection
 //        arg.parallel.map {[it, 1]}.combine([], {list, value -> list << value}).getParallel().map {k, v -> v = v.value.size(); it}.sort {-it.value}.collection
     }
 }

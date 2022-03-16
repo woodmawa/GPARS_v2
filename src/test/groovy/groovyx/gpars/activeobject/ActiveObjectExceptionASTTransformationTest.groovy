@@ -177,6 +177,7 @@ class MyExceptionWrapperWithErrorHandlerException implements ActorWithExceptionH
         throw new Exception(e)
     }
 }
+
 @ActiveObject
 class MyExceptionWrapperWithoutHandler {
     @ActiveMethod

@@ -29,7 +29,7 @@ import groovy.lang.Closure;
  * </pre>
  *
  * @author Vaclav Pech, Alex Tkachman
- *         Date: Jun 26, 2009
+ * Date: Jun 26, 2009
  */
 @SuppressWarnings("rawtypes")
 public class ReactiveActor extends AbstractLoopingActor {

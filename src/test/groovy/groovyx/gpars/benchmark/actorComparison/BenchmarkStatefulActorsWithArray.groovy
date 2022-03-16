@@ -67,7 +67,7 @@ final class DefaultActorHandlerWithArray extends DefaultActor {
 
     void act() {
         loop {
-            react {msg ->
+            react { msg ->
                 if (index < channels.length - 1) channels[index + 1].send(msg)
                 cdl.countDown()
             }

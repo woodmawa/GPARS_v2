@@ -23,7 +23,7 @@ import java.util.LinkedList;
  * Holds a thread-local stack of pools to allow for nested calls to ForkJoinPool.withPool() or GParsExecutorsPool.withPool()
  *
  * @author Vaclav Pech
- *         Date: Dec 15, 2009
+ * Date: Dec 15, 2009
  */
 final class ThreadLocalPools extends ThreadLocal<LinkedList<Object>> {
 

@@ -34,10 +34,11 @@ class PrinterService {
 
 def printer = new Agent<PrinterService>(new PrinterService())    //Wrap the service in an agent
 
-final Thread thread1 = Thread.start {       //Send off print tasks to the Agent, the tasks must each have exclusive access to the actual printing service
+final Thread thread1 = Thread.start {
+    //Send off print tasks to the Agent, the tasks must each have exclusive access to the actual printing service
     for (num in (1..3)) {
         final String text = "document $num"
-        printer << {printerService ->
+        printer << { printerService ->
             printerService.document = text
             printerService.quality = 'High'
             printerService.printDocument()
@@ -48,9 +49,10 @@ final Thread thread1 = Thread.start {       //Send off print tasks to the Agent,
 }
 
 final Thread thread2 = Thread.start {
-    for (num in (1..4)) {                   //Send off some other print tasks to the Agent, the tasks must each have exclusive access to the actual printing service
+    for (num in (1..4)) {
+        //Send off some other print tasks to the Agent, the tasks must each have exclusive access to the actual printing service
         final String text = "picture $num"
-        printer << {printerService ->
+        printer << { printerService ->
             printerService.document = text
             printerService.quality = 'Medium'
             printerService.printDocument()

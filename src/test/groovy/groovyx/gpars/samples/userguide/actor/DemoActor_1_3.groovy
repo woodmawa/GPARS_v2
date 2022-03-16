@@ -37,13 +37,13 @@ def friend = Actors.actor {
 def me = Actors.actor {
     friend.send('Hi')
 
-    delegate.metaClass.onTimeout = {->
+    delegate.metaClass.onTimeout = { ->
         friend.send('I see, busy as usual. Never mind.')
         stop()
     }
 
     //wait for answer 1sec
-    react(1000) {msg ->
+    react(1000) { msg ->
         if (msg != Actor.TIMEOUT) {
             //continue conversation
             println "Thank you for $msg"

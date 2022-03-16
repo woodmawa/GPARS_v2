@@ -38,11 +38,11 @@ class GPairs implements CSProcess {
         def pairsList = [new GPlus(outChannel: outChannel,
                 inChannel0: a.in(),
                 inChannel1: c.in()),
-                new GPCopy(inChannel: inChannel,
-                        outChannel0: a.out(),
-                        outChannel1: b.out()),
-                new GTail(inChannel: b.in(),
-                        outChannel: c.out())
+                         new GPCopy(inChannel: inChannel,
+                                 outChannel0: a.out(),
+                                 outChannel1: b.out()),
+                         new GTail(inChannel: b.in(),
+                                 outChannel: c.out())
         ]
         new PAR(pairsList).run()
     }

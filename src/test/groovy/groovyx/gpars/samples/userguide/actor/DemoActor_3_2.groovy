@@ -25,14 +25,14 @@ import groovyx.gpars.actor.Actors
 
 Actor demoActor = Actors.actor {
     delegate.metaClass {
-        handleA = {->
-            react {a ->
+        handleA = { ->
+            react { a ->
                 handleB(a)
             }
         }
 
-        handleB = {a ->
-            react {b ->
+        handleB = { a ->
+            react { b ->
                 println a + b
                 reply a + b
             }

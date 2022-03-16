@@ -59,7 +59,7 @@ task {
 }
 
 task {
-    volume << Math.PI * (radius.val ** 3)
+    volume << Math.PI * (radius.val**3)
 }
 
 task {
@@ -85,7 +85,7 @@ task {
 }
 
 task {
-    distance << deceleration.val * ((velocity.val / deceleration.val) ** 2) * 0.5
+    distance << deceleration.val * ((velocity.val / deceleration.val)**2) * 0.5
 }
 
 t.join()

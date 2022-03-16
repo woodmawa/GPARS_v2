@@ -28,8 +28,7 @@ import org.jcsp.lang.Parallel
  * <p>Company: Napier University</p>
  *
  * @author Jon Kerridge, Ken Barclay, John Savage
- * @version 1.0
- * @version 1.1 modified to compile under groovy jsr03
+ * @version 1.0* @version 1.1 modified to compile under groovy jsr03
  */
 
 @CompileStatic(value = TypeCheckingMode.PASS)

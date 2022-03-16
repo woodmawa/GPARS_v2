@@ -33,14 +33,14 @@ import static groovyx.gpars.dataflow.Dataflow.whenAllBound
  * once both B and C have been loaded.
  */
 
-def moduleA = new LazyDataflowVariable({->
+def moduleA = new LazyDataflowVariable({ ->
     println "Loading moduleA into memory"
     sleep 3000
     println "Loaded moduleA into memory"
     return "moduleA"
 })
 
-def moduleB = new LazyDataflowVariable({->
+def moduleB = new LazyDataflowVariable({ ->
     moduleA.then {
         println "->Loading moduleB into memory, since moduleA is ready"
         sleep 3000
@@ -49,7 +49,7 @@ def moduleB = new LazyDataflowVariable({->
     }
 })
 
-def moduleC = new LazyDataflowVariable({->
+def moduleC = new LazyDataflowVariable({ ->
     moduleA.then {
         println "->Loading moduleC into memory, since moduleA is ready"
         sleep 3000
@@ -58,7 +58,7 @@ def moduleC = new LazyDataflowVariable({->
     }
 })
 
-def moduleD = new LazyDataflowVariable({->
+def moduleD = new LazyDataflowVariable({ ->
     whenAllBound(moduleB, moduleC) { b, c ->
         println "-->Loading moduleD into memory, since moduleB and moduleC are ready"
         sleep 3000

@@ -38,7 +38,7 @@ import static java.util.Arrays.asList;
  * </p>
  *
  * @author Vaclav Pech
- *         Date: Jun 5, 2009
+ * Date: Jun 5, 2009
  */
 @SuppressWarnings({"rawtypes", "ClassWithTooManyMethods", "serial"})
 public final class SyncDataflowQueue<T> extends DataflowQueue<T> {

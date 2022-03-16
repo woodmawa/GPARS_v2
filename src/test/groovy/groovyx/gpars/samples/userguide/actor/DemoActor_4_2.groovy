@@ -29,7 +29,7 @@ final def group = new DefaultPGroup()
 final def barber = group.actor {
     final def random = new Random()
     loop {
-        react {message ->
+        react { message ->
             switch (message) {
                 case Enter:
                     message.customer.send new Start()
@@ -57,7 +57,7 @@ waitingRoom = group.actor {
     boolean barberAsleep = true
 
     loop {
-        react {message ->
+        react { message ->
             switch (message) {
                 case Enter:
                     if (waitingCustomers.size() == capacity) {
@@ -68,8 +68,7 @@ waitingRoom = group.actor {
                             assert waitingCustomers.size() == 1
                             barberAsleep = false
                             waitingRoom.send new Next()
-                        }
-                        else reply new Wait()
+                        } else reply new Wait()
                     }
                     break
                 case Next:
@@ -93,7 +92,7 @@ class Customer extends DefaultActor {
     void act() {
         localBarbers << new Enter(customer: this)
         loop {
-            react {message ->
+            react { message ->
                 switch (message) {
                     case Full:
                         println "Customer: $name: The waiting room is full. I am leaving."
@@ -119,10 +118,15 @@ class Customer extends DefaultActor {
 class Enter {
     Customer customer
 }
+
 class Full {}
+
 class Wait {}
+
 class Next {}
+
 class Start {}
+
 class Done {}
 
 def customers = []

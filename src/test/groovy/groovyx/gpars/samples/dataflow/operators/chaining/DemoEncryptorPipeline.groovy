@@ -26,10 +26,10 @@ import groovyx.gpars.dataflow.DataflowReadChannel
  * @author Vaclav Pech
  */
 
-def toUpperCase = {s -> s.toUpperCase()}
+def toUpperCase = { s -> s.toUpperCase() }
 
 final DataflowReadChannel encrypt = new DataflowQueue()
-final DataflowReadChannel encrypted = encrypt.chainWith toUpperCase chainWith {it.reverse()} chainWith {'###encrypted###' + it + '###'}
+final DataflowReadChannel encrypted = encrypt.chainWith toUpperCase chainWith { it.reverse() } chainWith { '###encrypted###' + it + '###' }
 
 encrypt << "I need to keep this message secret!"
 encrypt << "GPars can build operator pipelines really easy"

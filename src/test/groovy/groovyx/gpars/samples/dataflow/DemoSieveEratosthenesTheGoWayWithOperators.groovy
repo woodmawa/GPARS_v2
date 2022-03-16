@@ -34,7 +34,7 @@ import static groovyx.gpars.dataflow.Dataflow.task as go
 // Send the sequence 2, 3, 4, ... to channel 'ch'.
 
 def generate(ch) {
-    {->
+    { ->
         for (i in (2..100000)) {
             ch << i
         }

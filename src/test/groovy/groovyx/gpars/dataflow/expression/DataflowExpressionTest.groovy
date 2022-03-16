@@ -63,7 +63,7 @@ public class DataflowExpressionTest extends GroovyTestCase {
         final DataflowVariable a = new DataflowVariable()
         final DataflowVariable b = new DataflowVariable()
 
-        def prod = DataflowExpression.transform([a, b]) {x, y ->
+        def prod = DataflowExpression.transform([a, b]) { x, y ->
             x + y
         }
 
@@ -75,15 +75,15 @@ public class DataflowExpressionTest extends GroovyTestCase {
         assert 13 == (prod + 1).val
 
         shouldFail(IllegalArgumentException) {
-            DataflowExpression.transform([a]) {x, y ->}
+            DataflowExpression.transform([a]) { x, y -> }
         }
 
         shouldFail(IllegalArgumentException) {
-            DataflowExpression.transform([a, b, null]) {x, y ->}
+            DataflowExpression.transform([a, b, null]) { x, y -> }
         }
 
         shouldFail(IllegalArgumentException) {
-            DataflowExpression.transform([a]) {->}
+            DataflowExpression.transform([a]) { -> }
         }
     }
 
@@ -92,7 +92,7 @@ public class DataflowExpressionTest extends GroovyTestCase {
         final DataflowVariable b = new DataflowVariable()
 
         GParsPool.withPool {
-            final Closure transformation = {x, y ->
+            final Closure transformation = { x, y ->
                 x + y
             }.asyncFun()
 

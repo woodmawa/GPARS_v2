@@ -29,9 +29,9 @@ import static groovyx.gpars.actor.Actors.actor
 
 final Actor actor = actor {
     def candidates = []
-    final Closure printResult = {-> println "Reached best offer - ${candidates.max()}"}
+    final Closure printResult = { -> println "Reached best offer - ${candidates.max()}" }
 
-    loop({-> candidates.max() < 30}, printResult) {
+    loop({ -> candidates.max() < 30 }, printResult) {
         react {
             candidates << it
         }

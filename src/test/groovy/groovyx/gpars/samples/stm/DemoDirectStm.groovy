@@ -37,20 +37,20 @@ public class MyAccount {
     final private TxnRef date = newTxnRef(new Date());
 
     public void transfer(final int a) {
-        atomic({Txn tx ->
+        atomic({ Txn tx ->
             amount.increment(a);
             date.set(new Date());
         } as TxnVoidCallable)
     }
 
     public Date getLastModifiedDate() {
-        atomic({Txn tx ->
+        atomic({ Txn tx ->
             date.get();
         } as TxnCallable)
     }
 
     public int getCurrentAmount() {
-        atomic({Txn tx ->
+        atomic({ Txn tx ->
             amount.get();
         } as TxnIntCallable)
     }

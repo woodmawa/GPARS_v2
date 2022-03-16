@@ -40,6 +40,6 @@ final class Pairs implements Callable {
                 new Plus(a, c, outChannel),
                 new Copy(inChannel, a, b),
                 new Tail(b, c)
-        ].each {group.task it}
+        ].each { group.task it }
     }
 }

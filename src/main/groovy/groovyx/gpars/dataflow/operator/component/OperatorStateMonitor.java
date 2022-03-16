@@ -30,6 +30,7 @@ public interface OperatorStateMonitor {
     /**
      * Invoked by GracefulShutdownListeners, which listen on operators/selectors for lifecycle events, to get registered with the monitor.
      * The monitor will query these registered listeners about their respective operator/selector state when performing graceful shutdown.
+     *
      * @param listener The listener to register
      */
     void registerProcessorListener(final GracefulShutdownListener listener);

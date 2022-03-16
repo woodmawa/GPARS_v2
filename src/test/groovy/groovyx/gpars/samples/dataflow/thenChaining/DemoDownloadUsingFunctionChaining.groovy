@@ -23,18 +23,18 @@ import static groovyx.gpars.GParsPool.withPool
  */
 
 withPool {
-    Closure download = {String url ->
+    Closure download = { String url ->
         sleep 3000
         'web content'
     }.asyncFun()
 
-    Closure loadFile = {String fileName ->
+    Closure loadFile = { String fileName ->
         'file content'
     }.asyncFun()
 
-    Closure hash = {s -> s.hashCode()}.asyncFun()
+    Closure hash = { s -> s.hashCode() }.asyncFun()
 
-    Closure compare = {int first, int second ->
+    Closure compare = { int first, int second ->
         first == second
     }.asyncFun()
 

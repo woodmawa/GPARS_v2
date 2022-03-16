@@ -69,7 +69,8 @@ final class FilterActor extends DynamicDispatchActor {
     def onMessage(def poisson) {
         if (follower) {
             def sender = sender
-            follower.sendAndContinue(poisson, { this.stop(); sender?.send('Done') })  //Pass the poisson along and stop after a reply
+            follower.sendAndContinue(poisson, { this.stop(); sender?.send('Done') })
+            //Pass the poisson along and stop after a reply
         } else {  //I am the last in the chain
             stop()
             reply 'Done'

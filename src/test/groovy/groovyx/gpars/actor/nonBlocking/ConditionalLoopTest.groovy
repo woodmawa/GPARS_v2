@@ -22,11 +22,12 @@ import static groovyx.gpars.actor.Actors.actor
  * @author Vaclav Pech
  * Date: Aug 25th 2010
  */
-@SuppressWarnings("GroovyEmptyCatchBlock") class ConditionalLoopTest extends GroovyTestCase {
+@SuppressWarnings("GroovyEmptyCatchBlock")
+class ConditionalLoopTest extends GroovyTestCase {
     public void testNoLoop() {
         int result = 0
         def actor = actor {
-            loop({-> false}) {
+            loop({ -> false }) {
                 result = 1
             }
 //            result = 2
@@ -38,7 +39,7 @@ import static groovyx.gpars.actor.Actors.actor
     public void testNoLoopWithTail() {
         int result = 0
         def actor = actor {
-            loop({-> false}) {
+            loop({ -> false }) {
                 result = 1
             }
             result = 2
@@ -64,7 +65,7 @@ import static groovyx.gpars.actor.Actors.actor
         def actor = actor {
             Integer counter = 0
 
-            loop({-> counter < 1}) {
+            loop({ -> counter < 1 }) {
                 counter++
                 result++
             }
@@ -91,7 +92,7 @@ import static groovyx.gpars.actor.Actors.actor
         def actor = actor {
             Integer counter = 0
 
-            loop({-> counter < 5}) {
+            loop({ -> counter < 5 }) {
                 counter++
                 result++
             }
@@ -118,7 +119,7 @@ import static groovyx.gpars.actor.Actors.actor
         def actor = actor {
             Integer counter = 0
 
-            loop({-> counter < 5}) {
+            loop({ -> counter < 5 }) {
                 counter++
                 result++
                 stop()
@@ -147,7 +148,7 @@ import static groovyx.gpars.actor.Actors.actor
         def actor = actor {
             Integer counter = 0
 
-            loop({-> counter < 5}) {
+            loop({ -> counter < 5 }) {
                 counter++
                 result++
                 terminate()
@@ -176,7 +177,7 @@ import static groovyx.gpars.actor.Actors.actor
         def actor = actor {
             Integer counter = 0
 
-            loop({-> counter < 5}) {
+            loop({ -> counter < 5 }) {
                 counter++
                 result++
                 react {}
@@ -188,7 +189,10 @@ import static groovyx.gpars.actor.Actors.actor
         actor 3
         actor 4
         actor 5
-        try {actor 6} catch (ignore) {}
+        try {
+            actor 6
+        } catch (ignore) {
+        }
         actor.join()
         assert result == 5
     }
@@ -207,7 +211,10 @@ import static groovyx.gpars.actor.Actors.actor
         actor 3
         actor 4
         actor 5
-        try {actor 6} catch (ignore) {}
+        try {
+            actor 6
+        } catch (ignore) {
+        }
         actor.join()
         assert result == 5
     }
@@ -215,7 +222,7 @@ import static groovyx.gpars.actor.Actors.actor
     public void testNoLoopWithAfterLoopCode() {
         int result = 0
         def actor = actor {
-            loop({-> false}, {-> result += 3}) {
+            loop({ -> false }, { -> result += 3 }) {
                 result = 1
             }
 //            result = 2
@@ -229,7 +236,7 @@ import static groovyx.gpars.actor.Actors.actor
         def actor = actor {
             Integer counter = 0
 
-            loop({-> counter < 1}, {-> result += 3}) {
+            loop({ -> counter < 1 }, { -> result += 3 }) {
                 counter++
                 result++
             }
@@ -244,7 +251,7 @@ import static groovyx.gpars.actor.Actors.actor
         def actor = actor {
             Integer counter = 0
 
-            loop({-> counter < 5}, {-> result += 3}) {
+            loop({ -> counter < 5 }, { -> result += 3 }) {
                 counter++
                 result++
             }
@@ -259,7 +266,7 @@ import static groovyx.gpars.actor.Actors.actor
         def actor = actor {
             Integer counter = 0
 
-            def afterLoopCode = {->
+            def afterLoopCode = { ->
                 react {
                     result += it
                     react {
@@ -267,7 +274,7 @@ import static groovyx.gpars.actor.Actors.actor
                     }
                 }
             }
-            loop({-> counter < 5}, afterLoopCode) {
+            loop({ -> counter < 5 }, afterLoopCode) {
                 counter++
                 result++
                 react {}
@@ -283,7 +290,8 @@ import static groovyx.gpars.actor.Actors.actor
             actor 6
             actor 7
             actor 8
-        } catch (ignore) {}
+        } catch (ignore) {
+        }
         actor.join()
         assert result == 18
     }

@@ -43,7 +43,7 @@ class DataflowChannelChainingTest extends GroovyTestCase {
 
     public void testQueue() {
         final DataflowQueue queue = new DataflowQueue()
-        final result = queue.chainWith(group) {it * 2}.chainWith(group) {it + 1}.chainWith(group) {it}
+        final result = queue.chainWith(group) { it * 2 }.chainWith(group) { it + 1 }.chainWith(group) { it }
 
         queue << 1
         queue << 2
@@ -60,7 +60,7 @@ class DataflowChannelChainingTest extends GroovyTestCase {
 
     public void testQueueWithOrOperator() {
         final DataflowQueue queue = new DataflowQueue()
-        final result = queue | {it * 2} | {it + 1} | {it}
+        final result = queue | { it * 2 } | { it + 1 } | { it }
 
         queue << 1
         queue << 2
@@ -81,19 +81,19 @@ class DataflowChannelChainingTest extends GroovyTestCase {
         final DataflowVariable result = new DataflowVariable()
 
         shouldFail(IllegalArgumentException) {
-            queue.chainWith {a, b ->}
+            queue.chainWith { a, b -> }
         }
         shouldFail(IllegalArgumentException) {
-            queue.chainWith {a, b, c ->}
+            queue.chainWith { a, b, c -> }
         }
         shouldFail(IllegalArgumentException) {
-            queue.chainWith {-> result << 1}
+            queue.chainWith { -> result << 1 }
         }
     }
 
     public void testSyncQueue() {
         final SyncDataflowQueue queue = new SyncDataflowQueue()
-        final result = queue.chainWith(group) {it * 2}.chainWith(group) {it + 1}.chainWith(group) {it}
+        final result = queue.chainWith(group) { it * 2 }.chainWith(group) { it + 1 }.chainWith(group) { it }
 
         final resultQueue = new DataflowQueue()
         Thread.start {
@@ -117,7 +117,7 @@ class DataflowChannelChainingTest extends GroovyTestCase {
 
     public void testDFV() {
         final DataflowVariable variable = new DataflowVariable()
-        final result = variable.chainWith(group) {it * 2}.chainWith(group) {it + 1}.chainWith(group) {it}
+        final result = variable.chainWith(group) { it * 2 }.chainWith(group) { it + 1 }.chainWith(group) { it }
 
         variable << 1
 
@@ -126,7 +126,7 @@ class DataflowChannelChainingTest extends GroovyTestCase {
 
     public void testSyncDFV() {
         final SyncDataflowVariable variable = new SyncDataflowVariable()
-        final result = variable.chainWith(group) {it * 2}.chainWith(group) {it + 1}.chainWith(group) {it}
+        final result = variable.chainWith(group) { it * 2 }.chainWith(group) { it + 1 }.chainWith(group) { it }
 
         final resultQueue = new DataflowQueue()
         Thread.start {
@@ -140,7 +140,7 @@ class DataflowChannelChainingTest extends GroovyTestCase {
 
     public void testBroadcastSubscription() {
         final DataflowBroadcast broadcast = new DataflowBroadcast()
-        final result = broadcast.createReadChannel().chainWith(group) {it * 2}.chainWith(group) {it + 1}.chainWith(group) {it}
+        final result = broadcast.createReadChannel().chainWith(group) { it * 2 }.chainWith(group) { it + 1 }.chainWith(group) { it }
 
         broadcast << 1
         broadcast << 2
@@ -157,7 +157,7 @@ class DataflowChannelChainingTest extends GroovyTestCase {
 
     public void testSyncBroadcastSubscription() {
         final SyncDataflowBroadcast broadcast = new SyncDataflowBroadcast()
-        final result = broadcast.createReadChannel().chainWith(group) {it * 2}.chainWith(group) {it + 1}.chainWith(group) {it}
+        final result = broadcast.createReadChannel().chainWith(group) { it * 2 }.chainWith(group) { it + 1 }.chainWith(group) { it }
 
         final resultQueue = new DataflowQueue()
         Thread.start {

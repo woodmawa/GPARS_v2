@@ -26,7 +26,7 @@ import groovyx.gpars.dataflow.DataflowQueue
  */
 
 final DataflowQueue queue = new DataflowQueue()
-queue.chainWith {it * 2}.chainWith {it + 1} chainWith {println it}
+queue.chainWith { it * 2 }.chainWith { it + 1 } chainWith { println it }
 
 queue << 1
 queue << 2

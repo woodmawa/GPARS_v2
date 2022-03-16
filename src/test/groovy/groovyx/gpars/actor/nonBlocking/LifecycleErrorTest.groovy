@@ -37,7 +37,8 @@ public class LifecycleErrorTest extends GroovyTestCase {
 
 
     public void testOnException() {
-        final LFExceptionTestActor actor = new LFExceptionTestActor({-> receive { throw new LFErrorTestException('Firing off a lifecycle method exception test')}})
+        final LFExceptionTestActor actor = new LFExceptionTestActor({ ->
+            receive { throw new LFErrorTestException('Firing off a lifecycle method exception test') } })
         actor.start()
         actor << 1
 
@@ -48,7 +49,8 @@ public class LifecycleErrorTest extends GroovyTestCase {
     }
 
     public void testOnInterrupt() {
-        final LFExceptionTestActor actor = new LFExceptionTestActor({-> receive { Thread.currentThread().interrupt(); Thread.sleep(10)}})
+        final LFExceptionTestActor actor = new LFExceptionTestActor({ ->
+            receive { Thread.currentThread().interrupt(); Thread.sleep(10) } })
         actor.start()
         actor << 1
 
@@ -59,7 +61,7 @@ public class LifecycleErrorTest extends GroovyTestCase {
     }
 
     public void testOnInterruptWithReact() {
-        final LFExceptionTestActor actor = new LFExceptionTestActor({->
+        final LFExceptionTestActor actor = new LFExceptionTestActor({ ->
             receive {
                 Thread.currentThread().interrupt();
                 receive {}
@@ -75,7 +77,7 @@ public class LifecycleErrorTest extends GroovyTestCase {
     }
 
     public void testOnInterruptWithLoop() {
-        final LFExceptionTestActor actor = new LFExceptionTestActor({->
+        final LFExceptionTestActor actor = new LFExceptionTestActor({ ->
             while (true) {
                 receive {
                     Thread.currentThread().interrupt();
@@ -92,7 +94,7 @@ public class LifecycleErrorTest extends GroovyTestCase {
     }
 
     public void testOnSilentInterrupt() {
-        final LFExceptionTestActor actor = new LFExceptionTestActor({->
+        final LFExceptionTestActor actor = new LFExceptionTestActor({ ->
             receive {
                 Thread.currentThread().interrupt();
             }
@@ -107,7 +109,7 @@ public class LifecycleErrorTest extends GroovyTestCase {
     }
 
     public void testOnTimeout() {
-        final LFExceptionTestActor actor = new LFExceptionTestActor({->
+        final LFExceptionTestActor actor = new LFExceptionTestActor({ ->
             receive {
                 receive(1, TimeUnit.MILLISECONDS) {}
             }
@@ -122,7 +124,8 @@ public class LifecycleErrorTest extends GroovyTestCase {
     }
 }
 
-@PackageScope final class LFExceptionTestActor extends BlockingActor {
+@PackageScope
+final class LFExceptionTestActor extends BlockingActor {
     volatile boolean flag1 = false
     volatile boolean flag2 = false
     volatile boolean flag3 = false
@@ -169,7 +172,8 @@ public class LifecycleErrorTest extends GroovyTestCase {
     }
 }
 
-@PackageScope final class LFErrorTestException extends RuntimeException {
+@PackageScope
+final class LFErrorTestException extends RuntimeException {
 
     def LFErrorTestException(message) {
         super(message);

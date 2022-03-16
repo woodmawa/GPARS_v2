@@ -54,7 +54,7 @@ import static java.util.Arrays.asList;
  * Provides a common super class of pooled parallel groups.
  *
  * @author Vaclav Pech, Alex Tkachman
- *         Date: May 8, 2009
+ * Date: May 8, 2009
  */
 @SuppressWarnings({"RawUseOfParameterizedType", "rawtypes", "unchecked", "deprecation"})
 public abstract class PGroup {
@@ -131,7 +131,7 @@ public abstract class PGroup {
      * @param code The code to invoke for each received message
      * @return A new instance of ReactiveEventBasedThread
      */
-    public final  Actor reactor(@DelegatesTo(Actor.class) final Closure code) {
+    public final Actor reactor(@DelegatesTo(Actor.class) final Closure code) {
         final Actor actor = new ReactiveActor(code);
         actor.setParallelGroup(this);
         actor.start();
@@ -381,11 +381,13 @@ public abstract class PGroup {
     public final <T> Promise<T> lazyTask(final Callable<T> callable) {
         if (callable instanceof Closure) return lazyTask((Closure<T>) callable);
         return new LazyDataflowVariable<T>(this, new Closure<T>(this) {
-            @Override public int getMaximumNumberOfParameters() {
+            @Override
+            public int getMaximumNumberOfParameters() {
                 return 0;
             }
 
-            @Override public T call() {
+            @Override
+            public T call() {
                 try {
                     return callable.call();
                 } catch (Exception e) {

@@ -24,9 +24,9 @@ import groovyx.gpars.actor.Actors
 
 final intermediaries = []
 
-def src = Actors.actor {index ->
+def src = Actors.actor { index ->
     println "Source: Starting..."
-    react {go ->
+    react { go ->
         println "Source: got '$go'; sending 'hello'.."
         println "Source: got '${intermediaries[1].sendAndWait('hello')}'"
     }
@@ -35,10 +35,10 @@ def src = Actors.actor {index ->
 intermediaries << src
 
 for (i in 1..3) {
-    intermediaries << Actors.actor({index ->
+    intermediaries << Actors.actor({ index ->
         println "Intermediary[$index]: Starting..."
 
-        react {msg ->
+        react { msg ->
             println("Intermediary[$index]: Received: '$msg'")
             reply intermediaries[index + 1].sendAndWait("${msg}[$index]")
         }
@@ -48,7 +48,7 @@ for (i in 1..3) {
 
 intermediaries << Actors.actor {
     println "Sink: Starting..."
-    react {msg ->
+    react { msg ->
         println "Sink: got '$msg'"
         reply "thanks"
     }

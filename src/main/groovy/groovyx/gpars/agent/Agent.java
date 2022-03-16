@@ -46,7 +46,7 @@ import org.codehaus.groovy.runtime.NullObject;
  * or a clone might be more appropriate.
  *
  * @author Vaclav Pech
- *         Date: Jul 2, 2009
+ * Date: Jul 2, 2009
  */
 @SuppressWarnings({"MethodNamesDifferingOnlyByCase", "rawtypes", "unchecked", "serial"})
 public class Agent<T> extends AgentBase<T> {

@@ -29,10 +29,10 @@ import groovyx.gpars.dataflow.SyncDataflowBroadcast
 final SyncDataflowBroadcast broadcast = new SyncDataflowBroadcast()
 
 final DataflowReadChannel subscription1 = broadcast.createReadChannel()
-def result1 = subscription1.chainWith {it * 2}.chainWith {it + 1} chainWith {it * 100}
+def result1 = subscription1.chainWith { it * 2 }.chainWith { it + 1 } chainWith { it * 100 }
 
 final DataflowReadChannel subscription2 = broadcast.createReadChannel()
-def result2 = subscription2.chainWith {it * 3}.chainWith {it + 1} chainWith {it * 1000}
+def result2 = subscription2.chainWith { it * 3 }.chainWith { it + 1 } chainWith { it * 1000 }
 
 Thread.start {
     5.times {

@@ -48,7 +48,7 @@ class DataflowProcessorEventRewritingTest extends GroovyTestCase {
         final listener1 = new RewritingTestListener()
         final listener2 = new RewritingTestListener()
 
-        def op = group.operator(inputs: [a, b], outputs: [c], listeners: [listener1, listener2]) {x, y ->
+        def op = group.operator(inputs: [a, b], outputs: [c], listeners: [listener1, listener2]) { x, y ->
             bindOutput x + y
         }
 
@@ -67,7 +67,7 @@ class DataflowProcessorEventRewritingTest extends GroovyTestCase {
         final listener1 = new RewritingTestListener()
         final listener2 = new RewritingTestListener()
 
-        def op = group.selector(inputs: [a, b], outputs: [c], listeners: [listener1, listener2]) {x ->
+        def op = group.selector(inputs: [a, b], outputs: [c], listeners: [listener1, listener2]) { x ->
             bindOutput x
         }
 
@@ -99,7 +99,7 @@ class DataflowProcessorEventRewritingTest extends GroovyTestCase {
 
         @Override
         List<Object> beforeRun(final DataflowProcessor processor, final List<Object> messages) {
-            return messages.collect {"beforeRun:" + it}
+            return messages.collect { "beforeRun:" + it }
         }
     }
 }

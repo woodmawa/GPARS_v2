@@ -30,8 +30,8 @@ final DataflowQueue a = new DataflowQueue()
 final DataflowQueue b = new DataflowQueue()
 final DataflowQueue c = new DataflowQueue()
 
-def op = group.operator(inputs: [a, b], outputs: [c], stateObject: [counter: 0]) {x, y ->
-    stateObject.counter += x+y
+def op = group.operator(inputs: [a, b], outputs: [c], stateObject: [counter: 0]) { x, y ->
+    stateObject.counter += x + y
     bindOutput stateObject.counter
 }
 

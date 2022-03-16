@@ -57,7 +57,7 @@ import groovyx.gpars.serial.WithSerialId;
  * They register the request to read a value and will send a message to the actor or operator once the value is available.
  *
  * @author Vaclav Pech
- *         Date: Jun 5, 2009
+ * Date: Jun 5, 2009
  */
 @SuppressWarnings({"rawtypes", "ClassWithTooManyMethods", "unchecked", "serial"})
 public class DataflowQueue<T> extends WithSerialId implements DataflowChannel<T> {

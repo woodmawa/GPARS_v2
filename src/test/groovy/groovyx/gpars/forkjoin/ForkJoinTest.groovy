@@ -113,10 +113,10 @@ public final class TestSortWorker extends AbstractForkJoinWorker<List<Integer>> 
                 else return numbers[-1..0]                       //store own result
             default:
                 def splitList = split(numbers)
-                [new TestSortWorker(splitList[0]), new TestSortWorker(splitList[1])].each {forkOffChild it}  //fork a child task
+                [new TestSortWorker(splitList[0]), new TestSortWorker(splitList[1])].each { forkOffChild it }  //fork a child task
                 getChildrenResults()  //to test re-entrance capability of the children results collection
                 if (getChildrenResults().size() != 2) throw new IllegalStateException("Number of children results ${getChildrenResults().size()} is invalid.")
-                return merge(* childrenResults)      //use results of children tasks to calculate and store own result
+                return merge(*childrenResults)      //use results of children tasks to calculate and store own result
         }
     }
 }

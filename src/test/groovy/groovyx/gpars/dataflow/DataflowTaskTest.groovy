@@ -58,9 +58,10 @@ public class DataflowTaskTest extends GroovyTestCase {
                 queue << Dataflow.retrieveCurrentDFPGroup()
                 'http://gpars.codehaus.org'
             }
-            .then { page -> queue << Dataflow.retrieveCurrentDFPGroup(); page.toUpperCase() }
-            .then { page -> page.contains('GROOVY') }.then { queue << Dataflow.retrieveCurrentDFPGroup(); throw new RuntimeException('test') }
-            .then({ mentionsGroovy -> println "Groovy found: $mentionsGroovy" }, { error -> queue << Dataflow.retrieveCurrentDFPGroup(); 'error' }).join()
+                    .then { page -> queue << Dataflow.retrieveCurrentDFPGroup(); page.toUpperCase() }
+                    .then { page -> page.contains('GROOVY') }.then { queue << Dataflow.retrieveCurrentDFPGroup();
+                throw new RuntimeException('test') }
+                    .then({ mentionsGroovy -> println "Groovy found: $mentionsGroovy" }, { error -> queue << Dataflow.retrieveCurrentDFPGroup(); 'error' }).join()
         }
 
         4.times {
@@ -78,9 +79,10 @@ public class DataflowTaskTest extends GroovyTestCase {
                 queue << Dataflow.retrieveCurrentDFPGroup()
                 'http://gpars.codehaus.org'
             }
-            .then { page -> queue << Dataflow.retrieveCurrentDFPGroup(); page.toUpperCase() }
-            .then { page -> page.contains('GROOVY') }.then(group2) { queue << Dataflow.retrieveCurrentDFPGroup(); throw new RuntimeException('test') }
-            .then(group2, { mentionsGroovy -> println "Groovy found: $mentionsGroovy" }, { error -> queue << Dataflow.retrieveCurrentDFPGroup(); 'error' }).join()
+                    .then { page -> queue << Dataflow.retrieveCurrentDFPGroup(); page.toUpperCase() }
+                    .then { page -> page.contains('GROOVY') }.then(group2) { queue << Dataflow.retrieveCurrentDFPGroup();
+                throw new RuntimeException('test') }
+                    .then(group2, { mentionsGroovy -> println "Groovy found: $mentionsGroovy" }, { error -> queue << Dataflow.retrieveCurrentDFPGroup(); 'error' }).join()
         }
 
         2.times {
@@ -92,7 +94,8 @@ public class DataflowTaskTest extends GroovyTestCase {
     }
 }
 
-@PackageScope class TestRunnable implements Runnable {
+@PackageScope
+class TestRunnable implements Runnable {
 
     def df
 
@@ -105,7 +108,8 @@ public class DataflowTaskTest extends GroovyTestCase {
     }
 }
 
-@PackageScope class TestCallable implements Callable {
+@PackageScope
+class TestCallable implements Callable {
 
     def df
 

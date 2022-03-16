@@ -20,7 +20,7 @@ package groovyx.gpars.dataflow;
  * A common interface for all dataflow variables, streams or queues
  *
  * @author Vaclav Pech
- *         Date: 21st Sep 2010
+ * Date: 21st Sep 2010
  */
 public interface DataflowChannel<T> extends DataflowReadChannel<T>, DataflowWriteChannel<T> {
 }

@@ -25,4 +25,4 @@ import static groovyx.gpars.dataflow.Dataflow.task
  */
 task {
     2
-}.thenForkAndJoin({ it ** 2 }, { it ** 3 }, { it ** 4 }, { it ** 5 }).then({ println it }).join()
+}.thenForkAndJoin({ it**2 }, { it**3 }, { it**4 }, { it**5 }).then({ println it }).join()

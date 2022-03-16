@@ -23,7 +23,7 @@ class DDAReplyTest extends GroovyTestCase {
         final Dataflows df = new Dataflows()
 
         def dda = new DynamicDispatchActor().become {
-            when {msg ->
+            when { msg ->
                 df.sender = sender
                 sender.send 10
                 reply 20

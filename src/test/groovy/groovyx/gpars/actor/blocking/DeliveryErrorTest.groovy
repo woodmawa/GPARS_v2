@@ -36,7 +36,7 @@ public class DeliveryErrorTest extends GroovyTestCase {
         }
 
         def message = 1
-        message.metaClass.onDeliveryError = {->
+        message.metaClass.onDeliveryError = { ->
             flag.set(true)
         }
         actor << message
@@ -61,12 +61,12 @@ public class DeliveryErrorTest extends GroovyTestCase {
         }
 
         def message1 = 1
-        message1.metaClass.onDeliveryError = {->
+        message1.metaClass.onDeliveryError = { ->
             flag1.set(true)
         }
 
         def message2 = 2
-        message2.metaClass.onDeliveryError = {->
+        message2.metaClass.onDeliveryError = { ->
             flag2.set(true)
         }
         actor << message1
@@ -96,12 +96,12 @@ public class DeliveryErrorTest extends GroovyTestCase {
         }
 
         def message1 = 1
-        message1.metaClass.onDeliveryError = {->
+        message1.metaClass.onDeliveryError = { ->
             flag1.set(true)
         }
 
         def message2 = 2
-        message2.metaClass.onDeliveryError = {->
+        message2.metaClass.onDeliveryError = { ->
             flag2.set(true)
         }
         actor << message1
@@ -122,7 +122,7 @@ public class DeliveryErrorTest extends GroovyTestCase {
         }
 
         def message = 1
-        message.metaClass.onDeliveryError = {->
+        message.metaClass.onDeliveryError = { ->
             flag.set(true)
         }
         actor << message
@@ -141,7 +141,7 @@ public class DeliveryErrorTest extends GroovyTestCase {
         }
 
         def message = 1
-        message.metaClass.onDeliveryError = {->
+        message.metaClass.onDeliveryError = { ->
             flag.set(Thread.currentThread().isInterrupted())
         }
         actor << message

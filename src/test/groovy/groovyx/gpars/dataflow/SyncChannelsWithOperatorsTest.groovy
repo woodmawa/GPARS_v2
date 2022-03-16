@@ -36,10 +36,10 @@ class SyncChannelsWithOperatorsTest extends GroovyTestCase {
         }
 
         final NonDaemonPGroup group = new NonDaemonPGroup()
-        group.operator(queue, broadcast) {value ->
+        group.operator(queue, broadcast) { value ->
             bindOutput(2 * value)
         }
-        group.operator(subscription, result) {value ->
+        group.operator(subscription, result) { value ->
             bindOutput(value + 1)
         }
 
@@ -66,10 +66,10 @@ class SyncChannelsWithOperatorsTest extends GroovyTestCase {
         }
 
         final NonDaemonPGroup group = new NonDaemonPGroup(2)
-        group.selector([queue], [broadcast]) {value ->
+        group.selector([queue], [broadcast]) { value ->
             bindOutput(2 * value)
         }
-        group.selector([subscription], [result]) {value ->
+        group.selector([subscription], [result]) { value ->
             bindOutput(value + 1)
         }
 

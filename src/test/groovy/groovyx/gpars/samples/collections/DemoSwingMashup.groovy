@@ -51,10 +51,10 @@ final def frame = new SwingBuilder().frame(title: 'Demo', defaultCloseOperation:
         hbox {
             button('Search for Groovy', mnemonic: 'S', actionPerformed: {
                 doOutside {
-                    urls.each {url ->
-                        edt {logMessages.text += "Started downloading from $url \n"}
+                    urls.each { url ->
+                        edt { logMessages.text += "Started downloading from $url \n" }
                         def content = url.toURL().text
-                        edt {logMessages.text += "Done downloading from $url \n"}
+                        edt { logMessages.text += "Done downloading from $url \n" }
                         if (content.toUpperCase().contains('GROOVY'))
                             edt {
                                 result.text += "A groovy site found: ${url} \n"

@@ -67,7 +67,7 @@ def perform(PGroup producerGroup, PGroup consumerGroup, numberOfProducers, numbe
         }
     }
 
-    numberOfProducers.times {num ->
+    numberOfProducers.times { num ->
         producerGroup.task {
             startSignal.await()
             for (int i = 0; i < numberOfMessagesPerProducer; i++) {

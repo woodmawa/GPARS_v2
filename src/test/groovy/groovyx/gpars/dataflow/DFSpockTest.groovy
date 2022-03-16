@@ -22,7 +22,8 @@ class DFSpockTest extends Specification {
 
     def "data flow variable gets assigned"() {
         def result = new DataflowVariable()
-        when: result << 10
+        when:
+        result << 10
         then:
         result.val == 10
         result.isBound()
@@ -30,8 +31,10 @@ class DFSpockTest extends Specification {
 
     def "data flow variable cannot be re-assigned"() {
         def result = new DataflowVariable()
-        given: result << 10
-        when: result << 20
+        given:
+        result << 10
+        when:
+        result << 20
         then:
         thrown(IllegalStateException)
         result.val == 10

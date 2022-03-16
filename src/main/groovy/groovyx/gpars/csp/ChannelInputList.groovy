@@ -34,8 +34,7 @@ class ChannelInputList {
  *
  * <p>Company: Napier University</p>
  * @author Jon Kerridge, Ken Barclay, John Savage
- * @version 1.0
- *
+ * @version 1.0*
  * @version 1.1 included the empty  constructor to enable
  * easier <code>NetChannelOUTPUT</code> list creation (Jon Kerridge)
  * and changes to comply with Groovy-jsr03
@@ -93,11 +92,11 @@ class ChannelInputList {
         def values = []
         def channels = cList.size()
         def readerList = []
-        (0..<channels).each {i -> readerList[i] = new ProcessRead(cList[i])
+        (0..<channels).each { i -> readerList[i] = new ProcessRead(cList[i])
         }
         def parRead = new PAR(readerList)
         parRead.run()
-        (0..<channels).each {i -> values[i] = readerList[i].value }
+        (0..<channels).each { i -> values[i] = readerList[i].value }
         return values
     }
 

@@ -35,5 +35,5 @@ task {
     time << 10
 }
 
-def result = initialDistance + acceleration*0.5*time**2
+def result = initialDistance + acceleration * 0.5 * time**2
 println 'Total distance ' + result.val

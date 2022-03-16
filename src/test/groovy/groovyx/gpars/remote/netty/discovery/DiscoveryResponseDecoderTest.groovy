@@ -39,7 +39,7 @@ class DiscoveryResponseDecoderTest extends Specification {
         resultList.size() == 1
 
         def response = (resultList.get(0)) as DiscoveryResponse
-        response.getActorUrl() ==  actorUrl
+        response.getActorUrl() == actorUrl
         response.getServerSocketAddress().getPort() == 1234
     }
 

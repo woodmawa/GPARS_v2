@@ -27,7 +27,7 @@ import groovyx.gpars.group.PGroup;
  * upon receiving the message the actor runs the supplied closure / code with the DFV value as a parameter.
  *
  * @author Vaclav Pech, Alex Tkachman
- *         Date: Sep 13, 2009
+ * Date: Sep 13, 2009
  */
 @SuppressWarnings("rawtypes")
 public final class DataCallback extends MessageStream {

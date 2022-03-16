@@ -124,8 +124,7 @@ public class SerialHandle extends ManagedReference<WithSerialId> {
                     subscribers = list;
                 }
             } else {
-                @SuppressWarnings({"unchecked"})
-                final Collection<SerialContext> list = (Collection<SerialContext>) subscribers;
+                @SuppressWarnings({"unchecked"}) final Collection<SerialContext> list = (Collection<SerialContext>) subscribers;
                 for (final SerialContext remoteHost : list) {
                     if (remoteHost == context) {
                         return;
@@ -146,8 +145,7 @@ public class SerialHandle extends ManagedReference<WithSerialId> {
                     subscribers = null;
                 }
             } else {
-                @SuppressWarnings({"unchecked"})
-                final List<SerialContext> list = (List<SerialContext>) subscribers;
+                @SuppressWarnings({"unchecked"}) final List<SerialContext> list = (List<SerialContext>) subscribers;
                 list.remove(context);
                 if (list.size() == 1) {
                     subscribers = list.get(0);

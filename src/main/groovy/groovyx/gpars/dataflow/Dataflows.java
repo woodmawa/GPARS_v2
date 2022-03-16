@@ -47,7 +47,7 @@ import java.util.concurrent.ConcurrentMap;
  * </pre>
  *
  * @author Vaclav Pech, Dierk Koenig, Alex Tkachman
- *         Date: Sep 3, 2009
+ * Date: Sep 3, 2009
  */
 @SuppressWarnings({"unchecked"})
 public final class Dataflows extends GroovyObjectSupport {
@@ -107,7 +107,7 @@ public final class Dataflows extends GroovyObjectSupport {
 
     /**
      * @return the value of the DataflowVariable associated with the property "name".
-     *         May block if the value is not scalar.
+     * May block if the value is not scalar.
      * @see DataflowVariable#getVal
      */
     @Override
@@ -146,7 +146,7 @@ public final class Dataflows extends GroovyObjectSupport {
      *
      * @param index The index to find a match for
      * @return the value of the DataflowVariable associated with the property "index".
-     *         May block if the value is not scalar.
+     * May block if the value is not scalar.
      * @throws InterruptedException If the thread gets interrupted
      * @see DataflowVariable#getVal
      */

@@ -28,13 +28,13 @@ import static groovyx.gpars.GParsPool.withPool
 @SuppressWarnings("GroovyMultipleReturnPointsPerMethod")
 def quicksort(list) {
     if (list.size() < 2) return list.clone()
-    final def groups = list.parallel.map {[index: it <=> list[list.size().intdiv(2)], value: it]}
-    if (groups.filter {it.index in [-1, 1]}.size() == 0) return list.clone()
-    [filterByIndex(groups, -1), filterByIndex(groups, 0), filterByIndex(groups, 1)].collect {quicksort(it.collection)}.sumParallel()
+    final def groups = list.parallel.map { [index: it <=> list[list.size().intdiv(2)], value: it] }
+    if (groups.filter { it.index in [-1, 1] }.size() == 0) return list.clone()
+    [filterByIndex(groups, -1), filterByIndex(groups, 0), filterByIndex(groups, 1)].collect { quicksort(it.collection) }.sumParallel()
 }
 
 private def filterByIndex(groups, index) {
-    groups.filter {it.index == index}.map {it.value}
+    groups.filter { it.index == index }.map { it.value }
 }
 
 withPool {

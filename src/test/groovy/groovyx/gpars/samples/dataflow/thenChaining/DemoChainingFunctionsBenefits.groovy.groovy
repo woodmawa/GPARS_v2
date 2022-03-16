@@ -25,17 +25,17 @@ import static groovyx.gpars.dataflow.Dataflow.task
 
 final DataflowVariable variable = new DataflowVariable()
 
-final doubler = {it * 2}
-final inc = {it + 1}
+final doubler = { it * 2 }
+final inc = { it + 1 }
 
 //Using whenBound()
-variable.whenBound {value ->
+variable.whenBound { value ->
     task {
         doubler(value)
-    }.whenBound {doubledValue ->
+    }.whenBound { doubledValue ->
         task {
             inc(doubledValue)
-        }.whenBound {incrementedValue ->
+        }.whenBound { incrementedValue ->
             println incrementedValue
         }
     }
@@ -44,6 +44,6 @@ variable.whenBound {value ->
 //Using then() chaining
 variable.then doubler then inc then this.&println
 
-Thread.start {variable << 4}
+Thread.start { variable << 4 }
 
 sleep 1000

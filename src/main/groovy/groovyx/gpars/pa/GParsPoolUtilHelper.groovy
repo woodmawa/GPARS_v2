@@ -59,18 +59,18 @@ class GParsPoolUtilHelper {
 
     //this is called from GParsPoolUtil - so add to this stub
     public static <T> Future<T> callAsync(final Closure<T> cl, final Object... args) {
-         return GParsPoolUtil.callParallel({-> cl(* args) });
-     }
+        return GParsPoolUtil.callParallel({ -> cl(*args) });
+    }
 
     public static Closure asyncFun(final Closure original, final boolean blocking, final FJPool pool = null) {
-         final FJPool localPool = pool ?: retrieveFJPool();
+        final FJPool localPool = pool ?: retrieveFJPool();
 
-         return { final Object[] args ->
-             final DataflowVariable result = new DataflowVariable()
-             PAUtils.evaluateArguments(localPool ?: new FJPool(GParsPoolUtil.retrievePool()), args.clone(), 0, [], result, original, false)
-             blocking ? result.get() : result
-         }
-     }
+        return { final Object[] args ->
+            final DataflowVariable result = new DataflowVariable()
+            PAUtils.evaluateArguments(localPool ?: new FJPool(GParsPoolUtil.retrievePool()), args.clone(), 0, [], result, original, false)
+            blocking ? result.get() : result
+        }
+    }
 }
 // class GParsPoolUtilHelper {
 
@@ -244,8 +244,6 @@ class GParsPoolUtilHelper {
 //     public static <T> Collection<T> grepParallelPA(ParallelArray<T> pa, Object filter) {
 //         pa.withFilter(new ClosurePredicate({ filter.isCase it })).all().asList();
 //     }
-
-
 
 
 //     @Deprecated

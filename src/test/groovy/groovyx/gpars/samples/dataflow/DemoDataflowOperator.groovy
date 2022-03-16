@@ -46,7 +46,7 @@ def sites = new DataflowQueue()
  *
  * Downloads received urls passing downloaded content to the output
  */
-def downloader = Dataflow.operator(inputs: [downloadRequests], outputs: [urlRequests]) {request ->
+def downloader = Dataflow.operator(inputs: [downloadRequests], outputs: [urlRequests]) { request ->
 
     println "[Downloader] Downloading ${request.site}"
     def content = request.site.toURL().text
@@ -63,7 +63,7 @@ pendingDownloads = [:]
  * Caches sites' contents. Accepts requests for url content, outputs the content. Outputs requests for download
  * if the site is not in cache yet.
  */
-def cache = Dataflow.operator(inputs: [urlRequests], outputs: [downloadRequests, sites]) {request ->
+def cache = Dataflow.operator(inputs: [urlRequests], outputs: [downloadRequests, sites]) { request ->
 
     if (request.content) {
         println "[Cache] Caching ${request.site}"
@@ -107,7 +107,7 @@ def results = new DataflowQueue()
  *
  * Accepts sites' content searching for requested word in them. Sends the result to the results stream.
  */
-def finder = Dataflow.operator(inputs: [sites], outputs: [results]) {request ->
+def finder = Dataflow.operator(inputs: [sites], outputs: [results]) { request ->
     println "[Finder] Searching for ${request.word} in ${request.site}."
     def result = request.content.toUpperCase().contains(request.word.toUpperCase())
     results << "${result ? '' : 'No '}${request.word} in ${request.site}."

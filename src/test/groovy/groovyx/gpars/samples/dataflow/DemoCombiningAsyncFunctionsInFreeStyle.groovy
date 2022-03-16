@@ -36,27 +36,27 @@ import static groovyx.gpars.GParsPool.withPool
  */
 
 withPool {
-    Closure plus = {Integer a, Integer b ->
+    Closure plus = { Integer a, Integer b ->
         sleep 3000
         println 'Adding numbers'
         a + b
     }.asyncFun()
 
-    Closure multiply = {Integer a, Integer b ->
+    Closure multiply = { Integer a, Integer b ->
         sleep 2000
         a * b
     }.asyncFun()
 
-    Closure measureTime = {->
+    Closure measureTime = { ->
         sleep 3000
         4
     }.asyncFun()
 
-    Closure distance = {Integer initialDistance, Integer velocity, Integer time ->
+    Closure distance = { Integer initialDistance, Integer velocity, Integer time ->
         plus(initialDistance, multiply(velocity, time))
     }.asyncFun()
 
-    Closure chattyDistance = {Integer initialDistance, Integer velocity, Integer time ->
+    Closure chattyDistance = { Integer initialDistance, Integer velocity, Integer time ->
         println 'All parameters are now ready - starting'
         println 'About to call another asynchronous function'
         def innerResultPromise = plus(initialDistance, multiply(velocity, time))

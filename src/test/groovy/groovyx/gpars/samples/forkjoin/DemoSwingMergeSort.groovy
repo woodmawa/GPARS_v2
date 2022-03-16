@@ -112,7 +112,7 @@ withPool(1) {  //feel free to experiment with the number of fork/join threads in
     displayColorLegend()
     def topLabel = createLabel(0, 0, numbers)
     println """Sorted numbers: ${
-        runForkJoin(numbers, 0, 0, topLabel) {nums, row, column, label ->
+        runForkJoin(numbers, 0, 0, topLabel) { nums, row, column, label ->
             println "Thread ${Thread.currentThread().name[-1]}: Sorting $nums"
             def colorIndex = Integer.valueOf(Thread.currentThread().name[-1])
             setLabelColor(label, threadColors[colorIndex])
@@ -126,8 +126,7 @@ withPool(1) {  //feel free to experiment with the number of fork/join threads in
                     if (nums[0] <= nums[1]) {
                         finishStep(label, nums)
                         return nums     //store own result
-                    }
-                    else {
+                    } else {
                         finishStep(label, nums[-1..0])
                         return nums[-1..0]                       //store own result
                     }
@@ -138,7 +137,7 @@ withPool(1) {  //feel free to experiment with the number of fork/join threads in
                     setLabelColor(label, Color.MAGENTA)
                     forkOffChild splitList[0], row + 1, column, label1
                     forkOffChild splitList[1], row + 1, column + splitList[0].size(), label2
-                    result = merge(* childrenResults)
+                    result = merge(*childrenResults)
                     finishStep(label, result)
                     return result;       //use results of children tasks to calculate and store own result
 

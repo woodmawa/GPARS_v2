@@ -28,19 +28,22 @@ import javax.swing.SwingUtilities
  * @author Vaclav Pech
  */
 
-@Immutable final class WordFindRequest {
+@Immutable
+final class WordFindRequest {
     String site
     String word
 }
 
-@Immutable final class WordFindResponse {
+@Immutable
+final class WordFindResponse {
     String content
-    @Delegate WordFindRequest request
+    @Delegate
+    WordFindRequest request
 }
 
 def defaultSites = [
-        'http://www.dzone.com': 'Java Groovy',
-        'http://www.infoq.com': 'Java Scala',
+        'http://www.dzone.com' : 'Java Groovy',
+        'http://www.infoq.com' : 'Java Scala',
         'http://www.groovy.org': 'Java Groovy'
 ]
 
@@ -49,7 +52,7 @@ def contentCacheArea
 def wordFinderArea
 
 JTextArea.metaClass {
-    report = {text ->
+    report = { text ->
         def currentArea = delegate
         SwingUtilities.invokeLater {
             currentArea.text += text
@@ -89,7 +92,7 @@ def contentCache = Actors.actor {
                         reply new WordFindResponse(content, it)
                     } else {
                         def downloads = pendingDownloads[it.site]
-                        if (downloads!=null) {
+                        if (downloads != null) {
                             contentCacheArea.report "Awaiting download"
                             downloads << it
                         } else {
@@ -105,7 +108,7 @@ def contentCache = Actors.actor {
                     cache[it.request.site] = it.content
                     wordFinder << it
                     def downloads = pendingDownloads[it.site]
-                    if (downloads!=null) {
+                    if (downloads != null) {
                         for (downloadRequest in downloads) {
                             contentCacheArea.report "Waking up"
                             wordFinder << new WordFindResponse(it.content, downloadRequest)
@@ -134,7 +137,7 @@ wordFinder = Actors.actor {
     }
 }
 
-def createActorPanel = {actorName ->
+def createActorPanel = { actorName ->
     def area = null
     panel {
         vbox() {

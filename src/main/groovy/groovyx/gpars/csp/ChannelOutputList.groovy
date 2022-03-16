@@ -25,8 +25,7 @@ import org.jcsp.plugNplay.ProcessWrite
  * <p>Company: Napier University</p>
  *
  * @author Jon Kerridge, Ken Barclay, John Savage
- * @version 1.0
- *
+ * @version 1.0*
  * @version 1.1 included the empty  constructor to enable
  * easier <code>NetChannelOUTPUT</code> list creation (Jon Kerridge)
  * and changes to comply with Groovy-jsr03
@@ -91,7 +90,7 @@ class ChannelOutputList {
     def write(value) {
         def channels = cList.size()
         def writerList = []
-        (0..<channels).each {i ->
+        (0..<channels).each { i ->
             writerList[i] = new ProcessWrite(cList[i])
             writerList[i].value = value
         }

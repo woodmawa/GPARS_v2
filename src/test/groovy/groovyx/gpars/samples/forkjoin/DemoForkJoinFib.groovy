@@ -24,7 +24,7 @@ import static groovyx.gpars.GParsPool.withPool
  */
 
 withPool {
-    println GParsPool.runForkJoin(30) {n ->
+    println GParsPool.runForkJoin(30) { n ->
         if (n <= 2) return 1
         forkOffChild(n - 2)
         forkOffChild(n - 1)

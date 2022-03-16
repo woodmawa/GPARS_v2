@@ -22,6 +22,7 @@ final class RemoteActorsUrlUtils {
     /**
      * Checks if specified name is valid to publish some actor under it.
      * Valid name cannot contain "/"
+     *
      * @param name the name of an actor
      * @return true if name is valid; false otherwise
      */
@@ -31,17 +32,17 @@ final class RemoteActorsUrlUtils {
 
     /**
      * Gets actor name from specified actor url
+     *
      * @param actorUrl the actor url
      * @return name of an actor taken from specified actor url
      */
     static String getActorName(String actorUrl) {
         int splitPos = calculateSplitPosition(actorUrl);
-        return actorUrl.substring(splitPos+1);
+        return actorUrl.substring(splitPos + 1);
     }
 
     /**
      * Get actor group name from specified actor url
-     *
      */
     static String getGroupName(String actorUrl) {
         int splitPos = calculateSplitPosition(actorUrl);

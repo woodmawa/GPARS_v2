@@ -29,7 +29,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  * }*
  *
  * @author Vaclav Pech
- *         Date: Feb 18, 2009
+ * Date: Feb 18, 2009
  */
 @SuppressWarnings("rawtypes")
 public class EnhancedRWLock extends ReentrantReadWriteLock {

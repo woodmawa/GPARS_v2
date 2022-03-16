@@ -33,7 +33,7 @@ import static groovyx.gpars.dataflow.Dataflow.task as go
 // Send the sequence 2, 3, 4, ... to channel 'ch'.
 
 def generate(ch) {
-    {->
+    { ->
         for (i in (2..10000)) {
             ch << i
         }
@@ -44,7 +44,7 @@ def generate(ch) {
 // removing those divisible by 'prime'.
 
 def filter(inChannel, outChannel, int prime) {
-    {->
+    { ->
         for (; ;) {
             def number = inChannel.val
             if (number % prime != 0) {

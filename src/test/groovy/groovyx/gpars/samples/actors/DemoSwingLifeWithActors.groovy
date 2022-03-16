@@ -64,7 +64,7 @@ final class CellActor extends DynamicDispatchActor {
 
     void onMessage(Heartbeat heartbeat) {
         numEmptyNeighbors += 1
-        neighbors.each {it.send(alive)}
+        neighbors.each { it.send(alive) }
         progress()
     }
 
@@ -145,9 +145,9 @@ final class SwingLifeGameWithActors extends DynamicDispatchActor {
 
                 scene = builder.panel()
                 scene.layout = new GridLayout(gridHeight, gridWidth)
-                (0..<gridHeight).each {rowIndex ->
+                (0..<gridHeight).each { rowIndex ->
                     def cellRow = []
-                    (0..<gridWidth).each {columnIndex ->
+                    (0..<gridWidth).each { columnIndex ->
                         final JPanel cell = builder.panel()
                         scene.add(cell)
                         def b = builder.button(' ', enabled: false)
@@ -178,9 +178,9 @@ final class SwingLifeGameWithActors extends DynamicDispatchActor {
 
     private def setupCells() {
         final Random random = new Random()
-        (0..<gridHeight).each {rowIndex ->
+        (0..<gridHeight).each { rowIndex ->
             def cellRow = []
-            (0..<gridWidth).each {colIndex ->
+            (0..<gridWidth).each { colIndex ->
                 final CellActor actor = new CellActor(rowIndex, colIndex, randomInitialValue(random), printer, this)
                 actor.parallelGroup = group
                 actor.start()
@@ -189,10 +189,10 @@ final class SwingLifeGameWithActors extends DynamicDispatchActor {
             cellGrid.add(cellRow)
         }
 
-        (0..<gridHeight).each {rowIndex ->
-            (0..<gridWidth).each {columnIndex ->
+        (0..<gridHeight).each { rowIndex ->
+            (0..<gridWidth).each { columnIndex ->
                 final List<Actor> neighbors = []
-                [rowIndex - 1, rowIndex, rowIndex + 1].each {currentRowIndex ->
+                [rowIndex - 1, rowIndex, rowIndex + 1].each { currentRowIndex ->
                     if (currentRowIndex in 0..<gridHeight) {
                         if (columnIndex > 0) neighbors << cellGrid[currentRowIndex][columnIndex - 1]
                         if (currentRowIndex != rowIndex) neighbors << cellGrid[currentRowIndex][columnIndex]
@@ -232,8 +232,8 @@ final class SwingLifeGameWithActors extends DynamicDispatchActor {
     private void evolve() {
         sleep 1000
         //Send heartbeats to all cells
-        (0..<gridHeight).each {rowIndex ->
-            (0..<gridWidth).each {columnIndex ->
+        (0..<gridHeight).each { rowIndex ->
+            (0..<gridWidth).each { columnIndex ->
                 cellGrid[rowIndex][columnIndex].send(new Heartbeat())
             }
         }
@@ -252,7 +252,7 @@ final class PrinterActor extends DynamicDispatchActor {
         this.visualCells = visualCells
     }
 
-  // TODO: why was this @Override
+    // TODO: why was this @Override
     void onMessage(Object message) {
         PrintMessage msg = (PrintMessage) message
         final cell = visualCells[msg.row][msg.col]

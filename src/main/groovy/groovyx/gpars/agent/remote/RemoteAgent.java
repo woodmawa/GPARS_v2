@@ -23,12 +23,12 @@ import groovyx.gpars.serial.RemoteSerialized;
 
 /**
  * Proxy object for remote Agent instance.
- * @param <T> the type of state hold by the agent
  *
+ * @param <T> the type of state hold by the agent
  * @author Rafal Slawik
  */
 @SuppressWarnings({"serial"})
-public class RemoteAgent<T> extends AgentCore implements RemoteSerialized{
+public class RemoteAgent<T> extends AgentCore implements RemoteSerialized {
     private final RemoteHost remoteHost;
 
     private AgentClosureExecutionPolicy executionPolicy;

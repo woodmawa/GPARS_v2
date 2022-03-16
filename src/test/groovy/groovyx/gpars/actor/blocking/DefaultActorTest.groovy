@@ -52,7 +52,8 @@ class DefaultTestActor extends BlockingActor {
 
     volatile def threadName = ''
 
-    @Override protected void act() {
+    @Override
+    protected void act() {
         threadName = Thread.currentThread().name
         receive {
             receiveWasCalled.set true

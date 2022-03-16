@@ -38,7 +38,7 @@ def fib(n) {
         group.task {
             def a = fib(n - 2)
             def b = fib(n - 1)
-            a.whenBound {b.whenBound {result << a + b}}
+            a.whenBound { b.whenBound { result << a + b } }
         }
     }
     return result

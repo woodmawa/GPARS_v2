@@ -29,14 +29,14 @@ def group = new NonDaemonPGroup()
 final SyncDataflowBroadcast channel = new SyncDataflowBroadcast()
 
 def subscription1 = channel.createReadChannel()
-def fastConsumer = group.operator(inputs: [subscription1], outputs: []) {value ->
+def fastConsumer = group.operator(inputs: [subscription1], outputs: []) { value ->
     sleep 10  //simulating a fast consumer
     if (value == -1) terminate()
     else println "Fast consumer received $value"
 }
 
 def subscription2 = channel.createReadChannel()
-def slowConsumer = group.operator(inputs: [subscription2], outputs: []) {value ->
+def slowConsumer = group.operator(inputs: [subscription2], outputs: []) { value ->
     sleep 500  //simulating a slow consumer
     if (value == -1) terminate()
     else println "Slow consumer received $value"

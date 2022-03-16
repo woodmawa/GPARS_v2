@@ -45,8 +45,8 @@ final class MyDDA extends DynamicDispatchActor {
 }
 
 final def myActor = new MyDDA().become {
-    when {BigDecimal num -> println 'Received BigDecimal'}
-    when {Float num -> println 'Got a float'}
+    when { BigDecimal num -> println 'Received BigDecimal' }
+    when { Float num -> println 'Got a float' }
 }.start()
 Actors.actor {
     myActor 'Hello'

@@ -98,7 +98,7 @@ public class TimeoutTest extends GroovyTestCase {
             }
         }
 
-        actor.metaClass.onTimeout = {->
+        actor.metaClass.onTimeout = { ->
             timeoutFlag.set(true)
         }
 
@@ -128,8 +128,8 @@ public class TimeoutTest extends GroovyTestCase {
         }
 
         actor.metaClass {
-            onTimeout = {-> timeoutFlag.set(true) }
-            afterStop = {messages -> barrier.await() }
+            onTimeout = { -> timeoutFlag.set(true) }
+            afterStop = { messages -> barrier.await() }
         }
 
         actor.send 'message'
@@ -160,7 +160,7 @@ public class TimeoutTest extends GroovyTestCase {
         }
 
         actor.metaClass {
-            onTimeout = {-> timeoutFlag.set(true)}
+            onTimeout = { -> timeoutFlag.set(true) }
         }
 
         actor.send 'message'
@@ -185,7 +185,7 @@ public class TimeoutTest extends GroovyTestCase {
         })
 
         actor.metaClass {
-            onException = {exceptionFlag.set(true); barrier.await(); terminate()}
+            onException = { exceptionFlag.set(true); barrier.await(); terminate() }
         }
 
         actor.start()

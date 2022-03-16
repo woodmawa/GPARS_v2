@@ -56,7 +56,8 @@ class RemoteDataflowsDataflowQueueWithServerTest extends RemoteSpecification {
             try {
                 remoteQueue = clientRemoteDataflows.getDataflowQueue getHostAddress(), PORT, queueName get(10, TimeUnit.MILLISECONDS)
                 received = true
-            } catch (TimeoutException e) { }
+            } catch (TimeoutException e) {
+            }
         }
         remoteQueue
     }

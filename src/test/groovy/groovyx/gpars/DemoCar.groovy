@@ -37,7 +37,7 @@ println "The $car is made by $manufacturer"
 
 def match(obj, closure) {
     closure.subject = obj
-    closure.when = {value, result ->
+    closure.when = { value, result ->
         if (value == subject)
             throw new MatchResultException(result: result)
     }

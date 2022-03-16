@@ -69,7 +69,7 @@ final class Cell {
     @ActiveMethod
     void heartBeat() {
         numEmptyNeighbors += 1
-        neighbors.each {alive ? it.reportBeingAlive() : it.reportBeingEmpty()}
+        neighbors.each { alive ? it.reportBeingAlive() : it.reportBeingEmpty() }
         progress()
     }
 
@@ -155,9 +155,9 @@ final class SwingLifeGameWithActiveObjects {
 
                 scene = builder.panel()
                 scene.layout = new GridLayout(gridHeight, gridWidth)
-                (0..<gridHeight).each {rowIndex ->
+                (0..<gridHeight).each { rowIndex ->
                     def cellRow = []
-                    (0..<gridWidth).each {columnIndex ->
+                    (0..<gridWidth).each { columnIndex ->
                         final JPanel cell = builder.panel()
                         scene.add(cell)
                         def b = builder.button(' ', enabled: false)
@@ -188,18 +188,18 @@ final class SwingLifeGameWithActiveObjects {
 
     private def setupCells() {
         final Random random = new Random()
-        (0..<gridHeight).each {rowIndex ->
+        (0..<gridHeight).each { rowIndex ->
             def cellRow = []
-            (0..<gridWidth).each {colIndex ->
+            (0..<gridWidth).each { colIndex ->
                 cellRow[colIndex] = new Cell(rowIndex, colIndex, randomInitialValue(random), printer, this)
             }
             cellGrid.add(cellRow)
         }
 
-        (0..<gridHeight).each {rowIndex ->
-            (0..<gridWidth).each {columnIndex ->
+        (0..<gridHeight).each { rowIndex ->
+            (0..<gridWidth).each { columnIndex ->
                 final List<Cell> neighbors = []
-                [rowIndex - 1, rowIndex, rowIndex + 1].each {currentRowIndex ->
+                [rowIndex - 1, rowIndex, rowIndex + 1].each { currentRowIndex ->
                     if (currentRowIndex in 0..<gridHeight) {
                         if (columnIndex > 0) neighbors << cellGrid[currentRowIndex][columnIndex - 1]
                         if (currentRowIndex != rowIndex) neighbors << cellGrid[currentRowIndex][columnIndex]
@@ -242,8 +242,8 @@ final class SwingLifeGameWithActiveObjects {
     private void evolve() {
         sleep 1000
         //Send heartbeats to all cells
-        (0..<gridHeight).each {rowIndex ->
-            (0..<gridWidth).each {columnIndex ->
+        (0..<gridHeight).each { rowIndex ->
+            (0..<gridWidth).each { columnIndex ->
                 cellGrid[rowIndex][columnIndex].heartBeat()
             }
         }

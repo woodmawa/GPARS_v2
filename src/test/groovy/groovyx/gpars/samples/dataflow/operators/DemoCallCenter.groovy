@@ -39,7 +39,7 @@ final class CallCenter {
 
     def open() {
         println "Call center opening"
-        agents.times {agentIndex ->
+        agents.times { agentIndex ->
             group.operator(queue, clockOut) {
                 if (it == -1) {
                     println "Agent $agentIndex going home"

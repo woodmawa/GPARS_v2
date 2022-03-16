@@ -22,13 +22,13 @@
 //  Author: Hamlet D'Arcy - Updated OSGi configuration
 //  Author: Schalk W. Cronjé
 //
-//  uplifted to java 11, groovy 3.0.2 and general library refresh
+//  uplifted to java 17, groovy 3.0.8 and general library refresh, and gradle 7.2
 //  Author: Will Woodman
+
 
 plugins {
     id 'groovy'
     id 'java'
-    id 'maven'
     id 'maven-publish'
     //id 'osgi'
     id 'eclipse'
@@ -38,10 +38,9 @@ plugins {
 
 version '2.0-SNAPSHOT'
 
-sourceCompatibility = 1.11
+//sourceCompatibility = 1.16
 
-group = 'org.groovyx'
-archivesBaseName = 'groovyx.gpars'
+group = 'org.groovyx.gpars'
 
 ext {
     theVendor = 'groovyx.gpars.org'
@@ -53,9 +52,10 @@ ext {
 }
 
 repositories {
-    if (gpars_useMavenLocal) { mavenLocal() }
-    jcenter()
     mavenCentral()
+    jcenter()
+    if (gpars_useMavenLocal) { mavenLocal() }
+
 }
 
 configurations {
@@ -73,18 +73,18 @@ configurations.all {
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.13.1'
-    compile group: 'org.codehaus.groovy', name: 'groovy-all', version: "${gpars_groovyVersion}"
+    testImplementation group: 'junit', name: 'junit', version: '4.13'
+    implementation group: 'org.codehaus.groovy', name: 'groovy-all', version: "${gpars_groovyVersion}"
 
-    compile "org.codehaus.groovy:groovy-cli-commons:${gpars_groovyVersion}"
-    compile "org.multiverse:multiverse-core:${gpars_multiverseVersion}", { transitive = false }
-    compile "io.netty:netty-all:${gpars_nettyVersion}"
-    compile "org.codehaus.jcsp:jcsp:${gpars_jcspVersion}"
-    testCompile "org.spockframework:spock-core:${gpars_spockVersion}"
-    testCompile "com.google.code.gson:gson:${gpars_gsonVersion}"
-    testCompile "com.google.guava:guava:${gpars_guavaVersion}"
-    testCompile fileTree(dir: 'lib', include: '*.jar')
-    testCompile group: 'com.google.caliper', name: 'caliper', version: '1.0-beta-2'
+    implementation "org.codehaus.groovy:groovy-cli-commons:${gpars_groovyVersion}"
+    implementation "org.multiverse:multiverse-core:${gpars_multiverseVersion}", { transitive = false }
+    implementation "io.netty:netty-all:${gpars_nettyVersion}"
+    implementation "org.codehaus.jcsp:jcsp:${gpars_jcspVersion}"
+    //implementation "com.google.code.gson:gson:${gpars_gsonVersion}"
+    testImplementation "org.spockframework:spock-core:${gpars_spockVersion}"
+    testImplementation "com.google.guava:guava:${gpars_guavaVersion}"
+    testImplementation fileTree(dir: 'lib', include: '*.jar')
+    testImplementation group: 'com.google.caliper', name: 'caliper', version: '1.0-beta-2'
     deployerJars "org.apache.maven.wagon:wagon-http-lightweight:${gpars_wagonhttplightweightVersion}"
     //cover "net.sourceforge.cobertura:cobertura:${gpars_coberturaVersion}"
     // cant find testRuntime "net.sourceforge.cobertura:cobertura:${gpars_coberturaVersion}"
@@ -105,13 +105,15 @@ task copyDSLDefinitions(type: Copy) {
     from(sourceSets.main.allSource) { include('**/*.gdsl') }
 }
 
+
 jar {
-    archivesBaseName = 'gpars-all'//project.name + '-all'
+    archivesBaseName = 'gpars'
+    //archiveBaseName = project.name + '-all'  //'gpars-all'//
     manifest {
         attributes (
-                archiveName : 'groovyx.gpars',
+                archiveName : 'gpars',
                 archiveVersion: this.version,
-                symbolicName:'groovyx.gpars.org'
+                symbolicName:'groovyx.gpars.org',
                 /*
                 'Bundle-Vendor', ext.theVendor,
                 'Bundle-Description', group,
@@ -149,6 +151,7 @@ tasks.withType(CodeNarc).all { codeNarcTask ->
 
 
 javadoc {
+    options.addBooleanOption('html5', true)
     options.overview('overview.html')
     options.showAll()
     options.encoding('UTF-8')
@@ -164,6 +167,8 @@ javadoc {
     }
 }
 
+
+
 if (JavaVersion.current().isJava11Compatible()) {
     tasks.withType(Javadoc) {
         // disable the crazy super-strict doclint tool in Java 8
@@ -171,6 +176,7 @@ if (JavaVersion.current().isJava11Compatible()) {
         options.addStringOption('Xdoclint:none', '-quiet')
     }
 }
+
 
 groovydoc {
     groovyClasspath = configurations.groovyDoc // Hack, we shouldn't have to do this.
@@ -207,10 +213,12 @@ asciidoctor {
             'pdf-style': 'groovyx.gpars'
 }
 
+
 task jarDoc(type: Jar, dependsOn: [javadoc, groovydoc]) {
     archiveClassifier = 'javadoc'
     from docsDir
 }
+
 
 task jarSrc(type: Jar, dependsOn: classes) {
     archiveClassifier = 'sources'
@@ -219,7 +227,7 @@ task jarSrc(type: Jar, dependsOn: classes) {
 
 artifacts {
     archives(jarSrc)
-    archives(jarDoc)
+    //archives(jarDoc)
 }
 
 task zipGuide(type: Zip, dependsOn: asciidoctor) {
@@ -260,24 +268,24 @@ task zipDist(type: Zip) {
 publishing {
     publications {
         gParsPublish(MavenPublication) {
-            artifactId = 'gpars'
+            artifactId 'gpars'
             from components.java
 
-            artifact jarDoc {
+            /*artifact jarDoc {
                 archiveClassifier = 'javadoc'
-            }
+            } */
             artifact jarSrc {
                 archiveClassifier = 'sources'
             }
-            artifact zipGuide {
+            /* artifact zipGuide {
                 archiveClassifier = 'guide'
-            }
+            }*/
             artifact zipSamples {
                 archiveClassifier = 'samples'
             }
-            artifact zipJavaDemo {
+            /*artifact zipJavaDemo {
                 archiveClassifier = 'mvn-java-demo'
-            }
+            }*/
             artifact zipDist {
                 archiveClassifier = 'all'
             }
@@ -300,44 +308,3 @@ task release(dependsOn: ['build', 'jarSrc', 'jarDoc', 'zipSamples', 'zipJavaDemo
 }
 */
 
-idea {
-    module {
-        excludeDirs += file('gradle/') // Gradle directory including the wrapper subdirectory.
-        excludeDirs += file('.settings/') // Eclipse settings directory.
-        excludeDirs += file('bin') // Eclipse compilation directory.
-        excludeDirs += file('out') // IDEA compilation directory.
-        excludeDirs += file('build') // Gradle compilation directory.
-        excludeDirs += file('docs') // Jon's book directory
-        excludeDirs += file('java-demo') // A separate module of a pure-java gpars usage
-    }
-    project {
-        jdkName '1.11'
-        languageLevel 'JDK_11'
-        ipr {
-            withXml { provider ->
-                def node = provider.asNode()
-                def vcsConfig = node.component.find { it.'@name' == 'VcsDirectoryMappings' }
-                vcsConfig.mapping[0].'@vcs' = 'Git'
-                //Copy the inspection profiles as well as the spell-checker's dictionaries from the default project file
-                def inspectionConfig = provider.asNode().component.find {
-                    it.'@name' == 'InspectionProjectProfileManager'
-                }
-                if (inspectionConfig) node.remove(inspectionConfig)
-                def dictionaryConfig = provider.asNode().component.find { it.'@name' == 'ProjectDictionaryState' }
-                if (dictionaryConfig) node.remove(dictionaryConfig)
-/*
-                new File('GPars_CI_only.ipr').withReader { reader ->
-                    def project = new XmlParser().parse(reader)  //wont parse
-                    def inspections = project.component.find { it.'@name' == 'InspectionProjectProfileManager' }
-                    node.append(inspections)
-                    def dictionaries = project.component.find { it.'@name' == 'ProjectDictionaryState' }
-                    node.append(dictionaries)
-                }
-
- */
-                def gradleSettings = node.appendNode('component', [name: 'GradleSettings'])
-                gradleSettings.appendNode('option', [name: 'SDK_HOME', value: gradle.gradleHomeDir.absolutePath])
-            }
-        }
-    }
-}

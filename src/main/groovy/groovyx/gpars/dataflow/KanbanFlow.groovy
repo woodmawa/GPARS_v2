@@ -29,8 +29,7 @@ import groovyx.gpars.group.PGroup
  * All {@link KanbanLink}s in a KanbanFlow share the same PGroup. Per default this group uses a
  * resizeable pool of daemon threads, starting with the GPars default pool size. This can be overridden
  * by setting the <tt>pooledGroup</tt> property to a custom PGroup.
- * @see KanbanLink
- * @author Dierk Koenig
+ * @see KanbanLink* @author Dierk Koenig
  */
 class KanbanFlow {
 

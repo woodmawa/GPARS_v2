@@ -24,13 +24,13 @@ import static groovyx.gpars.dataflow.ProcessingNode.node
 
 class KanbanFlowTest extends Specification {
 
-    AtomicInteger count   = new AtomicInteger(0) // needed to create some products
+    AtomicInteger count = new AtomicInteger(0) // needed to create some products
     DataflowQueue results = new DataflowQueue()  // needed to assert collected products
-    KanbanFlow    flow    = new KanbanFlow()
+    KanbanFlow flow = new KanbanFlow()
 
-    def counter   = { below -> below count.andIncrement }
-    def reporter  = { above -> results << above.take() }
-    def repeater  = { above, below -> below above.take() }
+    def counter = { below -> below count.andIncrement }
+    def reporter = { above -> results << above.take() }
+    def repeater = { above, below -> below above.take() }
     def increment = { above, below -> below << above.take() + 1 }
 
     def "A -> B wire simple flow with one producer and one consumer"() {
@@ -39,7 +39,8 @@ class KanbanFlowTest extends Specification {
         def consumer = node(reporter)
         flow.link(producer).to(consumer)
 
-        when: flow.start(1)
+        when:
+        flow.start(1)
         then:
         results.val == 0
         results.val == 1
@@ -53,7 +54,8 @@ class KanbanFlowTest extends Specification {
         flow.pooledGroup = new DefaultPGroup(new ResizeablePool(true, 1))
         flow.link(producer).to(consumer)
 
-        when: flow.start(1)
+        when:
+        flow.start(1)
         then:
         results.val == 0
         results.val == 1
@@ -63,7 +65,7 @@ class KanbanFlowTest extends Specification {
     def "A -> B -> C flow with chain of three processing units"() {
         given:
         def producer = node(counter)
-        def middle   = node(repeater)
+        def middle = node(repeater)
         def consumer = node(reporter)
 
         flow.with {
@@ -71,7 +73,8 @@ class KanbanFlowTest extends Specification {
             link(middle).to(consumer)
         }
 
-        when: flow.start(1)
+        when:
+        flow.start(1)
 
         then:
         results.val == 0
@@ -81,11 +84,12 @@ class KanbanFlowTest extends Specification {
 
     def "A* -> B* simple flow with many producer and consumers forks"() {
         given:
-        def producer = node(counter);  producer.maxForks = producerForks
+        def producer = node(counter); producer.maxForks = producerForks
         def consumer = node(reporter); consumer.maxForks = consumerForks
         flow.link(producer).to(consumer)
 
-        when: flow.start()      // uses optimal number of trays
+        when:
+        flow.start()      // uses optimal number of trays
         then:
         def forks = consumerForks + producerForks
         results.val < forks     // "worst" case of scheduling
@@ -117,7 +121,8 @@ class KanbanFlowTest extends Specification {
         flow.link(producer).to(consumer1)
         flow.link(producer).to(consumer2)
 
-        when: flow.start()
+        when:
+        flow.start()
         then:
         4.times { results.val < 4 } // "worst" case of scheduling when one consumer is always faster
         flow.stop()
@@ -125,13 +130,14 @@ class KanbanFlowTest extends Specification {
 
     def "A -> B,C flow with one producer and two consumers(master-slave)"() {
         given:
-        def producer  = node {down1, down2 -> counter down1; counter down2 }
+        def producer = node { down1, down2 -> counter down1; counter down2 }
         def consumer1 = node(reporter)
         def consumer2 = node(reporter)
         flow.link(producer).to(consumer1)
         flow.link(producer).to(consumer2)
 
-        when: flow.start(1)
+        when:
+        flow.start(1)
         then:
         def reported = []
         4.times { reported << results.val }
@@ -141,13 +147,14 @@ class KanbanFlowTest extends Specification {
 
     def "A -> B,C flow with one producer and two consumers(selector)"() {
         given:
-        def producer  = node {down1, down2 -> counter down1; ~down2 }  // simple selection: always choose first
+        def producer = node { down1, down2 -> counter down1; ~down2 }  // simple selection: always choose first
         def consumer1 = node(reporter)
         def consumer2 = node(reporter)
         flow.link(producer).to(consumer1)
         flow.link(producer).to(consumer2)
 
-        when: flow.start(1)
+        when:
+        flow.start(1)
         then:
         def reported = []
         4.times { reported << results.val }
@@ -159,11 +166,12 @@ class KanbanFlowTest extends Specification {
         given:
         def producer1 = node(counter)
         def producer2 = node(counter)
-        def consumer  = node { a, b -> reporter a; reporter b }
+        def consumer = node { a, b -> reporter a; reporter b }
         flow.link(producer1).to(consumer)
         flow.link(producer2).to(consumer)
 
-        when: flow.start(1)
+        when:
+        flow.start(1)
         then:
         def reported = []
         4.times { reported << results.val }
@@ -173,9 +181,9 @@ class KanbanFlowTest extends Specification {
 
     def "A -> B,C -> D diamond"() {
         given:
-        def producer = node {down1, down2 -> counter down1; counter down2 }
-        def middle1  = node(increment)
-        def middle2  = node(increment)
+        def producer = node { down1, down2 -> counter down1; counter down2 }
+        def middle1 = node(increment)
+        def middle2 = node(increment)
         def collector = node { a, b -> reporter a; reporter b }
 
         flow.with {
@@ -185,7 +193,8 @@ class KanbanFlowTest extends Specification {
             link(middle2).to(collector)
         }
 
-        when: flow.start(1)
+        when:
+        flow.start(1)
         then:
         def reported = []
         4.times { reported << results.val }
@@ -241,7 +250,8 @@ class KanbanFlowTest extends Specification {
         KanbanLink link
         link = flow.link(a).to(a)
 
-        when: flow.start(1)
+        when:
+        flow.start(1)
         link.downstream << new KanbanTray(link: link, product: 0)
 
         then:
@@ -255,7 +265,7 @@ class KanbanFlowTest extends Specification {
         given:
         def heartbeat = node { fromSelf, toSelf, toTheRest ->
             def prod = fromSelf.take() + 1
-            toSelf    prod
+            toSelf prod
             toTheRest prod
         }
         def consumer = node(reporter)
@@ -264,7 +274,8 @@ class KanbanFlowTest extends Specification {
         KanbanLink lazySequence = flow.link(heartbeat).to(heartbeat)
         flow.link(heartbeat).to(consumer)
 
-        when: flow.start()
+        when:
+        flow.start()
         lazySequence.downstream << new KanbanTray(link: lazySequence, product: 0)
 
         then:
@@ -286,7 +297,8 @@ class KanbanFlowTest extends Specification {
             up = link(b).to(a)
         }
 
-        when: flow.start(1)
+        when:
+        flow.start(1)
         up.downstream << new KanbanTray(link: up, product: 0)
 
         then:
@@ -298,7 +310,7 @@ class KanbanFlowTest extends Specification {
 
     def "A -> B -> C -> A cycle: ping-peng-pong chained counter (generator)"() {
         given:
-        def a = node { dn, homeTray ->  dn << homeTray.take()  }
+        def a = node { dn, homeTray -> dn << homeTray.take() }
         def b = node(increment)
         def c = node { up, homeTray -> def val = up.product; reporter up; homeTray << val }
 
@@ -310,7 +322,8 @@ class KanbanFlowTest extends Specification {
             home = link(c).to(a)
         }
 
-        when: flow.start(1)
+        when:
+        flow.start(1)
         home.downstream << new KanbanTray(link: home, product: 0)
 
         then:
@@ -323,18 +336,19 @@ class KanbanFlowTest extends Specification {
     def "flow composition with single append"() {
         given:
         def firstFlow = new KanbanFlow()
-        def producer  = node(counter)
-        def consumer  = node(repeater)
+        def producer = node(counter)
+        def consumer = node(repeater)
         firstFlow.link(producer).to(consumer)
 
         def secondFlow = new KanbanFlow()
-        def producer2  = node(repeater)
-        def consumer2  = node(reporter)
+        def producer2 = node(repeater)
+        def consumer2 = node(reporter)
         secondFlow.link(producer2).to(consumer2)
 
         flow = firstFlow + secondFlow
 
-        when: flow.start(1)
+        when:
+        flow.start(1)
         then:
         results.val == 0
         results.val == 1

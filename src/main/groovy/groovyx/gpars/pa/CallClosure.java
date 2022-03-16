@@ -24,34 +24,27 @@ package groovyx.gpars.pa;// GPars - Groovy Parallel Systems
 //  * @author Vaclav Pech
 //  */
 /**
- public final class CallClosure<V> extends Closure<V> {
-    private final Closure<V> target;
-     private static final long serialVersionUID = 209099114666842715L;
-
-     public CallClosure(final Closure<V> target) {
-         super(target.getOwner());
-        this.target = target;
-     }
-
-    @Override
-    public V call(final Object[] args) {
-        return target.call(args);
-     }
-
-     @Override
-     public V call() {
-         return target.call();
-     }
-
-     @Override
-     public V call(final Object arguments) {
-         return target.call(arguments);
-     }
-
-     @SuppressWarnings({"EmptyMethod"})
-     @Override
-     public Object clone() {
-         return super.clone();
-     }
- }
-*/
+ * public final class CallClosure<V> extends Closure<V> {
+ * private final Closure<V> target;
+ * private static final long serialVersionUID = 209099114666842715L;
+ * <p>
+ * public CallClosure(final Closure<V> target) {
+ * super(target.getOwner());
+ * this.target = target;
+ * }
+ *
+ * @Override public V call(final Object[] args) {
+ * return target.call(args);
+ * }
+ * @Override public V call() {
+ * return target.call();
+ * }
+ * @Override public V call(final Object arguments) {
+ * return target.call(arguments);
+ * }
+ * @SuppressWarnings({"EmptyMethod"})
+ * @Override public Object clone() {
+ * return super.clone();
+ * }
+ * }
+ */

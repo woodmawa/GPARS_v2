@@ -24,7 +24,7 @@ import groovyx.gpars.dataflow.SelectableChannel;
  * about a value being available in a particular channel.
  *
  * @author Vaclav Pech
- *         Date: 30th Sep 2010
+ * Date: 30th Sep 2010
  */
 @SuppressWarnings("rawtypes")
 public final class SelectCallback<T> extends Closure {

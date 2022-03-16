@@ -303,16 +303,16 @@ class GoogleChartBuilder extends BuilderSupport {
     }
 
     def chartTypes = ['pie': type('p'), 'pie3d': type('p3'), 'line': type('lc'), 'lineXY': type('lxy'),
-            'bar': barType, 'venn': type('v'), 'scatter': type('s')]
+                      'bar': barType, 'venn': type('v'), 'scatter': type('s')]
 
     def required = ['size': size, 'data': data, 'tSet': textSet, 'eSet': extendedSet, 'sSet': extendedSet]
 
-    def optional = ['title': title, 'label': label, 'row': row, 'legend': 'chdl=', 'labels': 'chl=',
-            'axis': axis, 'position': axis_position, 'range': axis_range,
-            'style': axis_style, 'lineStyle': line_style, 'grid': grid, 'markers': 'chm=',
-            'shape': shape, 'rangeMarker': rangeMarker, 'fill': fill, 'backgrounds': 'chf=',
-            'background': background, 'area': area, 'solid': solid, 'gradient': gradient,
-            'stripes': stripes, 'stripe': stripe, colors: 'chco=', 'color': color, 'barSize': barSize, 'dataRange': data_range, 'labelOption': labelOption]
+    def optional = ['title'     : title, 'label': label, 'row': row, 'legend': 'chdl=', 'labels': 'chl=',
+                    'axis'      : axis, 'position': axis_position, 'range': axis_range,
+                    'style'     : axis_style, 'lineStyle': line_style, 'grid': grid, 'markers': 'chm=',
+                    'shape'     : shape, 'rangeMarker': rangeMarker, 'fill': fill, 'backgrounds': 'chf=',
+                    'background': background, 'area': area, 'solid': solid, 'gradient': gradient,
+                    'stripes'   : stripes, 'stripe': stripe, colors: 'chco=', 'color': color, 'barSize': barSize, 'dataRange': data_range, 'labelOption': labelOption]
 
     def closureDictionary = chartTypes + required + optional
 

@@ -30,6 +30,7 @@ import static java.util.concurrent.TimeUnit.SECONDS
  */
 
 final DefaultPGroup group = new DefaultPGroup(10)
+
 class Messages {
     static def REPLY_TO_EARLY_BIRDS = 'Received your kind offer. Still collecting offers. If you know someone, who might be interested, please tell him.'
     static def REPLY = 'Received your kind offer. Now processing it and comparing with others.'
@@ -37,18 +38,18 @@ class Messages {
 
 final Actor actor = group.actor {
     def messages = [:]
-    react {offerA ->
+    react { offerA ->
         messages[offerA] = sender
         reply Messages.REPLY_TO_EARLY_BIRDS
-        react {offerB ->
+        react { offerB ->
             messages[offerB] = sender
             reply Messages.REPLY_TO_EARLY_BIRDS
-            react {offerC ->
+            react { offerC ->
                 messages[offerC] = sender
                 messages.values()*.send Messages.REPLY  //sent to all senders
-                def winnerOffer = [offerA, offerB, offerC].min {it.price}
+                def winnerOffer = [offerA, offerB, offerC].min { it.price }
                 messages[winnerOffer].send 'I accept your reasonable offer'  //sent to the winner only
-                messages.findAll {it.key != winnerOffer}*.value*.send 'Maybe next time'  //sent to the losers only
+                messages.findAll { it.key != winnerOffer }*.value*.send 'Maybe next time'  //sent to the losers only
             }
         }
     }

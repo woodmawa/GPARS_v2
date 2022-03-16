@@ -24,7 +24,7 @@ import groovyx.gpars.group.DefaultPGroup
  *
  * @author Vaclav Pech
  */
-def log(text) {println text}
+def log(text) { println text }
 
 public Map calculateProjectDuration(int numOfEntities) {
     def df = new Dataflows()

@@ -28,7 +28,7 @@ import java.util.*;
  * The implementation of the core for all selects.
  *
  * @author Vaclav Pech
- *         Date: 29th Sep 2010
+ * Date: 29th Sep 2010
  */
 @SuppressWarnings({"unchecked", "rawtypes", "RawUseOfParameterizedType"})
 public final class SelectBase<T> {

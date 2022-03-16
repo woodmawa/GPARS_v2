@@ -26,9 +26,7 @@ import groovyx.gpars.dataflow.operator.DataflowProcessor
  * kanban flow pattern</a>.
  * In such a link, one or many {@link KanbanTray}s are passed back and forth.
  * Each link must have a {@KanbanFlow}. Many links can share the same {@KanbanFlow}.
- * @see KanbanFlow
- * @see KanbanTray
- * @author Dierk Koenig
+ * @see KanbanFlow* @see KanbanTray* @author Dierk Koenig
  */
 @CompileStatic(value = TypeCheckingMode.PASS)
 class KanbanLink {

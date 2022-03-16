@@ -54,7 +54,7 @@ public class DataflowPrioritySelectorTest extends GroovyTestCase {
         final DataflowQueue d = new DataflowQueue()
         final DataflowQueue e = new DataflowQueue()
 
-        def op = group.prioritySelector(inputs: [a, b, c], outputs: [d, e]) {x ->
+        def op = group.prioritySelector(inputs: [a, b, c], outputs: [d, e]) { x ->
             bindOutput 0, x
             bindOutput 1, 2 * x
         }
@@ -85,7 +85,7 @@ public class DataflowPrioritySelectorTest extends GroovyTestCase {
         c << 40
         b << 50
 
-        def op = group.prioritySelector(inputs: [a, b, c], outputs: [d, e]) {x ->
+        def op = group.prioritySelector(inputs: [a, b, c], outputs: [d, e]) { x ->
             bindOutput 0, x
             bindOutput 1, 2 * x
         }
@@ -102,7 +102,7 @@ public class DataflowPrioritySelectorTest extends GroovyTestCase {
         final DataflowQueue c = new DataflowQueue()
         final DataflowQueue d = new DataflowQueue()
 
-        def op = group.prioritySelector(inputs: [a, b, c], outputs: [d]) {x ->
+        def op = group.prioritySelector(inputs: [a, b, c], outputs: [d]) { x ->
             bindOutput 0, x
         }
 
@@ -153,7 +153,7 @@ public class DataflowPrioritySelectorTest extends GroovyTestCase {
         b << 20
         c << 40
 
-        def op = group.prioritySelector(inputs: [a, b, c], outputs: [d, e]) {x, index ->
+        def op = group.prioritySelector(inputs: [a, b, c], outputs: [d, e]) { x, index ->
             bindOutput 0, x
             bindOutput 1, index
         }
@@ -174,7 +174,7 @@ public class DataflowPrioritySelectorTest extends GroovyTestCase {
         final DataflowQueue b = new DataflowQueue()
         final CyclicBarrier barrier = new CyclicBarrier(2)
 
-        def op = group.prioritySelector(inputs: [a, a], outputs: [b]) {x ->
+        def op = group.prioritySelector(inputs: [a, a], outputs: [b]) { x ->
             bindOutput 0, x
             barrier.await()
         }
@@ -201,12 +201,13 @@ public class DataflowPrioritySelectorTest extends GroovyTestCase {
         final CyclicBarrier barrier2 = new CyclicBarrier(2)
         int counter = 0
 
-        def op1 = group.prioritySelector(inputs: [a, b], outputs: [c]) {x ->
+        def op1 = group.prioritySelector(inputs: [a, b], outputs: [c]) { x ->
             barrier1.await()
             counter++
             try {
                 barrier2.await()
-            } catch (InterruptedException ignore) { }
+            } catch (InterruptedException ignore) {
+            }
 
         }
         a << 'Delivered'
@@ -222,7 +223,7 @@ public class DataflowPrioritySelectorTest extends GroovyTestCase {
         final DataflowQueue b = new DataflowQueue()
         final AtomicBoolean flag = new AtomicBoolean(false)
 
-        def op1 = group.prioritySelector(inputs: [a], outputs: [b]) {v ->
+        def op1 = group.prioritySelector(inputs: [a], outputs: [b]) { v ->
             Thread.currentThread().interrupt()
             flag.set(true)
             bindOutput 'a'
@@ -241,7 +242,7 @@ public class DataflowPrioritySelectorTest extends GroovyTestCase {
         boolean flag = false
 
         shouldFail(IllegalArgumentException) {
-            def op1 = group.prioritySelector(inputs: [], outputs: [b]) {->
+            def op1 = group.prioritySelector(inputs: [], outputs: [b]) { ->
                 flag = true
                 terminate()
             }
@@ -288,26 +289,26 @@ public class DataflowPrioritySelectorTest extends GroovyTestCase {
         final DataflowQueue d = new DataflowQueue()
 
         group.prioritySelector(inputs: [a, b], outputs: [d]) {}.terminate()
-        group.prioritySelector(inputs: [a, b], outputs: [d]) {x ->}.terminate()
-        group.prioritySelector(inputs: [a, b], outputs: [d]) {x, y ->}.terminate()
+        group.prioritySelector(inputs: [a, b], outputs: [d]) { x -> }.terminate()
+        group.prioritySelector(inputs: [a, b], outputs: [d]) { x, y -> }.terminate()
 
         shouldFail(IllegalArgumentException) {
-            group.prioritySelector(inputs: [a, b, c], outputs: [d]) {x, y, z -> }
+            group.prioritySelector(inputs: [a, b, c], outputs: [d]) { x, y, z -> }
         }
         shouldFail(IllegalArgumentException) {
-            group.prioritySelector(inputs: [], outputs: [d]) { }
+            group.prioritySelector(inputs: [], outputs: [d]) {}
         }
         shouldFail(IllegalArgumentException) {
-            group.prioritySelector(inputs: [a], outputs: [d]) {-> }
+            group.prioritySelector(inputs: [a], outputs: [d]) { -> }
         }
 
-        def op1 = group.prioritySelector(inputs: [a], outputs: [d]) { }
+        def op1 = group.prioritySelector(inputs: [a], outputs: [d]) {}
         op1.terminate()
 
-        op1 = group.prioritySelector(inputs: [a], outputs: [d]) {x -> }
+        op1 = group.prioritySelector(inputs: [a], outputs: [d]) { x -> }
         op1.terminate()
 
-        op1 = group.prioritySelector(inputs: [a, b], outputs: [d]) {x, y -> }
+        op1 = group.prioritySelector(inputs: [a, b], outputs: [d]) { x, y -> }
         op1.terminate()
     }
 
@@ -315,9 +316,9 @@ public class DataflowPrioritySelectorTest extends GroovyTestCase {
         final DataflowQueue a = new DataflowQueue()
         final DataflowQueue d = new DataflowQueue()
 
-        def selector1 = group.prioritySelector(inputs: [a], outputs: []) {v -> terminate()}
-        def selector2 = group.prioritySelector(inputs: [a]) {v -> terminate()}
-        def selector3 = group.prioritySelector(inputs: [a], mistypedOutputs: [d]) {v -> terminate()}
+        def selector1 = group.prioritySelector(inputs: [a], outputs: []) { v -> terminate() }
+        def selector2 = group.prioritySelector(inputs: [a]) { v -> terminate() }
+        def selector3 = group.prioritySelector(inputs: [a], mistypedOutputs: [d]) { v -> terminate() }
 
         a << 'value'
         a << 'value'
@@ -330,10 +331,10 @@ public class DataflowPrioritySelectorTest extends GroovyTestCase {
         final DataflowQueue d = new DataflowQueue()
 
         shouldFail(IllegalArgumentException) {
-            group.prioritySelector(outputs: [d]) {v -> }
+            group.prioritySelector(outputs: [d]) { v -> }
         }
         shouldFail(IllegalArgumentException) {
-            group.prioritySelector([:]) {v -> }
+            group.prioritySelector([:]) { v -> }
         }
     }
 
@@ -373,7 +374,7 @@ public class DataflowPrioritySelectorTest extends GroovyTestCase {
         final DataflowQueue d = new DataflowQueue()
         final CyclicBarrier barrier = new CyclicBarrier(2)
 
-        def op1 = group.prioritySelector(inputs: [a, b], outputs: [c, d]) {x, index ->
+        def op1 = group.prioritySelector(inputs: [a, b], outputs: [c, d]) { x, index ->
             bindOutput 0, x
             bindOutput 1, index
             barrier.await()
@@ -384,7 +385,7 @@ public class DataflowPrioritySelectorTest extends GroovyTestCase {
         b << 3
         b << 4
         a << 5
-        4.times {barrier.await()}
+        4.times { barrier.await() }
         assert [c.val, c.val, c.val, c.val, c.val] == [1, 2, 5, 3, 4]
         assert [d.val, d.val, d.val, d.val, d.val] == [0, 0, 0, 1, 1]
         barrier.await()

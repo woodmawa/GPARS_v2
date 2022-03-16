@@ -28,7 +28,7 @@ def fib(DataflowChannel out) {
         def b = new SyncDataflowQueue()
         def c = new SyncDataflowQueue()
         def d = new SyncDataflowQueue()
-        [new Prefix(d, a, 0L), new Prefix(c, d, 1L), new Copy(a, b, out), new StatePairs(b, c)].each { group.task it}
+        [new Prefix(d, a, 0L), new Prefix(c, d, 1L), new Copy(a, b, out), new StatePairs(b, c)].each { group.task it }
     }
 }
 

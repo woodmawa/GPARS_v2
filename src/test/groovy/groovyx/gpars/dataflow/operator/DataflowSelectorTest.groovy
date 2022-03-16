@@ -52,7 +52,7 @@ public class DataflowSelectorTest extends GroovyTestCase {
         final DataflowQueue d = new DataflowQueue()
         final DataflowQueue e = new DataflowQueue()
 
-        def op = group.selector(inputs: [a, b, c], outputs: [d, e]) {x ->
+        def op = group.selector(inputs: [a, b, c], outputs: [d, e]) { x ->
             bindOutput 0, x
             bindOutput 1, 2 * x
         }
@@ -75,7 +75,7 @@ public class DataflowSelectorTest extends GroovyTestCase {
         final DataflowQueue c = new DataflowQueue()
         final DataflowQueue d = new DataflowQueue()
 
-        def op = group.selector(inputs: [a, b, c], outputs: [d]) {x ->
+        def op = group.selector(inputs: [a, b, c], outputs: [d]) { x ->
             bindOutput 0, x
         }
 
@@ -124,7 +124,7 @@ public class DataflowSelectorTest extends GroovyTestCase {
         final DataflowQueue d = new DataflowQueue()
         final DataflowQueue e = new DataflowQueue()
 
-        def op = group.selector(inputs: [a, b, c], outputs: [d, e]) {x, index ->
+        def op = group.selector(inputs: [a, b, c], outputs: [d, e]) { x, index ->
             bindOutput 0, x
             bindOutput 1, index
         }
@@ -150,7 +150,7 @@ public class DataflowSelectorTest extends GroovyTestCase {
         final DataflowQueue b = new DataflowQueue()
         final CyclicBarrier barrier = new CyclicBarrier(2)
 
-        def op = group.selector(inputs: [a, a], outputs: [b]) {x ->
+        def op = group.selector(inputs: [a, a], outputs: [b]) { x ->
             bindOutput 0, x
             barrier.await()
         }
@@ -176,7 +176,7 @@ public class DataflowSelectorTest extends GroovyTestCase {
         final CyclicBarrier barrier = new CyclicBarrier(2)
         int counter = 0
 
-        def op1 = group.selector(inputs: [a, b], outputs: [c]) {x ->
+        def op1 = group.selector(inputs: [a, b], outputs: [c]) { x ->
             counter++
             barrier.await()
 
@@ -194,7 +194,7 @@ public class DataflowSelectorTest extends GroovyTestCase {
         final DataflowQueue b = new DataflowQueue()
         boolean flag = false
 
-        def op1 = group.selector(inputs: [a], outputs: [b]) {v ->
+        def op1 = group.selector(inputs: [a], outputs: [b]) { v ->
             Thread.currentThread().interrupt()
             flag = true
             bindOutput 'a'
@@ -213,7 +213,7 @@ public class DataflowSelectorTest extends GroovyTestCase {
         boolean flag = false
 
         shouldFail(IllegalArgumentException) {
-            def op1 = group.selector(inputs: [], outputs: [b]) {->
+            def op1 = group.selector(inputs: [], outputs: [b]) { ->
                 flag = true
                 terminate()
             }
@@ -260,26 +260,26 @@ public class DataflowSelectorTest extends GroovyTestCase {
         final DataflowQueue d = new DataflowQueue()
 
         group.selector(inputs: [a, b], outputs: [d]) {}.terminate()
-        group.selector(inputs: [a, b], outputs: [d]) {x ->}.terminate()
-        group.selector(inputs: [a, b], outputs: [d]) {x, y ->}.terminate()
+        group.selector(inputs: [a, b], outputs: [d]) { x -> }.terminate()
+        group.selector(inputs: [a, b], outputs: [d]) { x, y -> }.terminate()
 
         shouldFail(IllegalArgumentException) {
-            group.selector(inputs: [a, b, c], outputs: [d]) {x, y, z -> }
+            group.selector(inputs: [a, b, c], outputs: [d]) { x, y, z -> }
         }
         shouldFail(IllegalArgumentException) {
-            group.selector(inputs: [], outputs: [d]) { }
+            group.selector(inputs: [], outputs: [d]) {}
         }
         shouldFail(IllegalArgumentException) {
-            group.selector(inputs: [a], outputs: [d]) {-> }
+            group.selector(inputs: [a], outputs: [d]) { -> }
         }
 
-        def op1 = group.selector(inputs: [a], outputs: [d]) { }
+        def op1 = group.selector(inputs: [a], outputs: [d]) {}
         op1.terminate()
 
-        op1 = group.selector(inputs: [a], outputs: [d]) {x -> }
+        op1 = group.selector(inputs: [a], outputs: [d]) { x -> }
         op1.terminate()
 
-        op1 = group.selector(inputs: [a, b], outputs: [d]) {x, y -> }
+        op1 = group.selector(inputs: [a, b], outputs: [d]) { x, y -> }
         op1.terminate()
     }
 
@@ -287,9 +287,9 @@ public class DataflowSelectorTest extends GroovyTestCase {
         final DataflowQueue a = new DataflowQueue()
         final DataflowQueue d = new DataflowQueue()
 
-        def selector1 = group.selector(inputs: [a], outputs: []) {v -> terminate()}
-        def selector2 = group.selector(inputs: [a]) {v -> terminate()}
-        def selector3 = group.selector(inputs: [a], mistypedOutputs: [d]) {v -> terminate()}
+        def selector1 = group.selector(inputs: [a], outputs: []) { v -> terminate() }
+        def selector2 = group.selector(inputs: [a]) { v -> terminate() }
+        def selector3 = group.selector(inputs: [a], mistypedOutputs: [d]) { v -> terminate() }
 
         a << 'value'
         a << 'value'
@@ -302,10 +302,10 @@ public class DataflowSelectorTest extends GroovyTestCase {
         final DataflowQueue d = new DataflowQueue()
 
         shouldFail(IllegalArgumentException) {
-            group.selector(outputs: [d]) {v -> }
+            group.selector(outputs: [d]) { v -> }
         }
         shouldFail(IllegalArgumentException) {
-            group.selector([:]) {v -> }
+            group.selector([:]) { v -> }
         }
     }
 

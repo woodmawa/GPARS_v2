@@ -33,13 +33,13 @@ final DataflowQueue result2 = new DataflowQueue()
 final Pool pool = new DefaultPool(false, 2)
 
 final DataflowQueue logChannel = new DataflowQueue()
-logChannel | {println 'LOG: ' + it}
+logChannel | { println 'LOG: ' + it }
 
-final negate = {-it}
+final negate = { -it }
 
 final Pipeline pipeline = new Pipeline(pool, queue)
 
-(pipeline | {it * 2} | {it + 1}).tap(logChannel) | negate
+(pipeline | { it * 2 } | { it + 1 }).tap(logChannel) | negate
 pipeline.split(result1, result2)
 
 queue << 1

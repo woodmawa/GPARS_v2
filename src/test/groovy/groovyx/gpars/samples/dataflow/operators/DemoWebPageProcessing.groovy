@@ -59,9 +59,9 @@ def scalaScanner = operator(pagesForScala, resultsFromScala) {
     bindOutput([url: it.url, foundWord: foundWord])
 }
 
-def reporter = operator(inputs: [resultsFromGroovy, resultsFromScala], outputs: [reports]) {g, s ->
+def reporter = operator(inputs: [resultsFromGroovy, resultsFromScala], outputs: [reports]) { g, s ->
     assert g.url == s.url
-    def words = [g.foundWord, s.foundWord].findAll {it}
+    def words = [g.foundWord, s.foundWord].findAll { it }
     def result
     switch (words.size()) {
         case 2:
@@ -77,7 +77,7 @@ def reporter = operator(inputs: [resultsFromGroovy, resultsFromScala], outputs: 
 }
 
 task {
-    for (;;) {
+    for (; ;) {
         println reports.val
     }
 }

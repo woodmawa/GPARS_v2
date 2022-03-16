@@ -147,8 +147,7 @@ public final class Scheduler implements Pool {
                         lastTaskPoke = schedulerTime;
                         try {
                             task.run();
-                        }
-                        catch (Throwable t) {
+                        } catch (Throwable t) {
                             if (Scheduler.TERMINATE != t) {
                                 //todo allow for a customizable handler
                                 t.printStackTrace();
@@ -157,8 +156,7 @@ public final class Scheduler implements Pool {
                     }
                 } catch (InterruptedException e) {//
                 }
-            }
-            finally {
+            } finally {
                 threadCount.decrementAndGet();
             }
         }

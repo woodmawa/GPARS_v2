@@ -34,7 +34,7 @@ import java.lang.annotation.Target;
  *
  * @author Vladimir Orany
  * @author Hamlet D'Arcy
- *         Date: May 14, 2011
+ * Date: May 14, 2011
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)

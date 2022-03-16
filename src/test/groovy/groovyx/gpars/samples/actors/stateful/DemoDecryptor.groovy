@@ -28,7 +28,7 @@ import static groovyx.gpars.actor.Actors.actor
 
 def decryptor = actor {
     loop {
-        react {message ->
+        react { message ->
             if (message instanceof String) reply message.reverse()
             else stop()
         }

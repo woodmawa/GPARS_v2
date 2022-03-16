@@ -35,7 +35,7 @@ import static java.util.Arrays.asList;
  * Contains factory methods to create dataflow actors and starting them.
  *
  * @author Vaclav Pech, Dierk Koenig
- *         Date: Jun 4, 2009
+ * Date: Jun 4, 2009
  */
 @SuppressWarnings({"rawtypes", "RawUseOfParameterizedType", "AbstractClassWithoutAbstractMethods", "AbstractClassNeverImplemented", "ConstantDeclaredInAbstractClass", "UtilityClass", "unchecked"})
 public abstract class Dataflow {

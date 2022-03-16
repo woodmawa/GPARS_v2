@@ -27,7 +27,8 @@ import groovyx.gpars.scheduler.Pool;
 public final class PoolUtils {
     private static final String GPARS_POOLSIZE = "groovyx.gpars.poolsize";
 
-    private PoolUtils() {}
+    private PoolUtils() {
+    }
 
     public static int retrieveDefaultPoolSize() {
         final String poolSizeValue = System.getProperty(PoolUtils.GPARS_POOLSIZE);

@@ -38,12 +38,12 @@ class GIntegrate implements CSProcess {
         def integrateList = [new GPrefix(prefixValue: 0,
                 outChannel: c.out(),
                 inChannel: b.in()),
-                new GPCopy(inChannel: a.in(),
-                        outChannel0: outChannel,
-                        outChannel1: b.out()),
-                new GPlus(inChannel0: inChannel,
-                        inChannel1: c.in(),
-                        outChannel: a.out())
+                             new GPCopy(inChannel: a.in(),
+                                     outChannel0: outChannel,
+                                     outChannel1: b.out()),
+                             new GPlus(inChannel0: inChannel,
+                                     inChannel1: c.in(),
+                                     outChannel: a.out())
         ]
         new PAR(integrateList).run()
 

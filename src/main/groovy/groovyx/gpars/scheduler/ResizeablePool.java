@@ -31,7 +31,7 @@ import java.util.concurrent.TimeUnit;
  * The resize() and resetDefaultSize() methods can be used to configure size of the thread pool at runtime.
  *
  * @author Vaclav Pech
- *         Date: Feb 27, 2009
+ * Date: Feb 27, 2009
  */
 public final class ResizeablePool extends DefaultPool {
     private static final long KEEP_ALIVE_TIME = 10L;

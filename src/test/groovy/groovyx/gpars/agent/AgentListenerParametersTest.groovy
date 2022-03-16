@@ -29,7 +29,7 @@ public class AgentListenerParametersTest extends GroovyTestCase {
     public void testListenerWithAgentParameter() {
         final DataflowVariable result = new DataflowVariable()
         def counter = new Agent(0)
-        counter.addListener {agent, o, n -> result << agent}
+        counter.addListener { agent, o, n -> result << agent }
         counter 20
         assert counter == result.val
     }
@@ -37,7 +37,7 @@ public class AgentListenerParametersTest extends GroovyTestCase {
     public void testValidatorWithAgentParameter() {
         final DataflowVariable result = new DataflowVariable()
         def counter = new Agent(0)
-        counter.addValidator {agent, o, n -> if (n == 10) throw new RuntimeException('test') else result << agent}
+        counter.addValidator { agent, o, n -> if (n == 10) throw new RuntimeException('test') else result << agent }
         counter 10
         counter.await()
         assert counter.hasErrors()
@@ -49,60 +49,60 @@ public class AgentListenerParametersTest extends GroovyTestCase {
     public void testInvalidListenerArguments() {
         def counter = new Agent(0)
         shouldFail(IllegalArgumentException) {
-            counter.addListener {oldValue, newValue, foo, bar -> }
+            counter.addListener { oldValue, newValue, foo, bar -> }
         }
         shouldFail(IllegalArgumentException) {
-            counter.addListener {oldValue -> }
+            counter.addListener { oldValue -> }
         }
         shouldFail(IllegalArgumentException) {
             counter.addListener {}
         }
         shouldFail(IllegalArgumentException) {
-            counter.addListener {->}
+            counter.addListener { -> }
         }
     }
 
     public void testInvalidValidatorArguments() {
         def counter = new Agent(0)
         shouldFail(IllegalArgumentException) {
-            counter.addValidator {oldValue, newValue, foo, bar -> }
+            counter.addValidator { oldValue, newValue, foo, bar -> }
         }
         shouldFail(IllegalArgumentException) {
-            counter.addValidator {oldValue -> }
+            counter.addValidator { oldValue -> }
         }
         shouldFail(IllegalArgumentException) {
             counter.addValidator {}
         }
         shouldFail(IllegalArgumentException) {
-            counter.addValidator {->}
+            counter.addValidator { -> }
         }
     }
 
     @SuppressWarnings("GroovyMethodWithMoreThanThreeNegations")
     public void testCloneStrategyWithValidators() {
-        def registrations = new Agent([], {it.clone()})
-        registrations.addValidator {o, n -> if ('Joe' in n) throw new IllegalArgumentException('Joe must not be allowed to register!')}
+        def registrations = new Agent([], { it.clone() })
+        registrations.addValidator { o, n -> if ('Joe' in n) throw new IllegalArgumentException('Joe must not be allowed to register!') }
 
-        registrations {updateValue(['Joe'])}
+        registrations { updateValue(['Joe']) }
         assert registrations.val == []
         assert registrations.hasErrors()
         assert 1 == registrations.errors.size()
 
-        registrations {updateValue(['Dave'])}
+        registrations { updateValue(['Dave']) }
         assert registrations.val == ['Dave']
         assert !registrations.hasErrors()
 
-        registrations {updateValue(['Joe'])}
+        registrations { updateValue(['Joe']) }
         assert registrations.val == ['Dave']
         assert registrations.hasErrors()
         assert 1 == registrations.errors.size()
 
-        registrations {updateValue(it << 'Joe')}
+        registrations { updateValue(it << 'Joe') }
         assert registrations.val == ['Dave']
         assert registrations.hasErrors()
         assert 1 == registrations.errors.size()
 
-        registrations {r ->
+        registrations { r ->
             r << 'Alice'
             r << 'Joe'
             r << 'James'
@@ -112,7 +112,7 @@ public class AgentListenerParametersTest extends GroovyTestCase {
         assert registrations.hasErrors()
         assert 1 == registrations.errors.size()
 
-        registrations {r ->
+        registrations { r ->
             r << 'Alice'
             r << 'James'
             updateValue r

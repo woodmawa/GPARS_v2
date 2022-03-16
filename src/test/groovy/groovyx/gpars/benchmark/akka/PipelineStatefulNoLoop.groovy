@@ -23,7 +23,7 @@ abstract class PipelineHandler {
     abstract String handleMessage(String message);
 
     void handle(actor, follower) {
-        actor.react {message ->
+        actor.react { message ->
             switch (message) {
                 case String:
                     follower?.send(handleMessage(message))

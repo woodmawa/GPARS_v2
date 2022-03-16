@@ -29,7 +29,7 @@ import groovyx.gpars.actor.Actor;
 import groovyx.gpars.group.DefaultPGroup;
 import groovyx.gpars.scheduler.FJPool;
 
-public abstract class BenchmarkCaliper  {
+public abstract class BenchmarkCaliper {
     public static final int STATIC_RUN = 1;
     public static final int STATIC_MESSAGE = 2;
     public static final int STATIC_POISON = 3;

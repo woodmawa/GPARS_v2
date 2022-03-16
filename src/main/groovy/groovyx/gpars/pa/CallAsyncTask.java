@@ -26,16 +26,15 @@ package groovyx.gpars.pa;// GPars - Groovy Parallel Systems
 //  */
 
 /**
- public final class CallAsyncTask<V> extends RecursiveTask<V> {
-     private final Closure<V> code;
-
-     public CallAsyncTask(final Closure<V> code) {
-        this.code = code;
-     }
-
-     @Override
-     protected V compute() {
-        return code.call();
-     }
- }
-*/
+ * public final class CallAsyncTask<V> extends RecursiveTask<V> {
+ * private final Closure<V> code;
+ * <p>
+ * public CallAsyncTask(final Closure<V> code) {
+ * this.code = code;
+ * }
+ *
+ * @Override protected V compute() {
+ * return code.call();
+ * }
+ * }
+ */

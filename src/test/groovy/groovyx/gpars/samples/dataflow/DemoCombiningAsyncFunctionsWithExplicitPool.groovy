@@ -31,11 +31,11 @@ import groovyx.gpars.scheduler.FJPool
  * @author Vaclav Pech
  */
 
-Closure sPlus = {Integer a, Integer b ->
+Closure sPlus = { Integer a, Integer b ->
     a + b
 }
 
-Closure sMultiply = {Integer a, Integer b ->
+Closure sMultiply = { Integer a, Integer b ->
     sleep 2000
     a * b
 }

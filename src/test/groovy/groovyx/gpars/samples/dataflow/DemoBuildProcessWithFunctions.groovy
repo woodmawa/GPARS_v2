@@ -26,8 +26,8 @@ import static groovyx.gpars.GParsPool.withPool
  */
 
 //Mock-up definitions of build steps
-final createABuildStep = {name -> {param -> println "Starting $name"; sleep 3000; println "Finished $name"; true}}
-final createAThreeArgBuildStep = {name -> {a, b, c -> println "Starting $name"; sleep 3000; println "Finished $name"; true}}
+final createABuildStep = { name -> { param -> println "Starting $name"; sleep 3000; println "Finished $name"; true } }
+final createAThreeArgBuildStep = { name -> { a, b, c -> println "Starting $name"; sleep 3000; println "Finished $name"; true } }
 final checkout = createABuildStep 'Checkout Sources'
 final compileSources = createABuildStep 'Compile Sources'
 final generateAPIDoc = createABuildStep 'Generate API Doc'

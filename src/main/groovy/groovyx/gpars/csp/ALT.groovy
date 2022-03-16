@@ -27,8 +27,7 @@ import org.jcsp.lang.Guard
  *
  * <p>Company: Napier University</p>
  * @author Jon Kerridge, Ken Barclay, John Savage
- * @version 1.0
- * @version 1.1    takes account of jsr03 requirements
+ * @version 1.0* @version 1.1    takes account of jsr03 requirements
  */
 @CompileStatic(value = TypeCheckingMode.PASS)
 class ALT extends Alternative {

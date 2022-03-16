@@ -26,7 +26,7 @@ import groovyx.gpars.dataflow.DataflowVariable
  */
 
 final DataflowVariable variable = new DataflowVariable()
-variable.chainWith {it * 2}.chainWith {it + 1} chainWith {println it}
+variable.chainWith { it * 2 }.chainWith { it + 1 } chainWith { println it }
 
 variable << 1
 

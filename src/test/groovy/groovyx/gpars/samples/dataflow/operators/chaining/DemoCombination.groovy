@@ -30,9 +30,9 @@ import static groovyx.gpars.dataflow.Dataflow.operator
 final DataflowQueue queue = new DataflowQueue()
 final DataflowQueue finalOutput = new DataflowQueue()
 final DataflowQueue otherChannel = new DataflowQueue()
-final chain = queue.chainWith {it * 2}.chainWith {it + 1} chainWith {it * 100}
+final chain = queue.chainWith { it * 2 }.chainWith { it + 1 } chainWith { it * 100 }
 
-operator([chain, otherChannel], [finalOutput]) {a, b ->
+operator([chain, otherChannel], [finalOutput]) { a, b ->
     bindOutput a + b
 }
 

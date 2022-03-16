@@ -37,8 +37,8 @@ final def actor = Actors.actor {
         terminate()
     }
 
-    react(5, TimeUnit.SECONDS) {x ->
-        react(5, TimeUnit.SECONDS) {y ->
+    react(5, TimeUnit.SECONDS) { x ->
+        react(5, TimeUnit.SECONDS) { y ->
             println "Got replies: a:${x} b:${b}"
         }
     }

@@ -72,7 +72,7 @@ class Processor extends BlockingActor {
     }
 
     protected void act() {
-        receive() {List<Integer> list ->
+        receive() { List<Integer> list ->
             switch (list.size()) {
                 case 0: parent.send([0])
                     break
@@ -113,11 +113,12 @@ class ReplyActor extends BlockingActor {
     void act() {
         def sum = 0
 
-        2.times { sum += receive()}
+        2.times { sum += receive() }
         parent.send([sum])
         terminate()
     }
 }
+
 class ArrayCalculator extends BlockingActor {
 
     List<Integer> listToCalculate;

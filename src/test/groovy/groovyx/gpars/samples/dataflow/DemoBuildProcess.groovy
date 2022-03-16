@@ -26,15 +26,15 @@ import static groovyx.gpars.dataflow.Dataflow.whenAllBound
  */
 
 //Mock-up definitions of build steps
-final createABuildStep = {name -> {param -> println "Starting $name"; sleep 3000; println "Finished $name"; true}}
-final createATwoArgBuildStep = {name -> {a, b -> println "Starting $name"; sleep 3000; println "Finished $name"; true}}
-final createAThreeArgBuildStep = {name -> {a, b, c -> println "Starting $name"; sleep 3000; println "Finished $name"; true}}
+final createABuildStep = { name -> { param -> println "Starting $name"; sleep 3000; println "Finished $name"; true } }
+final createATwoArgBuildStep = { name -> { a, b -> println "Starting $name"; sleep 3000; println "Finished $name"; true } }
+final createAThreeArgBuildStep = { name -> { a, b, c -> println "Starting $name"; sleep 3000; println "Finished $name"; true } }
 final checkout = createABuildStep 'Checkout Sources'
 final fetchSourceLibs = createABuildStep 'Fetch Source Libs'
 final fetchTestLibs = createABuildStep 'Fetch Test Libs'
 final compileSources = createABuildStep 'Compile Sources'
 final compileUnitTests = createATwoArgBuildStep 'Compile Unit Tests'
-final runUnitTests = createABuildStep('Run Unit Tests') >> {[unitTestSuccessful: true]}
+final runUnitTests = createABuildStep('Run Unit Tests') >> { [unitTestSuccessful: true] }
 final generateAPIDoc = createABuildStep 'Generate API Doc'
 final generateUserDocumentation = createABuildStep 'Generate User Documentation'
 final packageSources = createABuildStep 'Package Sources'
@@ -43,11 +43,11 @@ final uploadDocumentation = createAThreeArgBuildStep 'Upload Documentation'
 
 /* Here's the composition of individual build steps into a process */
 
-final checkoutDone = task {checkout('git@github.com:vaclav/GPars.git')}
+final checkoutDone = task { checkout('git@github.com:vaclav/GPars.git') }
 final sourceCompiled = checkoutDone.then fetchSourceLibs then compileSources
 final testLibsReady = checkoutDone.then fetchTestLibs
 final unitTestsResult = whenAllBound([sourceCompiled, testLibsReady], compileUnitTests).then runUnitTests
-final deployed = unitTestsResult.then {buildContext ->
+final deployed = unitTestsResult.then { buildContext ->
     if (buildContext.unitTestSuccessful) {
         deploy(packageSources(buildContext))
     } else return buildContext

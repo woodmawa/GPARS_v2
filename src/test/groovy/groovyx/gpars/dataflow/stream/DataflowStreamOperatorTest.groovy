@@ -73,7 +73,7 @@ class DataflowStreamOperatorTest extends GroovyTestCase {
             aw << 5
             bw << 6
         }
-        def result = (1..3).collect {select()}.sort {it.value}
+        def result = (1..3).collect { select() }.sort { it.value }
         assert result*.value == [4, 5, 6]
         assert result*.index == [1, 0, 1]
     }

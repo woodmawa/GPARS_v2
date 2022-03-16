@@ -25,17 +25,17 @@ import groovyx.gpars.agent.Agent
  * It is important to ensure that agents do not leak their internal state to the other agents.
  */
 
-def account1 = [withdraw: {println "Withdrawing: $it"}] as Object
-def account2 = [deposit: {println "Depositing: $it"}] as Object
+def account1 = [withdraw: { println "Withdrawing: $it" }] as Object
+def account2 = [deposit: { println "Depositing: $it" }] as Object
 
 def a1 = new Agent(account1)
 def a2 = new Agent(account2)
 
 def amount = 20
 
-a1 << {acc1 ->
+a1 << { acc1 ->
     acc1.withdraw(amount)
-    a2 << {acc2 ->
+    a2 << { acc2 ->
         //make sure you do not access acc1 from the context of this closure, the code here runs in the context of a2, not a1.
         acc2.deposit(amount)
     }

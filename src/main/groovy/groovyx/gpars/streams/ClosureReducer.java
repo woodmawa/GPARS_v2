@@ -21,23 +21,23 @@ import java.util.function.BinaryOperator;
 import groovy.lang.Closure;
 
 /**
- *  A wrapper around a Groovy Closure to create a Java BinaryOperator suitable for use in a Streams reduction.
+ * A wrapper around a Groovy Closure to create a Java BinaryOperator suitable for use in a Streams reduction.
  *
- *  @author Russel Winder
+ * @author Russel Winder
  */
 @SuppressWarnings({"unchecked"})
 public class ClosureReducer<T> implements BinaryOperator<T> {
 
-  private final Closure<?> code;
+    private final Closure<?> code;
 
-  public ClosureReducer(final Closure<?> code) {
-    this.code = code;
-  }
+    public ClosureReducer(final Closure<?> code) {
+        this.code = code;
+    }
 
-  @Override
-  public T apply(final T a, final T b) {
-    final Object[] args = {a, b};
-    return (T) code.call(args);
-  }
+    @Override
+    public T apply(final T a, final T b) {
+        final Object[] args = {a, b};
+        return (T) code.call(args);
+    }
 
 }

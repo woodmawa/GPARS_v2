@@ -24,10 +24,10 @@ import groovyx.gpars.GParsPool
  */
 def map = [a: 1, b: 2, c: 3, d: 4, e: 5]
 GParsPool.withPool {
-    map.eachParallel {item -> println "$item.key : $item.value"}
-    map.eachParallel {k, v -> println "$k : $v"}
-    println map.collectParallel {item -> "[$item.key : $item.value]"}
-    println map.collectParallel {k, v -> "[$k : $v]"}
+    map.eachParallel { item -> println "$item.key : $item.value" }
+    map.eachParallel { k, v -> println "$k : $v" }
+    println map.collectParallel { item -> "[$item.key : $item.value]" }
+    println map.collectParallel { k, v -> "[$k : $v]" }
 
-    println map.makeConcurrent().collect {k, v -> "[$k : $v]"}
+    println map.makeConcurrent().collect { k, v -> "[$k : $v]" }
 }

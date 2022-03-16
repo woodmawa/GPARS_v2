@@ -68,19 +68,19 @@ abstract class AbstractMessageQueueTest extends GroovyTestCase {
 
         def writer1 = Thread.start {
             barrier.await()
-            (1..100).each {queue.add it}
+            (1..100).each { queue.add it }
         }
         def writer2 = Thread.start {
             barrier.await()
-            (101..200).each {queue.add it}
+            (101..200).each { queue.add it }
         }
         def writer3 = Thread.start {
             barrier.await()
-            (201..300).each {queue.add it}
+            (201..300).each { queue.add it }
         }
         def writer4 = Thread.start {
             barrier.await()
-            (301..400).each {queue.add it}
+            (301..400).each { queue.add it }
         }
         def reader = Thread.start {
             barrier.await()

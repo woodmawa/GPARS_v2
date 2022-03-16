@@ -44,7 +44,7 @@ import java.util.Map;
  * </p>
  *
  * @author Vaclav Pech
- *         Date: Sep 9, 2009
+ * Date: Sep 9, 2009
  */
 @SuppressWarnings({"RawUseOfParameterizedType", "rawtypes", "unchecked"})
 public class DataflowSelector extends DataflowProcessor {
@@ -140,11 +140,12 @@ public class DataflowSelector extends DataflowProcessor {
 
     /**
      * Indicates, whether the selector has some guards enabled and so can select a value from the input channels
+     *
      * @return True, if at least input channel guard is enabled
      */
     final boolean allGuardsClosed() {
         for (final Boolean guard : guards) {
-            if(guard==Boolean.TRUE) return false;
+            if (guard == Boolean.TRUE) return false;
         }
         return true;
     }

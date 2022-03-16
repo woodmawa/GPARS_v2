@@ -26,7 +26,7 @@ def list = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 GParsExecutorsPoolEnhancer.enhanceInstance(list)
 
-println list.collectParallel {it * 2 }
+println list.collectParallel { it * 2 }
 
 final Iterator iterator = list.iterator()
 GParsExecutorsPoolEnhancer.enhanceInstance iterator
@@ -37,9 +37,9 @@ iterator.eachParallel {
 
 final String text = 'want to be very big'
 GParsExecutorsPoolEnhancer.enhanceInstance text
-println((text.collectParallel {it.toUpperCase()}).join())
+println((text.collectParallel { it.toUpperCase() }).join())
 
 def animals = ['dog', 'ant', 'cat', 'whale']
 GParsExecutorsPoolEnhancer.enhanceInstance animals
-println(animals.anyParallel {it ==~ /ant/} ? 'Found an ant' : 'No ants found')
-println(animals.everyParallel {it.contains('a')} ? 'All animals contain a' : 'Some animals can live without an a')
+println(animals.anyParallel { it ==~ /ant/ } ? 'Found an ant' : 'No ants found')
+println(animals.everyParallel { it.contains('a') } ? 'All animals contain a' : 'Some animals can live without an a')

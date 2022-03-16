@@ -25,9 +25,9 @@ import groovyx.gpars.actor.Actors
 import groovyx.gpars.actor.DynamicDispatchActor
 
 final Actor myActor = new DynamicDispatchActor().become {
-    when {String msg -> println 'A String'; reply 'Thanks'}
-    when {Double msg -> println 'A Double'; reply 'Thanks'}
-    when {msg -> println 'A something ...'; reply 'What was that?'; stop()}
+    when { String msg -> println 'A String'; reply 'Thanks' }
+    when { Double msg -> println 'A Double'; reply 'Thanks' }
+    when { msg -> println 'A something ...'; reply 'What was that?'; stop() }
 }
 myActor.start()
 Actors.actor {

@@ -24,7 +24,7 @@ import groovy.test.GroovyTestCase
 public class LazyDataflowVariableTest extends GroovyTestCase {
 
     public void testVariable() {
-        final LazyDataflowVariable variable = new LazyDataflowVariable({-> 10 })
+        final LazyDataflowVariable variable = new LazyDataflowVariable({ -> 10 })
         assert 10 == variable.get()
         assert 10 == variable.get()
 
@@ -33,7 +33,7 @@ public class LazyDataflowVariableTest extends GroovyTestCase {
         }
 
         shouldFail(IllegalStateException) {
-            final def v = new LazyDataflowVariable({-> 20 })
+            final def v = new LazyDataflowVariable({ -> 20 })
             v.get()
             variable << v
         }
@@ -41,20 +41,20 @@ public class LazyDataflowVariableTest extends GroovyTestCase {
     }
 
     public void testGet() {
-        final LazyDataflowVariable variable = new LazyDataflowVariable({-> 10 })
+        final LazyDataflowVariable variable = new LazyDataflowVariable({ -> 10 })
         assert 10 == variable.get()
         assert 10 == variable.get()
         assert 10 == variable.get(10, java.util.concurrent.TimeUnit.SECONDS)
     }
 
     public void testTimeoutGet() {
-        final LazyDataflowVariable variable = new LazyDataflowVariable({-> 10 })
+        final LazyDataflowVariable variable = new LazyDataflowVariable({ -> 10 })
         assert 10 == variable.get(10, java.util.concurrent.TimeUnit.SECONDS)
         assert 10 == variable.get()
     }
 
     public void testGetException() {
-        final LazyDataflowVariable variable = new LazyDataflowVariable({-> throw new Exception('test') })
+        final LazyDataflowVariable variable = new LazyDataflowVariable({ -> throw new Exception('test') })
         shouldFail(Exception) {
             variable.get()
         }
@@ -67,7 +67,7 @@ public class LazyDataflowVariableTest extends GroovyTestCase {
     }
 
     public void testGetRuntimeException() {
-        final LazyDataflowVariable variable = new LazyDataflowVariable({-> throw new RuntimeException('test') })
+        final LazyDataflowVariable variable = new LazyDataflowVariable({ -> throw new RuntimeException('test') })
         shouldFail(RuntimeException) {
             variable.get()
         }
@@ -80,7 +80,7 @@ public class LazyDataflowVariableTest extends GroovyTestCase {
     }
 
     public void testToString() {
-        final LazyDataflowVariable<Integer> variable = new LazyDataflowVariable<Integer>({-> 10 })
+        final LazyDataflowVariable<Integer> variable = new LazyDataflowVariable<Integer>({ -> 10 })
         assert 'LazyDataflowVariable(value=null)' == variable.toString()
         variable.get()
         assert 'LazyDataflowVariable(value=10)' == variable.toString()
@@ -88,7 +88,7 @@ public class LazyDataflowVariableTest extends GroovyTestCase {
     }
 
     public void testVariablePoll() {
-        final LazyDataflowVariable<Integer> variable = new LazyDataflowVariable<Integer>({-> 10 })
+        final LazyDataflowVariable<Integer> variable = new LazyDataflowVariable<Integer>({ -> 10 })
         final def result = new DataflowVariable()
 
         assert variable.poll() == null
@@ -103,7 +103,7 @@ public class LazyDataflowVariableTest extends GroovyTestCase {
     }
 
     public void testJoin() {
-        final LazyDataflowVariable variable = new LazyDataflowVariable({-> 10 })
+        final LazyDataflowVariable variable = new LazyDataflowVariable({ -> 10 })
 
         def t1 = System.currentTimeMillis()
 
@@ -120,7 +120,7 @@ public class LazyDataflowVariableTest extends GroovyTestCase {
 
     public void testTimedJoin() {
         final CyclicBarrier barrier = new CyclicBarrier(2)
-        final LazyDataflowVariable variable = new LazyDataflowVariable({->
+        final LazyDataflowVariable variable = new LazyDataflowVariable({ ->
             barrier.await()
             10
         })
@@ -141,7 +141,7 @@ public class LazyDataflowVariableTest extends GroovyTestCase {
     }
 
     public void testEqualValueRebind() {
-        final LazyDataflowVariable variable = new LazyDataflowVariable({-> [1, 2, 3] })
+        final LazyDataflowVariable variable = new LazyDataflowVariable({ -> [1, 2, 3] })
         variable.bind([1, 2, 3])
         variable.bind([1, 2, 3])
         variable.bindSafely([1, 2, 3])
@@ -182,8 +182,8 @@ public class LazyDataflowVariableTest extends GroovyTestCase {
 
     public void testResultComposition() {
 
-        final LazyDataflowVariable variable = new LazyDataflowVariable({->
-            new LazyDataflowVariable({-> 10 })
+        final LazyDataflowVariable variable = new LazyDataflowVariable({ ->
+            new LazyDataflowVariable({ -> 10 })
         })
         assert variable.get() == 10
 

@@ -41,28 +41,28 @@ final createAccumulator = { new BrandedCar('', '', 0.0) }
 
 withPool {
     def modelResult =
-        cars.parallel.map {
-            [it.model, it]
-        }.combine(createAccumulator) { sum, value ->
-            sum.model = value.model
-            sum.brand = "Mixed values"
-            sum.price += value.price
-            sum
-        }
-        .values()
+            cars.parallel.map {
+                [it.model, it]
+            }.combine(createAccumulator) { sum, value ->
+                sum.model = value.model
+                sum.brand = "Mixed values"
+                sum.price += value.price
+                sum
+            }
+                    .values()
 
     println modelResult
 
     def brandedResult =
-        cars.parallel.map {
-            [it.model + it.brand, it]
-        }.combine(createAccumulator) { sum, value ->
-            sum.model = value.model
-            sum.brand = value.brand
-            sum.price += value.price
-            sum
-        }
-        .values()
+            cars.parallel.map {
+                [it.model + it.brand, it]
+            }.combine(createAccumulator) { sum, value ->
+                sum.model = value.model
+                sum.brand = value.brand
+                sum.price += value.price
+                sum
+            }
+                    .values()
 
     println brandedResult
 }

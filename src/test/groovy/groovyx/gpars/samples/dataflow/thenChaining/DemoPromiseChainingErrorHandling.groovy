@@ -22,7 +22,8 @@ import groovyx.gpars.dataflow.Promise
 [10, 1, 0].each { num ->
     Promise<Integer> initial = new DataflowVariable<Integer>()
     Promise<String> result = initial.then { it * 2 } then { 100 / it }
-            .then { println "Logging the value $it as it passes by"; return it }      //Since no error handler is defined, exceptions will be ignored
+    . then { println "Logging the value $it as it passes by";
+        return it }      //Since no error handler is defined, exceptions will be ignored
     //and silently re-thrown to the next handler in the chain
             .then({ "The result for $num is $it" }, { "Error detected for $num: $it" }) //Here the exception is caught
     initial << num

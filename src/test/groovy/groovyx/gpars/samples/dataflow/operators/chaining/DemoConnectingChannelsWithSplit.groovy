@@ -28,7 +28,7 @@ import static groovyx.gpars.dataflow.Dataflow.task
  * @author Vaclav Pech
  */
 
-def toUpperCase = {s -> s.toUpperCase()}
+def toUpperCase = { s -> s.toUpperCase() }
 
 final DataflowReadChannel encrypt = new DataflowQueue()
 final DataflowWriteChannel messagesToSave = new DataflowQueue()
@@ -36,10 +36,10 @@ final DataflowWriteChannel messagesToLog = new DataflowQueue()
 
 //Define the decryption pipeline
 final DataflowWriteChannel messagesToDecrypt = new DataflowQueue()
-final decryptedMessages = messagesToDecrypt.chainWith {it[15..-4]} chainWith {it.reverse()} chainWith {it.toLowerCase()} chainWith {'Groovy leaks! Check out a decrypted secret message: ' + it}
+final decryptedMessages = messagesToDecrypt.chainWith { it[15..-4] } chainWith { it.reverse() } chainWith { it.toLowerCase() } chainWith { 'Groovy leaks! Check out a decrypted secret message: ' + it }
 
 //Define the encryption pipeline and split it into the save, log and decrypt pipelines
-encrypt.chainWith toUpperCase chainWith {it.reverse()} chainWith {'###encrypted###' + it + '###'} split([messagesToSave, messagesToLog, messagesToDecrypt])
+encrypt.chainWith toUpperCase chainWith { it.reverse() } chainWith { '###encrypted###' + it + '###' } split([messagesToSave, messagesToLog, messagesToDecrypt])
 
 //Run it all asynchronously
 task {

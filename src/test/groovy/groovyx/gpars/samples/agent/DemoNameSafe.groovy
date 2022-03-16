@@ -21,20 +21,21 @@ import groovyx.gpars.agent.Agent
 
 def name = new Agent<String>()           //new Agent
 
-name << {updateValue 'Joe' }            //Set the state to 'Joe'
-name << {updateValue(it + ' and Dave')} //Set the state to a new value derived from the previous value
+name << { updateValue 'Joe' }            //Set the state to 'Joe'
+name << { updateValue(it + ' and Dave') } //Set the state to a new value derived from the previous value
 println name.val
-println(name.sendAndWait({it.size()}))
+println(name.sendAndWait({ it.size() }))
 
 name << 'Alice'                         //Set a new state
 println name.val
-name.valAsync {println "Async: $it"}
+name.valAsync { println "Async: $it" }
 
 name << 'James'                         //Set a new state
 println name.val
 
 Actors.actor {                          //Create a new actor to communicate with the Agent
-    name << {owner.send it.toUpperCase()}          //Construct an upper cased string and reply it back. The internal state of the Agent doesn't change here
+    name << { owner.send it.toUpperCase() }
+    //Construct an upper cased string and reply it back. The internal state of the Agent doesn't change here
     react {                             //Wait for the reply with the uppercase string
         println it
     }

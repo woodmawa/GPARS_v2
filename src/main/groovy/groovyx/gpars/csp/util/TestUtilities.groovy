@@ -23,8 +23,7 @@ abstract class TestUtilities {
 
         if (firstList.size != secondList.size) {
             return false
-        }
-        else {
+        } else {
             firstList.sort()
             secondList.sort()
             return (firstList == secondList)
@@ -35,8 +34,7 @@ abstract class TestUtilities {
 
         if (firstList.size != secondList.size) {
             return false
-        }
-        else {
+        } else {
             for (i in 0..<firstList.size) {
                 if (firstList[i] < secondList[i]) {
                     return false

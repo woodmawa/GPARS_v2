@@ -33,7 +33,7 @@ final group = new DefaultPGroup()
 DataflowQueue a = new DataflowQueue()
 DataflowQueue b = new DataflowQueue()
 DataflowQueue c = new DataflowQueue()
-def op = group.operator(inputs: [a, b], outputs: [c]) {x, y ->
+def op = group.operator(inputs: [a, b], outputs: [c]) { x, y ->
     if (x < 0) throw new IllegalArgumentException("I do not like negative xs")
     bindOutput x + y
 }
@@ -53,7 +53,7 @@ def listener = new DataflowEventAdapter() {
     }
 }
 
-op = group.operator(inputs: [a, b], outputs: [c], listeners: [listener]) {x, y ->
+op = group.operator(inputs: [a, b], outputs: [c], listeners: [listener]) { x, y ->
     if (x < 0) throw new IllegalArgumentException("I do not like negative xs")
     bindOutput x + y
 }
@@ -85,7 +85,7 @@ final listener2 = new DataflowEventAdapter() {
     }
 }
 
-op = group.operator(inputs: [a, b], outputs: [c], listeners: [listener1, listener2]) {x, y ->
+op = group.operator(inputs: [a, b], outputs: [c], listeners: [listener1, listener2]) { x, y ->
     if (x < 0) throw new IllegalArgumentException("I do not like negative xs")
     bindOutput x + y
 }

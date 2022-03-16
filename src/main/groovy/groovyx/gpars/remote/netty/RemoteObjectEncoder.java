@@ -47,12 +47,10 @@ public class RemoteObjectEncoder extends ObjectEncoder {
         }
         try {
             super.encode(ctx, msg, out);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             throw e;
-        }
-        finally {
+        } finally {
             if (remoteHost != null) {
                 remoteHost.leave();
             }

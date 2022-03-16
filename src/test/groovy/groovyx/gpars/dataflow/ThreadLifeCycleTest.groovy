@@ -75,24 +75,24 @@ public class ThreadLifeCycleTest extends GroovyTestCase {
     private void enhance(final BlockingActor thread, final AtomicInteger counter, final CountDownLatch latch) {
 
         thread.metaClass {
-            afterStart = {->  //won't be called
+            afterStart = { ->  //won't be called
                 counter.incrementAndGet()
             }
 
-            afterStop = {List undeliveredMessages ->
+            afterStop = { List undeliveredMessages ->
                 counter.incrementAndGet()
                 latch.countDown()
             }
 
-            onInterrupt = {InterruptedException e ->
+            onInterrupt = { InterruptedException e ->
                 counter.incrementAndGet()
             }
 
-            onTimeout = {->
+            onTimeout = { ->
                 counter.incrementAndGet()
             }
 
-            onException = {Exception e ->
+            onException = { Exception e ->
                 counter.incrementAndGet()
             }
         }

@@ -44,11 +44,11 @@ me = group.actor {
     def message2 = 2
     def message3 = 3
 
-    message2.metaClass.onDeliveryError = {->
+    message2.metaClass.onDeliveryError = { ->
         me << "Could not deliver $delegate"
     }
 
-    message3.metaClass.onDeliveryError = {->
+    message3.metaClass.onDeliveryError = { ->
         me << "Could not deliver $delegate"
     }
 
@@ -57,9 +57,9 @@ me = group.actor {
     actor << message3
     barrier.await()
 
-    react {a ->
+    react { a ->
         println a
-        react {b ->
+        react { b ->
             println b
         }
     }

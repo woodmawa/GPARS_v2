@@ -37,11 +37,11 @@ class EnhancedRWLockTest extends GroovyTestCase {
             assertFalse lock.writeLock().tryLock(10, TimeUnit.MILLISECONDS)
 
             final def result1 = new DataflowVariable<Boolean>()
-            Thread.start {result1 << lock.readLock().tryLock(10, TimeUnit.MILLISECONDS); lock.readLock().unlock()}
+            Thread.start { result1 << lock.readLock().tryLock(10, TimeUnit.MILLISECONDS); lock.readLock().unlock() }
             assertTrue result1.val
 
             final def result2 = new DataflowVariable<Boolean>()
-            Thread.start {result2 << lock.writeLock().tryLock(10, TimeUnit.MILLISECONDS)}
+            Thread.start { result2 << lock.writeLock().tryLock(10, TimeUnit.MILLISECONDS) }
             assertFalse result2.val
         }
     }
@@ -55,11 +55,11 @@ class EnhancedRWLockTest extends GroovyTestCase {
             lock.writeLock().unlock()
 
             final def result1 = new DataflowVariable<Boolean>()
-            Thread.start {result1 << lock.readLock().tryLock(10, TimeUnit.MILLISECONDS)}
+            Thread.start { result1 << lock.readLock().tryLock(10, TimeUnit.MILLISECONDS) }
             assertFalse result1.val
 
             final def result2 = new DataflowVariable<Boolean>()
-            Thread.start {result2 << lock.writeLock().tryLock(10, TimeUnit.MILLISECONDS)}
+            Thread.start { result2 << lock.writeLock().tryLock(10, TimeUnit.MILLISECONDS) }
             assertFalse result2.val
         }
     }

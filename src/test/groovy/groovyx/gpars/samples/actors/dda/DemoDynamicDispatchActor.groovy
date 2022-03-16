@@ -46,7 +46,7 @@ final class MyActor extends DynamicDispatchActor {
 }
 
 final def actor = new MyActor({
-    when {BigDecimal num -> println 'Received BigDecimal'}
+    when { BigDecimal num -> println 'Received BigDecimal' }
 }).start()
 
 actor 1

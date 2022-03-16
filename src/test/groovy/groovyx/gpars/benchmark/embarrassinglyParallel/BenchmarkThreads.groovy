@@ -28,7 +28,9 @@ def execute(int actorCount) {
     final Queue queue = new ArrayBlockingQueue(actorCount)
     final accumulator = new Thread({
         double sum = 0.0d
-        for (c in computors) {sum += queue.take()}
+        for (c in computors) {
+            sum += queue.take()
+        }
         final double pi = 4.0d * sum * delta
         final double elapseTime = (System.nanoTime() - startTimeNanos) / 1e9
         println("==== Groovy GPars ActorScript pi = " + pi)
@@ -37,7 +39,7 @@ def execute(int actorCount) {
         println("==== Groovy GPars ActorScript actor count = " + actorCount)
     })
 
-    (0..<actorCount).each {long index ->
+    (0..<actorCount).each { long index ->
         final long start = 1l + index * sliceSize
         final long end = (index + 1l) * sliceSize
         computors.add(

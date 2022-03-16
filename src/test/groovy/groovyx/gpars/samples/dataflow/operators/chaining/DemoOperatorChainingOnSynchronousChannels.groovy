@@ -26,7 +26,7 @@ import groovyx.gpars.dataflow.SyncDataflowQueue
  */
 
 final SyncDataflowQueue queue = new SyncDataflowQueue()
-final result = queue.chainWith {it * 2}.chainWith {it + 1} chainWith {it * 100}
+final result = queue.chainWith { it * 2 }.chainWith { it + 1 } chainWith { it * 100 }
 
 Thread.start {
     5.times {

@@ -33,37 +33,67 @@ import groovy.transform.TypeCheckingMode
 final class TransparentParallel {
     private boolean concurrencyActive = true;
 
-    public def final each(Closure yield) { if (concurrencyActive) this.eachParallel(yield); else (mixedIn[Object] as Object).each(yield) }
+    public def final each(Closure yield) {
+        if (concurrencyActive) this.eachParallel(yield); else (mixedIn[Object] as Object).each(yield)
+    }
 
-    public def final eachWithIndex(Closure yield) { if (concurrencyActive) this.eachWithIndexParallel(yield); else (mixedIn[Object] as Object).eachWithIndex(yield) }
+    public def final eachWithIndex(Closure yield) {
+        if (concurrencyActive) this.eachWithIndexParallel(yield); else (mixedIn[Object] as Object).eachWithIndex(yield)
+    }
 
-    public def final collect(Closure yield) { if (concurrencyActive) this.collectParallel(yield).makeConcurrent(); else (mixedIn[Object] as Object).collect(yield) }
+    public def final collect(Closure yield) {
+        if (concurrencyActive) this.collectParallel(yield).makeConcurrent(); else (mixedIn[Object] as Object).collect(yield)
+    }
 
-    public def final collectMany(Closure yield) { if (concurrencyActive) this.collectManyParallel(yield).makeConcurrent(); else (mixedIn[Object] as Object).collectMany(yield) }
+    public def final collectMany(Closure yield) {
+        if (concurrencyActive) this.collectManyParallel(yield).makeConcurrent(); else (mixedIn[Object] as Object).collectMany(yield)
+    }
 
-    public def final find(Closure yield) { if (concurrencyActive) this.findParallel(yield); else (mixedIn[Object] as Object).find(yield) }
+    public def final find(Closure yield) {
+        if (concurrencyActive) this.findParallel(yield); else (mixedIn[Object] as Object).find(yield)
+    }
 
-    public def final findAny(Closure yield) { if (concurrencyActive) this.findAnyParallel(yield); else (mixedIn[Object] as Object).find(yield) }
+    public def final findAny(Closure yield) {
+        if (concurrencyActive) this.findAnyParallel(yield); else (mixedIn[Object] as Object).find(yield)
+    }
 
-    public def final findAll(Closure yield) { if (concurrencyActive) this.findAllParallel(yield).makeConcurrent(); else (mixedIn[Object] as Object).findAll(yield) }
+    public def final findAll(Closure yield) {
+        if (concurrencyActive) this.findAllParallel(yield).makeConcurrent(); else (mixedIn[Object] as Object).findAll(yield)
+    }
 
-    public def final grep(filter) { if (concurrencyActive) this.grepParallel(filter).makeConcurrent(); else (mixedIn[Object] as Object).grep(filter) }
+    public def final grep(filter) {
+        if (concurrencyActive) this.grepParallel(filter).makeConcurrent(); else (mixedIn[Object] as Object).grep(filter)
+    }
 
-    public def final split(Closure yield) { if (concurrencyActive) this.splitParallel(yield).makeConcurrent(); else (mixedIn[Object] as Object).split(yield) }
+    public def final split(Closure yield) {
+        if (concurrencyActive) this.splitParallel(yield).makeConcurrent(); else (mixedIn[Object] as Object).split(yield)
+    }
 
-    public def final count(filter) { if (concurrencyActive) this.countParallel(filter); else (mixedIn[Object] as Object).count(filter) }
+    public def final count(filter) {
+        if (concurrencyActive) this.countParallel(filter); else (mixedIn[Object] as Object).count(filter)
+    }
 
-    public def final every(Closure yield) { if (concurrencyActive) this.everyParallel(yield); else (mixedIn[Object] as Object).every(yield) }
+    public def final every(Closure yield) {
+        if (concurrencyActive) this.everyParallel(yield); else (mixedIn[Object] as Object).every(yield)
+    }
 
-    public def final any(Closure yield) { if (concurrencyActive) this.anyParallel(yield); else (mixedIn[Object] as Object).any(yield) }
+    public def final any(Closure yield) {
+        if (concurrencyActive) this.anyParallel(yield); else (mixedIn[Object] as Object).any(yield)
+    }
 
-    public def final groupBy(Closure yield) { if (concurrencyActive) this.groupByParallel(yield); else (mixedIn[Object] as Object).groupBy(yield) }
+    public def final groupBy(Closure yield) {
+        if (concurrencyActive) this.groupByParallel(yield); else (mixedIn[Object] as Object).groupBy(yield)
+    }
 
-    public def final min(Closure yield) { if (concurrencyActive) this.minParallel(yield); else (mixedIn[Object] as Object).min(yield) }
+    public def final min(Closure yield) {
+        if (concurrencyActive) this.minParallel(yield); else (mixedIn[Object] as Object).min(yield)
+    }
 
     public def final min() { if (concurrencyActive) this.minParallel(); else (mixedIn[Object] as Object).min() }
 
-    public def final max(Closure yield) { if (concurrencyActive) this.maxParallel(yield); else (mixedIn[Object] as Object).max(yield) }
+    public def final max(Closure yield) {
+        if (concurrencyActive) this.maxParallel(yield); else (mixedIn[Object] as Object).max(yield)
+    }
 
     public def final max() { if (concurrencyActive) this.maxParallel(); else (mixedIn[Object] as Object).max() }
 
@@ -75,9 +105,13 @@ final class TransparentParallel {
 //    @Deprecated
 //    public def final fold(seed, Closure yield) { if (concurrencyActive) this.foldParallel(seed, yield); else throw new UnsupportedOperationException('The inject() operation is not supported by collections in sequential mode') }
 
-    public def final inject(Closure yield) { if (concurrencyActive) this.injectParallel(yield); else throw new UnsupportedOperationException('The inject() operation is not supported by collections in sequential mode') }
+    public def final inject(Closure yield) {
+        if (concurrencyActive) this.injectParallel(yield); else throw new UnsupportedOperationException('The inject() operation is not supported by collections in sequential mode')
+    }
 
-    public def final inject(seed, Closure yield) { if (concurrencyActive) this.injectParallel(seed, yield); else throw new UnsupportedOperationException('The inject() operation is not supported by collections in sequential mode') }
+    public def final inject(seed, Closure yield) {
+        if (concurrencyActive) this.injectParallel(seed, yield); else throw new UnsupportedOperationException('The inject() operation is not supported by collections in sequential mode')
+    }
 
     /**
      * Indicates, whether the iterative methods like each() or collect() have been made parallel.

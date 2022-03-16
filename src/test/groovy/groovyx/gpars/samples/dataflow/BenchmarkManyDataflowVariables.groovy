@@ -28,7 +28,7 @@ def scheduler = Executors.newFixedThreadPool(20)
 
 scheduler.execute { result << dfs.sum { it.val } }
 
-dfs.each {df ->
+dfs.each { df ->
     scheduler.execute { df << 1 }
 }
 

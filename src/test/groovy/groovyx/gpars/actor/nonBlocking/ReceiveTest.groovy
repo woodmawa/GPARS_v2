@@ -54,12 +54,12 @@ public class ReceiveTest extends GroovyTestCase {
             while (true) {
                 receive {
                     receive {
-                        receive {msg1 ->
+                        receive { msg1 ->
                             df.result1 = msg1
                             df.result2 = receive()
-                            receive {msg2 ->
+                            receive { msg2 ->
                                 df.result3 = msg2
-                                receive {msg3 ->
+                                receive { msg3 ->
                                     df.result4 = msg3
                                     terminate()
                                 }

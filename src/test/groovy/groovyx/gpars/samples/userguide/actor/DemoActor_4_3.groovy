@@ -37,13 +37,13 @@ final class Philosopher extends DefaultActor {
             think()
             forks*.send new Take()
             def messages = []
-            react {a ->
+            react { a ->
                 messages << [a, sender]
-                react {b ->
+                react { b ->
                     messages << [b, sender]
-                    if ([a, b].any {Rejected.isCase it}) {
+                    if ([a, b].any { Rejected.isCase it }) {
                         println "$name: \tOops, can't get my forks! Giving up."
-                        final def accepted = messages.find {Accepted.isCase it[0]}
+                        final def accepted = messages.find { Accepted.isCase it[0] }
                         if (accepted != null) accepted[1].send new Finished()
                     } else {
                         eat()
@@ -74,7 +74,7 @@ final class Fork extends DefaultActor {
 
     void act() {
         loop {
-            react {message ->
+            react { message ->
                 switch (message) {
                     case Take:
                         if (available) {
@@ -94,8 +94,11 @@ final class Fork extends DefaultActor {
 }
 
 final class Take {}
+
 final class Accepted {}
+
 final class Rejected {}
+
 final class Finished {}
 
 def forks = [

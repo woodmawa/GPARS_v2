@@ -29,13 +29,12 @@ final DataflowQueue numbers = new DataflowQueue()
 def instruction
 def nums = []
 
-def sel = selector(inputs: [operations, numbers], outputs: [], guards: [true, false]) {value, index ->   //initial guards is set here
+def sel = selector(inputs: [operations, numbers], outputs: [], guards: [true, false]) { value, index ->   //initial guards is set here
     if (index == 0) {
         instruction = value
         setGuard(0, false)  //setGuard() used here
         setGuard(1, true)
-    }
-    else nums << value
+    } else nums << value
     if (nums.size() == 2) {
         setGuards([true, false])                                    //setGuards() used here
         final def formula = "${nums[0]} $instruction ${nums[1]}"

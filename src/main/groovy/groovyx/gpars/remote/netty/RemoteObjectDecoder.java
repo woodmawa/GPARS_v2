@@ -46,8 +46,7 @@ public class RemoteObjectDecoder extends ObjectDecoder {
         }
         try {
             return super.decode(ctx, in);
-        }
-        finally {
+        } finally {
             if (remoteHost != null) {
                 remoteHost.leave();
             }

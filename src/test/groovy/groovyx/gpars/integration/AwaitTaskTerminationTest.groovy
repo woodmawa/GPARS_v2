@@ -39,7 +39,7 @@ public class AwaitTaskTerminationTest extends GroovyTestCase {
             process i
 
         def doneFlag = new DataflowVariable()
-        activeTasks.addListener {oldValue, newValue -> if (newValue == 0) doneFlag.bind(true)}
+        activeTasks.addListener { oldValue, newValue -> if (newValue == 0) doneFlag.bind(true) }
         if (activeTasks.val > 0) doneFlag.join()
         assert counter.get() == 1000
         pooledGroup.shutdown()
@@ -47,11 +47,11 @@ public class AwaitTaskTerminationTest extends GroovyTestCase {
     }
 
     private void process(int i) {
-        activeTasks << {updateValue it + 1}
+        activeTasks << { updateValue it + 1 }
         pooledGroup.task {
             Thread.sleep(100) // to simulate some work
             counter.incrementAndGet()
-            activeTasks << {updateValue it - 1}
+            activeTasks << { updateValue it - 1 }
         }
     }
 

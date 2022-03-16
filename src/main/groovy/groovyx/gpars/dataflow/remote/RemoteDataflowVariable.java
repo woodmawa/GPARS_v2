@@ -24,8 +24,8 @@ import groovyx.gpars.serial.RemoteSerialized;
 
 /**
  * Proxy object for remote Variable instance.
- * @param <T> the type of the variable
  *
+ * @param <T> the type of the variable
  * @author Rafal Slawik
  */
 @SuppressWarnings("rawtypes")

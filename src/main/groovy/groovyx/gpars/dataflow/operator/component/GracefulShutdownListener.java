@@ -34,12 +34,13 @@ public class GracefulShutdownListener extends DataflowEventAdapter {
     private boolean collectingMessages = false;
     private final AtomicInteger activeForks = new AtomicInteger(0);
     private final OperatorStateMonitor monitor;
-    private DataflowProcessor processor=null;
+    private DataflowProcessor processor = null;
     private volatile boolean shutdownFlag = false;
     private final AtomicLong messagesInChannels = new AtomicLong(0L);
 
     /**
      * Hooks hooks the shared monitor
+     *
      * @param monitor The monitor that will orchestrate the shutdown
      */
     public GracefulShutdownListener(final OperatorStateMonitor monitor) {
@@ -53,6 +54,7 @@ public class GracefulShutdownListener extends DataflowEventAdapter {
      * The messageArrived() event handler will then remove the message from the temporary storage.
      * However, it is not guaranteed that the channel reports an incoming message before the corresponding messageArrived() handler gets invoked.
      * These cases are fine with respect to shutdown, however, we still need to take care of such situation in order to remove the message from teh temporary cache.
+     *
      * @param processor The reporting dataflow operator/selector
      */
     @Override
@@ -69,6 +71,7 @@ public class GracefulShutdownListener extends DataflowEventAdapter {
     /**
      * Entering a non-idle state, so a notification needs to be sent to the monitor.
      * Also, the received message must be removed from the temporary message cache (or added to it so that so that the not-yet-arrived notification from the channel can remove it).
+     *
      * @param processor The reporting dataflow operator/selector
      * @param channel   The input channel holding the message
      * @param index     The index of the input channel within the operator
@@ -86,6 +89,7 @@ public class GracefulShutdownListener extends DataflowEventAdapter {
     /**
      * Entering a non-idle state, so a notification needs to be sent to the monitor.
      * Also, the received message must be removed from the temporary message cache (or added to it so that so that the not-yet-arrived notification from the channel can remove it).
+     *
      * @param processor The reporting dataflow operator/selector
      * @param channel   The input channel holding the message
      * @param index     The index of the input channel within the operator
@@ -95,13 +99,14 @@ public class GracefulShutdownListener extends DataflowEventAdapter {
     @Override
     public Object controlMessageArrived(final DataflowProcessor processor, final DataflowReadChannel<Object> channel, final int index, final Object message) {
         fireEvent();
-        collectingMessages=false;
+        collectingMessages = false;
         this.messagesInChannels.decrementAndGet();
         return message;
     }
 
     /**
      * Entering a different non-idle state, so a notification needs to be sent to the monitor.
+     *
      * @param processor The reporting dataflow operator/selector
      * @param messages  The incoming messages
      * @return The same set of messages that was passed in
@@ -109,13 +114,14 @@ public class GracefulShutdownListener extends DataflowEventAdapter {
     @Override
     public List<Object> beforeRun(final DataflowProcessor processor, final List<Object> messages) {
         fireEvent();
-        collectingMessages=false;
+        collectingMessages = false;
         activeForks.incrementAndGet();
         return messages;
     }
 
     /**
      * Enters an idle state, so a notification needs to be sent to the monitor.
+     *
      * @param processor The reporting dataflow operator/selector
      * @param messages  The incoming messages that have been processed
      */
@@ -141,20 +147,22 @@ public class GracefulShutdownListener extends DataflowEventAdapter {
 
     /**
      * A quick check on, whether the operator/selector is in the Idle state
+     *
      * @return True, if the current state is Idle
      */
     public final boolean isIdle() {
-        return !collectingMessages && activeForks.get()==0;
+        return !collectingMessages && activeForks.get() == 0;
     }
 
     /**
      * A more sophisticated test for being Idle
+     *
      * @return True, if the operator/selector state is Idle, there are no messages in the input channels and there are no messages in the intermediate state between having been removed from the channel and being accepted by the operator
      */
     public final boolean isIdleAndNoIncomingMessages() {
-        if(processor==null)
+        if (processor == null)
             throw new IllegalStateException("The GracefulShutdownListener has not been registered with a dataflow processor yet.");
-        return isIdle() && messagesInChannels.get()<=0L;
+        return isIdle() && messagesInChannels.get() <= 0L;
     }
 
     /**

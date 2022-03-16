@@ -24,8 +24,8 @@ import groovyx.gpars.serial.SerialMsg;
 
 /**
  * Message that carry current state of Agent
- * @param <T> the type of state
  *
+ * @param <T> the type of state
  * @author Rafal Slawik
  */
 @SuppressWarnings({"unchecked", "serial"})

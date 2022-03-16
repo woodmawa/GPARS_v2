@@ -42,7 +42,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * </p>
  *
  * @author Vaclav Pech
- *         Date: Sep 9, 2009
+ * Date: Sep 9, 2009
  */
 @SuppressWarnings({"rawtypes", "RawUseOfParameterizedType", "AccessingNonPublicFieldOfAnotherObject", "unchecked", "AbstractClassWithoutAbstractMethods", "ConstantDeclaredInAbstractClass"})
 public abstract class DataflowProcessor {

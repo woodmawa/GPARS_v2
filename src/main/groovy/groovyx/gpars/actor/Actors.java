@@ -46,7 +46,7 @@ import groovyx.gpars.group.DefaultPGroup;
  * </p>
  *
  * @author Vaclav Pech, Alex Tkachman
- *         Date: Feb 18, 2009
+ * Date: Feb 18, 2009
  */
 @SuppressWarnings({"rawtypes", "UtilityClass", "AbstractClassWithoutAbstractMethods", "AbstractClassNeverImplemented", "ConstantDeclaredInAbstractClass"})
 public abstract class Actors {

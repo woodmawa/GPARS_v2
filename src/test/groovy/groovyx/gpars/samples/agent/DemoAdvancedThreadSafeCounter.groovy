@@ -39,15 +39,15 @@ final Agent conference = new Conference()  //new Conference created
  */
 
 final Thread t1 = Thread.start {
-    conference << {register(10L)}               //send a command to register 10 attendees
+    conference << { register(10L) }               //send a command to register 10 attendees
 }
 
 final Thread t2 = Thread.start {
-    conference << {register(5L)}                //send a command to register 5 attendees
+    conference << { register(5L) }                //send a command to register 5 attendees
 }
 
 final Thread t3 = Thread.start {
-    conference << {unregister(3L)}              //send a command to unregister 3 attendees
+    conference << { unregister(3L) }              //send a command to unregister 3 attendees
 }
 
 [t1, t2, t3]*.join()

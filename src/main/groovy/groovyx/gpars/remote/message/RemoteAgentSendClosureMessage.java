@@ -25,8 +25,8 @@ import groovyx.gpars.serial.SerialMsg;
 
 /**
  * Message used to perform local closure execution.
- * @param <T> the type of the state
  *
+ * @param <T> the type of the state
  * @author Rafal Slawik
  */
 @SuppressWarnings("serial")

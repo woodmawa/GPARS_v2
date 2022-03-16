@@ -28,7 +28,8 @@ import groovy.transform.PackageScope
  * @author Vaclav Pech
  */
 
-@PackageScope final class ExceptionFlag {
+@PackageScope
+final class ExceptionFlag {
     static final boolean THROW_EXCEPTION = true  //change the flag to test either exception or timeout
 }
 
@@ -36,26 +37,26 @@ Actors.actor {
     println "actor1 has started"
 
     delegate.metaClass {
-        afterStop = {List undeliveredMessages ->
+        afterStop = { List undeliveredMessages ->
             println "actor1 has stopped"
         }
 
-        onInterrupt = {InterruptedException e ->
+        onInterrupt = { InterruptedException e ->
             println "actor1 has been interrupted"
         }
 
-        onTimeout = {->
+        onTimeout = { ->
             println "actor1 has timed out"
         }
 
-        onException = {Exception e ->
+        onException = { Exception e ->
             println "actor1 threw an exception"
         }
     }
     println("Running actor1")
     if (ExceptionFlag.THROW_EXCEPTION) throw new RuntimeException('test')
     else {
-        react(10, TimeUnit.MILLISECONDS) {msg ->  //will timeout
+        react(10, TimeUnit.MILLISECONDS) { msg ->  //will timeout
             if (msg == Actor.TIMEOUT) println 'Timeout!'
         }
     }
@@ -69,7 +70,7 @@ class PooledLifeCycleSampleActor extends DefaultActor {
         println("Running actor2")
         if (ExceptionFlag.THROW_EXCEPTION) throw new RuntimeException('test')
         else {
-            react(10, TimeUnit.MILLISECONDS) {msg ->  //will timeout
+            react(10, TimeUnit.MILLISECONDS) { msg ->  //will timeout
                 if (msg == Actor.TIMEOUT) println 'Timeout!'
             }
         }

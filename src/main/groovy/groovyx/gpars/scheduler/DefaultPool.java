@@ -32,7 +32,7 @@ import java.util.concurrent.atomic.AtomicLong;
  * The resize() and resetDefaultSize() methods can be used to configure size of the thread pool at runtime.
  *
  * @author Vaclav Pech
- *         Date: Feb 27, 2009
+ * Date: Feb 27, 2009
  */
 public class DefaultPool implements Pool {
     private final ThreadPoolExecutor pool;

@@ -31,7 +31,7 @@ class MyLoopActor extends DefaultActor {
     }
 
     private void outerLoop() {
-        react {a ->
+        react { a ->
             println 'Outer: ' + a
             if (a != 0) innerLoop()
             else println 'Done'
@@ -39,7 +39,7 @@ class MyLoopActor extends DefaultActor {
     }
 
     private void innerLoop() {
-        react {b ->
+        react { b ->
             println 'Inner ' + b
             if (b == 0) outerLoop()
             else innerLoop()

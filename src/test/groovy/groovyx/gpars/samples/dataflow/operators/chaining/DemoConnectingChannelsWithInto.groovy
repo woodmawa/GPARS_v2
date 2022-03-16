@@ -28,11 +28,11 @@ import static groovyx.gpars.dataflow.Dataflow.task
  * @author Vaclav Pech
  */
 
-def toUpperCase = {s -> s.toUpperCase()}
+def toUpperCase = { s -> s.toUpperCase() }
 
 final DataflowReadChannel encrypt = new DataflowQueue()
 final DataflowWriteChannel messagesToSave = new DataflowQueue()
-encrypt.chainWith toUpperCase chainWith {it.reverse()} chainWith {'###encrypted###' + it + '###'} into messagesToSave
+encrypt.chainWith toUpperCase chainWith { it.reverse() } chainWith { '###encrypted###' + it + '###' } into messagesToSave
 
 task {
     encrypt << "I need to keep this message secret!"
