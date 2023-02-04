@@ -16,6 +16,7 @@
 
 package groovyx.gpars.actor.blocking
 
+import groovy.test.GroovyTestCase
 import groovy.time.TimeCategory
 import groovyx.gpars.actor.Actor
 import groovyx.gpars.actor.Actors

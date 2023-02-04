@@ -16,6 +16,7 @@
 
 package groovyx.gpars.actor.nonBlocking
 
+import groovy.test.GroovyTestCase
 import groovyx.gpars.actor.Actor
 
 import java.util.concurrent.CountDownLatch

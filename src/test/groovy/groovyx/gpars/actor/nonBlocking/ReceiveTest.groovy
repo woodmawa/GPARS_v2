@@ -16,6 +16,7 @@
 
 package groovyx.gpars.actor.nonBlocking
 
+import groovy.test.GroovyTestCase
 import groovyx.gpars.actor.Actors
 import groovyx.gpars.dataflow.Dataflows
 import java.util.concurrent.CyclicBarrier

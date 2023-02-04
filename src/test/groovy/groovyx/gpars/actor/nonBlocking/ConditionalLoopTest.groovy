@@ -17,6 +17,7 @@
 package groovyx.gpars.actor.nonBlocking
 
 import static groovyx.gpars.actor.Actors.actor
+import groovy.test.GroovyTestCase
 
 /**
  * @author Vaclav Pech

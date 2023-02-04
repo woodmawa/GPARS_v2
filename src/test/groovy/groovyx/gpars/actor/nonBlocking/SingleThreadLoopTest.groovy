@@ -17,7 +17,7 @@
 package groovyx.gpars.actor.nonBlocking
 
 import groovyx.gpars.group.DefaultPGroup
-
+import groovy.test.GroovyTestCase
 /**
  *
  * @author Vaclav Pech

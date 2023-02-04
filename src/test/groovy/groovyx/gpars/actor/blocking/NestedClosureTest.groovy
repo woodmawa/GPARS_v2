@@ -16,6 +16,7 @@
 
 package groovyx.gpars.actor.blocking
 
+import groovy.test.GroovyTestCase
 import groovyx.gpars.dataflow.DataflowVariable
 import groovyx.gpars.group.DefaultPGroup
 

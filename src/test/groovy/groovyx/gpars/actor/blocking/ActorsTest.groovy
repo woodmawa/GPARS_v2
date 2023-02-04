@@ -16,6 +16,7 @@
 
 package groovyx.gpars.actor.blocking
 
+import groovy.test.GroovyTestCase
 import groovyx.gpars.actor.Actors
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit

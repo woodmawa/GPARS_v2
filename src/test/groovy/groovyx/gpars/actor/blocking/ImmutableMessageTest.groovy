@@ -16,6 +16,7 @@
 
 package groovyx.gpars.actor.blocking
 
+import groovy.test.GroovyTestCase
 import groovy.transform.Immutable
 import groovyx.gpars.actor.Actor
 import groovyx.gpars.actor.Actors

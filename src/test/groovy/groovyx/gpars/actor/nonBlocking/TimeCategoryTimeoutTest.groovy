@@ -16,6 +16,7 @@
 
 package groovyx.gpars.actor.nonBlocking
 
+import groovy.test.GroovyTestCase
 import groovy.time.TimeCategory
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.CyclicBarrier

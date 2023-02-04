@@ -16,6 +16,7 @@
 
 package groovyx.gpars.actor.blocking
 
+import groovy.test.GroovyTestCase
 import groovyx.gpars.actor.Actor
 import groovyx.gpars.group.PGroupBuilder
 import groovyx.gpars.scheduler.DefaultPool
