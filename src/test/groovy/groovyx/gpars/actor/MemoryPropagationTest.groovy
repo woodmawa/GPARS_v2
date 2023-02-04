@@ -16,6 +16,7 @@
 
 package groovyx.gpars.actor
 
+import groovy.test.GroovyTestCase
 import groovyx.gpars.group.DefaultPGroup
 import groovyx.gpars.group.PGroup
 

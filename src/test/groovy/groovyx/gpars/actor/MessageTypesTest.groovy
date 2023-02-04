@@ -16,6 +16,7 @@
 
 package groovyx.gpars.actor
 
+import groovy.test.GroovyTestCase
 import static groovyx.gpars.actor.Actors.reactor
 
 public class MessageTypesTest extends GroovyTestCase {

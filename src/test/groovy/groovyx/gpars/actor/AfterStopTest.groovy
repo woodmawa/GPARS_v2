@@ -16,6 +16,7 @@
 
 package groovyx.gpars.actor
 
+import groovy.test.GroovyTestCase
 import org.codehaus.groovy.runtime.NullObject
 
 class AfterStopTest extends GroovyTestCase {

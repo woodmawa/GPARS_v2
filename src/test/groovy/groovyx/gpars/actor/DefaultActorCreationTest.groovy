@@ -16,6 +16,7 @@
 
 package groovyx.gpars.actor
 
+import groovy.test.GroovyTestCase
 import groovyx.gpars.dataflow.DataflowQueue
 import groovyx.gpars.dataflow.DataflowVariable
 
