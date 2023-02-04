@@ -74,9 +74,10 @@ configurations.all {
 
 dependencies {
     testImplementation group: 'junit', name: 'junit', version: '4.13'
-    implementation group: 'org.codehaus.groovy', name: 'groovy-all', version: "${gpars_groovyVersion}"
+    implementation group: 'org.apache.groovy', name: 'groovy-all', version: "${gpars_groovyVersion}"
 
-    implementation "org.codehaus.groovy:groovy-cli-commons:${gpars_groovyVersion}"
+    //implementation group: 'org.codehaus.groovy', name: 'groovy-cli-picocli', version: '3.0.14'
+    //implementation "org.apache.groovy:groovy-cli-commons:${gpars_groovyVersion}"
     implementation "org.multiverse:multiverse-core:${gpars_multiverseVersion}", { transitive = false }
     implementation "io.netty:netty-all:${gpars_nettyVersion}"
     implementation "org.codehaus.jcsp:jcsp:${gpars_jcspVersion}"
