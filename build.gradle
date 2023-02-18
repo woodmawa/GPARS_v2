@@ -182,7 +182,7 @@ if (JavaVersion.current().isJava11Compatible()) {
 groovydoc {
     groovyClasspath = configurations.groovyDoc // Hack, we shouldn't have to do this.
     dependsOn(classes)
-    includePrivate = true
+    //includePrivate = true
     use = true
     windowTitle = packageTitle
     docTitle = packageTitle
