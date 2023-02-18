@@ -16,6 +16,8 @@
 
 package groovyx.gpars.dataflow.stream
 
+import groovy.test.GroovyTestCase
+
 import static groovyx.gpars.dataflow.Dataflow.task
 
 class SyncDataflowStreamTest extends GroovyTestCase {

@@ -16,6 +16,7 @@
 
 package groovyx.gpars.dataflow.stream
 
+import groovy.test.GroovyTestCase
 import groovyx.gpars.dataflow.DataflowQueue
 import groovyx.gpars.dataflow.Select
 import static groovyx.gpars.dataflow.Dataflow.operator

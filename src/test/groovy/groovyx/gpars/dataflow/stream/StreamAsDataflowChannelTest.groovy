@@ -16,6 +16,7 @@
 
 package groovyx.gpars.dataflow.stream
 
+import groovy.test.GroovyTestCase
 import groovyx.gpars.dataflow.DataflowReadChannel
 import groovyx.gpars.dataflow.DataflowVariable
 import groovyx.gpars.group.DefaultPGroup

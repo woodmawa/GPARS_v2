@@ -16,12 +16,13 @@
 
 package groovyx.gpars.dataflow.stream
 
+import groovy.test.GroovyTestCase
 import groovyx.gpars.dataflow.DataflowVariable
 import groovyx.gpars.dataflow.Dataflows
 
 import static groovyx.gpars.dataflow.Dataflow.task
 
-@SuppressWarnings("SpellCheckingInspection")
+//@SuppressWarnings("SpellCheckingInspection")
 class SyncDataflowStreamDefaultTest extends GroovyTestCase {
 
     def stream = new SyncDataflowStream(0)

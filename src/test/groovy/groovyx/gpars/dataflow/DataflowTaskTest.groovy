@@ -16,6 +16,7 @@
 
 package groovyx.gpars.dataflow
 
+import groovy.test.GroovyTestCase
 import groovy.transform.PackageScope
 import groovyx.gpars.group.NonDaemonPGroup
 

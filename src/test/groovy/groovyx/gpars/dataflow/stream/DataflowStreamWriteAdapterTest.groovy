@@ -16,6 +16,7 @@
 
 package groovyx.gpars.dataflow.stream
 
+import groovy.test.GroovyTestCase
 import groovyx.gpars.dataflow.Dataflow
 import groovyx.gpars.dataflow.DataflowReadChannel
 import java.util.concurrent.CyclicBarrier

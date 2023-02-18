@@ -16,6 +16,7 @@
 
 package groovyx.gpars.dataflow
 
+import groovy.test.GroovyTestCase
 import groovyx.gpars.activeobject.ActiveMethod
 import groovyx.gpars.activeobject.ActiveObject
 import static groovyx.gpars.GParsPool.withPool

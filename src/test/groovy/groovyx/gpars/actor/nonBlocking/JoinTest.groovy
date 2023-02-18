@@ -16,6 +16,7 @@
 
 package groovyx.gpars.actor.nonBlocking
 
+import groovy.test.GroovyTestCase
 import groovyx.gpars.actor.Actors
 
 public class JoinTest extends GroovyTestCase {
