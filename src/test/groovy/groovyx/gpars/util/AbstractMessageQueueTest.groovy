@@ -24,7 +24,6 @@ abstract class AbstractMessageQueueTest extends GroovyTestCase {
 
     protected abstract MessageQueue createMessageQueue()
 
-    ;
 
     public void testEmptyQueue() {
         final def queue = createMessageQueue()
