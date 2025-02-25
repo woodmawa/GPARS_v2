@@ -33,7 +33,7 @@ plugins {
     //id 'osgi'
     id 'eclipse'
     id 'idea'
-    id("org.asciidoctor.convert") version "1.5.9.2"
+    id("org.asciidoctor.convert") version "2.4.0"
 }
 
 version '2.0-SNAPSHOT'

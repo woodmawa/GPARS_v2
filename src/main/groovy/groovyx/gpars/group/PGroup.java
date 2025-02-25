@@ -42,6 +42,7 @@ import groovyx.gpars.dataflow.operator.DataflowProcessorAtomicBoundAllClosure;
 import groovyx.gpars.dataflow.operator.DataflowSelector;
 import groovyx.gpars.scheduler.Pool;
 
+import java.lang.ref.Cleaner;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -57,7 +58,11 @@ import static java.util.Arrays.asList;
  * Date: May 8, 2009
  */
 @SuppressWarnings({"RawUseOfParameterizedType", "rawtypes", "unchecked", "deprecation"})
-public abstract class PGroup {
+public abstract class PGroup implements AutoCloseable {
+
+    /** replace finalisable, with cleaner  **/
+    private static final Cleaner cleaner = Cleaner.create();
+    private final Cleaner.Cleanable cleanable;
 
     protected static final String A_SPLITTER_NEEDS_AN_INPUT_CHANNEL_AND_AT_LEAST_ONE_OUTPUT_CHANNEL_TO_BE_CREATED = "A splitter needs an input channel and at least one output channel to be created.";
 
@@ -77,6 +82,28 @@ public abstract class PGroup {
      */
     protected PGroup(final Pool threadPool) {
         this.threadPool = threadPool;
+        cleanable = cleaner.register(this, new PGCleanup(threadPool));
+    }
+
+    @Override
+    public void close() {
+        // perform actions to close all underlying resources
+        //will be called automatically if not invoked explicitly
+        this.cleanable.clean();
+    }
+
+    /**
+     * Shutdown the thread pool gracefully
+     */
+    static class PGCleanup implements Runnable {
+        Pool tPool;
+        PGCleanup(Pool threadPool) {tPool = threadPool; }
+
+        @Override
+        public void run ()  {
+            tPool.shutdown();
+        }
+
     }
 
     /**
@@ -830,15 +857,7 @@ public abstract class PGroup {
         return code.getMaximumNumberOfParameters() == 1 && List.class.isAssignableFrom(code.getParameterTypes()[0]);
     }
 
-    /**
-     * Shutdown the thread pool gracefully
-     */
-    @SuppressWarnings({"FinalizeDeclaration"})
-    @Override
-    protected void finalize() throws Throwable {
-        this.threadPool.shutdown();
-        super.finalize();
-    }
+
 
     /**
      * Resizes the thread pool to the specified value
