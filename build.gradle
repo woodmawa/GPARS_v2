@@ -22,7 +22,7 @@
 //  Author: Hamlet D'Arcy - Updated OSGi configuration
 //  Author: Schalk W. Cronjé
 //
-//  uplifted to java 17, groovy 4.0.26 and general library refresh, and gradle 8.13
+//  uplifted to java 23, groovy 4.0.26 and general library refresh, and gradle 8.13
 //  Author: Will Woodman
 
 plugins {
