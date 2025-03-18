@@ -18,7 +18,7 @@
 package groovyx.gpars.benchmark.caliper;
 
 import com.google.caliper.runner.CaliperMain;
-import com.google.caliper.runner.InvalidBenchmarkException;
+import com.google.caliper.core.InvalidBenchmarkException;
 import com.google.caliper.util.InvalidCommandException;
 import groovyx.gpars.benchmark.caliper.akka.BenchmarkLatencyDynamicDispatchActorCaliper;
 import groovyx.gpars.benchmark.caliper.akka.BenchmarkLatencyStaticDispatchActorCaliper;

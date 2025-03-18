@@ -212,7 +212,8 @@ class DefaultActorCreationTest extends GroovyTestCase {
     public void testContinuationStyleWithAct() {
         final def result = new DataflowVariable()
         final def continuationResult = new DataflowVariable()
-        final actor = [act: {
+        def  actor
+        actor= [act: {
             actor.react {
                 result << it
             }

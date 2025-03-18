@@ -88,6 +88,8 @@ dependencies {
     testImplementation "org.spockframework:spock-core:${gpars_spockVersion}"
     testImplementation "com.google.guava:guava:${gpars_guavaVersion}"
     testImplementation fileTree(dir: 'lib', include: '*.jar')
+    testImplementation group: 'com.google.caliper', name: 'caliper', version: '1.0-beta-3'
+
 
     deployerJars "org.apache.maven.wagon:wagon-http-lightweight:${gpars_wagonhttplightweightVersion}"
 
