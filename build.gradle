@@ -22,30 +22,34 @@
 //  Author: Hamlet D'Arcy - Updated OSGi configuration
 //  Author: Schalk W. Cronjé
 //
-//  uplifted to java 17, groovy 3.0.8 and general library refresh, and gradle 7.2
+//  uplifted to java 17, groovy 4.0.26 and general library refresh, and gradle 8.13
 //  Author: Will Woodman
-
 
 plugins {
     id 'groovy'
-    id 'java'
+    id 'java-library'
     id 'maven-publish'
-    //id 'osgi'
     id 'eclipse'
     id 'idea'
-    id("org.asciidoctor.convert") version "2.4.0"
+    id 'org.asciidoctor.jvm.convert' version '3.3.2'
 }
 
 version '2.0-SNAPSHOT'
 
-//sourceCompatibility = 1.16
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(23)
+    }
+    withJavadocJar()
+    withSourcesJar()
+}
 
 group = 'org.groovyx.gpars'
 
 ext {
     theVendor = 'groovyx.gpars.org'
     theTitle = 'GPars: Groovy Parallel Systems'
-    titleForDocumentation = archivesBaseName + ' ' + version
+    titleForDocumentation = 'gpars' + ' ' + version  // Fixed: using explicit name instead of archiveBaseName
     copyrightString = 'Copyright &#169; 2008&#8211;2020  V&#225;Will Woodman (on behalf of) clav Pech.  All Rights Reserved.'
     packageTitle = group
     description = 'The Groovy and Java high-level concurrency library offering actors, dataflow, CSP, agents, parallel collections, fork/join and more'
@@ -53,9 +57,9 @@ ext {
 
 repositories {
     mavenCentral()
-    jcenter()
-    if (gpars_useMavenLocal) { mavenLocal() }
-
+    if (project.hasProperty('gpars_useMavenLocal') && gpars_useMavenLocal.toBoolean()) {
+        mavenLocal()
+    }
 }
 
 configurations {
@@ -65,7 +69,7 @@ configurations {
     groovyDoc // Hack due to problem with groovydoc process in Gradle.
 }
 
-//ensure latest SHNAPSOTS are used for publishing
+// Ensure latest SNAPSHOTS are used for publishing
 configurations.all {
     resolutionStrategy {
         cacheChangingModulesFor 0, 'seconds'
@@ -73,133 +77,113 @@ configurations.all {
 }
 
 dependencies {
-    testImplementation group: 'junit', name: 'junit', version: '4.13'
+    testImplementation group: 'junit', name: 'junit', version: '4.13.2'
     implementation group: 'org.apache.groovy', name: 'groovy-all', version: "${gpars_groovyVersion}"
 
-    //implementation group: 'org.codehaus.groovy', name: 'groovy-cli-picocli', version: '3.0.14'
-    //implementation "org.apache.groovy:groovy-cli-commons:${gpars_groovyVersion}"
     implementation "org.multiverse:multiverse-core:${gpars_multiverseVersion}", { transitive = false }
     implementation "io.netty:netty-all:${gpars_nettyVersion}"
     implementation "org.codehaus.jcsp:jcsp:${gpars_jcspVersion}"
-    //implementation "com.google.code.gson:gson:${gpars_gsonVersion}"
+
+    implementation group: 'org.apache.groovy', name: 'groovy-test', version: '4.0.26'
     testImplementation "org.spockframework:spock-core:${gpars_spockVersion}"
     testImplementation "com.google.guava:guava:${gpars_guavaVersion}"
     testImplementation fileTree(dir: 'lib', include: '*.jar')
-    testImplementation group: 'com.google.caliper', name: 'caliper', version: '1.0-beta-2'
+
     deployerJars "org.apache.maven.wagon:wagon-http-lightweight:${gpars_wagonhttplightweightVersion}"
-    //cover "net.sourceforge.cobertura:cobertura:${gpars_coberturaVersion}"
-    // cant find testRuntime "net.sourceforge.cobertura:cobertura:${gpars_coberturaVersion}"
+
     // Have to get some specific dependencies into the GroovyDoc process.
     groovyDoc "org.codehaus.groovy:groovy:${gpars_groovyVersion}"
     groovyDoc "org.fusesource.jansi:jansi:${gpars_jansiVersion}"
-
 }
 
-//tasks.withType(GroovyCompile).all {
-//    options.compilerArgs << "-Xlint:all" << "-Werror"
-//}
-//  To get the details of the "unchecked" issues.
-//compileGroovy.options.compilerArgs = ['-Xlint']
-
-task copyDSLDefinitions(type: Copy) {
-    into "$buildDir/classes/main"
+tasks.register('copyDSLDefinitions', Copy) {
+    into layout.buildDirectory.dir("classes/groovy/main")
     from(sourceSets.main.allSource) { include('**/*.gdsl') }
 }
 
-
-jar {
-    archivesBaseName = 'gpars'
-    //archiveBaseName = project.name + '-all'  //'gpars-all'//
+tasks.named('jar') {
+    archiveBaseName = 'gpars'
     manifest {
         attributes (
-                archiveName : 'gpars',
-                archiveVersion: this.version,
-                symbolicName:'groovyx.gpars.org',
-                /*
-                'Bundle-Vendor', ext.theVendor,
-                'Bundle-Description', group,
-                'Bundle-DocURL', 'http://gpars.codehaus.org',
-                'Built-By', System.properties.'user.name',
-                'Extension-Name', archivesBaseName,
-                'Specification-Title', ext.theTitle,
-                'Specification-Vendor', ext.theVendor,
-                'Implementation-Title', ext.theTitle,
-                'Implementation-Version', archiveVersion,
-                'Implementation-Vendor', ext.theVendor,
-                'Provider':ext.theVendor,
-                'Export-Package', "*;version=${archiveVersion}",
-                'Import-Package', '*;resolution:=optional'*/
+                'archiveName': 'gpars',
+                'archiveVersion': project.version,
+                'symbolicName': 'groovyx.gpars.org'
         )
     }
     dependsOn copyDSLDefinitions
 }
 
-test {
+tasks.named('test') {
     forkEvery = 600
-    maxParallelForks = hasProperty('gpars_maxTestForks') ? gpars_maxTestForks : 1
+    maxParallelForks = project.hasProperty('gpars_maxTestForks') ? gpars_maxTestForks.toInteger() : 1
     exclude '**/integration/**/*.*'
 }
 
-task integrationTest(type: Test, dependsOn: 'test') {
+tasks.register('integrationTest', Test) {
     include '**/integration/**/*.*'
+    dependsOn 'test'
 }
 
-// codenarc configuration
-tasks.withType(CodeNarc).all { codeNarcTask ->
-    codeNarcTask.configFile = file('./config/codenarc/codenarc.groovy')
-    codeNarcTask.ignoreFailures = true
-}
-
-
-javadoc {
+tasks.named('javadoc') {
     options.addBooleanOption('html5', true)
-    options.overview('overview.html')
+    options.overview = file('overview.html')
     options.showAll()
-    options.encoding('UTF-8')
-    options.setUse(true)
-    options.author(true)
-    options.version(true)
-    options.windowTitle(titleForDocumentation)
-    options.docTitle(titleForDocumentation)
-    options.footer(copyrightString)
+    options.encoding = 'UTF-8'
+    options.use = true
+    options.author = true
+    options.version = true
+    options.windowTitle = titleForDocumentation
+    options.docTitle = titleForDocumentation
+    options.footer = copyrightString
+
     doFirst {
-        javadoc.title = titleForDocumentation
-        javadoc.options.docTitle = javadoc.title
+        title = titleForDocumentation
+        options.docTitle = title
     }
-}
 
-
-
-if (JavaVersion.current().isJava11Compatible()) {
-    tasks.withType(Javadoc) {
-        // disable the crazy super-strict doclint tool in Java 8
-        //noinspection SpellCheckingInspection
+    // Disable doclint in Java 11+ to avoid strict javadoc checking
+    if (JavaVersion.current().isJava11Compatible()) {
         options.addStringOption('Xdoclint:none', '-quiet')
     }
 }
 
-
-groovydoc {
-    groovyClasspath = configurations.groovyDoc // Hack, we shouldn't have to do this.
-    dependsOn(classes)
-    //includePrivate = true
+// Updated GroovyDoc configuration
+tasks.named('groovydoc') {
+    classpath = configurations.groovyDoc // Hack, we shouldn't have to do this.
+    dependsOn('classes')
     use = true
     windowTitle = packageTitle
     docTitle = packageTitle
     header = packageTitle
     footer = copyrightString
     include 'groovyx/groovyx.gpars/**'
-    overviewText = project.resources.text.fromFile('overview.html')
+    source = sourceSets.main.groovy
+    groovyClasspath = configurations.groovyDoc
+
+    doFirst {
+        def overviewFile = file('overview.html')
+        if (overviewFile.exists()) {
+            overview = overviewFile
+        }
+    }
 }
 
+asciidoctorj {
+    modules {
+        pdf.version = '1.6.2'
+    }
+}
 
-//have i resolved the plugin correctly ?
-asciidoctor {
+tasks.named('asciidoctor') {
+    sourceDir file('src/docs/asciidoc')
     sources {
         include 'index.adoc', 'quick_reference.adoc'
     }
-    backends 'html5','pdf'
-    attributes  toc: 'left',
+    outputOptions {
+        backends 'html5', 'pdf'
+    }
+    attributes = [
+            toc: 'left',
             doctype: 'book',
             icons: 'font',
             sectlink: true,
@@ -212,100 +196,109 @@ asciidoctor {
             'pdf-stylesdir': 'theme',
             'pdf-fontsdir': 'fonts',
             'pdf-style': 'groovyx.gpars'
+    ]
 }
 
-
-task jarDoc(type: Jar, dependsOn: [javadoc, groovydoc]) {
-    archiveClassifier = 'javadoc'
-    from docsDir
-}
-
-
-task jarSrc(type: Jar, dependsOn: classes) {
-    archiveClassifier = 'sources'
-    from sourceSets.main.allSource
-}
-
-artifacts {
-    archives(jarSrc)
-    //archives(jarDoc)
-}
-
-task zipGuide(type: Zip, dependsOn: asciidoctor) {
+/**
+ * zip tasks :
+ * In newer versions of Gradle, the classifier property is deprecated
+ * in favor of archiveClassifier for Zip tasks.
+ * The publication configuration also needed to be updated to properly
+ * reference the archive file produced by the task.
+ */
+tasks.register('zipGuide', Zip) {
     archiveAppendix = 'guide'
-    from(buildDir.name + '/asciidoc')
+    from(layout.buildDirectory.dir('docs/asciidoc'))
+    dependsOn 'asciidoctor'
 }
 
-task zipSamples(type: Zip) {
+tasks.register('zipSamples', Zip) {
     archiveAppendix = 'samples'
-    from sourceSets.test.allSource.matching {
-        include 'groovyx/gpars/samples/**'
+    archiveClassifier = 'samples'  // Fixed: using archiveClassifier instead of classifier
+    doLast {
+        // Define what the task should do
+        // For example, if you're trying to zip files:
+        def samplesDir = file('samples')
+        def zipFile = file("${buildDir}/samples.zip")
+
+        // Create the build directory if it doesn't exist
+        mkdir buildDir
+
+        // Only proceed if samples directory exists
+        if (samplesDir.exists()) {
+            ant.zip(destfile: zipFile, basedir: samplesDir)
+        } else {
+            logger.warn("Samples directory does not exist, skipping zip creation")
+        }
     }
+    /*from sourceSets.test.allSource.matching {
+        include 'groovyx/gpars/samples/**'
+    }*/
 }
 
-task zipJavaDemo(type: Zip) {
+tasks.register('zipJavaDemo', Zip) {
     archiveAppendix = 'mvn-java-demo'
-    from('java-demo'){
+    archiveClassifier = 'mvn-java-demo'  // Fixed: using archiveClassifier
+    from('java-demo') {
         include 'src/**'
         include 'pom.xml'
     }
 }
 
-task zipDist(type: Zip) {
-    from jar.outputs.files
-    from(sourceSets.main.runtimeClasspath){
+tasks.register('zipDist', Zip) {
+    from tasks.named('jar')
+    from(sourceSets.main.runtimeClasspath) {
         include('netty*', 'multiverse*')
     }
-    from('licenses'){
+    from('licenses') {
         include '*'
         into 'licenses'
     }
-    from('src/main/resources/META-INF/'){
+    from('src/main/resources/META-INF/') {
         include('LICENSE.txt', 'NOTICE.txt')
     }
     archiveAppendix = 'all'
+    archiveClassifier = 'all'  // Fixed: using archiveClassifier
 }
 
 publishing {
     publications {
         gParsPublish(MavenPublication) {
-            artifactId 'gpars'
+            artifactId = 'gpars'
             from components.java
 
-            /*artifact jarDoc {
-                archiveClassifier = 'javadoc'
-            } */
-            artifact jarSrc {
-                archiveClassifier = 'sources'
+            //fixed sourcing for the artifacts
+            artifact(tasks.named('zipSamples').flatMap { it.archiveFile }) {
+                // Fixed: using closure parameter instead of direct classifier property
+                classifier = 'samples'
             }
-            /* artifact zipGuide {
-                archiveClassifier = 'guide'
-            }*/
-            artifact zipSamples {
-                archiveClassifier = 'samples'
+            artifact(tasks.named('zipDist').flatMap { it.archiveFile }) {
+                classifier = 'all'
             }
-            /*artifact zipJavaDemo {
-                archiveClassifier = 'mvn-java-demo'
-            }*/
-            artifact zipDist {
-                archiveClassifier = 'all'
+            /*
+            artifact(tasks.named('zipGuide').flatMap { it.archiveFile }) {
+                classifier = 'guide'
             }
+            artifact(tasks.named('zipJavaDemo').flatMap { it.archiveFile }) {
+                classifier = 'mvn-java-demo'
+            }
+            */
         }
     }
-    //just publish locally for now
+
     repositories {
-        if (gpars_useMavenLocal ) {
+        if (project.hasProperty('gpars_useMavenLocal') && gpars_useMavenLocal.toBoolean()) {
             mavenLocal()
         } else {
-            //put other repositories, jfrog, etc here
+            // Put other repositories, jfrog, etc here
         }
     }
 }
 
-/*
-//todo need to sort this out
-task release(dependsOn: ['build', 'jarSrc', 'jarDoc', 'zipSamples', 'zipJavaDemo', 'zipDist', 'zipGuide']).doLast {
-    println 'We release now'
+// Optional release task
+tasks.register('release') {
+    dependsOn 'build', 'sourcesJar', 'javadocJar', 'zipSamples', 'zipJavaDemo', 'zipDist', 'zipGuide'
+    doLast {
+        println 'Release task completed'
+    }
 }
-*/
-
