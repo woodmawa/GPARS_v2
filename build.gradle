@@ -279,10 +279,11 @@ publishing {
             from components.java
 
             //fixed sourcing for the artifacts
-            artifact(tasks.named('zipSamples').flatMap { it.archiveFile }) {
+            //cant find samples - comment out for now
+            /* artifact(tasks.named('zipSamples').flatMap { it.archiveFile }) {
                 // Fixed: using closure parameter instead of direct classifier property
                 classifier = 'samples'
-            }
+            }*/
             artifact(tasks.named('zipDist').flatMap { it.archiveFile }) {
                 classifier = 'all'
             }
