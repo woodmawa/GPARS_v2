@@ -89,7 +89,10 @@ public abstract class StreamCore<T> implements FList<T> {
     }
 
     private static <T> T eval(final Object valueOrDataflowVariable) {
-        if (valueOrDataflowVariable instanceof DataflowVariable)
+        /** make check more specific for DataflowReadChannel.  as it the test
+         * we are returning the string directly
+         */
+        if (valueOrDataflowVariable instanceof DataflowReadChannel)
             try {
                 return ((DataflowReadChannel<T>) valueOrDataflowVariable).getVal();
             } catch (InterruptedException e) {
@@ -247,11 +250,17 @@ public abstract class StreamCore<T> implements FList<T> {
         StreamCore<Object> recurResult = result;
         while (true) {
             if (recurRest.isEmpty()) {
-                recurResult.leftShift(StreamCore.eos()); // explicit casting to make tests pass (Java8 related)
+                recurResult.leftShift((Object) StreamCore.eos()); // explicit casting to make tests pass (Java8 related)
                 return;
             }
             final Object mapped = mapClosure.call(new Object[]{recurRest.getFirst()});
-            recurResult = recurResult.leftShift(eval(mapped)); // explicit casting to make tests pass (Java8 related)
+            final Object evaluatedValue = eval(mapped);
+            // Check if the evaluated value is a DataflowReadChannel and handle accordingly
+            if (evaluatedValue instanceof DataflowReadChannel) {
+                recurResult = recurResult.leftShift((DataflowReadChannel<Object>) evaluatedValue);
+            } else {
+                recurResult = recurResult.leftShift(evaluatedValue);
+            }
             recurRest = recurRest.getRest();
         }
     }
