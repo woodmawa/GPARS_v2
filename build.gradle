@@ -31,14 +31,14 @@ plugins {
     id 'maven-publish'
     id 'eclipse'
     id 'idea'
-    id 'org.asciidoctor.jvm.convert' version '3.3.2'
+    id 'org.asciidoctor.jvm.convert' version '4.0.5'
 }
 
 version '2.0-SNAPSHOT'
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(23)
+        languageVersion = JavaLanguageVersion.of(25)
     }
     withJavadocJar()
     withSourcesJar()
@@ -77,7 +77,8 @@ configurations.all {
 }
 
 dependencies {
-    testImplementation group: 'junit', name: 'junit', version: '4.13.2'
+    //testImplementation group: 'junit', name: 'junit', version: '4.13.2'
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '6.0.1'
     implementation group: 'org.apache.groovy', name: 'groovy-all', version: "${gpars_groovyVersion}"
 
     implementation "org.multiverse:multiverse-core:${gpars_multiverseVersion}", { transitive = false }
@@ -98,10 +99,32 @@ dependencies {
     groovyDoc "org.fusesource.jansi:jansi:${gpars_jansiVersion}"
 }
 
-tasks.register('copyDSLDefinitions', Copy) {
-    into layout.buildDirectory.dir("classes/groovy/main")
-    from(sourceSets.main.allSource) { include('**/*.gdsl') }
+//make gradle 9 aware that copyDSLDefinitions copies inputs to build its outputs
+//gradle 9 requires explicit dependencies now
+tasks.named('compileTestGroovy') {
+    dependsOn tasks.named('copyDSLDefinitions')
 }
+
+tasks.register('copyDSLDefinitions', Copy) {
+    description = "Copies Groovy DSL (.gdsl) definition files into build/dsl for inclusion in the jar."
+    group = "build"
+    from(sourceSets.main.allSource.matching { include('**/*.gdsl') })
+    into(layout.buildDirectory.dir("dsl"))
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+tasks.named('compileGroovy') {
+    dependsOn tasks.named('copyDSLDefinitions')
+}
+
+tasks.named('jar') {
+    from(layout.buildDirectory.dir("dsl"))
+    dependsOn tasks.named('copyDSLDefinitions')
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+//----
+
 
 tasks.named('jar') {
     archiveBaseName = 'gpars'
